@@ -35,15 +35,6 @@ const SignIn =()=> {
     }
   });
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       dispatch(showAuthLoader());
-  //       dispatch(userSignIn(values));
-  //     }
-  //   });
-  // };
 
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);

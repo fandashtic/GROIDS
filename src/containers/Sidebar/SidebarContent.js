@@ -34,7 +34,7 @@ const SidebarContent = () => {
             theme={themeType === THEME_TYPE_LITE ? 'lite' : 'dark'}
             mode="inline">
             <Menu.Item key="dashboard">
-              <Link to="main/dashboard/company"><i
+              <Link to="/main/dashboard/company"><i
                 className="icon icon-dasbhoard" /> <span><IntlMessages id="sidebar.dashboard" /></span></Link>
             </Menu.Item>
             <Menu.Item key="main/Product">
