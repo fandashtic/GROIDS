@@ -1,14 +1,15 @@
-var { GetById, GetAll, Add, Update, Delete } = require('./../Shared/TableReposidery');
+var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
 
 const _tableName = 'users';
 const _primaryKey = 'email_id';
+
+//#region
 
 exports.GetUserById = async (key, callback) => {
     return await GetById(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllUsers = async (callback, filter) => {
-    debugger;
+exports.GetAllUsers = async (filter, callback) => {
     return await GetAll(_tableName, filter, callback);
 };
 
@@ -24,3 +25,5 @@ exports.DeleteUer = async (key, callback) =>
 {
     return await Delete(_tableName, _primaryKey, key, callback);
 };
+
+//#endregion

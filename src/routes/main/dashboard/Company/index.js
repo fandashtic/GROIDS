@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Col, Row} from "antd";
 
 import {Area, AreaChart, Line, LineChart, ResponsiveContainer, Tooltip} from "recharts";
@@ -8,7 +8,28 @@ import Auxiliary from "util/Auxiliary";
 import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 import OrderHistory from "../../../../components/dashboard/Stores/OrderHistory";
 
+import { GetAllUsers, GetUserById } from '../../../../api/controller/UserController';
+
+let filter =
+{
+  "is_deleted": false
+};
+
 const Crypto = () => {
+
+  useEffect(() => { 
+    GetAllUsers(filter, (data, err) =>
+    {
+      console.log(data);
+    }); 
+    
+    GetUserById('demo@gmail.com', (data, err) =>
+    {
+      console.log(data);
+    });
+
+  }, [filter]);
+
   return (
     <Auxiliary>
       <Row>

@@ -13,7 +13,6 @@ exports.GetById = async (tableName, keyColumn, keyValue, callback) => {
 };
 
 exports.GetAll = async (tableName, filter, callback) => {
-    debugger;
     let array = [];
     let data = GetUpdateExpressionAndAttributeValuesAndNames(filter, 0);
 
