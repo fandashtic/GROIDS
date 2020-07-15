@@ -1,18 +1,19 @@
 var { docClient } = require('./../db');
 var { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey } = require('./../Shared/Util');
 
-exports.GetById = async (tableName, keyColumn, keyValue, res) => {
+exports.GetById = async (tableName, keyColumn, keyValue, callback) => {
     var params = {
         TableName: tableName,
         Key: GetKey(keyColumn, keyValue)
     };
 
     return await docClient.get(params, function (err, data) {
-        ReturnObject(res, err, data, 'GetById');
+        ReturnObject(callback, err, data, 'GetById');
     });
 };
 
-exports.GetAll = async (tableName, filter, res) => {
+exports.GetAll = async (tableName, filter, callback) => {
+    debugger;
     let array = [];
     let data = GetUpdateExpressionAndAttributeValuesAndNames(filter, 0);
 
@@ -40,23 +41,23 @@ exports.GetAll = async (tableName, filter, res) => {
                 docClient.scan(params, onScan);
             }
 
-            ReturnObject(res, err, array, 'GetAll');
+            ReturnObject(callback, err, array, 'GetAll');
         }
     }
 };
 
-exports.Add = async (tableName, tableData, res) => {
+exports.Add = async (tableName, tableData, callback) => {
     var params = {
         TableName: tableName,
         Item:  tableData
     };
 
     return await docClient.put(params, function (err, data) {
-        ReturnObject(res, err, data, 'Add');
+        ReturnObject(callback, err, data, 'Add');
     });
 }
 
-exports.Update = async (tableName, keyColumn, keyValue, tableData, res) => { 
+exports.Update = async (tableName, keyColumn, keyValue, tableData, callback) => { 
     let data = GetUpdateExpressionAndAttributeValuesAndNames(tableData, 1);
     
     var params = {
@@ -68,17 +69,17 @@ exports.Update = async (tableName, keyColumn, keyValue, tableData, res) => {
     };
 
     return await docClient.update(params, function (err, data) {
-        ReturnObject(res, err, data, 'Update');
+        ReturnObject(callback, err, data, 'Update');
     });
 }
 
-exports.Delete = async (tableName, keyColumn, keyValue, res) =>
+exports.Delete = async (tableName, keyColumn, keyValue, callback) =>
 {
     var params = {
         TableName: tableName,
         Key: GetKey(keyColumn, keyValue)
     };
     docClient.delete(params, function (err, data) {
-        ReturnObject(res, err, data, 'Delete');
+        ReturnObject(callback, err, data, 'Delete');
     });
 };

@@ -1,21 +1,21 @@
 exports.GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
-    let result = {};
-    result.expression = 'set ';
-    result.names = {};
-    result.attributeValues = {};
+    let callbackult = {};
+    callbackult.expcallbacksion = 'set ';
+    callbackult.names = {};
+    callbackult.attributeValues = {};
     if (IsHasValue(obj)) {
         var keys = Object.keys(obj);
         for (var i = 0; i < keys.length; i++) {
-            if (i === 0) result.expression = (type === 0 ? '' : 'set ');
-            result.expression = result.expression + (type === 0 ? '#' : '') + keys[i] + ' = :' + keys[i];
+            if (i === 0) callbackult.expcallbacksion = (type === 0 ? '' : 'set ');
+            callbackult.expcallbacksion = callbackult.expcallbacksion + (type === 0 ? '#' : '') + keys[i] + ' = :' + keys[i];
 
-            result.attributeValues[':' + keys[i]] = obj[keys[i]];
-            result.names['#' + keys[i]] = keys[i];
+            callbackult.attributeValues[':' + keys[i]] = obj[keys[i]];
+            callbackult.names['#' + keys[i]] = keys[i];
             
-            if (i < keys.length - 1) result.expression = result.expression + ', ';
+            if (i < keys.length - 1) callbackult.expcallbacksion = callbackult.expcallbacksion + ', ';
         }
     }
-    return result;
+    return callbackult;
 };
 
 exports.GetKey = (key, value) => {
@@ -24,16 +24,17 @@ exports.GetKey = (key, value) => {
     return _key;
 };
 
-exports.ReturnObject = (res, err, data, methodName) => {
+exports.ReturnObject = (callback, err, data, methodName) => {
+    debugger;
     if (err) {
-        res.json('Error on ' + methodName + ': '+ JSON.stringify(err));
+        callback(null, 'Error on ' + methodName + ': '+ JSON.stringify(err));
     } else {            
         if(IsHasValue(data)){
-            if(IsHasValue(data.Item)) { res.json(data.Item); return; }
-            if(IsHasValue(data.Attributes)) { res.json(data.Attributes); return; }
-            if(IsHasValue(data)) { res.json(data); return; }
+            if(IsHasValue(data.Item)) { return callback(data.Item, null); }
+            if(IsHasValue(data.Attributes)) { return callback(data.Attributes, null); }
+            if(IsHasValue(data)) { return callback(data, null); }
         }else{
-            res.json('Error on ' + methodName);
+            return callback(null,'Error on ' + methodName);
         }
     }
 };
