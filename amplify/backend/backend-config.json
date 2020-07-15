@@ -1,0 +1,81 @@
+{
+    "function": {
+        "groids04a10ead": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda",
+            "dependsOn": []
+        },
+        "groids": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "groids04a10ead",
+                    "attributes": [
+                        "Name"
+                    ]
+                },
+                {
+                    "category": "auth",
+                    "resourceName": "cognito90f49db3",
+                    "attributes": [
+                        "UserPoolId"
+                    ]
+                },
+                {
+                    "category": "api",
+                    "resourceName": "groids",
+                    "attributes": [
+                        "ApiName",
+                        "ApiId"
+                    ]
+                }
+            ]
+        }
+    },
+    "auth": {
+        "cognito90f49db3": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "api": {
+        "groids": {
+            "service": "API Gateway",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "groids04a10ead",
+                    "attributes": [
+                        "Name",
+                        "Arn"
+                    ]
+                }
+            ]
+        },
+        "api": {
+            "service": "API Gateway",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "groids",
+                    "attributes": [
+                        "Name",
+                        "Arn"
+                    ]
+                }
+            ]
+        }
+    },
+    "hosting": {
+        "amplifyhosting": {
+            "service": "amplifyhosting",
+            "type": "cicd"
+        }
+    }
+}

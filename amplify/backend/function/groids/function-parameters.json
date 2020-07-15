@@ -1,0 +1,31 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "function": {
+        "groids04a10ead": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      },
+      "auth": {
+        "cognito90f49db3": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      },
+      "api": {
+        "groids": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": []
+}
