@@ -78,11 +78,3 @@ export const LIGHT_PURPLE_2_DARK_TEXT_COLOR = '#5782BB';
 
 
 export const TAB_SIZE = 992;
-
-export const locale =  {
-    languageId: 'english',
-    locale: 'en',
-    name: 'English',
-    icon: 'us'
-  }
-  export const navCollapsed =  true

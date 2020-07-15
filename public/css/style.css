@@ -34701,6 +34701,7 @@ fieldset[disabled] a.gx-btn {
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  padding:12px;
 }
 .gx-module-nav li .gx-link {
   padding: 5px 29px;
