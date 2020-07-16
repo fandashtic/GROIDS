@@ -1,11 +1,6 @@
 exports.City = {
-    user_id: String,
-    email_id: String,
-    user_name: String,
-    password: String,
-    first_name: String,
-    last_name: String,
-    user_type: String,
+    city_id: String,
+    city_name: String,
     company_id: String,
     store_id: String,
     profile_image_url: String,
