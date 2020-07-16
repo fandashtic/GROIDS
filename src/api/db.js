@@ -1,14 +1,12 @@
 var AWS = require('aws-sdk');
+var config = require('./../../src/appConfig.json');
 
 let awsConfig = {
     "region": "us-east-2",
     "endpoint": "https://dynamodb.us-east-2.amazonaws.com",
-    "accessKeyId": "AKIA5O6WF24TRCXACIMP",
-    "secretAccessKey": "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"
+    "accessKeyId": config.db.AWS_ACCESS_KEY_ID,
+    "secretAccessKey": config.db.AWS_SECRET_ACCESS_KEY
 };
-
-// "accessKeyId": "AKIA5O6WF24TRCXACIMP",
-// "secretAccessKey": "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"
 
 //amplify push
 

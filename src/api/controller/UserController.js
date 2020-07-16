@@ -1,29 +1,22 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
 
-const _tableName = 'users';
-const _primaryKey = 'email_id';
+var { GetAllUsers, IsUserValid, AddUser, UpdateUser, DeleteUser } = require('./../Core/UserManager');
 
-//#region
-
-exports.GetUserById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
-};
-
-exports.GetAllUsers = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+exports.IsUserValid = async (userName, password, callback) => {
+    return await IsUserValid(userName, password, callback);
 };
 
 exports.AddUser = async (user, callback) => {
-    return await Add(_tableName, user, callback);
-}
-
-exports.UpdateUser = async (key, user, callback) => { 
-    return await Update(_tableName, _primaryKey, key, user, callback);
-}
-
-exports.DeleteUer = async (key, callback) =>
-{
-    return await Delete(_tableName, _primaryKey, key, callback);
+    return await AddUser(user, callback);
 };
 
-//#endregion
+exports.UpdateUser = async (userId, user, callback) => {
+    return await UpdateUser(userId, user, callback);
+};
+
+exports.DeleteUser = async (userId, callback) => {
+    return await DeleteUser(userId, callback);
+};
+
+exports.GetUsers = async (filter, callback) => {
+    return await GetAllUsers( filter, callback);
+};

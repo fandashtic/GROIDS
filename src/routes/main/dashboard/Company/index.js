@@ -8,27 +8,27 @@ import Auxiliary from "util/Auxiliary";
 import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 import OrderHistory from "../../../../components/dashboard/Stores/OrderHistory";
 
-import { GetAllUsers, GetUserById } from '../../../../api/controller/UserController';
+var { GetUsers } = require('../../../../api/Controller/UserController');
 
 let filter =
 {
-  "is_deleted": false
+  "status": true
 };
 
 const Crypto = () => {
 
   useEffect(() => { 
-    GetAllUsers(filter, (data, err) =>
+    GetUsers(filter, (data, err) =>
     {
       console.log(data);
     }); 
     
-    GetUserById('demo@gmail.com', (data, err) =>
-    {
-      console.log(data);
-    });
+    // IsUserValid('demo@example.com', 'Password@123', (data, err) =>
+    // {
+    //   console.log(data);
+    // });
 
-  }, [filter]);
+  }, []);
 
   return (
     <Auxiliary>
