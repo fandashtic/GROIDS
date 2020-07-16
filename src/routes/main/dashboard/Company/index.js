@@ -7,21 +7,21 @@ import ChartCard from "../../../../components/dashboard/Stores/ChartCard";
 import Auxiliary from "util/Auxiliary";
 import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 import OrderHistory from "../../../../components/dashboard/Stores/OrderHistory";
-
-var { GetUsers } = require('../../../../api/Controller/UserController');
+import {GetUsers} from 'api/controller/UserController'
 
 let filter =
 {
   "status": true
 };
 
-const Crypto = () => {
+
+const Company = () => {
 
   useEffect(() => { 
     GetUsers(filter, (data, err) =>
     {
       console.log(data);
-    }); 
+    });
     
     // IsUserValid('demo@example.com', 'Password@123', (data, err) =>
     // {
@@ -111,4 +111,4 @@ const Crypto = () => {
   );
 };
 
-export default Crypto;
+export default Company;

@@ -1,7 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {Avatar, Popover} from "antd";
-import {userSignOut} from "appRedux/actions/Auth";
 
 const UserInfo = () => {
 

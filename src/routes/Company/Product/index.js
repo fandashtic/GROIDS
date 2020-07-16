@@ -72,37 +72,6 @@ class Product extends Component {
     </div>
 
   };
-  onContactSelect = (data) => {
-    data.selected = !data.selected;
-    let selectedContacts = 0;
-    const contactList = this.state.contactList.map(contact => {
-        if (contact.selected) {
-          selectedContacts++;
-        }
-        if (contact.id === data.id) {
-          if (contact.selected) {
-            selectedContacts++;
-          }
-          return data;
-        } else {
-          return contact;
-        }
-      }
-    );
-
-    this.setState({
-      selectedContacts: selectedContacts,
-      contactList: contactList
-    });
-  };
-  
-  onAddContact = () => {
-    this.setState({addContactState: true});
-  };
-  onContactClose = () => {
-    this.setState({addContactState: false});
-  };
-
 
   optionIds = (option) =>{
     this.setState({
@@ -138,13 +107,6 @@ class Product extends Component {
     }
 
   };
-
-  handleRequestClose = () => {
-    this.setState({
-      showMessage: false,
-    });
-  };
-
   constructor() {
     super();
     this.state = {
@@ -182,14 +144,17 @@ class Product extends Component {
             {this.ContactSideBar()}
           </div>
           <div className="gx-module-box">
-          {
-              menuName === 'Brand' ? (<Brand/>):
-              menuName === 'Products' ? (<Products/>) :
-              menuName === 'Category' ?(<Category/>) : 
-              menuName === 'Manufacture' ? (<Manufacture/>) :
-              menuName === 'Product Family' ? (<ProductFamily/>) : ''
-
-          }
+          <span className="gx-drawer-btn gx-d-flex gx-d-lg-none">
+                  <i className="icon icon-menu gx-icon-btn" aria-label="Menu"
+                     onClick={this.onToggleDrawer.bind(this)}/>
+              </span>
+            {
+                menuName === 'Brand' ? (<Brand/>):
+                menuName === 'Products' ? (<Products/>) :
+                menuName === 'Category' ?(<Category/>) : 
+                menuName === 'Manufacture' ? (<Manufacture/>) :
+                menuName === 'Product Family' ? (<ProductFamily/>) : ''
+            }
           </div>
         </div>
         {showMessage && message.info(<span id="message-id">{alertMessage}</span>, 3, this.handleRequestClose)}

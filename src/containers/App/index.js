@@ -1,6 +1,6 @@
 import React, {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import URLSearchParams from 'url-search-params'
+import URLSearchParams from 'url-search-params';
 import {Redirect, Route, Switch, useHistory, useLocation, useRouteMatch} from "react-router-dom";
 import {ConfigProvider} from 'antd';
 import {IntlProvider} from "react-intl";
@@ -9,8 +9,10 @@ import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
- import {setInitUrl} from "appRedux/actions/Auth";
- import {onLayoutTypeChange, onNavStyleChange, setThemeType} from "appRedux/actions/Setting";
+import Website from "../Website";
+import {setInitUrl} from "appRedux/actions/Auth";
+import {onLayoutTypeChange, onNavStyleChange, setThemeType} from "appRedux/actions/Setting";
+
 
 import {
   LAYOUT_TYPE_BOXED,
@@ -100,17 +102,17 @@ const App = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      if (authUser === null) {
-        history.push('/signin');
-      } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
-        history.push('/main/dashboard/company');
-      } else {
-        history.push(initURL);
-      }
-    }
-  }, [authUser, initURL, location, history]);
+  // useEffect(() => {
+  //   if (location.pathname === '/') {
+  //     if (authUser === null) {
+  //       history.push('/signin');
+  //     } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
+  //       history.push('/main/dashboard/company');
+  //     } else {
+  //       history.push(initURL);
+  //     }
+  //   }
+  // }, [authUser, initURL, location, history]);
 
   useEffect(() => {
     if (themeType === THEME_TYPE_DARK) {
@@ -135,6 +137,8 @@ const App = (props) => {
         messages={currentAppLocale.messages}>
 
         <Switch>
+          
+          <Route exact path='/' component={Website}/>
           <Route exact path='/signin' component={SignIn}/>
           <Route exact path='/signup' component={SignUp}/>
           <RestrictedRoute path={`${match.url}`} authUser={authUser} location={location}
