@@ -1,22 +1,23 @@
+import {GetAllUsers, IsUserValid, AddUser, UpdateUser, DeleteUser} from 'api/Core/UserManager'
 
-var { GetAllUsers, IsUserValid, AddUser, UpdateUser, DeleteUser } = require('./../Core/UserManager');
-
-exports.IsUserValid = async (userName, password, callback) => {
+const IsUserValid = async (userName, password, callback) => {
     return await IsUserValid(userName, password, callback);
 };
 
-exports.AddUser = async (user, callback) => {
+const AddUser = async (user, callback) => {
     return await AddUser(user, callback);
 };
 
-exports.UpdateUser = async (userId, user, callback) => {
+const UpdateUser = async (userId, user, callback) => {
     return await UpdateUser(userId, user, callback);
 };
 
-exports.DeleteUser = async (userId, callback) => {
+const DeleteUser = async (userId, callback) => {
     return await DeleteUser(userId, callback);
 };
 
-exports.GetUsers = async (filter, callback) => {
+const GetUsers = async (filter, callback) => {
     return await GetAllUsers( filter, callback);
 };
+
+export{IsUserValid,AddUser,UpdateUser,DeleteUser,GetUsers}

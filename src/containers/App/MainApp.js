@@ -3,7 +3,6 @@ import {Layout} from "antd";
 
 import Sidebar from "../Sidebar/index";
 import Topbar from "../Topbar/index";
-import {footerText} from "util/config";
 import App from "routes/index";
 import {useSelector} from "react-redux";
 import {
@@ -21,7 +20,7 @@ import {
 } from "../../constants/ThemeSetting";
 import {useRouteMatch} from "react-router-dom";
 
-const {Content, Footer} = Layout;
+const {Content} = Layout;
 
 const MainApp = () => {
 
@@ -44,10 +43,6 @@ const MainApp = () => {
         return '';
     }
   };
-  const getNavStyles = () => {
-        return <Topbar/>;
-    }
-
   const getSidebar = (navStyle, width) => {
     if (width < TAB_SIZE) {
       return <Sidebar/>;

@@ -7,28 +7,26 @@ import ChartCard from "../../../../components/dashboard/Stores/ChartCard";
 import Auxiliary from "util/Auxiliary";
 import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 import OrderHistory from "../../../../components/dashboard/Stores/OrderHistory";
-import {GetUsers} from 'api/controller/UserController'
+//import {GetUsers} from 'api/controller/Shared/UserController'
 
 let filter =
 {
   "status": true
 };
 
-
 const Company = () => {
-
-  useEffect(() => { 
-    GetUsers(filter, (data, err) =>
-    {
-      console.log(data);
-    });
+  // useEffect(() => { 
+  //   GetUsers(filter, (data, err) =>
+  //   {
+  //     console.log(data);
+  //   });
     
-    // IsUserValid('demo@example.com', 'Password@123', (data, err) =>
-    // {
-    //   console.log(data);
-    // });
+  //   // IsUserValid('demo@example.com', 'Password@123', (data, err) =>
+  //   // {
+  //   //   console.log(data);
+  //   // });
 
-  }, []);
+  // }, []);
 
   return (
     <Auxiliary>

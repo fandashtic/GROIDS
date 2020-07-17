@@ -6,20 +6,19 @@ const data = [
 
 const columns = [
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a>{text}</a>,
+        title: 'Category Name',
+        dataIndex: 'Category Name',
+        key: 'Category Name',
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: 'Manufacture Name',
+        dataIndex: 'Manufacture Name',
+        key: 'Manufacture Name',
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: 'Brand',
+        dataIndex: 'Brand',
+        key: 'Brand',
     },
     {
         title: 'Action',
@@ -38,7 +37,8 @@ export default class index extends Component {
     render() {
         return (
             <>
-                <Table columns={columns} dataSource={data} />
+                <Table columns={columns} dataSource={data} pagination={{pageSize: 50}}
+             scroll={{y: 240}}/>
             </>
         )
     }

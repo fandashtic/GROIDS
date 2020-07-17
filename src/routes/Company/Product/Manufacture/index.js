@@ -1,77 +1,43 @@
 import React, { Component } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Card, Table, Button } from "antd";
-import ManufactureModal from "components/modal/Products/Manufacture"
+import { Button, Row, Col, Card } from "antd";
+import ListView from './view';
+import ListForm from './form';
+import CustomScrollbars from "util/CustomScrollbars";
 
-const data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-}, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-}, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-}, {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-}];
 class Index extends Component {
     state = {
-        modal: false,
-
+        view: true,
     }
-    updateContactUser = () => {
-    }
-    onAddProduct = e => {
-        this.setState({ modal: true })
-    }
-    onClose = e => {
-        this.setState({ modal: false })
+    viewChanged = () => {
+        this.setState({ view: !this.state.view })
     }
     render() {
-        const { modal } = this.state
-        const columns = [{
-            title: 'Name',
-            dataIndex: 'name',
-        }, {
-            title: 'Age',
-            dataIndex: 'age',
-        }, {
-            title: 'Address',
-            dataIndex: 'address',
-        }];
-
-
+        const { view } = this.state
         return (
-            <>
-                <div className="gx-module-box-header row">
-                    <AppModuleHeader placeholder="Search Manufacture"
-                        onChange={this.updateContactUser()}
-                    />
+            <div className="gx-module-box-content">
+                <div className="gx-module-box-topbar">
+                    <Row justify="space-between">
+                        <Col>
+                            <></>
+                            {view && <AppModuleHeader placeholder="Search Manufacture" />}
+                        </Col >
+                        <Col>
+                            <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={this.viewChanged}>
+                                {view ? (
+                                    <><i className="icon icon-add gx-mr-2" />
+                                        <span>Add New Manufacture</span></>) : (
+                                        <>
+                                            <i className="icon icon-eye gx-mr-2" />
+                                            <span>View Manufacture</span></>)
+                                }
+                            </Button>
+                        </Col>
+                    </Row>
                 </div>
-                <div className="gx-module-box-content">
-                    <div className="gx-module-box-topbar" style={{ "alignSelf": "flex-end" }}>
-                        <Button className="ant-btn gx-right" type="primary" aria-label="add"
-                            onClick={this.onAddProduct}>
-                            <i className="icon icon-add gx-mr-2" />
-                            <span>Add New Manufacture</span>
-                        </Button>
-                    </div>
-                    <Card>
-                        <Table className="gx-table-responsive" columns={columns} dataSource={data} onChange={this.handleChange} />
-                    </Card>
-                </div>
-                <ManufactureModal open={modal} onClose={this.onClose}></ManufactureModal>
-            </>
+                    {view ? (<ListView />) : <ListForm />}
+
+            </div>
         )
     }
 }
