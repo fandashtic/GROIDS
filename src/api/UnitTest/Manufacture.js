@@ -4,6 +4,7 @@ import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
 import { AddBrandAPI } from 'api/Controller/Shared/BrandController';
 import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
 import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
+import { ProductLookUpAPI } from 'api/Controller/Shared/ProductController';
 
 const company_id = uuidv4();
 const manufacture_id = uuidv4();
@@ -13,7 +14,7 @@ const product_family_id = uuidv4();
 const store_id = uuidv4();
 const created_by = uuidv4();
 
-let AddManufacture = () =>{
+let AddManufacture = () => {
     const manufacture = {
         manufacture_id: manufacture_id,
         manufacture_name: 'ITC',
@@ -33,7 +34,7 @@ let AddManufacture = () =>{
     });
 }
 
-let AddBrand = () =>{
+let AddBrand = () => {
     const Brand = {
         brand_id: brand_id,
         brand_name: 'SunFest',
@@ -54,7 +55,7 @@ let AddBrand = () =>{
     });
 }
 
-let AddProductCategory = () =>{
+let AddProductCategory = () => {
     const ProductCategory = {
         product_category_id: product_category_id,
         product_category_name: 'Food',
@@ -76,7 +77,7 @@ let AddProductCategory = () =>{
     });
 }
 
-let AddProductFamily = () =>{
+let AddProductFamily = () => {
     const Productfamily = {
         product_family_id: product_family_id,
         product_family_name: 'Biscuit',
@@ -99,11 +100,20 @@ let AddProductFamily = () =>{
     });
 }
 
+let ProductLookUp = () => {
+    ProductLookUpAPI(null, (data, err) => {
+        console.log(data);
+        console.log(err);
+    });
+}
+
+
 let RunUnitTest = () => {
     //AddManufacture();
     // AddBrand();
     // AddProductCategory();
     // AddProductFamily();
+    ProductLookUp();
 };
 
 export { RunUnitTest };

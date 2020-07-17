@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Brand';
+import { GetBrandDataById, GetAllBrandDatas, SaveBrandData, UpdateBrandData, DeleteBrandData } from 'api/Data/Brand';
 
 let IsBrandValid = async (brandName, password, callback) => {
-    return await GetById(brandName, async (brand) => {
+    return await GetBrandDataById(brandName, async (brand) => {
         if (brand.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsBrandValid = async (brandName, password, callback) => {
 };
 
 let AddBrand = async (brand, callback) => {
-    return await Save(brand, async (brand) => {
+    return await SaveBrandData(brand, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -40,7 +40,7 @@ let AddBrand = async (brand, callback) => {
 }
 
 let UpdateBrand = async (key, brand, callback) => { 
-    return await Update(key, brand, async (brand) => {
+    return await UpdateBrandData(key, brand, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -57,7 +57,7 @@ let UpdateBrand = async (key, brand, callback) => {
 
 let DeleteBrand = async (key, callback) =>
 {
-    return await Delete(key, async (brand) => {
+    return await DeleteBrandData(key, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -73,7 +73,7 @@ let DeleteBrand = async (key, callback) =>
 };
 
 let GetBrand = async (brandName, callback) => {
-    return await GetById(brandName, async (brand) => {
+    return await GetBrandDataById(brandName, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -89,7 +89,7 @@ let GetBrand = async (brandName, callback) => {
 }
 
 let GetAllBrands = async (filter, callback) => {
-    return await GetAll(filter, async (brands) => {
+    return await GetAllBrandDatas(filter, async (brands) => {
         if (brands) {
             return await callback({
                 'data':brands,

@@ -1,4 +1,4 @@
-import { GetAllProductFamilys, AddProductFamily, UpdateProductFamily, DeleteProductFamily } from 'api/Core/ProductFamilyManager';
+import { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
 
 let AddProductFamilyAPI = async (productFamily, callback) => {
     return await AddProductFamily(productFamily, callback);
@@ -12,8 +12,8 @@ let DeleteProductFamilyAPI = async (productFamilyId, callback) => {
     return await DeleteProductFamily(productFamilyId, callback);
 };
 
-let GetProductFamilysAPI = async (filter, callback) => {
-    return await GetAllProductFamilys(filter, callback);
+let GetProductFamiliesAPI = async (filter, callback) => {
+    return await GetAllProductFamilies(filter, callback);
 };
 
-export { AddProductFamilyAPI, UpdateProductFamilyAPI, DeleteProductFamilyAPI, GetProductFamilysAPI };
+export { AddProductFamilyAPI, UpdateProductFamilyAPI, DeleteProductFamilyAPI, GetProductFamiliesAPI };

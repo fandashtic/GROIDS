@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/ProductCategory';
+import { GetProductCategoryDataById, GetAllProductCategoriesData, SaveProductCategoryData, UpdateProductCategoryData, DeleteProductCategoryData } from 'api/Data/ProductCategory';
 
 let IsProductCategoryValid = async (productCategoryName, password, callback) => {
-    return await GetById(productCategoryName, async (productCategory) => {
+    return await GetProductCategoryDataById(productCategoryName, async (productCategory) => {
         if (productCategory.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsProductCategoryValid = async (productCategoryName, password, callback) => 
 };
 
 let AddProductCategory = async (productCategory, callback) => {
-    return await Save(productCategory, async (productCategory) => {
+    return await SaveProductCategoryData(productCategory, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -40,7 +40,7 @@ let AddProductCategory = async (productCategory, callback) => {
 }
 
 let UpdateProductCategory = async (key, productCategory, callback) => { 
-    return await Update(key, productCategory, async (productCategory) => {
+    return await UpdateProductCategoryData(key, productCategory, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -57,7 +57,7 @@ let UpdateProductCategory = async (key, productCategory, callback) => {
 
 let DeleteProductCategory = async (key, callback) =>
 {
-    return await Delete(key, async (productCategory) => {
+    return await DeleteProductCategoryData(key, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -73,7 +73,7 @@ let DeleteProductCategory = async (key, callback) =>
 };
 
 let GetProductCategory = async (productCategoryName, callback) => {
-    return await GetById(productCategoryName, async (productCategory) => {
+    return await GetProductCategoryDataById(productCategoryName, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -89,7 +89,7 @@ let GetProductCategory = async (productCategoryName, callback) => {
 }
 
 let GetAllProductCategories = async (filter, callback) => {
-    return await GetAll(filter, async (productCategorys) => {
+    return await GetAllProductCategoriesData(filter, async (productCategorys) => {
         if (productCategorys) {
             return await callback({
                 'data':productCategorys,

@@ -1,19 +1,23 @@
-import { GetAllProducts, AddProduct, UpdateProduct, DeleteProduct } from 'api/Core/ProductManager';
+import { IsProductValid, SaveProduct, UpdateProduct, DeleteProduct, GetProduct, GetAllProducts, ProductLookUp } from 'api/Core/ProductManager';
 
 let AddProductAPI = async (product, callback) => {
-    return await AddProduct(product, callback);
+    return await SaveProduct(product, callback);
 };
 
-let UpdateProductAPI = async (productId, product, callback) => {
-    return await UpdateProduct(productId, product, callback);
+let UpdateProductAPI = async (product_id, product, callback) => {
+    return await UpdateProduct(product_id, product, callback);
 };
 
-let DeleteProductAPI = async (productId, callback) => {
-    return await DeleteProduct(productId, callback);
+let DeleteProductAPI = async (product_id, callback) => {
+    return await DeleteProduct(product_id, callback);
 };
 
 let GetProductsAPI = async (filter, callback) => {
     return await GetAllProducts(filter, callback);
 };
 
-export { AddProductAPI, UpdateProductAPI, DeleteProductAPI, GetProductsAPI };
+let ProductLookUpAPI = async (product_id, callback) => {
+    return await ProductLookUp(product_id, callback);
+};
+
+export { AddProductAPI, UpdateProductAPI, DeleteProductAPI, GetProductsAPI, ProductLookUpAPI };

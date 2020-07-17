@@ -5,27 +5,27 @@ const _primaryKey = 'product_category_id';
 
 //#region
 
-let GetById = async (key, callback) => {
+let GetProductCategoryDataById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);
 };
 
-let GetAll = async (filter, callback) => {
+let GetAllProductCategoriesData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (productcategory, callback) => {
+let SaveProductCategoryData = async (productcategory, callback) => {
     return await Add(_tableName, productcategory, callback);
 }
 
-let Update = async (key, productcategory, callback) => { 
+let UpdateProductCategoryData = async (key, productcategory, callback) => { 
     return await Edit(_tableName, _primaryKey, key, productcategory, callback);
 }
 
-let Delete = async (key, callback) =>
+let DeleteProductCategoryData = async (key, callback) =>
 {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
-export { GetById, GetAll, Save, Update, Delete };
+export { GetProductCategoryDataById, GetAllProductCategoriesData, SaveProductCategoryData, UpdateProductCategoryData, DeleteProductCategoryData };
 
 //#endregion

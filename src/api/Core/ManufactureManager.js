@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Inventory';
+import { GetManufactureDataById, GetAllManufactureData, SaveManufactureData, UpdateManufactureData, DeleteManufactureData } from 'api/Data/Manufacture';
 
 let AddManufacture = async (manufacture, callback) => {
-    return await Save(manufacture, async (manufacture) => {
+    return await SaveManufactureData(manufacture, async (manufacture) => {
         if (manufacture) {
             return await callback({
                 'data': manufacture,
@@ -17,7 +17,7 @@ let AddManufacture = async (manufacture, callback) => {
 }
 
 let UpdateManufacture = async (key, manufacture, callback) => {
-    return await Update(key, manufacture, async (manufacture) => {
+    return await UpdateManufactureData(key, manufacture, async (manufacture) => {
         if (manufacture) {
             return await callback({
                 'data': manufacture,
@@ -33,7 +33,7 @@ let UpdateManufacture = async (key, manufacture, callback) => {
 }
 
 let DeleteManufacture = async (key, callback) => {
-    return await Delete(key, async (manufacture) => {
+    return await DeleteManufactureData(key, async (manufacture) => {
         if (manufacture) {
             return await callback({
                 'data': manufacture,
@@ -49,7 +49,7 @@ let DeleteManufacture = async (key, callback) => {
 };
 
 let GetManufacture = async (manufactureName, callback) => {
-    return await GetById(manufactureName, async (manufacture) => {
+    return await GetManufactureDataById(manufactureName, async (manufacture) => {
         if (manufacture) {
             return await callback({
                 'data': manufacture,
@@ -65,7 +65,7 @@ let GetManufacture = async (manufactureName, callback) => {
 };
 
 let GetAllManufactures = async (filter, callback) => {
-    return await GetAll(filter, async (manufactures) => {
+    return await GetAllManufactureData(filter, async (manufactures) => {
         if (manufactures) {
             return await callback({
                 'data': manufactures,

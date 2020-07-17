@@ -1,4 +1,4 @@
-exports.GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
+let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     let result = {};
     result.expression = 'set ';
     result.names = {};
@@ -18,13 +18,13 @@ exports.GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     return result;
 };
 
-exports.GetKey = (key, value) => {
+let GetKey = (key, value) => {
     let _key = {};
     _key[key] = value;
     return _key;
 };
 
-exports.ReturnObject = (callback, err, data, methodName) => {
+let ReturnObject = (callback, err, data, methodName) => {
     if (err) {
         callback(null, 'Error on ' + methodName + ': '+ JSON.stringify(err));
     } else {            
@@ -46,4 +46,4 @@ let IsHasValue = (data) =>
     return false;
 };
 
-exports.IsHasValue = IsHasValue;
+export{ IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey };

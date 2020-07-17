@@ -3,29 +3,29 @@ import {   Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 const _tableName = 'manufactures';
 const _primaryKey = 'manufacture_id';
 
-//#region
+//#region ManufactureData
 
-let GetById = async (key, callback) => {
+let GetManufactureDataById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);
 };
 
-let GetAll = async (filter, callback) => {
+let GetAllManufactureData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (manufacture, callback) => {
+let SaveManufactureData = async (manufacture, callback) => {
     return await Add(_tableName, manufacture, callback);
 }
 
-let Update = async (key, manufacture, callback) => { 
+let UpdateManufactureData = async (key, manufacture, callback) => { 
     return await Edit(_tableName, _primaryKey, key, manufacture, callback);
 }
 
-let Delete = async (key, callback) =>
+let DeleteManufactureData = async (key, callback) =>
 {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
-export { GetById, GetAll, Save, Update, Delete };
+export { GetManufactureDataById, GetAllManufactureData, SaveManufactureData, UpdateManufactureData, DeleteManufactureData };
 
 //#endregion

@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/ProductFamily';
+import { GetProductFamilyDataById, GetAllProductFamiliesData, SaveProductFamilyData, UpdateProductFamilyData, DeleteProductFamilyData } from 'api/Data/ProductFamily';
 
 let IsProductFamilyValid = async (productFamilyName, password, callback) => {
-    return await GetById(productFamilyName, async (productFamily) => {
+    return await GetProductFamilyDataById(productFamilyName, async (productFamily) => {
         if (productFamily.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsProductFamilyValid = async (productFamilyName, password, callback) => {
 };
 
 let AddProductFamily = async (productFamily, callback) => {
-    return await Save(productFamily, async (productFamily) => {
+    return await SaveProductFamilyData(productFamily, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -40,7 +40,7 @@ let AddProductFamily = async (productFamily, callback) => {
 }
 
 let UpdateProductFamily = async (key, productFamily, callback) => { 
-    return await Update(key, productFamily, async (productFamily) => {
+    return await UpdateProductFamilyData(key, productFamily, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -57,7 +57,7 @@ let UpdateProductFamily = async (key, productFamily, callback) => {
 
 let DeleteProductFamily = async (key, callback) =>
 {
-    return await Delete(key, async (productFamily) => {
+    return await DeleteProductFamilyData(key, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -73,7 +73,7 @@ let DeleteProductFamily = async (key, callback) =>
 };
 
 let GetProductFamily = async (productFamilyName, callback) => {
-    return await GetById(productFamilyName, async (productFamily) => {
+    return await GetProductFamilyDataById(productFamilyName, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -88,8 +88,8 @@ let GetProductFamily = async (productFamilyName, callback) => {
     });
 }
 
-let GetAllProductFamilys = async (filter, callback) => {
-    return await GetAll(filter, async (productFamilys) => {
+let GetAllProductFamilies = async (filter, callback) => {
+    return await GetAllProductFamiliesData(filter, async (productFamilys) => {
         if (productFamilys) {
             return await callback({
                 'data':productFamilys,
@@ -104,4 +104,4 @@ let GetAllProductFamilys = async (filter, callback) => {
     });
 };
 
-export { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilys };
+export { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies };
