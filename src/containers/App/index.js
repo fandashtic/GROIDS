@@ -34,7 +34,7 @@ const RestrictedRoute = ({component: Component, location, authUser, ...rest}) =>
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: '/signin',
+            pathname: '/product',
             state: {from: location}
           }}
         />}

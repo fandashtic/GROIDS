@@ -1,45 +1,50 @@
-import React, { Component } from "react";
+import React, {useState,useEffect} from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Button, Row, Col, Card } from "antd";
+import { Button, Row, Col } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import CustomScrollbars from "util/CustomScrollbars";
+import {GetManufacturesAPI} from 'api/controller/Shared/ManufactureController'
 
-class Index extends Component {
-    state = {
-        view: true,
+const filter ={status:true}
+function Manufacture() {
+    const [view, setView] = useState(true);
+    const [manufactures,setManufactures] = useState([]);
+    const viewChanged = () => {
+        setView(!view)
     }
-    viewChanged = () => {
-        this.setState({ view: !this.state.view })
-    }
-    render() {
-        const { view } = this.state
-        return (
-            <div className="gx-module-box-content">
-                <div className="gx-module-box-topbar">
-                    <Row justify="space-between">
-                        <Col>
-                            <></>
-                            {view && <AppModuleHeader placeholder="Search Manufacture" />}
-                        </Col >
-                        <Col>
-                            <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={this.viewChanged}>
-                                {view ? (
-                                    <><i className="icon icon-add gx-mr-2" />
-                                        <span>Add New Manufacture</span></>) : (
-                                        <>
-                                            <i className="icon icon-eye gx-mr-2" />
-                                            <span>View Manufacture</span></>)
-                                }
-                            </Button>
-                        </Col>
-                    </Row>
-                </div>
-                    {view ? (<ListView />) : <ListForm />}
 
+    useEffect(() => {
+        GetManufacturesAPI(filter , (data,err)=>{
+            console.log(data)
+            setManufactures(data)
+        })
+      }, [GetManufacturesAPI]);
+
+    return (
+        <div className="gx-module-box-content">
+            <div className="gx-module-box-topbar">
+                <Row justify="space-between">
+                    <Col>
+                        <></>
+                        {view && <AppModuleHeader placeholder="Search Manufacture" />}
+                    </Col >
+                    <Col>
+                        <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
+                            {view ? (
+                                <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle"/>
+                                    <span>Add New Manufacture</span></>) : (
+                                    <>
+                                        <i className="icon icon-eye gx-mr-2" />
+                                        <span>View Manufacture</span></>)
+                            }
+                        </Button>
+                    </Col>
+                </Row>
             </div>
-        )
-    }
+                {view ? (<ListView  data={manufactures}/>) : <ListForm />}
+
+        </div>
+    )
 }
 
-export default Index
+export default Manufacture

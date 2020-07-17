@@ -33,7 +33,7 @@ const SignIn =()=> {
   };
 
   const onFinish = values => {
-    history.push('/main/dashboard/company');
+    history.push('/dashboard/company');
   };
 
     return (
