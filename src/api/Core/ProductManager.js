@@ -1,7 +1,7 @@
-var { GetAllProducts, GetProductById, Add, Update, Delete } = require('./../Data/Product');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Product';
 
-exports.IsProductValid = async (productName, password, callback) => {
-    return await GetProductById(productName, async (product) => {
+let IsProductValid = async (productName, password, callback) => {
+    return await GetById(productName, async (product) => {
         if (product.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsProductValid = async (productName, password, callback) => {
     });
 };
 
-exports.AddProduct = async (product, callback) => {
-    return await Add(product, async (product) => {
+let SaveProduct = async (product, callback) => {
+    return await Save(product, async (product) => {
         if (product) {
             return await callback({
                 'data':product,
@@ -39,7 +39,7 @@ exports.AddProduct = async (product, callback) => {
     });
 }
 
-exports.UpdateProduct = async (key, product, callback) => { 
+let UpdateProduct = async (key, product, callback) => { 
     return await Update(key, product, async (product) => {
         if (product) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateProduct = async (key, product, callback) => {
     });
 }
 
-exports.DeleteProduct = async (key, callback) =>
+let DeleteProduct = async (key, callback) =>
 {
     return await Delete(key, async (product) => {
         if (product) {
@@ -72,8 +72,8 @@ exports.DeleteProduct = async (key, callback) =>
     });
 };
 
-exports.GetProduct = async (productName, callback) => {
-    return await GetProductById(productName, async (product) => {
+let GetProduct = async (productName, callback) => {
+    return await GetById(productName, async (product) => {
         if (product) {
             return await callback({
                 'data':product,
@@ -88,8 +88,8 @@ exports.GetProduct = async (productName, callback) => {
     });
 }
 
-exports.GetAllProducts = async (filter, callback) => {
-    return await GetAllProducts(filter, async (products) => {
+let GetAllProducts = async (filter, callback) => {
+    return await GetAll(filter, async (products) => {
         if (products) {
             return await callback({
                 'data':products,
@@ -103,3 +103,5 @@ exports.GetAllProducts = async (filter, callback) => {
         }
     });
 };
+
+export { IsProductValid, SaveProduct, UpdateProduct, DeleteProduct, GetProduct, GetAllProducts };

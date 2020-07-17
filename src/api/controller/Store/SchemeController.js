@@ -1,18 +1,20 @@
 
-var { GetAllSchemes, AddScheme, UpdateScheme, DeleteScheme } = require('./../Core/SchemeManager');
+import { GetAllSchemes, AddScheme, UpdateScheme, DeleteScheme } from 'api/Core/SchemeManager';
 
-exports.AddScheme = async (scheme, callback) => {
+let AddSchemeAPI = async (scheme, callback) => {
     return await AddScheme(scheme, callback);
 };
 
-exports.UpdateScheme = async (schemeId, scheme, callback) => {
+let UpdateSchemeAPI = async (schemeId, scheme, callback) => {
     return await UpdateScheme(schemeId, scheme, callback);
 };
 
-exports.DeleteScheme = async (schemeId, callback) => {
+let DeleteSchemeAPI = async (schemeId, callback) => {
     return await DeleteScheme(schemeId, callback);
 };
 
-exports.GetSchemes = async (filter, callback) => {
+let GetSchemesAPI = async (filter, callback) => {
     return await GetAllSchemes( filter, callback);
 };
+
+export { AddSchemeAPI, UpdateSchemeAPI, DeleteSchemeAPI, GetSchemesAPI };

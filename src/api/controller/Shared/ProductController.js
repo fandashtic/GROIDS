@@ -1,18 +1,19 @@
+import { GetAllProducts, AddProduct, UpdateProduct, DeleteProduct } from 'api/Core/ProductManager';
 
-var { GetAllProducts, AddProduct, UpdateProduct, DeleteProduct } = require('./../Core/ProductManager');
-
-exports.AddProduct = async (product, callback) => {
+let AddProductAPI = async (product, callback) => {
     return await AddProduct(product, callback);
 };
 
-exports.UpdateProduct = async (productId, product, callback) => {
+let UpdateProductAPI = async (productId, product, callback) => {
     return await UpdateProduct(productId, product, callback);
 };
 
-exports.DeleteProduct = async (productId, callback) => {
+let DeleteProductAPI = async (productId, callback) => {
     return await DeleteProduct(productId, callback);
 };
 
-exports.GetProducts = async (filter, callback) => {
-    return await GetAllProducts( filter, callback);
+let GetProductsAPI = async (filter, callback) => {
+    return await GetAllProducts(filter, callback);
 };
+
+export { AddProductAPI, UpdateProductAPI, DeleteProductAPI, GetProductsAPI };

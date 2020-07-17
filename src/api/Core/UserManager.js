@@ -1,7 +1,7 @@
-var { GetAllUsers, GetUserById, Add, Update, Delete } = require('./../Data/User');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/User';
 
-exports.IsUserValid = async (userName, password, callback) => {
-    return await GetUserById(userName, async (user) => {
+let IsUserValid = async (userName, password, callback) => {
+    return await GetById(userName, async (user) => {
         if (user.password === password) {
             return await callback({
                 'data': {
@@ -23,11 +23,11 @@ exports.IsUserValid = async (userName, password, callback) => {
     });
 };
 
-exports.AddUser = async (user, callback) => {
-    return await Add(user, async (user) => {
+let AddUser = async (user, callback) => {
+    return await Save(user, async (user) => {
         if (user) {
             return await callback({
-                'data':user,
+                'data': user,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ exports.AddUser = async (user, callback) => {
     });
 }
 
-exports.UpdateUser = async (key, user, callback) => { 
+let UpdateUser = async (key, user, callback) => {
     return await Update(key, user, async (user) => {
         if (user) {
             return await callback({
-                'data':user,
+                'data': user,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ exports.UpdateUser = async (key, user, callback) => {
     });
 }
 
-exports.DeleteUser = async (key, callback) =>
-{
+let DeleteUser = async (key, callback) => {
     return await Delete(key, async (user) => {
         if (user) {
             return await callback({
-                'data':user,
+                'data': user,
                 'Status': 200
             })
         } else {
@@ -72,11 +71,11 @@ exports.DeleteUser = async (key, callback) =>
     });
 };
 
-exports.GetUser = async (userName, callback) => {
-    return await GetUserById(userName, async (user) => {
+let GetUser = async (userName, callback) => {
+    return await GetById(userName, async (user) => {
         if (user) {
             return await callback({
-                'data':user,
+                'data': user,
                 'Status': 200
             })
         } else {
@@ -88,11 +87,11 @@ exports.GetUser = async (userName, callback) => {
     });
 }
 
-exports.GetAllUsers = async (filter, callback) => {
-    return await GetAllUsers(filter, async (users) => {
+let GetAllUsers = async (filter, callback) => {
+    return await GetAll(filter, async (users) => {
         if (users) {
             return await callback({
-                'data':users,
+                'data': users,
                 'Status': 200
             })
         } else {
@@ -103,3 +102,5 @@ exports.GetAllUsers = async (filter, callback) => {
         }
     });
 };
+
+export { IsUserValid, AddUser, UpdateUser, DeleteUser, GetUser, GetAllUsers };

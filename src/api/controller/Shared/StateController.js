@@ -1,18 +1,19 @@
+import { GetAllStates, AddState, UpdateState, DeleteState } from 'api/Core/StateManager';
 
-var { GetAllStates, AddState, UpdateState, DeleteState } = require('./../Core/StateManager');
-
-exports.AddState = async (state, callback) => {
+let AddStateAPI = async (state, callback) => {
     return await AddState(state, callback);
 };
 
-exports.UpdateState = async (stateId, state, callback) => {
+let UpdateStateAPI = async (stateId, state, callback) => {
     return await UpdateState(stateId, state, callback);
 };
 
-exports.DeleteState = async (stateId, callback) => {
+let DeleteStateAPI = async (stateId, callback) => {
     return await DeleteState(stateId, callback);
 };
 
-exports.GetStates = async (filter, callback) => {
+let GetStatesAPI = async (filter, callback) => {
     return await GetAllStates( filter, callback);
 };
+
+export { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStatesAPI };

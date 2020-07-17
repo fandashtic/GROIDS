@@ -1,7 +1,7 @@
-var { GetAllAreas, GetAreaById, Add, Update, Delete } = require('./../Data/Area');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Area';
 
-exports.IsAreaValid = async (areaName, password, callback) => {
-    return await GetAreaById(areaName, async (area) => {
+let IsAreaValid = async (areaName, password, callback) => {
+    return await GetById(areaName, async (area) => {
         if (area.password === password) {
             return await callback({
                 'data': {
@@ -22,8 +22,8 @@ exports.IsAreaValid = async (areaName, password, callback) => {
     });
 };
 
-exports.AddArea = async (area, callback) => {
-    return await Add(area, async (area) => {
+let AddArea = async (area, callback) => {
+    return await Save(area, async (area) => {
         if (area) {
             return await callback({
                 'data':area,
@@ -38,7 +38,7 @@ exports.AddArea = async (area, callback) => {
     });
 }
 
-exports.UpdateArea = async (key, area, callback) => { 
+let UpdateArea = async (key, area, callback) => { 
     return await Update(key, area, async (area) => {
         if (area) {
             return await callback({
@@ -54,7 +54,7 @@ exports.UpdateArea = async (key, area, callback) => {
     });
 }
 
-exports.DeleteArea = async (key, callback) =>
+let DeleteArea = async (key, callback) =>
 {
     return await Delete(key, async (area) => {
         if (area) {
@@ -71,8 +71,8 @@ exports.DeleteArea = async (key, callback) =>
     });
 };
 
-exports.GetArea = async (areaName, callback) => {
-    return await GetAreaById(areaName, async (area) => {
+let GetArea = async (areaName, callback) => {
+    return await GetById(areaName, async (area) => {
         if (area) {
             return await callback({
                 'data':area,
@@ -87,8 +87,8 @@ exports.GetArea = async (areaName, callback) => {
     });
 }
 
-exports.GetAllAreas = async (filter, callback) => {
-    return await GetAllAreas(filter, async (areas) => {
+let GetAllAreas = async (filter, callback) => {
+    return await GetAll(filter, async (areas) => {
         if (areas) {
             return await callback({
                 'data':areas,
@@ -102,3 +102,5 @@ exports.GetAllAreas = async (filter, callback) => {
         }
     });
 };
+
+export { IsAreaValid, AddArea, UpdateArea, DeleteArea, GetArea, GetAllAreas };

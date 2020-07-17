@@ -1,7 +1,7 @@
-var { GetAllCompanys, GetCompanyById, Add, Update, Delete } = require('./../Data/Company');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Company';
 
-exports.IsCompanyValid = async (companyName, password, callback) => {
-    return await GetCompanyById(companyName, async (company) => {
+let IsCompanyValid = async (companyName, password, callback) => {
+    return await GetById(companyName, async (company) => {
         if (company.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsCompanyValid = async (companyName, password, callback) => {
     });
 };
 
-exports.AddCompany = async (company, callback) => {
-    return await Add(company, async (company) => {
+let AddCompany = async (company, callback) => {
+    return await Save(company, async (company) => {
         if (company) {
             return await callback({
                 'data':company,
@@ -39,7 +39,7 @@ exports.AddCompany = async (company, callback) => {
     });
 }
 
-exports.UpdateCompany = async (key, company, callback) => { 
+let UpdateCompany = async (key, company, callback) => { 
     return await Update(key, company, async (company) => {
         if (company) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateCompany = async (key, company, callback) => {
     });
 }
 
-exports.DeleteCompany = async (key, callback) =>
+let DeleteCompany = async (key, callback) =>
 {
     return await Delete(key, async (company) => {
         if (company) {
@@ -72,8 +72,8 @@ exports.DeleteCompany = async (key, callback) =>
     });
 };
 
-exports.GetCompany = async (companyName, callback) => {
-    return await GetCompanyById(companyName, async (company) => {
+let GetCompany = async (companyName, callback) => {
+    return await GetById(companyName, async (company) => {
         if (company) {
             return await callback({
                 'data':company,
@@ -88,8 +88,8 @@ exports.GetCompany = async (companyName, callback) => {
     });
 }
 
-exports.GetAllCompanys = async (filter, callback) => {
-    return await GetAllCompanys(filter, async (companys) => {
+let GetAllCompanys = async (filter, callback) => {
+    return await GetAll(filter, async (companys) => {
         if (companys) {
             return await callback({
                 'data':companys,
@@ -103,3 +103,5 @@ exports.GetAllCompanys = async (filter, callback) => {
         }
     });
 };
+
+export { IsCompanyValid, AddCompany, UpdateCompany, DeleteCompany, GetCompany, GetAllCompanys };

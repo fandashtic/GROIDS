@@ -1,29 +1,31 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 
-const _tableName = 'productFamilys';
-const _primaryKey = 'productFamily_id';
+const _tableName = 'productfamilys';
+const _primaryKey = 'product_family_id';
 
 //#region
 
-exports.GetProductFamilyById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllProductFamilys = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAll = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddProductFamily = async (productFamily, callback) => {
+let Save = async (productFamily, callback) => {
     return await Add(_tableName, productFamily, callback);
 }
 
-exports.UpdateProductFamily = async (key, productFamily, callback) => { 
-    return await Update(_tableName, _primaryKey, key, productFamily, callback);
+let Update = async (key, productFamily, callback) => { 
+    return await Edit(_tableName, _primaryKey, key, productFamily, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
+let Delete = async (key, callback) =>
 {
-    return await Delete(_tableName, _primaryKey, key, callback);
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetById, GetAll, Save, Update, Delete };
 
 //#endregion

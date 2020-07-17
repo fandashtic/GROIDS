@@ -1,7 +1,7 @@
-var { GetAllStates, GetStateById, Add, Update, Delete } = require('./../Data/State');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/State';
 
-exports.IsStateValid = async (stateName, password, callback) => {
-    return await GetStateById(stateName, async (state) => {
+let IsStateValid = async (stateName, password, callback) => {
+    return await GetById(stateName, async (state) => {
         if (state.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsStateValid = async (stateName, password, callback) => {
     });
 };
 
-exports.AddState = async (state, callback) => {
-    return await Add(state, async (state) => {
+let AddState = async (state, callback) => {
+    return await Save(state, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -39,7 +39,7 @@ exports.AddState = async (state, callback) => {
     });
 }
 
-exports.UpdateState = async (key, state, callback) => { 
+let UpdateState = async (key, state, callback) => { 
     return await Update(key, state, async (state) => {
         if (state) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateState = async (key, state, callback) => {
     });
 }
 
-exports.DeleteState = async (key, callback) =>
+let DeleteState = async (key, callback) =>
 {
     return await Delete(key, async (state) => {
         if (state) {
@@ -72,8 +72,8 @@ exports.DeleteState = async (key, callback) =>
     });
 };
 
-exports.GetState = async (stateName, callback) => {
-    return await GetStateById(stateName, async (state) => {
+let GetState = async (stateName, callback) => {
+    return await GetById(stateName, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -88,8 +88,8 @@ exports.GetState = async (stateName, callback) => {
     });
 }
 
-exports.GetAllStates = async (filter, callback) => {
-    return await GetAllStates(filter, async (states) => {
+let GetAllStates = async (filter, callback) => {
+    return await GetAll(filter, async (states) => {
         if (states) {
             return await callback({
                 'data':states,
@@ -103,3 +103,5 @@ exports.GetAllStates = async (filter, callback) => {
         }
     });
 };
+
+export { IsStateValid, AddState, UpdateState, DeleteState, GetState, GetAllStates };

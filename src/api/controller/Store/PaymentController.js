@@ -1,18 +1,20 @@
 
-var { GetAllPayments, AddPayment, UpdatePayment, DeletePayment } = require('./../Core/PaymentManager');
+import { GetAllPayments, AddPayment, UpdatePayment, DeletePayment } from 'api/Core/PaymentManager';
 
-exports.AddPayment = async (payment, callback) => {
+let AddPaymentAPI = async (payment, callback) => {
     return await AddPayment(payment, callback);
 };
 
-exports.UpdatePayment = async (paymentId, payment, callback) => {
+let UpdatePaymentAPI = async (paymentId, payment, callback) => {
     return await UpdatePayment(paymentId, payment, callback);
 };
 
-exports.DeletePayment = async (paymentId, callback) => {
+let DeletePaymentAPI = async (paymentId, callback) => {
     return await DeletePayment(paymentId, callback);
 };
 
-exports.GetPayments = async (filter, callback) => {
+let GetPaymentsAPI = async (filter, callback) => {
     return await GetAllPayments( filter, callback);
 };
+
+export { AddPaymentAPI, UpdatePaymentAPI, DeletePaymentAPI, GetPaymentsAPI };

@@ -1,7 +1,7 @@
-var { GetAllStores, GetStoreById, Add, Update, Delete } = require('./../Data/Store');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Store';
 
-exports.IsStoreValid = async (storeName, password, callback) => {
-    return await GetStoreById(storeName, async (store) => {
+let IsStoreValid = async (storeName, password, callback) => {
+    return await GetById(storeName, async (store) => {
         if (store.password === password) {
             return await callback({
                 'data': {
@@ -23,11 +23,11 @@ exports.IsStoreValid = async (storeName, password, callback) => {
     });
 };
 
-exports.AddStore = async (store, callback) => {
-    return await Add(store, async (store) => {
+let AddStore = async (store, callback) => {
+    return await Save(store, async (store) => {
         if (store) {
             return await callback({
-                'data':store,
+                'data': store,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ exports.AddStore = async (store, callback) => {
     });
 }
 
-exports.UpdateStore = async (key, store, callback) => { 
+let UpdateStore = async (key, store, callback) => {
     return await Update(key, store, async (store) => {
         if (store) {
             return await callback({
-                'data':store,
+                'data': store,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ exports.UpdateStore = async (key, store, callback) => {
     });
 }
 
-exports.DeleteStore = async (key, callback) =>
-{
+let DeleteStore = async (key, callback) => {
     return await Delete(key, async (store) => {
         if (store) {
             return await callback({
-                'data':store,
+                'data': store,
                 'Status': 200
             })
         } else {
@@ -72,11 +71,11 @@ exports.DeleteStore = async (key, callback) =>
     });
 };
 
-exports.GetStore = async (storeName, callback) => {
-    return await GetStoreById(storeName, async (store) => {
+let GetStore = async (storeName, callback) => {
+    return await GetById(storeName, async (store) => {
         if (store) {
             return await callback({
-                'data':store,
+                'data': store,
                 'Status': 200
             })
         } else {
@@ -88,11 +87,11 @@ exports.GetStore = async (storeName, callback) => {
     });
 }
 
-exports.GetAllStores = async (filter, callback) => {
-    return await GetAllStores(filter, async (stores) => {
+let GetAllStores = async (filter, callback) => {
+    return await GetAll(filter, async (stores) => {
         if (stores) {
             return await callback({
-                'data':stores,
+                'data': stores,
                 'Status': 200
             })
         } else {
@@ -103,3 +102,5 @@ exports.GetAllStores = async (filter, callback) => {
         }
     });
 };
+
+export { IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };

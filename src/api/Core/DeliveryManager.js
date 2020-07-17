@@ -1,7 +1,7 @@
-var { GetAllDeliverys, GetDeliveryById, Add, Update, Delete } = require('./../Data/Delivery');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Delivery';
 
-exports.IsDeliveryValid = async (deliveryName, password, callback) => {
-    return await GetDeliveryById(deliveryName, async (delivery) => {
+let IsDeliveryValid = async (deliveryName, password, callback) => {
+    return await GetById(deliveryName, async (delivery) => {
         if (delivery.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsDeliveryValid = async (deliveryName, password, callback) => {
     });
 };
 
-exports.AddDelivery = async (delivery, callback) => {
-    return await Add(delivery, async (delivery) => {
+let AddDelivery = async (delivery, callback) => {
+    return await Save(delivery, async (delivery) => {
         if (delivery) {
             return await callback({
                 'data':delivery,
@@ -39,7 +39,7 @@ exports.AddDelivery = async (delivery, callback) => {
     });
 }
 
-exports.UpdateDelivery = async (key, delivery, callback) => { 
+let UpdateDelivery = async (key, delivery, callback) => { 
     return await Update(key, delivery, async (delivery) => {
         if (delivery) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateDelivery = async (key, delivery, callback) => {
     });
 }
 
-exports.DeleteDelivery = async (key, callback) =>
+let DeleteDelivery = async (key, callback) =>
 {
     return await Delete(key, async (delivery) => {
         if (delivery) {
@@ -72,8 +72,8 @@ exports.DeleteDelivery = async (key, callback) =>
     });
 };
 
-exports.GetDelivery = async (deliveryName, callback) => {
-    return await GetDeliveryById(deliveryName, async (delivery) => {
+let GetDelivery = async (deliveryName, callback) => {
+    return await GetById(deliveryName, async (delivery) => {
         if (delivery) {
             return await callback({
                 'data':delivery,
@@ -88,8 +88,8 @@ exports.GetDelivery = async (deliveryName, callback) => {
     });
 }
 
-exports.GetAllDeliverys = async (filter, callback) => {
-    return await GetAllDeliverys(filter, async (deliverys) => {
+let GetAllDeliverys = async (filter, callback) => {
+    return await GetAll(filter, async (deliverys) => {
         if (deliverys) {
             return await callback({
                 'data':deliverys,
@@ -103,3 +103,5 @@ exports.GetAllDeliverys = async (filter, callback) => {
         }
     });
 };
+
+export { IsDeliveryValid, AddDelivery, UpdateDelivery, DeleteDelivery, GetDelivery, GetAllDeliverys };

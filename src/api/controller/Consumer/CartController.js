@@ -1,18 +1,19 @@
+import { GetAllCarts, AddCart, UpdateCart, DeleteCart } from 'api/Core/CartManager';
 
-var { GetAllCarts, AddCart, UpdateCart, DeleteCart } = require('./../Core/CartManager');
-
-exports.AddCart = async (cart, callback) => {
+let AddCartAPI = async (cart, callback) => {
     return await AddCart(cart, callback);
 };
 
-exports.UpdateCart = async (cartId, cart, callback) => {
+let UpdateCartAPI = async (cartId, cart, callback) => {
     return await UpdateCart(cartId, cart, callback);
 };
 
-exports.DeleteCart = async (cartId, callback) => {
+let DeleteCartAPI = async (cartId, callback) => {
     return await DeleteCart(cartId, callback);
 };
 
-exports.GetCarts = async (filter, callback) => {
-    return await GetAllCarts( filter, callback);
+let GetCartsAPI = async (filter, callback) => {
+    return await GetAllCarts(filter, callback);
 };
+
+export { AddCartAPI, UpdateCartAPI, DeleteCartAPI, GetCartsAPI };

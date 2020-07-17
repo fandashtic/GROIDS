@@ -1,7 +1,7 @@
-var { docClient } = require('./../db');
-var { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey } = require('./../Shared/Util');
+import { docClient } from 'api/db';
+import { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey } from 'api/Shared/Util';
 
-exports.GetById = async (tableName, keyColumn, keyValue, callback) => {
+let Get = async (tableName, keyColumn, keyValue, callback) => {
     var params = {
         TableName: tableName,
         Key: GetKey(keyColumn, keyValue)
@@ -12,7 +12,7 @@ exports.GetById = async (tableName, keyColumn, keyValue, callback) => {
     });
 };
 
-exports.GetAll = async (tableName, filter, callback) => {
+let All = async (tableName, filter, callback) => {
     let array = [];
     let data = GetUpdateExpressionAndAttributeValuesAndNames(filter, 0);
 
@@ -20,19 +20,19 @@ exports.GetAll = async (tableName, filter, callback) => {
         TableName: tableName,
         FilterExpression: data.expression,
         ExpressionAttributeNames: data.names,
-        ExpressionAttributeValues: data.attributeValues   
+        ExpressionAttributeValues: data.attributeValues
     };
-    
+
     docClient.scan(params, onScan);
-    
+
     function onScan(err, data) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            data.Items.forEach(function(itemdata) {
+            data.Items.forEach(function (itemdata) {
                 array.push(itemdata);
             });
-    
+
             // continue scanning if we have more items
             if (typeof data.LastEvaluatedKey != "undefined") {
                 console.log("Scanning for more...");
@@ -45,10 +45,10 @@ exports.GetAll = async (tableName, filter, callback) => {
     }
 };
 
-exports.Add = async (tableName, tableData, callback) => {
+let Add = async (tableName, tableData, callback) => {
     var params = {
         TableName: tableName,
-        Item:  tableData
+        Item: tableData
     };
 
     return await docClient.put(params, function (err, data) {
@@ -56,11 +56,11 @@ exports.Add = async (tableName, tableData, callback) => {
     });
 }
 
-exports.Update = async (tableName, keyColumn, keyValue, tableData, callback) => { 
+let Edit = async (tableName, keyColumn, keyValue, tableData, callback) => {
     let data = GetUpdateExpressionAndAttributeValuesAndNames(tableData, 1);
-    
+
     var params = {
-        TableName:tableName,
+        TableName: tableName,
         Key: GetKey(keyColumn, keyValue),
         UpdateExpression: data.expression, // "set updated_by = :updated_by, is_deleted = :is_deleted",
         ExpressionAttributeValues: data.attributeValues,
@@ -72,8 +72,7 @@ exports.Update = async (tableName, keyColumn, keyValue, tableData, callback) => 
     });
 }
 
-exports.Delete = async (tableName, keyColumn, keyValue, callback) =>
-{
+let Remove = async (tableName, keyColumn, keyValue, callback) => {
     var params = {
         TableName: tableName,
         Key: GetKey(keyColumn, keyValue)
@@ -82,3 +81,5 @@ exports.Delete = async (tableName, keyColumn, keyValue, callback) =>
         ReturnObject(callback, err, data, 'Delete');
     });
 };
+
+export { Get, All, Add, Edit, Remove };

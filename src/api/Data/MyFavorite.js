@@ -1,29 +1,31 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 
 const _tableName = 'myfavorites';
 const _primaryKey = 'myfavorite_id';
 
 //#region
 
-exports.GetMyfavoriteById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllMyfavorites = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAll = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddMyfavorite = async (myfavorite, callback) => {
+let Save = async (myfavorite, callback) => {
     return await Add(_tableName, myfavorite, callback);
 }
 
-exports.UpdateMyfavorite = async (key, myfavorite, callback) => { 
-    return await Update(_tableName, _primaryKey, key, myfavorite, callback);
+let Update = async (key, myfavorite, callback) => { 
+    return await Edit(_tableName, _primaryKey, key, myfavorite, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
+let Delete = async (key, callback) =>
 {
-    return await Delete(_tableName, _primaryKey, key, callback);
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetById, GetAll, Save, Update, Delete };
 
 //#endregion

@@ -1,29 +1,31 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 
 const _tableName = 'areas';
 const _primaryKey = 'area_id';
 
 //#region
 
-exports.GetAreaById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllAreas = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAll = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddArea = async (area, callback) => {
+let Save = async (area, callback) => {
     return await Add(_tableName, area, callback);
 }
 
-exports.UpdateArea = async (key, area, callback) => { 
-    return await Update(_tableName, _primaryKey, key, area, callback);
+let Update = async (key, area, callback) => { 
+    return await Edit(_tableName, _primaryKey, key, area, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
+let Delete = async (key, callback) =>
 {
-    return await Delete(_tableName, _primaryKey, key, callback);
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetById, GetAll, Save, Update, Delete };
 
 //#endregion

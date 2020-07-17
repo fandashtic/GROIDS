@@ -1,33 +1,10 @@
-var { GetAllManufactures, GetManufactureById, Add, Update, Delete } = require('./../Data/Manufacture');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Inventory';
 
-exports.IsManufactureValid = async (manufactureName, password, callback) => {
-    return await GetManufactureById(manufactureName, async (manufacture) => {
-        if (manufacture.password === password) {
-            return await callback({
-                'data': {
-                    ManufactureName: manufacture.manufactureName,
-                    ManufactureDisplayName: manufacture.firstName + ' ' + manufacture.lastName,
-                    ManufactureType: manufacture.manufactureType,
-                    CompanyId: manufacture.companyId,
-                    StoreId: manufacture.storeId,
-                    ManufactureProfileImage: manufacture.profileImageUrl
-                },
-                'Status': 200
-            })
-        } else {
-            return await callback({
-                'data': null,
-                'Status': 401
-            })
-        }
-    });
-};
-
-exports.AddManufacture = async (manufacture, callback) => {
-    return await Add(manufacture, async (manufacture) => {
+let AddManufacture = async (manufacture, callback) => {
+    return await Save(manufacture, async (manufacture) => {
         if (manufacture) {
             return await callback({
-                'data':manufacture,
+                'data': manufacture,
                 'Status': 200
             })
         } else {
@@ -39,11 +16,11 @@ exports.AddManufacture = async (manufacture, callback) => {
     });
 }
 
-exports.UpdateManufacture = async (key, manufacture, callback) => { 
+let UpdateManufacture = async (key, manufacture, callback) => {
     return await Update(key, manufacture, async (manufacture) => {
         if (manufacture) {
             return await callback({
-                'data':manufacture,
+                'data': manufacture,
                 'Status': 200
             })
         } else {
@@ -55,12 +32,11 @@ exports.UpdateManufacture = async (key, manufacture, callback) => {
     });
 }
 
-exports.DeleteManufacture = async (key, callback) =>
-{
+let DeleteManufacture = async (key, callback) => {
     return await Delete(key, async (manufacture) => {
         if (manufacture) {
             return await callback({
-                'data':manufacture,
+                'data': manufacture,
                 'Status': 200
             })
         } else {
@@ -72,27 +48,11 @@ exports.DeleteManufacture = async (key, callback) =>
     });
 };
 
-exports.GetManufacture = async (manufactureName, callback) => {
-    return await GetManufactureById(manufactureName, async (manufacture) => {
+let GetManufacture = async (manufactureName, callback) => {
+    return await GetById(manufactureName, async (manufacture) => {
         if (manufacture) {
             return await callback({
-                'data':manufacture,
-                'Status': 200
-            })
-        } else {
-            return await callback({
-                'data': null,
-                'Status': 401
-            })
-        }
-    });
-}
-
-exports.GetAllManufactures = async (filter, callback) => {
-    return await GetAllManufactures(filter, async (manufactures) => {
-        if (manufactures) {
-            return await callback({
-                'data':manufactures,
+                'data': manufacture,
                 'Status': 200
             })
         } else {
@@ -103,3 +63,21 @@ exports.GetAllManufactures = async (filter, callback) => {
         }
     });
 };
+
+let GetAllManufactures = async (filter, callback) => {
+    return await GetAll(filter, async (manufactures) => {
+        if (manufactures) {
+            return await callback({
+                'data': manufactures,
+                'Status': 200
+            })
+        } else {
+            return await callback({
+                'data': null,
+                'Status': 401
+            })
+        }
+    });
+};
+
+export { AddManufacture, UpdateManufacture, DeleteManufacture, GetManufacture, GetAllManufactures };

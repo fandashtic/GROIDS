@@ -1,7 +1,7 @@
-var { GetAllCarts, GetCartById, Add, Update, Delete } = require('./../Data/Cart');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Cart';
 
-exports.IsCartValid = async (cartName, password, callback) => {
-    return await GetCartById(cartName, async (cart) => {
+let IsCartValid = async (cartName, password, callback) => {
+    return await GetById(cartName, async (cart) => {
         if (cart.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsCartValid = async (cartName, password, callback) => {
     });
 };
 
-exports.AddCart = async (cart, callback) => {
-    return await Add(cart, async (cart) => {
+let AddCart = async (cart, callback) => {
+    return await Save(cart, async (cart) => {
         if (cart) {
             return await callback({
                 'data':cart,
@@ -39,7 +39,7 @@ exports.AddCart = async (cart, callback) => {
     });
 }
 
-exports.UpdateCart = async (key, cart, callback) => { 
+let UpdateCart = async (key, cart, callback) => { 
     return await Update(key, cart, async (cart) => {
         if (cart) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateCart = async (key, cart, callback) => {
     });
 }
 
-exports.DeleteCart = async (key, callback) =>
+let DeleteCart = async (key, callback) =>
 {
     return await Delete(key, async (cart) => {
         if (cart) {
@@ -72,8 +72,8 @@ exports.DeleteCart = async (key, callback) =>
     });
 };
 
-exports.GetCart = async (cartName, callback) => {
-    return await GetCartById(cartName, async (cart) => {
+let GetCart = async (cartName, callback) => {
+    return await GetById(cartName, async (cart) => {
         if (cart) {
             return await callback({
                 'data':cart,
@@ -88,8 +88,8 @@ exports.GetCart = async (cartName, callback) => {
     });
 }
 
-exports.GetAllCarts = async (filter, callback) => {
-    return await GetAllCarts(filter, async (carts) => {
+let GetAllCarts = async (filter, callback) => {
+    return await GetAll(filter, async (carts) => {
         if (carts) {
             return await callback({
                 'data':carts,
@@ -103,3 +103,5 @@ exports.GetAllCarts = async (filter, callback) => {
         }
     });
 };
+
+export { IsCartValid, AddCart, UpdateCart, DeleteCart, GetCart, GetAllCarts };
