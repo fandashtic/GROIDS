@@ -6,6 +6,10 @@ import "assets/vendors/style";
 import configureStore, { history } from './appRedux/store';
 import App from "./containers/App/index";
 
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
 const store = configureStore(/* provide initial state if any */);
 
 const NextApp = () =>
