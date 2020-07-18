@@ -22,12 +22,7 @@ let AddManufacture = () => {
         manufacture_name: 'ITC',
         company_id: 'company_xyz',
         store_id: 'store_xyz',
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: 'demouser',
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddManufactureAPI(manufacture, (data, err) => {
@@ -41,12 +36,7 @@ let AddBrand = () => {
         manufacture_id: manufacture_id,
         company_id: company_id,
         store_id: store_id,
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: created_by,
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddBrandAPI(Brand, (data, err) => {
@@ -61,12 +51,7 @@ let AddProductCategory = () => {
         brand_id: brand_id,
         company_id: company_id,
         store_id: store_id,
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: created_by,
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddProductCategoryAPI(ProductCategory, (data, err) => {
@@ -82,12 +67,7 @@ let AddProductFamily = () => {
         product_category_id: product_category_id,
         company_id: company_id,
         store_id: store_id,
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: 'demouser',
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddProductFamilyAPI(Productfamily, (data, err) => {
@@ -105,20 +85,15 @@ let AddProduct = () => {
         product_category_id: product_category_id,
         company_id: company_id,
         store_id: store_id,
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: 'demouser',
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddProductAPI(Product, (data, err) => {
     });
 }
 
-let ProductLookUp = () => {
-    ProductLookUpAPI('PR#OGI0YTRkMzgtMDQ1ZC00OGQ5LWEyYjUtMTY5NWVlOWUzOGI3', (data, err) => {
+let ProductLookUp = () => {    
+    ProductLookUpAPI(product_id, (data, err) => {
         console.log(data);
         console.log(err);
     });
@@ -135,22 +110,19 @@ let SaveUser = () => {
         user_type: UserType.SUPER_ADMIN,
         company_id: company_id,
         store_id: store_id,
-        profile_image_url: 'image.png',
-        status: true,
-        created_on: new Date(),
-        created_by: created_by,
-        modified_on: null,
-        modified_by: null
+        profile_image_url: 'image.png'
     }
 
     AddUserAPI(User, (data, err) => {
-
+        console.log(data);
+        console.log(err);
     });
 }
 
 let SignIn = () => {
     IsUserValidAPI('demo@example.com', 'demo#123', (data, err) => {
-
+        console.log(data);
+        console.log(err);
     })
 }
 
@@ -160,9 +132,11 @@ let RunUnitTest = () => {
     AddProductCategory();
     AddProductFamily();
     AddProduct();
-    ProductLookUp();
-    SaveUser();
-    SignIn();
+    //ProductLookUp(null);
+    let product_id= 'PR#M2ExMzAwMGItYWI3NS00MGY2LTg2MzItMjQ4OWQwZDcxMjVj';
+    ProductLookUp(product_id);    
+    //SaveUser();
+    //SignIn();
 };
 
 export { RunUnitTest };

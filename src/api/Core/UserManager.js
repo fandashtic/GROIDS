@@ -1,7 +1,7 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/User';
 import { InsertLog } from 'api/Data/SessionLog';
 import { PreFix } from 'api/Shared/Constant/Enum';
-import { GetNewKey, IsHasValue } from 'api/Shared/Util';
+import { GetNewKey, IsHasValue, GetDate } from 'api/Shared/Util';
 
 let IsUserValid = async (userName, password, callback) => {
     let filter = {
@@ -13,22 +13,20 @@ let IsUserValid = async (userName, password, callback) => {
         if (IsHasValue(userExists) && userExists.length > 0 && userExists[0].password === password) {
             let _session = {                
                 session_token: GetNewKey(),
-                session_date: new Date()
+                session_date: GetDate()
             }
-
-            InsertLog(userExists[0].user_id + GetNewKey() , _session, async (session) => {
-                return await callback({
-                    'data': {
-                        UserName: userExists[0].userName,
-                        UserDisplayName: userExists[0].firstName + ' ' + userExists[0].lastName,
-                        UserType: userExists[0].userType,
-                        CompanyId: userExists[0].companyId,
-                        StoreId: userExists[0].storeId,
-                        UserProfileImage: userExists[0].profileImageUrl
-                    },
-                    'Status': 200
-                })
-            });            
+            AddSessionLog(userExists[0].user_id + GetNewKey() , _session);           
+            return await callback({
+                'data': {
+                    UserName: userExists[0].userName,
+                    UserDisplayName: userExists[0].firstName + ' ' + userExists[0].lastName,
+                    UserType: userExists[0].userType,
+                    CompanyId: userExists[0].companyId,
+                    StoreId: userExists[0].storeId,
+                    UserProfileImage: userExists[0].profileImageUrl
+                },
+                'Status': 200
+            })
         } else {
             return await callback({
                 'data': null,
@@ -37,6 +35,12 @@ let IsUserValid = async (userName, password, callback) => {
         }
     });
 };
+
+let AddSessionLog = (session_id, session) => {
+    InsertLog(session_id, session, async (session) => {
+               
+    });
+}
 
 let AddUser = async (user, callback) => {
     return await Save(user, async (user) => {

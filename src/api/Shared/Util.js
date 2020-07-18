@@ -41,9 +41,9 @@ let ReturnObject = (callback, err, data, methodName) => {
         callback(null, 'Error on ' + methodName + ': ' + JSON.stringify(err));
     } else {
         if (IsHasValue(data)) {
-            if (IsHasValue(data.Item)) { return callback(data.Item, null); }
-            if (IsHasValue(data.Attributes)) { return callback(data.Attributes, null); }
-            if (IsHasValue(data)) { return callback(data, null); }
+            if (IsHasValue(data.Item)) { return callback(SortByCreatedOn(data.Item), null); }
+            if (IsHasValue(data.Attributes)) { return callback(SortByCreatedOn(data.Attributes), null); }
+            if (IsHasValue(data)) { return callback(SortByCreatedOn(data), null); }
         } else {
             return callback(null, 'Error on ' + methodName);
         }
@@ -60,15 +60,41 @@ let IsHasValue = (data) => {
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
     tableData['created_by'] = created_by;
-    tableData['created_on'] = new Date();
+    tableData['created_on'] = GetDate();
     tableData['status'] = true;
     return tableData;
 }
 
 let UpdateDetaultValues = (tableData, modified_by) => {
     tableData['modified_by'] = modified_by;
-    tableData['modified_on'] = new Date();
+    tableData['modified_on'] = GetDate();
     return tableData;
 }
 
-export { IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };
+let SortByCreatedOn = (tableData) => {
+   return tableData;
+//    .sort(function (x, y) {
+//         return x.created_on - y.created_on;
+//     });
+}
+
+let AppendLeadingZeroes = (n) => {
+    if (n <= 9) {
+        return "0" + n;
+    }
+    return n
+}
+
+let GetDate = () => {
+    const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    let current_datetime = new Date();
+    let formatted_date = current_datetime.getFullYear() + "-"
+    + months[current_datetime.getMonth()] + "-"
+    + AppendLeadingZeroes(current_datetime.getDate()) + " "
+    + AppendLeadingZeroes(current_datetime.getHours()) + ":"
+    + AppendLeadingZeroes(current_datetime.getMinutes()) + ":"
+    + AppendLeadingZeroes(current_datetime.getSeconds())
+    return formatted_date;
+}
+
+export { GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };

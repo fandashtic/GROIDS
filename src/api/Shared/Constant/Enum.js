@@ -61,12 +61,22 @@ let Event = {
 }
 
 let PreFix = {
-    Company: 'C',
-    Manufacture : 'MF',
+    Area: 'A',
     Brand: 'BR',
+    Cart: 'CT',
+    City: 'CY',
+    Company: 'C',
+    Country: 'CON',
+    Delivery: 'DL',
+    Inventory: 'I',
+    Manufacture : 'MF',
+    Order: 'O',
+    Payment: 'PY',
+    Product : 'PR',
     ProductCategory : 'PC',
     ProductFamily: 'PF',
-    Product : 'PR',
+    Scheme: 'SC',
+    State: 'S',
     Store: 'ST',
     User: 'U'
 }

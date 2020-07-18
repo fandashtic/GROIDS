@@ -31,10 +31,9 @@ let IsProductValid = async (productName, password, callback) => {
 };
 
 let ProductLookUp = async (product_id, callback) => {
-
     if(IsHasValue(product_id)){
-        return await GetById(product_id, async (product) => {
-            if (product) {
+        return await GetById(product_id, async (product) => {            
+            if (IsHasValue(product)) {
                 return await GetProductHierarchyData(product, callback);
             } else {
                 return await callback({
@@ -151,13 +150,25 @@ const GetProductHierarchyData = async (product, callback) => {
     //store: [{ dispalyName: '', value: '', isSelected: true }, { dispalyName: '', value: '', isSelected: false }],
 
     GetAllManufactureData(active_filter, async (manufactures) => {
-        _product_Lookup.manufactures = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _product_Lookup.manufacture_id);
+        let _m = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _product_Lookup.manufacture_id);
+        _product_Lookup.manufactures = _m.list;
+        _product_Lookup.manufacture_name = _m.dispalyName;
+
         await GetAllBrandDatas(active_filter, async (brands) => {
-            _product_Lookup.brands = GetLookUpData(brands, 'brand_id', 'brand_name', _product_Lookup.brand_id);
+            let _b = GetLookUpData(brands, 'brand_id', 'brand_name', _product_Lookup.brand_id);
+            _product_Lookup.brands = _b.list;
+            _product_Lookup.brand_name = _b.dispalyName;
+
             await GetAllProductCategoriesData(active_filter, async (productCategories) => {
-                _product_Lookup.product_categories = GetLookUpData(productCategories, 'product_category_id', 'product_category_name', _product_Lookup.product_category_id);;
+                let _bc = GetLookUpData(productCategories, 'product_category_id', 'product_category_name', _product_Lookup.product_category_id);
+                _product_Lookup.productCategories = _bc.list;
+                _product_Lookup.product_category_name = _bc.dispalyName;
+
                 await GetAllProductFamiliesData(active_filter, async (productFamilies) => {
-                    _product_Lookup.product_families = GetLookUpData(productFamilies, 'product_family_id', 'product_family_name', _product_Lookup.product_family_id);;;
+                    let _bf = GetLookUpData(productFamilies, 'product_family_id', 'product_family_name', _product_Lookup.product_family_id);
+                    _product_Lookup.product_families = _bf.list;
+                    _product_Lookup.product_family_name = _bf.dispalyName;
+
                     return await ReturnObject(callback, null, _product_Lookup, 'GetProductHierarchyData');
                 });
             });
@@ -166,13 +177,17 @@ const GetProductHierarchyData = async (product, callback) => {
 }
 
 let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
-    let result = [];
+    let result = {list: [], displayName: ''};
+    let _isSelected = false;
     list.forEach(l => {
-        result.push(
+        _isSelected = ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false);
+        if(_isSelected === true) result.displayName = l[displayColumn];
+
+        result.list.push(
             {
                 dispalyName: l[displayColumn],
                 value: l[idCoulmn],
-                isSelected: ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false)
+                isSelected: _isSelected
             }
         )
     });

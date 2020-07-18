@@ -9,7 +9,9 @@ import {
 } from 'antd';
 
 import useForm from 'components/Shared/Useform';
-import {AddManufactureAPI} from 'api/Controller/Shared/ManufactureController'
+import {AddManufactureAPI} from 'api/Controller/Shared/ManufactureController';
+import {GetDate} from 'api/Shared/Util';
+
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -43,7 +45,7 @@ const From = () => {
         values['store_id'] = "1"
         values['profile_image_url'] = "test"
         values['status'] = true
-        values['created_on'] = new Date()
+        values['created_on'] = GetDate()
         values['created_by'] = 1
         console.log(values)
 //}
