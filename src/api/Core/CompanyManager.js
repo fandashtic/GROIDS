@@ -9,7 +9,7 @@ let IsCompanyValid = async (companyName, password, callback) => {
                     CompanyDisplayName: company.firstName + ' ' + company.lastName,
                     CompanyType: company.companyType,
                     CompanyId: company.companyId,
-                    StoreId: company.storeId,
+                    store_id: company.store_id,
                     CompanyProfileImage: company.profileImageUrl
                 },
                 'Status': 200

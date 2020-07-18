@@ -1,5 +1,5 @@
 
-import { GetAllOrders, AddOrder, UpdateOrder, DeleteOrder } from 'api/Controller/Store/node_modules/api/Core/OrderManager';
+import { GetAllOrders, AddOrder, UpdateOrder, DeleteOrder } from 'api/Core/OrderManager';
 
 let AddOrderAPI = async (order, callback) => {
     return await AddOrder(order, callback);

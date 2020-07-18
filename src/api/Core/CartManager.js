@@ -9,7 +9,7 @@ let IsCartValid = async (cartName, password, callback) => {
                     CartDisplayName: cart.firstName + ' ' + cart.lastName,
                     CartType: cart.cartType,
                     CompanyId: cart.companyId,
-                    StoreId: cart.storeId,
+                    store_id: cart.store_id,
                     CartProfileImage: cart.profileImageUrl
                 },
                 'Status': 200

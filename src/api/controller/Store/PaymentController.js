@@ -1,5 +1,5 @@
 
-import { GetAllPayments, AddPayment, UpdatePayment, DeletePayment } from 'api/Controller/Store/node_modules/api/Core/PaymentManager';
+import { GetAllPayments, AddPayment, UpdatePayment, DeletePayment } from 'api/Core/PaymentManager';
 
 let AddPaymentAPI = async (payment, callback) => {
     return await AddPayment(payment, callback);

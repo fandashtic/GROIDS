@@ -16,8 +16,12 @@ let GetProductsAPI = async (filter, callback) => {
     return await GetAllProducts(filter, callback);
 };
 
+let GetProductAPI = async (product_id, callback) => {
+    return await GetProduct(product_id, callback);
+};
+
 let ProductLookUpAPI = async (product_id, callback) => {
     return await ProductLookUp(product_id, callback);
 };
 
-export { AddProductAPI, UpdateProductAPI, DeleteProductAPI, GetProductsAPI, ProductLookUpAPI };
+export { AddProductAPI, UpdateProductAPI, DeleteProductAPI, GetProductsAPI, GetProductAPI, ProductLookUpAPI };

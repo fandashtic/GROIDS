@@ -1,11 +1,12 @@
-import { GetNewKey, AddDetaultValues } from 'api/Shared/Util';
-import { PreFix, UserType } from 'api/Shared/Constant/Enum';
+import { GetNewKey, AddDetaultValues, GetDate } from 'api/Shared/Util';
+import { PreFix, UserType, StoreType, ActiveStatus } from 'api/Shared/Constant/Enum';
 import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
 import { AddBrandAPI } from 'api/Controller/Shared/BrandController';
 import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
 import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
 import { ProductLookUpAPI, AddProductAPI } from 'api/Controller/Shared/ProductController';
 import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
+import { StoreLookUpAPI, AddStoreAPI, GetStoresAPI, GetStoreAPI } from 'api/Controller/Shared/StoreController';
 
 const company_id = GetNewKey(PreFix.Company);
 const manufacture_id = GetNewKey(PreFix.Manufacture);
@@ -15,6 +16,12 @@ const product_family_id = GetNewKey(PreFix.ProductFamily);
 const store_id = GetNewKey(PreFix.Store);
 const product_id = GetNewKey(PreFix.Product);
 const created_by = GetNewKey(PreFix.User);
+const store_by = GetNewKey(PreFix.Store);
+const country_id = GetNewKey(PreFix.Country);
+const state_id = GetNewKey(PreFix.State);
+const city_id = GetNewKey(PreFix.City);
+const area_id = GetNewKey(PreFix.Area);
+
 
 let AddManufacture = () => {
     const manufacture = {
@@ -99,6 +106,55 @@ let ProductLookUp = () => {
     });
 }
 
+let AddStore = () => {
+    const Store = {
+        store_id: store_id,
+        store_name: 'store_name',
+        store_type: StoreType.Wholesale,
+        billing_address: 'Address 1',
+        shipping_address: 'Address 2',
+        area_id: area_id,
+        area_name: 'Mettupatty',
+        city_id: city_id,
+        city_name: 'Salem',
+        state_id: state_id,
+        state_name: 'TamilNadu',
+        country_id: country_id,
+        country_name: 'India',
+        pincode : '636111',
+        latitude: '0000000',
+        longitude: '00000001',
+        email: 'mail@mail.com',
+        mobilenumber: '1234567890',
+        contactperson: 'Human',
+        tin: 'TIN123456789',
+        gst: 'GST1245679',
+        logo: 'image.png',
+        banner : 'image1.png',
+        business_days_hours : '[mon:{10:00-18:00}]',
+        delivery_days_hours : '[Mon,Tue,Wed,Thu,Fri]',
+        company_id: company_id
+    }
+
+    AddStoreAPI(Store, (data, err) => {
+
+    });
+}
+
+let StoreLookUp = () => {    
+    StoreLookUpAPI(product_id, (data, err) => {
+        console.log(data);
+        console.log(err);
+    });
+}
+
+let GetStore = (store_id) => {    
+    GetStoreAPI(store_id, (data, err) => {
+        console.log(data);
+        console.log(err);
+    });
+}
+
 let SaveUser = () => {
     const User = {
         user_id: created_by,
@@ -127,14 +183,20 @@ let SignIn = () => {
 }
 
 let RunUnitTest = () => {
-    AddManufacture();
-    AddBrand();
-    AddProductCategory();
-    AddProductFamily();
-    AddProduct();
-    //ProductLookUp(null);
-    let product_id= 'PR#M2ExMzAwMGItYWI3NS00MGY2LTg2MzItMjQ4OWQwZDcxMjVj';
-    ProductLookUp(product_id);    
+    // AddManufacture();
+    // AddBrand();
+    // AddProductCategory();
+    // AddProductFamily();
+    // AddProduct();
+    //ProductLookUp(null);    
+    //let product_id= 'PR#M2ExMzAwMGItYWI3NS00MGY2LTg2MzItMjQ4OWQwZDcxMjVj';
+    //ProductLookUp(product_id);
+    
+    let store_id= 'S#ZGU3YzkxODUtYmNiYi00N2MxLWI0MjAtNjBiZTQ5YmFkODQ3';
+    //AddStore();
+    GetStore(store_id);
+    //StoreLookUp(null);    
+    //StoreLookUp(store_id);
     //SaveUser();
     //SignIn();
 };

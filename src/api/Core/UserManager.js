@@ -22,7 +22,7 @@ let IsUserValid = async (userName, password, callback) => {
                     UserDisplayName: userExists[0].firstName + ' ' + userExists[0].lastName,
                     UserType: userExists[0].userType,
                     CompanyId: userExists[0].companyId,
-                    StoreId: userExists[0].storeId,
+                    store_id: userExists[0].store_id,
                     UserProfileImage: userExists[0].profileImageUrl
                 },
                 'Status': 200

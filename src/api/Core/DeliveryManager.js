@@ -9,7 +9,7 @@ let IsDeliveryValid = async (deliveryName, password, callback) => {
                     DeliveryDisplayName: delivery.firstName + ' ' + delivery.lastName,
                     DeliveryType: delivery.deliveryType,
                     CompanyId: delivery.companyId,
-                    StoreId: delivery.storeId,
+                    store_id: delivery.store_id,
                     DeliveryProfileImage: delivery.profileImageUrl
                 },
                 'Status': 200

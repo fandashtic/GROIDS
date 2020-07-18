@@ -9,7 +9,7 @@ let IsOrderValid = async (orderName, password, callback) => {
                     OrderDisplayName: order.firstName + ' ' + order.lastName,
                     OrderType: order.orderType,
                     CompanyId: order.companyId,
-                    StoreId: order.storeId,
+                    store_id: order.store_id,
                     OrderProfileImage: order.profileImageUrl
                 },
                 'Status': 200

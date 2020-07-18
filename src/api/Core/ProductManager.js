@@ -4,7 +4,6 @@ import { GetAllBrandDatas } from 'api/Data/Brand';
 import { GetAllProductCategoriesData } from 'api/Data/ProductCategory';
 import { GetAllProductFamiliesData } from 'api/Data/ProductFamily';
 import { ReturnObject } from 'api/Shared/Util';
-
 import { IsHasValue } from 'api/Shared/Util'
 
 let IsProductValid = async (productName, password, callback) => {
@@ -16,7 +15,7 @@ let IsProductValid = async (productName, password, callback) => {
                     ProductDisplayName: product.firstName + ' ' + product.lastName,
                     ProductType: product.productType,
                     CompanyId: product.companyId,
-                    StoreId: product.storeId,
+                    store_id: product.store_id,
                     ProductProfileImage: product.profileImageUrl
                 },
                 'Status': 200
@@ -174,11 +173,11 @@ const GetProductHierarchyData = async (product, callback) => {
 }
 
 let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
-    let result = {list: [], displayName: ''};
+    let result = {list: [], label: ''};
     let _isSelected = false;
     list.forEach(l => {
         _isSelected = ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false);
-        if(_isSelected === true) result.displayName = l[displayColumn];
+        if(_isSelected === true) result.label = l[displayColumn];
 
         result.list.push(
             {

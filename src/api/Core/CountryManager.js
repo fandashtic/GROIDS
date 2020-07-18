@@ -9,7 +9,7 @@ let IsCountryValid = async (countryName, password, callback) => {
                     CountryDisplayName: country.firstName + ' ' + country.lastName,
                     CountryType: country.countryType,
                     CompanyId: country.companyId,
-                    StoreId: country.storeId,
+                    store_id: country.store_id,
                     CountryProfileImage: country.profileImageUrl
                 },
                 'Status': 200

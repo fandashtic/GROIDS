@@ -9,7 +9,7 @@ let IsCityValid = async (cityName, password, callback) => {
                     CityDisplayName: city.firstName + ' ' + city.lastName,
                     CityType: city.cityType,
                     CompanyId: city.companyId,
-                    StoreId: city.storeId,
+                    store_id: city.store_id,
                     CityProfileImage: city.profileImageUrl
                 },
                 'Status': 200

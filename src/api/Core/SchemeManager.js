@@ -9,7 +9,7 @@ let IsSchemeValid = async (schemeName, password, callback) => {
                     SchemeDisplayName: scheme.firstName + ' ' + scheme.lastName,
                     SchemeType: scheme.schemeType,
                     CompanyId: scheme.companyId,
-                    StoreId: scheme.storeId,
+                    store_id: scheme.store_id,
                     SchemeProfileImage: scheme.profileImageUrl
                 },
                 'Status': 200

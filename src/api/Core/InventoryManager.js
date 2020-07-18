@@ -9,7 +9,7 @@ let IsInventoryValid = async (inventoryName, password, callback) => {
                     InventoryDisplayName: inventory.firstName + ' ' + inventory.lastName,
                     InventoryType: inventory.inventoryType,
                     CompanyId: inventory.companyId,
-                    StoreId: inventory.storeId,
+                    store_id: inventory.store_id,
                     InventoryProfileImage: inventory.profileImageUrl
                 },
                 'Status': 200

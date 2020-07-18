@@ -1,4 +1,5 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Store';
+import { GetAllAreaData } from 'api/Data/Area';
 import { GetAllCityData } from 'api/Data/City';
 import { GetAllStateData } from 'api/Data/State';
 import { GetAllCountryData } from 'api/Data/Country';
@@ -14,7 +15,7 @@ let IsStoreValid = async (storeName, password, callback) => {
                     StoreDisplayName: store.firstName + ' ' + store.lastName,
                     StoreType: store.storeType,
                     CompanyId: store.companyId,
-                    StoreId: store.storeId,
+                    store_id: store.store_id,
                     StoreProfileImage: store.profileImageUrl
                 },
                 'Status': 200
@@ -125,50 +126,60 @@ let StoreLookUp = async (store_id, callback) => {
     }   
 }
 
-// const GetStoreHierarchyData = async (store, callback) => {
-//     let active_filter = { 'status': true };
-//     let _store_Lookup = {};
+const GetStoreHierarchyData = async (store, callback) => {
+    let active_filter = { 'status': true };
+    let _store_Lookup = {};
 
-//     if (IsHasValue(store)) {
-//         _store_Lookup.store_id = store.store_id;
-//         _store_Lookup.store_name = store.store_name;
-//         _store_Lookup.country_id = store.manufacture_id;
-//         _store_Lookup.state_id = store.brand_id;
-//         _store_Lookup.city_id = store.store_category_id;
-//         _store_Lookup.area_id = store.store_family_id;
-//         _store_Lookup.company_id = store.company_id;
-//         _store_Lookup.store_id = store.store_id;
-//         _store_Lookup.description = store.description;
-//         _store_Lookup.profile_image_url = store.profile_image_url;
-//         _store_Lookup.status = store.status;
-//     }
+    if (IsHasValue(store)) {
+        _store_Lookup.store_id = store.store_id;
+        _store_Lookup.store_name = store.store_name;
+        _store_Lookup.country_id = store.manufacture_id;
+        _store_Lookup.state_id = store.brand_id;
+        _store_Lookup.city_id = store.store_category_id;
+        _store_Lookup.area_id = store.store_family_id;
+        _store_Lookup.company_id = store.company_id;
+        _store_Lookup.profile_image_url = store.profile_image_url;
+        _store_Lookup.status = store.status;
+        _store_Lookup.pincode = store.pincode;
+        _store_Lookup.latitude = store.latitude;
+        _store_Lookup.longitude = store.longitude;
+        _store_Lookup.email = store.email;
+        _store_Lookup.mobilenumber = store.mobilenumber;
+        _store_Lookup.contactperson = store.contactperson;
+        _store_Lookup.tin = store.tin;
+        _store_Lookup.gst = store.gst;
+        _store_Lookup.logo = store.logo;
+        _store_Lookup.banner = store.banner;
+        _store_Lookup.business_days_hours = store.business_days_hours;
+        _store_Lookup.delivery_days_hours = store.delivery_days_hours;
+    }
 
-//     GetAllCountryData(active_filter, async (countries) => {
-//         let _m = GetLookUpData(countries, 'country_id', 'country_name', _store_Lookup.country_id);
-//         _store_Lookup.manufactures = _m.list;
-//         _store_Lookup.manufacture_name = _m.dispalyName;
+    GetAllCountryData(active_filter, async (countries) => {
+        let _m = GetLookUpData(countries, 'country_id', 'country_name', _store_Lookup.country_id);
+        _store_Lookup.manufactures = _m.list;
+        _store_Lookup.manufacture_name = _m.label;
 
-//         await GetAllBrandDatas(active_filter, async (brands) => {
-//             let _b = GetLookUpData(brands, 'state_id', 'brand_name', _store_Lookup.state_id);
-//             _store_Lookup.brands = _b.list;
-//             _store_Lookup.brand_name = _b.dispalyName;
+        await GetAllStateData(active_filter, async (brands) => {
+            let _b = GetLookUpData(brands, 'state_id', 'state_name', _store_Lookup.state_id);
+            _store_Lookup.states = _b.list;
+            _store_Lookup.state_name = _b.label;
 
-//             await GetAllStoreCategoriesData(active_filter, async (storeCategories) => {
-//                 let _bc = GetLookUpData(storeCategories, 'city_id', 'store_category_name', _store_Lookup.city_id);
-//                 _store_Lookup.storeCategories = _bc.list;
-//                 _store_Lookup.store_category_name = _bc.dispalyName;
+            await GetAllCityData(active_filter, async (storeCategories) => {
+                let _bc = GetLookUpData(storeCategories, 'city_id', 'city_name', _store_Lookup.city_id);
+                _store_Lookup.cities = _bc.list;
+                _store_Lookup.city_name = _bc.label;
 
-//                 await GetAllStoreFamiliesData(active_filter, async (storeFamilies) => {
-//                     let _bf = GetLookUpData(storeFamilies, 'store_family_id', 'store_family_name', _store_Lookup.store_family_id);
-//                     _store_Lookup.store_families = _bf.list;
-//                     _store_Lookup.store_family_name = _bf.dispalyName;
+                await GetAllAreaData(active_filter, async (storeFamilies) => {
+                    let _bf = GetLookUpData(storeFamilies, 'area_id', 'area_name', _store_Lookup.area_id);
+                    _store_Lookup.areas = _bf.list;
+                    _store_Lookup.area_name = _bf.label;
 
-//                     return await ReturnObject(callback, null, _store_Lookup, 'GetStoreHierarchyData');
-//                 });
-//             });
-//         });
-//     });
-// }
+                    return await ReturnObject(callback, null, _store_Lookup, 'GetStoreHierarchyData');
+                });
+            });
+        });
+    });
+}
 
 let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
     let result = {list: [], displayName: ''};
@@ -188,4 +199,4 @@ let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
     return result;
 }
 
-export { IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };
+export { StoreLookUp, IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };

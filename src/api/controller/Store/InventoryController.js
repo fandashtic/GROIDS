@@ -1,5 +1,5 @@
 
-import { GetAllInventorys, AddInventory, UpdateInventory, DeleteInventory } from 'api/Controller/Store/node_modules/api/Core/InventoryManager';
+import { GetAllInventorys, AddInventory, UpdateInventory, DeleteInventory } from 'api/Core/InventoryManager';
 
 let AddInventoryAPI = async (inventory, callback) => {
     return await AddInventory(inventory, callback);

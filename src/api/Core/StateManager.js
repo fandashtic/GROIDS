@@ -9,7 +9,7 @@ let IsStateValid = async (stateName, password, callback) => {
                     StateDisplayName: state.firstName + ' ' + state.lastName,
                     StateType: state.stateType,
                     CompanyId: state.companyId,
-                    StoreId: state.storeId,
+                    store_id: state.store_id,
                     StateProfileImage: state.profileImageUrl
                 },
                 'Status': 200

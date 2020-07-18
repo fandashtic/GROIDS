@@ -9,7 +9,7 @@ let IsBrandValid = async (brandName, password, callback) => {
                     BrandDisplayName: brand.firstName + ' ' + brand.lastName,
                     BrandType: brand.brandType,
                     CompanyId: brand.companyId,
-                    StoreId: brand.storeId,
+                    store_id: brand.store_id,
                     BrandProfileImage: brand.profileImageUrl
                 },
                 'Status': 200

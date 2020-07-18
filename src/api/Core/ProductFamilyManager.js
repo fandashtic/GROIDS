@@ -9,7 +9,7 @@ let IsProductFamilyValid = async (productFamilyName, password, callback) => {
                     ProductFamilyDisplayName: productFamily.firstName + ' ' + productFamily.lastName,
                     ProductFamilyType: productFamily.productFamilyType,
                     CompanyId: productFamily.companyId,
-                    StoreId: productFamily.storeId,
+                    store_id: productFamily.store_id,
                     ProductFamilyProfileImage: productFamily.profileImageUrl
                 },
                 'Status': 200

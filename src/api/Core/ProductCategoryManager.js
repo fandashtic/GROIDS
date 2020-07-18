@@ -9,7 +9,7 @@ let IsProductCategoryValid = async (productCategoryName, password, callback) => 
                     ProductCategoryDisplayName: productCategory.firstName + ' ' + productCategory.lastName,
                     ProductCategoryType: productCategory.productCategoryType,
                     CompanyId: productCategory.companyId,
-                    StoreId: productCategory.storeId,
+                    store_id: productCategory.store_id,
                     ProductCategoryProfileImage: productCategory.profileImageUrl
                 },
                 'Status': 200
