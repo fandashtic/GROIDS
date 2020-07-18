@@ -1,7 +1,7 @@
-var { GetAllCountrys, GetCountryById, Add, Update, Delete } = require('./../Data/Country');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Country';
 
-exports.IsCountryValid = async (countryName, password, callback) => {
-    return await GetCountryById(countryName, async (country) => {
+let IsCountryValid = async (countryName, password, callback) => {
+    return await GetById(countryName, async (country) => {
         if (country.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsCountryValid = async (countryName, password, callback) => {
     });
 };
 
-exports.AddCountry = async (country, callback) => {
-    return await Add(country, async (country) => {
+let AddCountry = async (country, callback) => {
+    return await Save(country, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -39,7 +39,7 @@ exports.AddCountry = async (country, callback) => {
     });
 }
 
-exports.UpdateCountry = async (key, country, callback) => { 
+let UpdateCountry = async (key, country, callback) => { 
     return await Update(key, country, async (country) => {
         if (country) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateCountry = async (key, country, callback) => {
     });
 }
 
-exports.DeleteCountry = async (key, callback) =>
+let DeleteCountry = async (key, callback) =>
 {
     return await Delete(key, async (country) => {
         if (country) {
@@ -72,8 +72,8 @@ exports.DeleteCountry = async (key, callback) =>
     });
 };
 
-exports.GetCountry = async (countryName, callback) => {
-    return await GetCountryById(countryName, async (country) => {
+let GetCountry = async (countryName, callback) => {
+    return await GetById(countryName, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -88,8 +88,8 @@ exports.GetCountry = async (countryName, callback) => {
     });
 }
 
-exports.GetAllCountrys = async (filter, callback) => {
-    return await GetAllCountrys(filter, async (countrys) => {
+let GetAllCountrys = async (filter, callback) => {
+    return await GetAll(filter, async (countrys) => {
         if (countrys) {
             return await callback({
                 'data':countrys,
@@ -103,3 +103,5 @@ exports.GetAllCountrys = async (filter, callback) => {
         }
     });
 };
+
+export { IsCountryValid, AddCountry, UpdateCountry, DeleteCountry, GetCountry, GetAllCountrys };

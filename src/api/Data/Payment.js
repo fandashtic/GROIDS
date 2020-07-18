@@ -1,29 +1,35 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'payments';
 const _primaryKey = 'payment_id';
 
 //#region
 
-exports.GetPaymentById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllPayments = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAll = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddPayment = async (payment, callback) => {
-    return await Add(_tableName, payment, callback);
+let Save = async (payment, callback) => {    
+    payment = AddDetaultValues(payment, 'payment_id', PreFix.Payment, payment.created_by);
+    return await Add(_tableName, _primaryKey,payment, callback);
 }
 
-exports.UpdatePayment = async (key, payment, callback) => { 
-    return await Update(_tableName, _primaryKey, key, payment, callback);
+let Update = async (key, payment, callback) => { 
+    payment = UpdateDetaultValues(payment, payment.modified_by);
+    return await Edit(_tableName, _primaryKey, key, payment, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
+let Delete = async (key, callback) =>
 {
-    return await Delete(_tableName, _primaryKey, key, callback);
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetById, GetAll, Save, Update, Delete };
 
 //#endregion

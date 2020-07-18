@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import {
     Form,
     Input,
@@ -7,7 +8,8 @@ import {
     Cascader
 } from 'antd';
 
-
+import useForm from 'components/Shared/Useform';
+import {AddManufactureAPI} from 'api/Controller/Shared/ManufactureController'
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -33,20 +35,32 @@ const status = [
 const From = () => {
 
     const [form] = Form.useForm();
+    const {handleChange,handleSubmit,values} = useForm()
 
-    const onFinish = values => {
+    const submitData = () => {
         console.log('Received values of form: ', values);
+        values['company_id'] = "212435446"
+        values['store_id'] = "1"
+        values['profile_image_url'] = "test"
+        values['status'] = true
+        values['created_on'] = new Date()
+        values['created_by'] = 1
+        console.log(values)
+//}
+       AddManufactureAPI(values,(data,err)=>{
+           console.log('response', data)
+           console.log('err',err)
+       })
     };
 
-    
-
+  
     return (
         <Card className="gx-card" title="Manufacture Form">
             <Form
                 {...formItemLayout}
                 form={form}
                 name="Manufacture"
-                onFinish={onFinish}
+                onFinish={handleSubmit}
                 initialValues={{
                 }}
                 scrollToFirstError
@@ -61,7 +75,7 @@ const From = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input name="manufacture_name" onChange={handleChange} />
                 </Form.Item>
                 <Form.Item
                     name="Status"
@@ -75,7 +89,7 @@ const From = () => {
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" onClick={() =>submitData()} htmlType="submit">
                     Submit
                 </Button>
             </Form>

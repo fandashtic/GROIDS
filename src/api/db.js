@@ -12,4 +12,7 @@ let awsConfig = {
 
 AWS.config.update(awsConfig);
 
-exports.docClient = new AWS.DynamoDB.DocumentClient();
+let dynamodb = new AWS.DynamoDB();
+let docClient = new AWS.DynamoDB.DocumentClient();
+
+export { docClient, dynamodb };

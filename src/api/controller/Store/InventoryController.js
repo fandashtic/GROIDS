@@ -1,18 +1,20 @@
 
-var { GetAllInventorys, AddInventory, UpdateInventory, DeleteInventory } = require('./../Core/InventoryManager');
+import { GetAllInventorys, AddInventory, UpdateInventory, DeleteInventory } from 'api/Core/InventoryManager';
 
-exports.AddInventory = async (inventory, callback) => {
+let AddInventoryAPI = async (inventory, callback) => {
     return await AddInventory(inventory, callback);
 };
 
-exports.UpdateInventory = async (inventoryId, inventory, callback) => {
+let UpdateInventoryAPI = async (inventoryId, inventory, callback) => {
     return await UpdateInventory(inventoryId, inventory, callback);
 };
 
-exports.DeleteInventory = async (inventoryId, callback) => {
+let DeleteInventoryAPI = async (inventoryId, callback) => {
     return await DeleteInventory(inventoryId, callback);
 };
 
-exports.GetInventorys = async (filter, callback) => {
-    return await GetAllInventorys( filter, callback);
+let GetInventorysAPI = async (filter, callback) => {
+    return await GetAllInventorys(filter, callback);
 };
+
+export { AddInventoryAPI, UpdateInventoryAPI, DeleteInventoryAPI, GetInventorysAPI };

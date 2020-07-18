@@ -14,7 +14,7 @@ import IntlMessages from "../../util/IntlMessages";
 import { useSelector } from "react-redux";
 
 const SidebarContent = () => {
-  let { navStyle, themeType, pathname } = useSelector(({ settings }) => settings);
+  let {themeType, pathname } = useSelector(({ settings }) => settings);
   const getNoHeaderClass = (navStyle) => {
     if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) {
       return "gx-no-header-notifications";

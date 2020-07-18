@@ -1,29 +1,35 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'brands';
 const _primaryKey = 'brand_id';
 
-//#region
+//#region 
 
-exports.GetBrandById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetBrandDataById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllBrands = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAllBrandDatas = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddBrand = async (brand, callback) => {
-    return await Add(_tableName, brand, callback);
+let SaveBrandData = async (brand, callback) => {
+    brand = AddDetaultValues(brand, 'brand_id', PreFix.Brand, brand.created_by);
+    return await Add(_tableName, _primaryKey, brand, callback);
 }
 
-exports.UpdateBrand = async (key, brand, callback) => { 
-    return await Update(_tableName, _primaryKey, key, brand, callback);
+let UpdateBrandData = async (key, brand, callback) => {
+    brand = UpdateDetaultValues(brand, brand.modified_by);
+    return await Edit(_tableName, _primaryKey, key, brand, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
-{
-    return await Delete(_tableName, _primaryKey, key, callback);
+let DeleteBrandData = async (key, callback) => {
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+
+export { GetBrandDataById, GetAllBrandDatas, SaveBrandData, UpdateBrandData, DeleteBrandData };
 
 //#endregion

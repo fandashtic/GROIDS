@@ -1,7 +1,7 @@
-var { GetAllBrands, GetBrandById, Add, Update, Delete } = require('./../Data/Brand');
+import { GetBrandDataById, GetAllBrandDatas, SaveBrandData, UpdateBrandData, DeleteBrandData } from 'api/Data/Brand';
 
-exports.IsBrandValid = async (brandName, password, callback) => {
-    return await GetBrandById(brandName, async (brand) => {
+let IsBrandValid = async (brandName, password, callback) => {
+    return await GetBrandDataById(brandName, async (brand) => {
         if (brand.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsBrandValid = async (brandName, password, callback) => {
     });
 };
 
-exports.AddBrand = async (brand, callback) => {
-    return await Add(brand, async (brand) => {
+let AddBrand = async (brand, callback) => {
+    return await SaveBrandData(brand, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -39,8 +39,8 @@ exports.AddBrand = async (brand, callback) => {
     });
 }
 
-exports.UpdateBrand = async (key, brand, callback) => { 
-    return await Update(key, brand, async (brand) => {
+let UpdateBrand = async (key, brand, callback) => { 
+    return await UpdateBrandData(key, brand, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -55,9 +55,9 @@ exports.UpdateBrand = async (key, brand, callback) => {
     });
 }
 
-exports.DeleteBrand = async (key, callback) =>
+let DeleteBrand = async (key, callback) =>
 {
-    return await Delete(key, async (brand) => {
+    return await DeleteBrandData(key, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -72,8 +72,8 @@ exports.DeleteBrand = async (key, callback) =>
     });
 };
 
-exports.GetBrand = async (brandName, callback) => {
-    return await GetBrandById(brandName, async (brand) => {
+let GetBrand = async (brandName, callback) => {
+    return await GetBrandDataById(brandName, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -88,8 +88,8 @@ exports.GetBrand = async (brandName, callback) => {
     });
 }
 
-exports.GetAllBrands = async (filter, callback) => {
-    return await GetAllBrands(filter, async (brands) => {
+let GetAllBrands = async (filter, callback) => {
+    return await GetAllBrandDatas(filter, async (brands) => {
         if (brands) {
             return await callback({
                 'data':brands,
@@ -103,3 +103,5 @@ exports.GetAllBrands = async (filter, callback) => {
         }
     });
 };
+
+export { IsBrandValid, AddBrand, UpdateBrand, DeleteBrand, GetBrand, GetAllBrands };

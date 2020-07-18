@@ -1,7 +1,7 @@
-var { GetAllSchemes, GetSchemeById, Add, Update, Delete } = require('./../Data/Scheme');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Scheme';
 
-exports.IsSchemeValid = async (schemeName, password, callback) => {
-    return await GetSchemeById(schemeName, async (scheme) => {
+let IsSchemeValid = async (schemeName, password, callback) => {
+    return await GetById(schemeName, async (scheme) => {
         if (scheme.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsSchemeValid = async (schemeName, password, callback) => {
     });
 };
 
-exports.AddScheme = async (scheme, callback) => {
-    return await Add(scheme, async (scheme) => {
+let AddScheme = async (scheme, callback) => {
+    return await Save(scheme, async (scheme) => {
         if (scheme) {
             return await callback({
                 'data':scheme,
@@ -39,7 +39,7 @@ exports.AddScheme = async (scheme, callback) => {
     });
 }
 
-exports.UpdateScheme = async (key, scheme, callback) => { 
+let UpdateScheme = async (key, scheme, callback) => { 
     return await Update(key, scheme, async (scheme) => {
         if (scheme) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateScheme = async (key, scheme, callback) => {
     });
 }
 
-exports.DeleteScheme = async (key, callback) =>
+let DeleteScheme = async (key, callback) =>
 {
     return await Delete(key, async (scheme) => {
         if (scheme) {
@@ -72,8 +72,8 @@ exports.DeleteScheme = async (key, callback) =>
     });
 };
 
-exports.GetScheme = async (schemeName, callback) => {
-    return await GetSchemeById(schemeName, async (scheme) => {
+let GetScheme = async (schemeName, callback) => {
+    return await GetById(schemeName, async (scheme) => {
         if (scheme) {
             return await callback({
                 'data':scheme,
@@ -88,8 +88,8 @@ exports.GetScheme = async (schemeName, callback) => {
     });
 }
 
-exports.GetAllSchemes = async (filter, callback) => {
-    return await GetAllSchemes(filter, async (schemes) => {
+let GetAllSchemes = async (filter, callback) => {
+    return await GetAll(filter, async (schemes) => {
         if (schemes) {
             return await callback({
                 'data':schemes,
@@ -103,3 +103,5 @@ exports.GetAllSchemes = async (filter, callback) => {
         }
     });
 };
+
+export { IsSchemeValid, AddScheme, UpdateScheme, DeleteScheme, GetScheme, GetAllSchemes };

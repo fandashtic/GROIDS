@@ -1,7 +1,7 @@
-var { GetAllOrders, GetOrderById, Add, Update, Delete } = require('./../Data/Order');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Order';
 
-exports.IsOrderValid = async (orderName, password, callback) => {
-    return await GetOrderById(orderName, async (order) => {
+let IsOrderValid = async (orderName, password, callback) => {
+    return await GetById(orderName, async (order) => {
         if (order.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsOrderValid = async (orderName, password, callback) => {
     });
 };
 
-exports.AddOrder = async (order, callback) => {
-    return await Add(order, async (order) => {
+let AddOrder = async (order, callback) => {
+    return await Save(order, async (order) => {
         if (order) {
             return await callback({
                 'data':order,
@@ -39,7 +39,7 @@ exports.AddOrder = async (order, callback) => {
     });
 }
 
-exports.UpdateOrder = async (key, order, callback) => { 
+let UpdateOrder = async (key, order, callback) => { 
     return await Update(key, order, async (order) => {
         if (order) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateOrder = async (key, order, callback) => {
     });
 }
 
-exports.DeleteOrder = async (key, callback) =>
+let DeleteOrder = async (key, callback) =>
 {
     return await Delete(key, async (order) => {
         if (order) {
@@ -72,8 +72,8 @@ exports.DeleteOrder = async (key, callback) =>
     });
 };
 
-exports.GetOrder = async (orderName, callback) => {
-    return await GetOrderById(orderName, async (order) => {
+let GetOrder = async (orderName, callback) => {
+    return await GetById(orderName, async (order) => {
         if (order) {
             return await callback({
                 'data':order,
@@ -88,8 +88,8 @@ exports.GetOrder = async (orderName, callback) => {
     });
 }
 
-exports.GetAllOrders = async (filter, callback) => {
-    return await GetAllOrders(filter, async (orders) => {
+let GetAllOrders = async (filter, callback) => {
+    return await GetAll(filter, async (orders) => {
         if (orders) {
             return await callback({
                 'data':orders,
@@ -103,3 +103,5 @@ exports.GetAllOrders = async (filter, callback) => {
         }
     });
 };
+
+export { IsOrderValid, AddOrder, UpdateOrder, DeleteOrder, GetOrder, GetAllOrders };

@@ -1,7 +1,7 @@
-var { GetAllPayments, GetPaymentById, Add, Update, Delete } = require('./../Data/Payment');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Payment';
 
-exports.IsPaymentValid = async (paymentName, password, callback) => {
-    return await GetPaymentById(paymentName, async (payment) => {
+let IsPaymentValid = async (paymentName, password, callback) => {
+    return await GetById(paymentName, async (payment) => {
         if (payment.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsPaymentValid = async (paymentName, password, callback) => {
     });
 };
 
-exports.AddPayment = async (payment, callback) => {
-    return await Add(payment, async (payment) => {
+let AddPayment = async (payment, callback) => {
+    return await Save(payment, async (payment) => {
         if (payment) {
             return await callback({
                 'data':payment,
@@ -39,7 +39,7 @@ exports.AddPayment = async (payment, callback) => {
     });
 }
 
-exports.UpdatePayment = async (key, payment, callback) => { 
+let UpdatePayment = async (key, payment, callback) => { 
     return await Update(key, payment, async (payment) => {
         if (payment) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdatePayment = async (key, payment, callback) => {
     });
 }
 
-exports.DeletePayment = async (key, callback) =>
+let DeletePayment = async (key, callback) =>
 {
     return await Delete(key, async (payment) => {
         if (payment) {
@@ -72,8 +72,8 @@ exports.DeletePayment = async (key, callback) =>
     });
 };
 
-exports.GetPayment = async (paymentName, callback) => {
-    return await GetPaymentById(paymentName, async (payment) => {
+let GetPayment = async (paymentName, callback) => {
+    return await GetById(paymentName, async (payment) => {
         if (payment) {
             return await callback({
                 'data':payment,
@@ -88,8 +88,8 @@ exports.GetPayment = async (paymentName, callback) => {
     });
 }
 
-exports.GetAllPayments = async (filter, callback) => {
-    return await GetAllPayments(filter, async (payments) => {
+let GetAllPayments = async (filter, callback) => {
+    return await GetAll(filter, async (payments) => {
         if (payments) {
             return await callback({
                 'data':payments,
@@ -103,3 +103,5 @@ exports.GetAllPayments = async (filter, callback) => {
         }
     });
 };
+
+export { IsPaymentValid, AddPayment, UpdatePayment, DeletePayment, GetPayment, GetAllPayments };

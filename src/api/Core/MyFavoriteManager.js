@@ -1,7 +1,7 @@
-var { GetAllMyFavorites, GetMyFavoriteById, Add, Update, Delete } = require('./../Data/MyFavorite');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/MyFavorite';
 
-exports.IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
-    return await GetMyFavoriteById(myFavoriteName, async (myFavorite) => {
+let IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
+    return await GetById(myFavoriteName, async (myFavorite) => {
         if (myFavorite.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
     });
 };
 
-exports.AddMyFavorite = async (myFavorite, callback) => {
-    return await Add(myFavorite, async (myFavorite) => {
+let AddMyFavorite = async (myFavorite, callback) => {
+    return await Save(myFavorite, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
                 'data':myFavorite,
@@ -39,7 +39,7 @@ exports.AddMyFavorite = async (myFavorite, callback) => {
     });
 }
 
-exports.UpdateMyFavorite = async (key, myFavorite, callback) => { 
+let UpdateMyFavorite = async (key, myFavorite, callback) => { 
     return await Update(key, myFavorite, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateMyFavorite = async (key, myFavorite, callback) => {
     });
 }
 
-exports.DeleteMyFavorite = async (key, callback) =>
+let DeleteMyFavorite = async (key, callback) =>
 {
     return await Delete(key, async (myFavorite) => {
         if (myFavorite) {
@@ -72,8 +72,8 @@ exports.DeleteMyFavorite = async (key, callback) =>
     });
 };
 
-exports.GetMyFavorite = async (myFavoriteName, callback) => {
-    return await GetMyFavoriteById(myFavoriteName, async (myFavorite) => {
+let GetMyFavorite = async (myFavoriteName, callback) => {
+    return await GetById(myFavoriteName, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
                 'data':myFavorite,
@@ -88,8 +88,8 @@ exports.GetMyFavorite = async (myFavoriteName, callback) => {
     });
 }
 
-exports.GetAllMyFavorites = async (filter, callback) => {
-    return await GetAllMyFavorites(filter, async (myFavorites) => {
+let GetAllMyFavorites = async (filter, callback) => {
+    return await GetAll(filter, async (myFavorites) => {
         if (myFavorites) {
             return await callback({
                 'data':myFavorites,
@@ -103,3 +103,5 @@ exports.GetAllMyFavorites = async (filter, callback) => {
         }
     });
 };
+
+export { IsMyFavoriteValid, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite, GetMyFavorite, GetAllMyFavorites };

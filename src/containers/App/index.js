@@ -23,8 +23,9 @@ import {
   NAV_STYLE_DARK_HORIZONTAL,
   NAV_STYLE_DEFAULT_HORIZONTAL,
   NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
-  THEME_TYPE_DARK
 } from "../../constants/ThemeSetting";
+
+const authUser = true
 
 const RestrictedRoute = ({component: Component, location, authUser, ...rest}) =>
   <Route
@@ -34,22 +35,20 @@ const RestrictedRoute = ({component: Component, location, authUser, ...rest}) =>
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: '/signin',
+            pathname: '/product',
             state: {from: location}
           }}
         />}
-  />;
-
+/>;
 
 const App = (props) => {
 
   const dispatch = useDispatch();
-  const {locale, themeType, navStyle, layoutType} = useSelector(({settings}) => settings);
-  const {authUser, initURL} = useSelector(({auth}) => auth);
+  const {locale, navStyle, layoutType} = useSelector(({settings}) => settings);
+  const { initURL} = useSelector(({auth}) => auth);
 
   const location = useLocation();
   const match = useRouteMatch();
-
 
   useEffect(() => {
         if (initURL === '') {
@@ -113,19 +112,19 @@ const App = (props) => {
   //   }
   // }, [authUser, initURL, location, history]);
 
-  useEffect(() => {
-    if (themeType === THEME_TYPE_DARK) {
-      console.log("adding dark class")
-      document.body.classList.add('dark-theme');
-      document.body.classList.add('dark-theme');
-      let link = document.createElement('link');
-      link.type = 'text/css';
-      link.rel = 'stylesheet';
-      link.href = "/css/dark_theme.css";
-      link.className = 'style_dark_theme';
-      document.body.appendChild(link);
-    }}
-  ,[]);
+  // useEffect(() => {
+  //   if (themeType === THEME_TYPE_DARK) {
+  //     console.log("adding dark class")
+  //     document.body.classList.add('dark-theme');
+  //     document.body.classList.add('dark-theme');
+  //     let link = document.createElement('link');
+  //     link.type = 'text/css';
+  //     link.rel = 'stylesheet';
+  //     link.href = "/css/dark_theme.css";
+  //     link.className = 'style_dark_theme';
+  //     document.body.appendChild(link);
+  //   }}
+  // ,[]);
 
   const currentAppLocale = AppLocale[locale.locale];
 
@@ -134,9 +133,7 @@ const App = (props) => {
       <IntlProvider
         locale={currentAppLocale.locale}
         messages={currentAppLocale.messages}>
-
         <Switch>
-          
           <Route exact path='/' component={Website}/>
           <Route exact path='/signin' component={SignIn}/>
           <Route exact path='/signup' component={SignUp}/>

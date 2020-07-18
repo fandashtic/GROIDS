@@ -1,29 +1,34 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'users';
-const _primaryKey = 'email_id';
+const _primaryKey = 'user_id';
 
 //#region
 
-exports.GetUserById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllUsers = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAll = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddUser = async (user, callback) => {
-    return await Add(_tableName, user, callback);
+let Save = async (user, callback) => {
+    user = AddDetaultValues(user, 'user_id', PreFix.User, user.created_by);
+    return await Add(_tableName, _primaryKey, user, callback);
 }
 
-exports.UpdateUser = async (key, user, callback) => { 
-    return await Update(_tableName, _primaryKey, key, user, callback);
+let Update = async (key, user, callback) => {
+    user = UpdateDetaultValues(user, user.modified_by);
+    return await Edit(_tableName, _primaryKey, key, user, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
-{
-    return await Delete(_tableName, _primaryKey, key, callback);
+let Delete = async (key, callback) => {
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetById, GetAll, Save, Update, Delete };
 
 //#endregion

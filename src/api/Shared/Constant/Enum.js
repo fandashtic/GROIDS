@@ -1,16 +1,16 @@
-const ActiveStatus = {
+let ActiveStatus = {
     ACTIVE : 1,
     INACTIVE : 0
 }
 
-const PaymentStatus = {
+let PaymentStatus = {
     PENDING : 1,
     RECIVED : 2,    
     PARCIALY_RECIVED : 3,
     REVISED : 4,
 }
 
-const UserType = {
+let UserType = {
     SUPER_ADMIN : 1,
     STORE_ADMIN : 2,    
     STORE_STAFF : 3,    
@@ -18,19 +18,19 @@ const UserType = {
     SUPPORT : 5,
 }
 
-const StoreType = {
+let StoreType = {
     Wholesale : 1,
     Retail : 2,    
     SuperMarket : 3,    
     Stockist : 4,
 }
 
-const ConsumerType = {
+let ConsumerType = {
     PRIME : 1,
     NORMAL : 2,
 }
 
-const PaymentMode = {
+let PaymentMode = {
     CASH : 1,
     CREDIT : 2,
     CHEQUE : 3,
@@ -39,7 +39,7 @@ const PaymentMode = {
     UPI : 6,
 }
 
-const CreditTerms = {
+let CreditTerms = {
     NOCREDIT : 0,
     ONEWEEKDAYS : 2,
     TWOWEEKDAYS : 3,
@@ -48,7 +48,7 @@ const CreditTerms = {
     ONEYEARDAYS : 6,
 }
 
-const Event = {
+let Event = {
     ADD : 1,
     EDIT : 2,    
     UPDATE : 3,    
@@ -59,3 +59,16 @@ const Event = {
     MAKE_INACTIVE : 8,
     CANCEL : 9,
 }
+
+let PreFix = {
+    Company: 'C',
+    Manufacture : 'MF',
+    Brand: 'BR',
+    ProductCategory : 'PC',
+    ProductFamily: 'PF',
+    Product : 'PR',
+    Store: 'ST',
+    User: 'U'
+}
+
+export {ActiveStatus, PaymentStatus, UserType, StoreType, ConsumerType, PaymentMode, CreditTerms, Event, PreFix};

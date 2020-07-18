@@ -6,6 +6,7 @@ import Main from "./main/index";
 import Product from "./Company/Product"
 import Stores from "./Company/Stores"
 import Settings from "./Company/Setttings"
+import UnitTest from "./UnitTest"
 const App = ({match}) => (
   <div className="gx-main-content-wrapper">
     <Switch>
@@ -13,6 +14,7 @@ const App = ({match}) => (
       <Route path={`${match.url}product`} component={Product}/>
       <Route path={`${match.url}stores`} component={Stores}/>
       <Route path={`${match.url}settings`} component={Settings}/>
+      <Route path={`${match.url}unittest`} component={UnitTest}/>
     </Switch>
   </div>
 );

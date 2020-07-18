@@ -1,7 +1,7 @@
-var { GetAllProductCategorys, GetProductCategoryById, Add, Update, Delete } = require('./../Data/ProductCategory');
+import { GetProductCategoryDataById, GetAllProductCategoriesData, SaveProductCategoryData, UpdateProductCategoryData, DeleteProductCategoryData } from 'api/Data/ProductCategory';
 
-exports.IsProductCategoryValid = async (productCategoryName, password, callback) => {
-    return await GetProductCategoryById(productCategoryName, async (productCategory) => {
+let IsProductCategoryValid = async (productCategoryName, password, callback) => {
+    return await GetProductCategoryDataById(productCategoryName, async (productCategory) => {
         if (productCategory.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsProductCategoryValid = async (productCategoryName, password, callback)
     });
 };
 
-exports.AddProductCategory = async (productCategory, callback) => {
-    return await Add(productCategory, async (productCategory) => {
+let AddProductCategory = async (productCategory, callback) => {
+    return await SaveProductCategoryData(productCategory, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -39,8 +39,8 @@ exports.AddProductCategory = async (productCategory, callback) => {
     });
 }
 
-exports.UpdateProductCategory = async (key, productCategory, callback) => { 
-    return await Update(key, productCategory, async (productCategory) => {
+let UpdateProductCategory = async (key, productCategory, callback) => { 
+    return await UpdateProductCategoryData(key, productCategory, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -55,9 +55,9 @@ exports.UpdateProductCategory = async (key, productCategory, callback) => {
     });
 }
 
-exports.DeleteProductCategory = async (key, callback) =>
+let DeleteProductCategory = async (key, callback) =>
 {
-    return await Delete(key, async (productCategory) => {
+    return await DeleteProductCategoryData(key, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -72,8 +72,8 @@ exports.DeleteProductCategory = async (key, callback) =>
     });
 };
 
-exports.GetProductCategory = async (productCategoryName, callback) => {
-    return await GetProductCategoryById(productCategoryName, async (productCategory) => {
+let GetProductCategory = async (productCategoryName, callback) => {
+    return await GetProductCategoryDataById(productCategoryName, async (productCategory) => {
         if (productCategory) {
             return await callback({
                 'data':productCategory,
@@ -88,8 +88,8 @@ exports.GetProductCategory = async (productCategoryName, callback) => {
     });
 }
 
-exports.GetAllProductCategorys = async (filter, callback) => {
-    return await GetAllProductCategorys(filter, async (productCategorys) => {
+let GetAllProductCategories = async (filter, callback) => {
+    return await GetAllProductCategoriesData(filter, async (productCategorys) => {
         if (productCategorys) {
             return await callback({
                 'data':productCategorys,
@@ -103,3 +103,5 @@ exports.GetAllProductCategorys = async (filter, callback) => {
         }
     });
 };
+
+export { IsProductCategoryValid, AddProductCategory, UpdateProductCategory, DeleteProductCategory, GetProductCategory, GetAllProductCategories };

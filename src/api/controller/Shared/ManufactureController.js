@@ -1,18 +1,20 @@
 
-var { GetAllManufactures, AddManufacture, UpdateManufacture, DeleteManufacture } = require('./../Core/ManufactureManager');
+import { GetAllManufactures, AddManufacture, UpdateManufacture, DeleteManufacture } from 'api/Core/ManufactureManager';
 
-exports.AddManufacture = async (manufacture, callback) => {
+let AddManufactureAPI = async (manufacture, callback) => {
     return await AddManufacture(manufacture, callback);
 };
 
-exports.UpdateManufacture = async (manufactureId, manufacture, callback) => {
+let UpdateManufactureAPI = async (manufactureId, manufacture, callback) => {
     return await UpdateManufacture(manufactureId, manufacture, callback);
 };
 
-exports.DeleteManufacture = async (manufactureId, callback) => {
+let DeleteManufactureAPI = async (manufactureId, callback) => {
     return await DeleteManufacture(manufactureId, callback);
 };
 
-exports.GetManufactures = async (filter, callback) => {
-    return await GetAllManufactures( filter, callback);
+let GetManufacturesAPI = async (filter, callback) => {
+    return await GetAllManufactures(filter, callback);
 };
+
+export { AddManufactureAPI, UpdateManufactureAPI, DeleteManufactureAPI, GetManufacturesAPI };

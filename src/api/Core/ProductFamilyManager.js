@@ -1,7 +1,7 @@
-var { GetAllProductFamilys, GetProductFamilyById, Add, Update, Delete } = require('./../Data/ProductFamily');
+import { GetProductFamilyDataById, GetAllProductFamiliesData, SaveProductFamilyData, UpdateProductFamilyData, DeleteProductFamilyData } from 'api/Data/ProductFamily';
 
-exports.IsProductFamilyValid = async (productFamilyName, password, callback) => {
-    return await GetProductFamilyById(productFamilyName, async (productFamily) => {
+let IsProductFamilyValid = async (productFamilyName, password, callback) => {
+    return await GetProductFamilyDataById(productFamilyName, async (productFamily) => {
         if (productFamily.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsProductFamilyValid = async (productFamilyName, password, callback) => 
     });
 };
 
-exports.AddProductFamily = async (productFamily, callback) => {
-    return await Add(productFamily, async (productFamily) => {
+let AddProductFamily = async (productFamily, callback) => {
+    return await SaveProductFamilyData(productFamily, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -39,8 +39,8 @@ exports.AddProductFamily = async (productFamily, callback) => {
     });
 }
 
-exports.UpdateProductFamily = async (key, productFamily, callback) => { 
-    return await Update(key, productFamily, async (productFamily) => {
+let UpdateProductFamily = async (key, productFamily, callback) => { 
+    return await UpdateProductFamilyData(key, productFamily, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -55,9 +55,9 @@ exports.UpdateProductFamily = async (key, productFamily, callback) => {
     });
 }
 
-exports.DeleteProductFamily = async (key, callback) =>
+let DeleteProductFamily = async (key, callback) =>
 {
-    return await Delete(key, async (productFamily) => {
+    return await DeleteProductFamilyData(key, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -72,8 +72,8 @@ exports.DeleteProductFamily = async (key, callback) =>
     });
 };
 
-exports.GetProductFamily = async (productFamilyName, callback) => {
-    return await GetProductFamilyById(productFamilyName, async (productFamily) => {
+let GetProductFamily = async (productFamilyName, callback) => {
+    return await GetProductFamilyDataById(productFamilyName, async (productFamily) => {
         if (productFamily) {
             return await callback({
                 'data':productFamily,
@@ -88,8 +88,8 @@ exports.GetProductFamily = async (productFamilyName, callback) => {
     });
 }
 
-exports.GetAllProductFamilys = async (filter, callback) => {
-    return await GetAllProductFamilys(filter, async (productFamilys) => {
+let GetAllProductFamilies = async (filter, callback) => {
+    return await GetAllProductFamiliesData(filter, async (productFamilys) => {
         if (productFamilys) {
             return await callback({
                 'data':productFamilys,
@@ -103,3 +103,5 @@ exports.GetAllProductFamilys = async (filter, callback) => {
         }
     });
 };
+
+export { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies };

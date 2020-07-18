@@ -1,29 +1,34 @@
-var { GetById, GetAll, Add, Update, Delete } = require('../Shared/TableReposidery');
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
-const _tableName = 'productCategories';
-const _primaryKey = 'productcategory_id';
+const _tableName = 'productcategories';
+const _primaryKey = 'product_category_id';
 
 //#region
 
-exports.GetProductCategoryById = async (key, callback) => {
-    return await GetById(_tableName, _primaryKey, key, callback);
+let GetProductCategoryDataById = async (key, callback) => {
+    return await Get(_tableName, _primaryKey, key, callback);
 };
 
-exports.GetAllProductCategories = async (filter, callback) => {
-    return await GetAll(_tableName, filter, callback);
+let GetAllProductCategoriesData = async (filter, callback) => {
+    return await All(_tableName, filter, callback);
 };
 
-exports.AddProductCategory = async (productcategory, callback) => {
-    return await Add(_tableName, productcategory, callback);
+let SaveProductCategoryData = async (productcategory, callback) => {
+    productcategory = AddDetaultValues(productcategory, 'product_category_id', PreFix.ProductCategory, productcategory.created_by);
+    return await Add(_tableName, _primaryKey, productcategory, callback);
 }
 
-exports.UpdateProductCategory = async (key, productcategory, callback) => { 
-    return await Update(_tableName, _primaryKey, key, productcategory, callback);
+let UpdateProductCategoryData = async (key, productcategory, callback) => {
+    productcategory = UpdateDetaultValues(productcategory, productcategory.modified_by);
+    return await Edit(_tableName, _primaryKey, key, productcategory, callback);
 }
 
-exports.DeleteUer = async (key, callback) =>
-{
-    return await Delete(_tableName, _primaryKey, key, callback);
+let DeleteProductCategoryData = async (key, callback) => {
+    return await Remove(_tableName, _primaryKey, key, callback);
 };
+
+export { GetProductCategoryDataById, GetAllProductCategoriesData, SaveProductCategoryData, UpdateProductCategoryData, DeleteProductCategoryData };
 
 //#endregion

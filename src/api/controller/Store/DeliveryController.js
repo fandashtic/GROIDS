@@ -1,22 +1,20 @@
 
-var { GetAllDeliverys, IsDeliveryValid, AddDelivery, UpdateDelivery, DeleteDelivery } = require('./../Core/DeliveryManager');
+import { GetAllDeliverys, AddDelivery, UpdateDelivery, DeleteDelivery } from 'api/Core/DeliveryManager';
 
-exports.IsDeliveryValid = async (deliveryName, password, callback) => {
-    return await IsDeliveryValid(deliveryName, password, callback);
-};
-
-exports.AddDelivery = async (delivery, callback) => {
+let AddDeliveryAPI = async (delivery, callback) => {
     return await AddDelivery(delivery, callback);
 };
 
-exports.UpdateDelivery = async (deliveryId, delivery, callback) => {
+let UpdateDeliveryAPI = async (deliveryId, delivery, callback) => {
     return await UpdateDelivery(deliveryId, delivery, callback);
 };
 
-exports.DeleteDelivery = async (deliveryId, callback) => {
+let DeleteDeliveryAPI = async (deliveryId, callback) => {
     return await DeleteDelivery(deliveryId, callback);
 };
 
-exports.GetDeliverys = async (filter, callback) => {
-    return await GetAllDeliverys( filter, callback);
+let GetDeliverysAPI = async (filter, callback) => {
+    return await GetAllDeliverys(filter, callback);
 };
+
+export { AddDeliveryAPI, UpdateDeliveryAPI, DeleteDeliveryAPI, GetDeliverysAPI };

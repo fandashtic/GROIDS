@@ -1,7 +1,7 @@
-var { GetAllInventorys, GetInventoryById, Add, Update, Delete } = require('./../Data/Inventory');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Inventory';
 
-exports.IsInventoryValid = async (inventoryName, password, callback) => {
-    return await GetInventoryById(inventoryName, async (inventory) => {
+let IsInventoryValid = async (inventoryName, password, callback) => {
+    return await GetById(inventoryName, async (inventory) => {
         if (inventory.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsInventoryValid = async (inventoryName, password, callback) => {
     });
 };
 
-exports.AddInventory = async (inventory, callback) => {
-    return await Add(inventory, async (inventory) => {
+let AddInventory = async (inventory, callback) => {
+    return await Save(inventory, async (inventory) => {
         if (inventory) {
             return await callback({
                 'data':inventory,
@@ -39,7 +39,7 @@ exports.AddInventory = async (inventory, callback) => {
     });
 }
 
-exports.UpdateInventory = async (key, inventory, callback) => { 
+let UpdateInventory = async (key, inventory, callback) => { 
     return await Update(key, inventory, async (inventory) => {
         if (inventory) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateInventory = async (key, inventory, callback) => {
     });
 }
 
-exports.DeleteInventory = async (key, callback) =>
+let DeleteInventory = async (key, callback) =>
 {
     return await Delete(key, async (inventory) => {
         if (inventory) {
@@ -72,8 +72,8 @@ exports.DeleteInventory = async (key, callback) =>
     });
 };
 
-exports.GetInventory = async (inventoryName, callback) => {
-    return await GetInventoryById(inventoryName, async (inventory) => {
+let GetInventory = async (inventoryName, callback) => {
+    return await GetById(inventoryName, async (inventory) => {
         if (inventory) {
             return await callback({
                 'data':inventory,
@@ -88,8 +88,8 @@ exports.GetInventory = async (inventoryName, callback) => {
     });
 }
 
-exports.GetAllInventorys = async (filter, callback) => {
-    return await GetAllInventorys(filter, async (inventorys) => {
+let GetAllInventorys = async (filter, callback) => {
+    return await GetAll(filter, async (inventorys) => {
         if (inventorys) {
             return await callback({
                 'data':inventorys,
@@ -103,3 +103,5 @@ exports.GetAllInventorys = async (filter, callback) => {
         }
     });
 };
+
+export { IsInventoryValid, AddInventory, UpdateInventory, DeleteInventory, GetInventory, GetAllInventorys };

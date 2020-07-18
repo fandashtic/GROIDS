@@ -1,7 +1,7 @@
-var { GetAllCitys, GetCityById, Add, Update, Delete } = require('./../Data/City');
+import { GetById, GetAll, Save, Update, Delete } from 'api/Data/City';
 
-exports.IsCityValid = async (cityName, password, callback) => {
-    return await GetCityById(cityName, async (city) => {
+let IsCityValid = async (cityName, password, callback) => {
+    return await GetById(cityName, async (city) => {
         if (city.password === password) {
             return await callback({
                 'data': {
@@ -23,8 +23,8 @@ exports.IsCityValid = async (cityName, password, callback) => {
     });
 };
 
-exports.AddCity = async (city, callback) => {
-    return await Add(city, async (city) => {
+let AddCity = async (city, callback) => {
+    return await Save(city, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -39,7 +39,7 @@ exports.AddCity = async (city, callback) => {
     });
 }
 
-exports.UpdateCity = async (key, city, callback) => { 
+let UpdateCity = async (key, city, callback) => { 
     return await Update(key, city, async (city) => {
         if (city) {
             return await callback({
@@ -55,7 +55,7 @@ exports.UpdateCity = async (key, city, callback) => {
     });
 }
 
-exports.DeleteCity = async (key, callback) =>
+let DeleteCity = async (key, callback) =>
 {
     return await Delete(key, async (city) => {
         if (city) {
@@ -72,8 +72,8 @@ exports.DeleteCity = async (key, callback) =>
     });
 };
 
-exports.GetCity = async (cityName, callback) => {
-    return await GetCityById(cityName, async (city) => {
+let GetCity = async (cityName, callback) => {
+    return await GetById(cityName, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -88,8 +88,8 @@ exports.GetCity = async (cityName, callback) => {
     });
 }
 
-exports.GetAllCitys = async (filter, callback) => {
-    return await GetAllCitys(filter, async (citys) => {
+let GetAllCitys = async (filter, callback) => {
+    return await GetAll(filter, async (citys) => {
         if (citys) {
             return await callback({
                 'data':citys,
@@ -103,3 +103,5 @@ exports.GetAllCitys = async (filter, callback) => {
         }
     });
 };
+
+export { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCitys };

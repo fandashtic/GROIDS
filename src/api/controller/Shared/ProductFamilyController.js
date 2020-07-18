@@ -1,18 +1,19 @@
+import { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
 
-var { GetAllProductFamilys, AddProductFamily, UpdateProductFamily, DeleteProductFamily } = require('./../Core/ProductFamilyManager');
-
-exports.AddProductFamily = async (productFamily, callback) => {
+let AddProductFamilyAPI = async (productFamily, callback) => {
     return await AddProductFamily(productFamily, callback);
 };
 
-exports.UpdateProductFamily = async (productFamilyId, productFamily, callback) => {
+let UpdateProductFamilyAPI = async (productFamilyId, productFamily, callback) => {
     return await UpdateProductFamily(productFamilyId, productFamily, callback);
 };
 
-exports.DeleteProductFamily = async (productFamilyId, callback) => {
+let DeleteProductFamilyAPI = async (productFamilyId, callback) => {
     return await DeleteProductFamily(productFamilyId, callback);
 };
 
-exports.GetProductFamilys = async (filter, callback) => {
-    return await GetAllProductFamilys( filter, callback);
+let GetProductFamiliesAPI = async (filter, callback) => {
+    return await GetAllProductFamilies(filter, callback);
 };
+
+export { AddProductFamilyAPI, UpdateProductFamilyAPI, DeleteProductFamilyAPI, GetProductFamiliesAPI };

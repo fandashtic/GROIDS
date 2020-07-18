@@ -1,18 +1,20 @@
 
-var { GetAllBrands, AddBrand, UpdateBrand, DeleteBrand } = require('./../Core/BrandManager');
+import { GetAllBrands, AddBrand, UpdateBrand, DeleteBrand } from 'api/Core/BrandManager';
 
-exports.AddBrand = async (brand, callback) => {
+let AddBrandAPI = async (brand, callback) => {
     return await AddBrand(brand, callback);
 };
 
-exports.UpdateBrand = async (brandId, brand, callback) => {
+let UpdateBrandAPI = async (brandId, brand, callback) => {
     return await UpdateBrand(brandId, brand, callback);
 };
 
-exports.DeleteBrand = async (brandId, callback) => {
+let DeleteBrandAPI = async (brandId, callback) => {
     return await DeleteBrand(brandId, callback);
 };
 
-exports.GetBrands = async (filter, callback) => {
+let GetBrandsAPI = async (filter, callback) => {
     return await GetAllBrands( filter, callback);
 };
+
+export { AddBrandAPI, UpdateBrandAPI, DeleteBrandAPI, GetBrandsAPI };
