@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'productcategories';
@@ -21,6 +21,7 @@ let SaveProductCategoryData = async (productcategory, callback) => {
 }
 
 let UpdateProductCategoryData = async (key, productcategory, callback) => {
+    productcategory = UpdateDetaultValues(productcategory, productcategory.modified_by);
     return await Edit(_tableName, _primaryKey, key, productcategory, callback);
 }
 

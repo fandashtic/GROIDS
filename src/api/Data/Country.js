@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'countrys';
@@ -21,6 +21,7 @@ let Save = async (country, callback) => {
 }
 
 let Update = async (key, country, callback) => { 
+    country = UpdateDetaultValues(country, country.modified_by);
     return await Edit(_tableName, _primaryKey, key, country, callback);
 }
 

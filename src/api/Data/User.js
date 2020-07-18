@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'users';
@@ -15,17 +15,17 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (user, callback) => {    
+let Save = async (user, callback) => {
     user = AddDetaultValues(user, 'user_id', PreFix.User, user.created_by);
     return await Add(_tableName, _primaryKey, user, callback);
 }
 
-let Update = async (key, user, callback) => { 
+let Update = async (key, user, callback) => {
+    user = UpdateDetaultValues(user, user.modified_by);
     return await Edit(_tableName, _primaryKey, key, user, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

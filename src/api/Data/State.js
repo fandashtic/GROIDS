@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'states';
@@ -15,17 +15,17 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (state, callback) => {    
+let Save = async (state, callback) => {
     state = AddDetaultValues(state, 'area_id', PreFix.State, state.created_by);
-    return await Add(_tableName, _primaryKey,state, callback);
+    return await Add(_tableName, _primaryKey, state, callback);
 }
 
-let Update = async (key, state, callback) => { 
+let Update = async (key, state, callback) => {
+    state = UpdateDetaultValues(state, state.modified_by);
     return await Edit(_tableName, _primaryKey, key, state, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

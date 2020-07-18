@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'myfavorites';
@@ -21,6 +21,7 @@ let Save = async (myfavorite, callback) => {
 }
 
 let Update = async (key, myfavorite, callback) => { 
+    myfavorite = UpdateDetaultValues(myfavorite, myfavorite.modified_by);
     return await Edit(_tableName, _primaryKey, key, myfavorite, callback);
 }
 

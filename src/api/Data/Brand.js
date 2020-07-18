@@ -1,5 +1,5 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'brands';
@@ -21,6 +21,7 @@ let SaveBrandData = async (brand, callback) => {
 }
 
 let UpdateBrandData = async (key, brand, callback) => {
+    brand = UpdateDetaultValues(brand, brand.modified_by);
     return await Edit(_tableName, _primaryKey, key, brand, callback);
 }
 
