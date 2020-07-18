@@ -9,7 +9,7 @@ import {
 } from 'antd';
 
 import useForm from 'components/Shared/Useform';
-import {AddManufactureAPI} from 'api/controller/Shared/ManufactureController'
+import {AddManufactureAPI} from 'api/Controller/Shared/ManufactureController'
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },

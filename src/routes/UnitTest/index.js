@@ -1,8 +1,15 @@
-import React from "react";
-import {Route, Switch,Redirect} from "react-router-dom";
+import React, { useEffect } from 'react'
+import { RunUnitTest } from 'api/UnitTest/TestData';
 
-const UnitTest = ({match}) => (
-  <div>Unit Test</div>
-);
+const UnitTest = () => {
+
+  useEffect(() => {
+    RunUnitTest();
+  }, []);
+
+  return (
+    <div>Unit Test</div>
+  )
+}
 
 export default UnitTest;
