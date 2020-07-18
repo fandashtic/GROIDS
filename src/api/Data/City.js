@@ -1,4 +1,6 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'cities';
 const _primaryKey = 'city_id';
@@ -14,6 +16,7 @@ let GetAll = async (filter, callback) => {
 };
 
 let Save = async (city, callback) => {
+    city = AddDetaultValues(city, 'city_id', PreFix.City, city.created_by);
     return await Add(_tableName, _primaryKey,city, callback);
 }
 

@@ -1,4 +1,6 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'orders';
 const _primaryKey = 'order_id';
@@ -13,7 +15,8 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (order, callback) => {
+let Save = async (order, callback) => {    
+    order = AddDetaultValues(order, 'order_id', PreFix.Order, order.created_by);
     return await Add(_tableName, _primaryKey,order, callback);
 }
 

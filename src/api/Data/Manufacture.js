@@ -1,5 +1,5 @@
-import {   Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { GetNewKey } from 'api/Shared/Util';
+import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'manufactures';
@@ -15,17 +15,16 @@ let GetAllManufactureData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let SaveManufactureData = async (manufacture, callback) => {
-    manufacture['manufacture_id'] = GetNewKey(PreFix.Manufacture);    
+let SaveManufactureData = async (manufacture, callback) => {    
+    manufacture = AddDetaultValues(manufacture, 'manufacture_id', PreFix.Manufacture, manufacture.created_by);
     return await Add(_tableName, _primaryKey, manufacture, callback);
 }
 
-let UpdateManufactureData = async (key, manufacture, callback) => { 
+let UpdateManufactureData = async (key, manufacture, callback) => {
     return await Edit(_tableName, _primaryKey, key, manufacture, callback);
 }
 
-let DeleteManufactureData = async (key, callback) =>
-{
+let DeleteManufactureData = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

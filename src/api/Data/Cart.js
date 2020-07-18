@@ -1,4 +1,6 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'carts';
 const _primaryKey = 'cart_id';
@@ -14,15 +16,15 @@ let GetAll = async (filter, callback) => {
 };
 
 let Save = async (cart, callback) => {
-    return await Add(_tableName, _primaryKey,cart, callback);
+    cart = AddDetaultValues(cart, 'cart_id', PreFix.Cart, cart.created_by);
+    return await Add(_tableName, _primaryKey, cart, callback);
 }
 
-let Update = async (key, cart, callback) => { 
+let Update = async (key, cart, callback) => {
     return await Edit(_tableName, _primaryKey, key, cart, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

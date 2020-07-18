@@ -1,4 +1,6 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'productfamilys';
 const _primaryKey = 'product_family_id';
@@ -14,6 +16,7 @@ let GetAllProductFamiliesData = async (filter, callback) => {
 };
 
 let SaveProductFamilyData = async (productFamily, callback) => {
+    productFamily = AddDetaultValues(productFamily, 'product_family_id', PreFix.ProductFamily, productFamily.created_by);
     return await Add(_tableName, _primaryKey,productFamily, callback);
 }
 

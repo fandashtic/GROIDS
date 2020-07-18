@@ -1,6 +1,6 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/User';
 import { InsertLog } from 'api/Data/SessionLog';
-
+import { PreFix } from 'api/Shared/Constant/Enum';
 import { GetNewKey, IsHasValue } from 'api/Shared/Util';
 
 let IsUserValid = async (userName, password, callback) => {

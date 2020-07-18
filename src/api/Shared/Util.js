@@ -13,7 +13,7 @@ let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
 
             result.attributeValues[':' + keys[i]] = obj[keys[i]];
             result.names['#' + keys[i]] = keys[i];
-            
+
             if (i < keys.length - 1) result.expression = result.expression + ', ';
         }
     }
@@ -30,7 +30,7 @@ let GetNewKey = (type) => {
     let _key = uuidv4();
     let buff = new Buffer(_key);
     let base64data = buff.toString('base64');
-    if(IsHasValue(type)){
+    if (IsHasValue(type)) {
         base64data = type + '#' + base64data;
     }
     return base64data;
@@ -38,24 +38,37 @@ let GetNewKey = (type) => {
 
 let ReturnObject = (callback, err, data, methodName) => {
     if (err) {
-        callback(null, 'Error on ' + methodName + ': '+ JSON.stringify(err));
-    } else {            
-        if(IsHasValue(data)){
-            if(IsHasValue(data.Item)) { return callback(data.Item, null); }
-            if(IsHasValue(data.Attributes)) { return callback(data.Attributes, null); }
-            if(IsHasValue(data)) { return callback(data, null); }
-        }else{
-            return callback(null,'Error on ' + methodName);
+        callback(null, 'Error on ' + methodName + ': ' + JSON.stringify(err));
+    } else {
+        if (IsHasValue(data)) {
+            if (IsHasValue(data.Item)) { return callback(data.Item, null); }
+            if (IsHasValue(data.Attributes)) { return callback(data.Attributes, null); }
+            if (IsHasValue(data)) { return callback(data, null); }
+        } else {
+            return callback(null, 'Error on ' + methodName);
         }
     }
 };
 
-let IsHasValue = (data) =>
-{
-    if(data !== null && data !== undefined && data !== ''){
+let IsHasValue = (data) => {
+    if (data !== null && data !== undefined && data !== '') {
         return true;
     }
     return false;
 };
 
-export{ IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey };
+let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
+    tableData[keyColumn] = GetNewKey(type);
+    tableData['created_by'] = created_by;
+    tableData['created_on'] = new Date();
+    tableData['status'] = true;
+    return tableData;
+}
+
+let UpdateDetaultValues = (tableData, modified_by) => {
+    tableData['modified_by'] = modified_by;
+    tableData['modified_on'] = new Date();
+    return tableData;
+}
+
+export { IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };

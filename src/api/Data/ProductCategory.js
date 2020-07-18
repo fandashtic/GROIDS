@@ -1,4 +1,6 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { AddDetaultValues } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'productcategories';
 const _primaryKey = 'product_category_id';
@@ -14,15 +16,15 @@ let GetAllProductCategoriesData = async (filter, callback) => {
 };
 
 let SaveProductCategoryData = async (productcategory, callback) => {
-    return await Add(_tableName, _primaryKey,productcategory, callback);
+    productcategory = AddDetaultValues(productcategory, 'product_category_id', PreFix.ProductCategory, productcategory.created_by);
+    return await Add(_tableName, _primaryKey, productcategory, callback);
 }
 
-let UpdateProductCategoryData = async (key, productcategory, callback) => { 
+let UpdateProductCategoryData = async (key, productcategory, callback) => {
     return await Edit(_tableName, _primaryKey, key, productcategory, callback);
 }
 
-let DeleteProductCategoryData = async (key, callback) =>
-{
+let DeleteProductCategoryData = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
