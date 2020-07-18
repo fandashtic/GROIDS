@@ -106,8 +106,20 @@
     border-color: #34b880 !important;
 }
 
-/* .ant-btn-primary:hover {
+.ant-btn-primary:not([disabled]):not(.disabled):active {
     background: #34b880 !important;
     background-color: #34b880 !important;
     border-color: #34b880 !important;
-} */
+}
+
+.ant-btn-primary:focus {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+}
+
+.ant-btn-primary:hover {
+    background: #74d8ae !important;
+    background-color: #74d8ae !important;
+    border-color: #74d8ae !important;
+}
