@@ -1,5 +1,4 @@
-
-import { GetAllCompanys, AddCompany, UpdateCompany, DeleteCompany } from 'api/Controller/Company/node_modules/api/Core/CompanyManager';
+import { GetAllCompanys, AddCompany, UpdateCompany, DeleteCompany } from 'api/Core/CompanyManager';
 
 let AddCompanyAPI = async (company, callback) => {
     return await AddCompany(company, callback);

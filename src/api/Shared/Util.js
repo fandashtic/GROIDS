@@ -1,4 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
+import generator from 'generate-password';
+import { Base64 } from 'js-base64';
 
 let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     let result = {};
@@ -118,4 +120,24 @@ let GetDate = () => {
     return formatted_date;
 }
 
-export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };
+let CreatePassword = (password, password_salt) =>{
+    return Base64.encode(password + password_salt);
+};
+
+let ComparePassword = (password, password_salt, sys_password) =>{
+    return Base64.encode(password + password_salt) === sys_password ? true : false;
+};
+
+let CreatePasswordSalt = () =>{
+    return generator.generate({
+        length: 10,
+        numbers: true,
+        symbols: true,
+        lowercase: true,
+        uppercase: true
+    });
+};
+
+export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, 
+    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, 
+    ComparePassword };

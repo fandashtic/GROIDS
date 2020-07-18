@@ -1,4 +1,4 @@
-import { GetAllCarts, AddCart, UpdateCart, DeleteCart } from 'api/Controller/Consumer/node_modules/api/Core/CartManager';
+import { GetAllCarts, AddCart, UpdateCart, DeleteCart } from 'api/Core/CartManager';
 
 let AddCartAPI = async (cart, callback) => {
     return await AddCart(cart, callback);

@@ -5,6 +5,8 @@ import { GetAllStateData } from 'api/Data/State';
 import { GetAllCountryData } from 'api/Data/Country';
 import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
 import { IsHasValue } from 'api/Shared/Util'
+import { CreateDynamicUser } from 'api/Shared/Common';
+import { ApplicationType } from 'api/Shared/Constant/Enum';
 
 let IsStoreValid = async (store_id, password, callback) => {
     return await GetById(store_id, async (store) => {
@@ -32,6 +34,7 @@ let IsStoreValid = async (store_id, password, callback) => {
 let AddStore = async (store, callback) => {
     return await Save(store, async (store) => {
         if (store) {
+            await CreateDynamicUser(store, ApplicationType.Store);
             return await callback({
                 'data': store,
                 'Status': 200
