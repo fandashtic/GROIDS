@@ -31,7 +31,7 @@ let AddProductCategory = async (product_category, callback) => {
     return await SaveProductCategoryData(product_category, async (product_category) => {
         if (product_category) {
             return await callback({
-                'data':product_category,
+                'data': product_category,
                 'Status': 200
             })
         } else {
@@ -43,11 +43,11 @@ let AddProductCategory = async (product_category, callback) => {
     });
 }
 
-let UpdateProductCategory = async (product_category_id, product_category, callback) => { 
+let UpdateProductCategory = async (product_category_id, product_category, callback) => {
     return await UpdateProductCategoryData(product_category_id, product_category, async (product_category) => {
         if (product_category) {
             return await callback({
-                'data':product_category,
+                'data': product_category,
                 'Status': 200
             })
         } else {
@@ -59,12 +59,11 @@ let UpdateProductCategory = async (product_category_id, product_category, callba
     });
 }
 
-let DeleteProductCategory = async (product_category_id, callback) =>
-{
+let DeleteProductCategory = async (product_category_id, callback) => {
     return await DeleteProductCategoryData(product_category_id, async (product_category) => {
         if (product_category) {
             return await callback({
-                'data':product_category,
+                'data': product_category,
                 'Status': 200
             })
         } else {
@@ -80,7 +79,7 @@ let GetProductCategory = async (product_category_name, callback) => {
     return await GetProductCategoryDataById(product_category_name, async (product_category) => {
         if (product_category) {
             return await callback({
-                'data':product_category,
+                'data': product_category,
                 'Status': 200
             })
         } else {
@@ -96,7 +95,7 @@ let GetAllProductCategories = async (filter, callback) => {
     return await GetAllProductCategoriesData(filter, async (product_categorys) => {
         if (product_categorys) {
             return await callback({
-                'data':product_categorys,
+                'data': product_categorys,
                 'Status': 200
             })
         } else {
@@ -109,8 +108,8 @@ let GetAllProductCategories = async (filter, callback) => {
 };
 
 let ProductCategoryLookUp = async (product_category_id, callback) => {
-    if(IsHasValue(product_category_id)){
-        return await GetProductCategoryDataById(product_category_id, async (product_category) => {            
+    if (IsHasValue(product_category_id)) {
+        return await GetProductCategoryDataById(product_category_id, async (product_category) => {
             if (IsHasValue(product_category)) {
                 return await GetProductCategoryHierarchyData(product_category, callback);
             } else {
@@ -120,9 +119,9 @@ let ProductCategoryLookUp = async (product_category_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetProductCategoryHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetProductCategoryHierarchyData = async (product_category, callback) => {
@@ -152,7 +151,7 @@ const GetProductCategoryHierarchyData = async (product_category, callback) => {
             let _b = GetLookUpData(brands, 'brand_id', 'brand_name', _lookup.brand_id);
             _lookup.brands = _b.list;
             _lookup.brand_name = _b.label;
-            return await ReturnObject(callback, null, _lookup, 'GetProductCategoryHierarchyData');            
+            return await ReturnObject(callback, null, _lookup, 'GetProductCategoryHierarchyData');
         });
     });
 }

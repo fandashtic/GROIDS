@@ -1,4 +1,4 @@
-exports.Country = {
+let Country = {
     country_id: String,
     country_name: String,
     profile_image_url: String,
@@ -8,3 +8,5 @@ exports.Country = {
     modified_on: Date,
     modified_by: String
 }
+
+export { Country };

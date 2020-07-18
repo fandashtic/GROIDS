@@ -1,4 +1,4 @@
-exports.Company = {
+let Company = {
     company_id: String,
     company_name: String,
     email: String,
@@ -8,10 +8,12 @@ exports.Company = {
     tin: String,
     gst: String,
     logo: String,
-    banner : String,
+    banner: String,
     status: Boolean,
     created_on: Date,
     created_by: String,
     modified_on: Date,
     modified_by: String
 }
+
+export { Company };

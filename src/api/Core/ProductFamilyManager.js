@@ -32,7 +32,7 @@ let AddProductFamily = async (product_family, callback) => {
     return await SaveProductFamilyData(product_family, async (product_family) => {
         if (product_family) {
             return await callback({
-                'data':product_family,
+                'data': product_family,
                 'Status': 200
             })
         } else {
@@ -44,11 +44,11 @@ let AddProductFamily = async (product_family, callback) => {
     });
 }
 
-let UpdateProductFamily = async (product_family_id, product_family, callback) => { 
+let UpdateProductFamily = async (product_family_id, product_family, callback) => {
     return await UpdateProductFamilyData(product_family_id, product_family, async (product_family) => {
         if (product_family) {
             return await callback({
-                'data':product_family,
+                'data': product_family,
                 'Status': 200
             })
         } else {
@@ -60,12 +60,11 @@ let UpdateProductFamily = async (product_family_id, product_family, callback) =>
     });
 }
 
-let DeleteProductFamily = async (product_family_id, callback) =>
-{
+let DeleteProductFamily = async (product_family_id, callback) => {
     return await DeleteProductFamilyData(product_family_id, async (product_family) => {
         if (product_family) {
             return await callback({
-                'data':product_family,
+                'data': product_family,
                 'Status': 200
             })
         } else {
@@ -81,7 +80,7 @@ let GetProductFamily = async (product_family_name, callback) => {
     return await GetProductFamilyDataById(product_family_name, async (product_family) => {
         if (product_family) {
             return await callback({
-                'data':product_family,
+                'data': product_family,
                 'Status': 200
             })
         } else {
@@ -97,7 +96,7 @@ let GetAllProductFamilies = async (filter, callback) => {
     return await GetAllProductFamiliesData(filter, async (product_familys) => {
         if (product_familys) {
             return await callback({
-                'data':product_familys,
+                'data': product_familys,
                 'Status': 200
             })
         } else {
@@ -110,8 +109,8 @@ let GetAllProductFamilies = async (filter, callback) => {
 };
 
 let ProductFamilyLookUp = async (product_family_id, callback) => {
-    if(IsHasValue(product_family_id)){
-        return await GetProductFamilyDataById(product_family_id, async (product_family) => {            
+    if (IsHasValue(product_family_id)) {
+        return await GetProductFamilyDataById(product_family_id, async (product_family) => {
             if (IsHasValue(product_family)) {
                 return await GetProductFamilyHierarchyData(product_family, callback);
             } else {
@@ -121,9 +120,9 @@ let ProductFamilyLookUp = async (product_family_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetProductFamilyHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetProductFamilyHierarchyData = async (product_family, callback) => {
@@ -165,6 +164,5 @@ const GetProductFamilyHierarchyData = async (product_family, callback) => {
         });
     });
 }
-
 
 export { ProductFamilyLookUp, IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies };

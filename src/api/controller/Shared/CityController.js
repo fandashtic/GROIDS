@@ -1,5 +1,5 @@
 
-import { GetAllCities, AddCity, UpdateCity, DeleteCity, CityLookUp } from 'api/Core/CityManager';
+import { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCities, CityLookUp } from 'api/Core/CityManager';
 
 let AddCityAPI = async (city, callback) => {
     return await AddCity(city, callback);
@@ -14,11 +14,15 @@ let DeleteCityAPI = async (city_id, callback) => {
 };
 
 let GetCiteisAPI = async (filter, callback) => {
-    return await GetAllCities( filter, callback);
+    return await GetAllCities(filter, callback);
+};
+
+let GetCityAPI = async (city_id, callback) => {
+    return await GetCity(city_id, callback);
 };
 
 let CityLookUpAPI = async (city_id, callback) => {
-    return await CityLookUp( city_id, callback);
+    return await CityLookUp(city_id, callback);
 };
 
-export { AddCityAPI, UpdateCityAPI, DeleteCityAPI, GetCiteisAPI, CityLookUpAPI };
+export { AddCityAPI, UpdateCityAPI, DeleteCityAPI, GetCiteisAPI, GetCityAPI, CityLookUpAPI };

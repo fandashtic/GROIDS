@@ -12,8 +12,8 @@ let DeleteStoreAPI = async (store_id, callback) => {
     return await DeleteStore(store_id, callback);
 };
 
-let GetStoreAPI = async (filter, callback) => {
-    return await GetStore(filter, callback);
+let GetStoreAPI = async (store_id, callback) => {
+    return await GetStore(store_id, callback);
 };
 
 let GetStoresAPI = async (filter, callback) => {

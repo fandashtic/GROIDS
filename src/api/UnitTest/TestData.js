@@ -6,7 +6,7 @@ import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryCont
 import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
 import { ProductLookUpAPI, AddProductAPI, GetProductAPI } from 'api/Controller/Shared/ProductController';
 import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
-import { StoreLookUpAPI, AddStoreAPI, GetStoresAPI, GetStoreAPI } from 'api/Controller/Shared/StoreController';
+import { AddStoreAPI, UpdateStoreAPI, DeleteStoreAPI, GetStoresAPI, GetStoreAPI, StoreLookUpAPI } from 'api/Controller/Shared/StoreController';
 
 const company_id = GetNewKey(PreFix.Company);
 const manufacture_id = GetNewKey(PreFix.Manufacture);

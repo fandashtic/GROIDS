@@ -31,7 +31,7 @@ let AddCity = async (city, callback) => {
     return await SaveCityData(city, async (city) => {
         if (city) {
             return await callback({
-                'data':city,
+                'data': city,
                 'Status': 200
             })
         } else {
@@ -43,11 +43,11 @@ let AddCity = async (city, callback) => {
     });
 }
 
-let UpdateCity = async (city_id, city, callback) => { 
+let UpdateCity = async (city_id, city, callback) => {
     return await UpdateCityData(city_id, city, async (city) => {
         if (city) {
             return await callback({
-                'data':city,
+                'data': city,
                 'Status': 200
             })
         } else {
@@ -59,12 +59,11 @@ let UpdateCity = async (city_id, city, callback) => {
     });
 }
 
-let DeleteCity = async (city_id, callback) =>
-{
+let DeleteCity = async (city_id, callback) => {
     return await DeleteCityData(city_id, async (city) => {
         if (city) {
             return await callback({
-                'data':city,
+                'data': city,
                 'Status': 200
             })
         } else {
@@ -80,7 +79,7 @@ let GetCity = async (city_id, callback) => {
     return await GetCityDataById(city_id, async (city) => {
         if (city) {
             return await callback({
-                'data':city,
+                'data': city,
                 'Status': 200
             })
         } else {
@@ -92,11 +91,11 @@ let GetCity = async (city_id, callback) => {
     });
 }
 
-let GetAllCitys = async (filter, callback) => {
+let GetAllCities = async (filter, callback) => {
     return await GetAllCityData(filter, async (citys) => {
         if (citys) {
             return await callback({
-                'data':citys,
+                'data': citys,
                 'Status': 200
             })
         } else {
@@ -109,8 +108,8 @@ let GetAllCitys = async (filter, callback) => {
 };
 
 let CityLookUp = async (city_id, callback) => {
-    if(IsHasValue(city_id)){
-        return await GetCityDataById(city_id, async (city) => {            
+    if (IsHasValue(city_id)) {
+        return await GetCityDataById(city_id, async (city) => {
             if (IsHasValue(city)) {
                 return await GetCityHierarchyData(city, callback);
             } else {
@@ -120,9 +119,9 @@ let CityLookUp = async (city_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetCityHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetCityHierarchyData = async (city, callback) => {
@@ -135,7 +134,7 @@ const GetCityHierarchyData = async (city, callback) => {
         _lookup.state_id = city.state_id;
         _lookup.state_name = city.state_name;
         _lookup.city_id = city.city_id;
-        _lookup.city_name = city.city_name;        
+        _lookup.city_name = city.city_name;
         _lookup.company_id = city.company_id;
         _lookup.company_name = city.company_name;
         _lookup.store_id = city.store_id;
@@ -161,4 +160,4 @@ const GetCityHierarchyData = async (city, callback) => {
     });
 }
 
-export { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCitys, CityLookUp };
+export { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCities, CityLookUp };
