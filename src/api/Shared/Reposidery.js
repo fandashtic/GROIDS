@@ -1,5 +1,21 @@
-import { docClient } from 'api/db';
+import { docClient, dynamodb } from 'api/db';
 import { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey } from 'api/Shared/Util';
+
+// let CreateTable = async (tableName, keyColumn, callback) => {
+//     var params = {
+//         TableName: tableName,
+//         KeySchema: [
+//             { AttributeName: keyColumn, KeyType: "HASH" }
+//         ],
+//         AttributeDefinitions: [],
+//         ProvisionedThroughput: {
+//             ReadCapacityUnits: 5,
+//             WriteCapacityUnits: 5
+//         }
+//     };
+
+//     dynamodb.createTable(params, callback);
+// }
 
 let Get = async (tableName, keyColumn, keyValue, callback) => {
     var params = {
@@ -45,15 +61,17 @@ let All = async (tableName, filter, callback) => {
     }
 };
 
-let Add = async (tableName, tableData, callback) => {
+let Add = async (tableName, keyColumn, tableData, callback) => {    
     var params = {
         TableName: tableName,
         Item: tableData
     };
 
-    return await docClient.put(params, function (err, data) {
-        ReturnObject(callback, err, data, 'Add');
-    });
+    //CreateTable(tableName, keyColumn, async () => {
+        return await docClient.put(params, function (err, data) {
+            ReturnObject(callback, err, data, 'Add');
+        });
+    //})
 }
 
 let Edit = async (tableName, keyColumn, keyValue, tableData, callback) => {
@@ -67,9 +85,11 @@ let Edit = async (tableName, keyColumn, keyValue, tableData, callback) => {
         ReturnValues: "UPDATED_NEW"
     };
 
-    return await docClient.update(params, function (err, data) {
-        ReturnObject(callback, err, data, 'Update');
-    });
+    //CreateTable(tableName, keyColumn, async () => {
+        return await docClient.update(params, function (err, data) {
+            ReturnObject(callback, err, data, 'Update');
+        });
+    //})    
 }
 
 let Remove = async (tableName, keyColumn, keyValue, callback) => {

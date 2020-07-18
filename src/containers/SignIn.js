@@ -12,12 +12,18 @@ import {
 import IntlMessages from "util/IntlMessages";
 import CircularProgress from "components/CircularProgress/index";
 
+import { RunUnitTest } from 'api/UnitTest/TestData';
+
+
+
 const SignIn =()=> {
 
   const dispatch = useDispatch();
   const {loader, alertMessage, showMessage}= useSelector(({auth}) => auth);
-  //const [form] = Form.useForm();
+  const [form] = Form.useForm();
   const history = useHistory();
+
+  RunUnitTest();
 
   useEffect(() => {
     if (showMessage) {
@@ -33,7 +39,7 @@ const SignIn =()=> {
   };
 
   const onFinish = values => {
-    history.push('/dashboard/company');
+    history.push('/main/dashboard/company');
   };
 
     return (
