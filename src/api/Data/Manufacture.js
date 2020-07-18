@@ -1,4 +1,6 @@
 import {   Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
+import { GetNewKey } from 'api/Shared/Util';
+import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'manufactures';
 const _primaryKey = 'manufacture_id';
@@ -14,7 +16,8 @@ let GetAllManufactureData = async (filter, callback) => {
 };
 
 let SaveManufactureData = async (manufacture, callback) => {
-    return await Add(_tableName, manufacture, callback);
+    manufacture['manufacture_id'] = GetNewKey(PreFix.Manufacture);    
+    return await Add(_tableName, _primaryKey, manufacture, callback);
 }
 
 let UpdateManufactureData = async (key, manufacture, callback) => { 

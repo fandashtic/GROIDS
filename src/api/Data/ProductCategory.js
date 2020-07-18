@@ -14,7 +14,7 @@ let GetAllProductCategoriesData = async (filter, callback) => {
 };
 
 let SaveProductCategoryData = async (productcategory, callback) => {
-    return await Add(_tableName, productcategory, callback);
+    return await Add(_tableName, _primaryKey,productcategory, callback);
 }
 
 let UpdateProductCategoryData = async (key, productcategory, callback) => { 

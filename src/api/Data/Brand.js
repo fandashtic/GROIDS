@@ -13,12 +13,12 @@ let GetAllBrandDatas = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let SaveBrandData = async (area, callback) => {
-    return await Add(_tableName, area, callback);
+let SaveBrandData = async (brand, callback) => {
+    return await Add(_tableName, _primaryKey, brand, callback);
 }
 
-let UpdateBrandData = async (key, area, callback) => { 
-    return await Edit(_tableName, _primaryKey, key, area, callback);
+let UpdateBrandData = async (key, brand, callback) => { 
+    return await Edit(_tableName, _primaryKey, key, brand, callback);
 }
 
 let DeleteBrandData = async (key, callback) =>

@@ -14,7 +14,7 @@ let GetAllProductFamiliesData = async (filter, callback) => {
 };
 
 let SaveProductFamilyData = async (productFamily, callback) => {
-    return await Add(_tableName, productFamily, callback);
+    return await Add(_tableName, _primaryKey,productFamily, callback);
 }
 
 let UpdateProductFamilyData= async (key, productFamily, callback) => { 

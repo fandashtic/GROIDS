@@ -13,12 +13,12 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (area, callback) => {
-    return await Add(_tableName, area, callback);
+let Save = async (cart, callback) => {
+    return await Add(_tableName, _primaryKey,cart, callback);
 }
 
-let Update = async (key, area, callback) => { 
-    return await Edit(_tableName, _primaryKey, key, area, callback);
+let Update = async (key, cart, callback) => { 
+    return await Edit(_tableName, _primaryKey, key, cart, callback);
 }
 
 let Delete = async (key, callback) =>

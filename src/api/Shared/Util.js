@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     let result = {};
     result.expression = 'set ';
@@ -24,6 +26,16 @@ let GetKey = (key, value) => {
     return _key;
 };
 
+let GetNewKey = (type) => {
+    let _key = uuidv4();
+    let buff = new Buffer(_key);
+    let base64data = buff.toString('base64');
+    if(IsHasValue(type)){
+        base64data = type + '#' + base64data;
+    }
+    return base64data;
+};
+
 let ReturnObject = (callback, err, data, methodName) => {
     if (err) {
         callback(null, 'Error on ' + methodName + ': '+ JSON.stringify(err));
@@ -46,4 +58,4 @@ let IsHasValue = (data) =>
     return false;
 };
 
-export{ IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey };
+export{ IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey };

@@ -14,7 +14,7 @@ let GetAll = async (filter, callback) => {
 };
 
 let Save = async (scheme, callback) => {
-    return await Add(_tableName, scheme, callback);
+    return await Add(_tableName, _primaryKey,scheme, callback);
 }
 
 let Update = async (key, scheme, callback) => { 

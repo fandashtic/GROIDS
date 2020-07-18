@@ -61,11 +61,14 @@ let Event = {
 }
 
 let PreFix = {
+    Company: 'C',
     Manufacture : 'MF',
     Brand: 'BR',
     ProductCategory : 'PC',
     ProductFamily: 'PF',
     Product : 'PR',
-    Store: 'SR',
-    
+    Store: 'ST',
+    User: 'U'
 }
+
+export {ActiveStatus, PaymentStatus, UserType, StoreType, ConsumerType, PaymentMode, CreditTerms, Event, PreFix};
