@@ -1,17 +1,27 @@
-var { GetAllAreas, AddArea, UpdateArea, DeleteArea } = require('../Core/AreaManager');
+import { AddArea, UpdateArea, DeleteArea, GetArea, GetAllAreas, AreaLookUp } from 'api/Core/AreaManager';
 
-exports.AddArea = async (area, callback) => {
+let AddAreaAPI = async (area, callback) => {
     return await AddArea(area, callback);
 };
 
-exports.UpdateArea = async (areaId, area, callback) => {
-    return await UpdateArea(areaId, area, callback);
+let UpdateAreaAPI = async (area_id, area, callback) => {
+    return await UpdateArea(area_id, area, callback);
 };
 
-exports.DeleteArea = async (areaId, callback) => {
-    return await DeleteArea(areaId, callback);
+let DeleteAreaAPI = async (area_id, callback) => {
+    return await DeleteArea(area_id, callback);
 };
 
-exports.GetAreas = async (filter, callback) => {
-    return await GetAllAreas( filter, callback);
+let GetAreaAPI = async (area_id, callback) => {
+    return await GetArea(area_id, callback);
 };
+
+let GetAreasAPI = async (filter, callback) => {
+    return await GetAllAreas(filter, callback);
+};
+
+let AreaLookUpAPI = async (area_id, callback) => {
+    return await AreaLookUp(area_id, callback);
+};
+
+export { AddAreaAPI, UpdateAreaAPI, DeleteAreaAPI, GetAreaAPI, GetAreasAPI, AreaLookUpAPI };

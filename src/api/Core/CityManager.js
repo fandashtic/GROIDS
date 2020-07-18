@@ -1,7 +1,11 @@
 import { GetCityDataById, GetAllCityData, SaveCityData, UpdateCityData, DeleteCityData } from 'api/Data/City';
+import { GetAllStateData } from 'api/Data/State';
+import { GetAllCountryData } from 'api/Data/Country';
+import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
+import { IsHasValue } from 'api/Shared/Util'
 
-let IsCityValid = async (cityName, password, callback) => {
-    return await GetCityDataById(cityName, async (city) => {
+let IsCityValid = async (city_id, password, callback) => {
+    return await GetCityDataById(city_id, async (city) => {
         if (city.password === password) {
             return await callback({
                 'data': {
@@ -39,8 +43,8 @@ let AddCity = async (city, callback) => {
     });
 }
 
-let UpdateCity = async (key, city, callback) => { 
-    return await UpdateCityData(key, city, async (city) => {
+let UpdateCity = async (city_id, city, callback) => { 
+    return await UpdateCityData(city_id, city, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -55,9 +59,9 @@ let UpdateCity = async (key, city, callback) => {
     });
 }
 
-let DeleteCity = async (key, callback) =>
+let DeleteCity = async (city_id, callback) =>
 {
-    return await DeleteCityData(key, async (city) => {
+    return await DeleteCityData(city_id, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -72,8 +76,8 @@ let DeleteCity = async (key, callback) =>
     });
 };
 
-let GetCity = async (cityName, callback) => {
-    return await GetCityDataById(cityName, async (city) => {
+let GetCity = async (city_id, callback) => {
+    return await GetCityDataById(city_id, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -104,4 +108,57 @@ let GetAllCitys = async (filter, callback) => {
     });
 };
 
-export { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCitys };
+let CityLookUp = async (city_id, callback) => {
+    if(IsHasValue(city_id)){
+        return await GetCityDataById(city_id, async (city) => {            
+            if (IsHasValue(city)) {
+                return await GetCityHierarchyData(city, callback);
+            } else {
+                return await callback({
+                    'data': null,
+                    'Status': 401
+                })
+            }
+        });
+    }else{
+        return await GetCityHierarchyData(null, callback);
+    }   
+}
+
+const GetCityHierarchyData = async (city, callback) => {
+    let active_filter = { 'status': true };
+    let _lookup = {};
+
+    if (IsHasValue(city)) {
+        _lookup.country_id = city.country_id;
+        _lookup.country_name = city.country_name;
+        _lookup.state_id = city.state_id;
+        _lookup.state_name = city.state_name;
+        _lookup.city_id = city.city_id;
+        _lookup.city_name = city.city_name;        
+        _lookup.company_id = city.company_id;
+        _lookup.company_name = city.company_name;
+        _lookup.store_id = city.store_id;
+        _lookup.store_name = city.store_name;
+        _lookup.profile_image_url = city.profile_image_url;
+        _lookup.status = city.status;
+        _lookup.latitude = city.latitude;
+        _lookup.longitude = city.longitude;
+    }
+
+    GetAllCountryData(active_filter, async (countries) => {
+        let _m = GetLookUpData(countries, 'country_id', 'country_name', _lookup.country_id);
+        _lookup.countries = _m.list;
+        _lookup.country_name = _m.label;
+
+        await GetAllStateData(active_filter, async (brands) => {
+            let _b = GetLookUpData(brands, 'state_id', 'state_name', _lookup.state_id);
+            _lookup.states = _b.list;
+            _lookup.state_name = _b.label;
+
+            return await ReturnObject(callback, null, _lookup, 'GetCityHierarchyData');
+        });
+    });
+}
+
+export { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCitys, CityLookUp };

@@ -4,7 +4,7 @@ import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
 import { AddBrandAPI } from 'api/Controller/Shared/BrandController';
 import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
 import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
-import { ProductLookUpAPI, AddProductAPI } from 'api/Controller/Shared/ProductController';
+import { ProductLookUpAPI, AddProductAPI, GetProductAPI } from 'api/Controller/Shared/ProductController';
 import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
 import { StoreLookUpAPI, AddStoreAPI, GetStoresAPI, GetStoreAPI } from 'api/Controller/Shared/StoreController';
 
@@ -12,11 +12,10 @@ const company_id = GetNewKey(PreFix.Company);
 const manufacture_id = GetNewKey(PreFix.Manufacture);
 const brand_id = GetNewKey(PreFix.Brand);
 const product_category_id = GetNewKey(PreFix.ProductCategory);
-const product_family_id = GetNewKey(PreFix.ProductFamily);
+const product_family_id = GetNewKey(PreFix.product_family);
 const store_id = GetNewKey(PreFix.Store);
 const product_id = GetNewKey(PreFix.Product);
 const created_by = GetNewKey(PreFix.User);
-const store_by = GetNewKey(PreFix.Store);
 const country_id = GetNewKey(PreFix.Country);
 const state_id = GetNewKey(PreFix.State);
 const city_id = GetNewKey(PreFix.City);
@@ -66,7 +65,7 @@ let AddProductCategory = () => {
 }
 
 let AddProductFamily = () => {
-    const Productfamily = {
+    const product_family = {
         product_family_id: product_family_id,
         product_family_name: 'Biscuit',
         manufacture_id: manufacture_id,
@@ -77,7 +76,7 @@ let AddProductFamily = () => {
         profile_image_url: 'image.png'
     }
 
-    AddProductFamilyAPI(Productfamily, (data, err) => {
+    AddProductFamilyAPI(product_family, (data, err) => {
     });
 }
 
@@ -99,7 +98,14 @@ let AddProduct = () => {
     });
 }
 
-let ProductLookUp = () => {    
+let GetProduct = (product_id) => {    
+    GetProductAPI(product_id, (data, err) => {
+        console.log(data);
+        console.log(err);
+    });
+}
+
+let ProductLookUp = (product_id) => {    
     ProductLookUpAPI(product_id, (data, err) => {
         console.log(data);
         console.log(err);
@@ -188,15 +194,17 @@ let RunUnitTest = () => {
     // AddProductCategory();
     // AddProductFamily();
     // AddProduct();
+    let _product_id= 'PR#MGMwZDFkOWEtZGMxZC00NGUzLTg0M2UtNTZlODkyYmE5Mzdl';
+    //GetProduct(_product_id);
     //ProductLookUp(null);    
-    //let product_id= 'PR#M2ExMzAwMGItYWI3NS00MGY2LTg2MzItMjQ4OWQwZDcxMjVj';
-    //ProductLookUp(product_id);
     
-    let store_id= 'S#ZGU3YzkxODUtYmNiYi00N2MxLWI0MjAtNjBiZTQ5YmFkODQ3';
+    ProductLookUp(_product_id);
+    
+    let _store_id= 'ST#YzQwMWYzZGQtZTQ2OS00NjQ2LTg1ZDItZjhlZDA0YjQ4MDBm';
     //AddStore();
-    GetStore(store_id);
+    //GetStore(_store_id);
     //StoreLookUp(null);    
-    //StoreLookUp(store_id);
+    //StoreLookUp(_store_id);
     //SaveUser();
     //SignIn();
 };

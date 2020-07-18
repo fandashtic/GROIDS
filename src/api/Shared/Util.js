@@ -57,6 +57,27 @@ let IsHasValue = (data) => {
     return false;
 };
 
+let GetLookUpData = (dataList, idCoulmn, dataLabel, selectedValue) => {
+    let result = {list: [], label: ''};
+    let _isSelected = false;
+    dataList.forEach(l => {        
+        _isSelected = ((l[idCoulmn] === selectedValue) ? true : false);
+        if(_isSelected === true) 
+        {
+            result.label = l[dataLabel];
+        }
+
+        result.list.push(
+        {
+            label: l[dataLabel],
+            value: l[idCoulmn],
+            isSelected: _isSelected
+        }
+        )
+    });
+    return result;
+}
+
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
     tableData['created_by'] = created_by;
@@ -97,4 +118,4 @@ let GetDate = () => {
     return formatted_date;
 }
 
-export { GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };
+export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues };

@@ -1,7 +1,10 @@
 import { GetStateDataById, GetAllStateData, SaveStateData, UpdateStateData, DeleteStateData } from 'api/Data/State';
+import { GetAllCountryData } from 'api/Data/Country';
+import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
+import { IsHasValue } from 'api/Shared/Util'
 
-let IsStateValid = async (stateName, password, callback) => {
-    return await GetStateDataById(stateName, async (state) => {
+let IsStateValid = async (state_id, password, callback) => {
+    return await GetStateDataById(state_id, async (state) => {
         if (state.password === password) {
             return await callback({
                 'data': {
@@ -39,8 +42,8 @@ let AddState = async (state, callback) => {
     });
 }
 
-let UpdateState = async (key, state, callback) => { 
-    return await UpdateStateData(key, state, async (state) => {
+let UpdateState = async (state_id, state, callback) => { 
+    return await UpdateStateData(state_id, state, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -55,9 +58,9 @@ let UpdateState = async (key, state, callback) => {
     });
 }
 
-let DeleteState = async (key, callback) =>
+let DeleteState = async (state_id, callback) =>
 {
-    return await DeleteStateData(key, async (state) => {
+    return await DeleteStateData(state_id, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -72,8 +75,8 @@ let DeleteState = async (key, callback) =>
     });
 };
 
-let GetState = async (stateName, callback) => {
-    return await GetStateDataById(stateName, async (state) => {
+let GetState = async (state_id, callback) => {
+    return await GetStateDataById(state_id, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -104,4 +107,48 @@ let GetAllStates = async (filter, callback) => {
     });
 };
 
-export { IsStateValid, AddState, UpdateState, DeleteState, GetState, GetAllStates };
+let StateLookUp = async (state_id, callback) => {
+    if(IsHasValue(state_id)){
+        return await GetStateDataById(state_id, async (state) => {            
+            if (IsHasValue(state)) {
+                return await GetStateHierarchyData(state, callback);
+            } else {
+                return await callback({
+                    'data': null,
+                    'Status': 401
+                })
+            }
+        });
+    }else{
+        return await GetStateHierarchyData(null, callback);
+    }   
+}
+
+const GetStateHierarchyData = async (state, callback) => {
+    let active_filter = { 'status': true };
+    let _lookup = {};
+
+    if (IsHasValue(state)) {
+        _lookup.country_id = state.country_id;
+        _lookup.country_name = state.country_name;
+        _lookup.state_id = state.state_id;
+        _lookup.state_name = state.state_name;   
+        _lookup.company_id = state.company_id;
+        _lookup.company_name = state.company_name;
+        _lookup.store_id = state.store_id;
+        _lookup.store_name = state.store_name;
+        _lookup.profile_image_url = state.profile_image_url;
+        _lookup.status = state.status;
+        _lookup.latitude = state.latitude;
+        _lookup.longitude = state.longitude;
+    }
+
+    GetAllCountryData(active_filter, async (countries) => {
+        let _m = GetLookUpData(countries, 'country_id', 'country_name', _lookup.country_id);
+        _lookup.countries = _m.list;
+        _lookup.country_name = _m.label;
+        return await ReturnObject(callback, null, _lookup, 'GetStateHierarchyData');
+    });
+}
+
+export { IsStateValid, AddState, UpdateState, DeleteState, GetState, GetAllStates, StateLookUp };

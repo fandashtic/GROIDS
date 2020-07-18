@@ -3,11 +3,11 @@ import { GetAllAreaData } from 'api/Data/Area';
 import { GetAllCityData } from 'api/Data/City';
 import { GetAllStateData } from 'api/Data/State';
 import { GetAllCountryData } from 'api/Data/Country';
-import { ReturnObject } from 'api/Shared/Util';
+import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
 import { IsHasValue } from 'api/Shared/Util'
 
-let IsStoreValid = async (storeName, password, callback) => {
-    return await GetById(storeName, async (store) => {
+let IsStoreValid = async (store_id, password, callback) => {
+    return await GetById(store_id, async (store) => {
         if (store.password === password) {
             return await callback({
                 'data': {
@@ -45,8 +45,8 @@ let AddStore = async (store, callback) => {
     });
 }
 
-let UpdateStore = async (key, store, callback) => {
-    return await Update(key, store, async (store) => {
+let UpdateStore = async (store_id, store, callback) => {
+    return await Update(store_id, store, async (store) => {
         if (store) {
             return await callback({
                 'data': store,
@@ -61,8 +61,8 @@ let UpdateStore = async (key, store, callback) => {
     });
 }
 
-let DeleteStore = async (key, callback) => {
-    return await Delete(key, async (store) => {
+let DeleteStore = async (store_id, callback) => {
+    return await Delete(store_id, async (store) => {
         if (store) {
             return await callback({
                 'data': store,
@@ -77,8 +77,8 @@ let DeleteStore = async (key, callback) => {
     });
 };
 
-let GetStore = async (storeName, callback) => {
-    return await GetById(storeName, async (store) => {
+let GetStore = async (store_id, callback) => {
+    return await GetById(store_id, async (store) => {
         if (store) {
             return await callback({
                 'data': store,
@@ -128,75 +128,62 @@ let StoreLookUp = async (store_id, callback) => {
 
 const GetStoreHierarchyData = async (store, callback) => {
     let active_filter = { 'status': true };
-    let _store_Lookup = {};
+    let _lookup = {};
 
     if (IsHasValue(store)) {
-        _store_Lookup.store_id = store.store_id;
-        _store_Lookup.store_name = store.store_name;
-        _store_Lookup.country_id = store.manufacture_id;
-        _store_Lookup.state_id = store.brand_id;
-        _store_Lookup.city_id = store.store_category_id;
-        _store_Lookup.area_id = store.store_family_id;
-        _store_Lookup.company_id = store.company_id;
-        _store_Lookup.profile_image_url = store.profile_image_url;
-        _store_Lookup.status = store.status;
-        _store_Lookup.pincode = store.pincode;
-        _store_Lookup.latitude = store.latitude;
-        _store_Lookup.longitude = store.longitude;
-        _store_Lookup.email = store.email;
-        _store_Lookup.mobilenumber = store.mobilenumber;
-        _store_Lookup.contactperson = store.contactperson;
-        _store_Lookup.tin = store.tin;
-        _store_Lookup.gst = store.gst;
-        _store_Lookup.logo = store.logo;
-        _store_Lookup.banner = store.banner;
-        _store_Lookup.business_days_hours = store.business_days_hours;
-        _store_Lookup.delivery_days_hours = store.delivery_days_hours;
+        _lookup.store_id = store.store_id;
+        _lookup.store_name = store.store_name;
+        _lookup.company_id = store.company_id;
+        _lookup.company_name = store.company_name;
+        _lookup.country_id = store.manufacture_id;
+        _lookup.country_name = store.manufacture_name;
+        _lookup.state_id = store.state_id;
+        _lookup.state_name = store.state_name;
+        _lookup.city_id = store.city_id;
+        _lookup.city_name = store.city_name;
+        _lookup.area_id = store.area_id;
+        _lookup.area_name = store.area_name;        
+        _lookup.profile_image_url = store.profile_image_url;
+        _lookup.status = store.status;
+        _lookup.pincode = store.pincode;
+        _lookup.latitude = store.latitude;
+        _lookup.longitude = store.longitude;
+        _lookup.email = store.email;
+        _lookup.mobilenumber = store.mobilenumber;
+        _lookup.contactperson = store.contactperson;
+        _lookup.tin = store.tin;
+        _lookup.gst = store.gst;
+        _lookup.logo = store.logo;
+        _lookup.banner = store.banner;
+        _lookup.business_days_hours = store.business_days_hours;
+        _lookup.delivery_days_hours = store.delivery_days_hours;
     }
 
     GetAllCountryData(active_filter, async (countries) => {
-        let _m = GetLookUpData(countries, 'country_id', 'country_name', _store_Lookup.country_id);
-        _store_Lookup.manufactures = _m.list;
-        _store_Lookup.manufacture_name = _m.label;
+        let _m = GetLookUpData(countries, 'country_id', 'country_name', _lookup.country_id);
+        _lookup.countries = _m.list;
+        _lookup.country_name = _m.label;
 
         await GetAllStateData(active_filter, async (brands) => {
-            let _b = GetLookUpData(brands, 'state_id', 'state_name', _store_Lookup.state_id);
-            _store_Lookup.states = _b.list;
-            _store_Lookup.state_name = _b.label;
+            let _b = GetLookUpData(brands, 'state_id', 'state_name', _lookup.state_id);
+            _lookup.states = _b.list;
+            _lookup.state_name = _b.label;
 
             await GetAllCityData(active_filter, async (storeCategories) => {
-                let _bc = GetLookUpData(storeCategories, 'city_id', 'city_name', _store_Lookup.city_id);
-                _store_Lookup.cities = _bc.list;
-                _store_Lookup.city_name = _bc.label;
+                let _bc = GetLookUpData(storeCategories, 'city_id', 'city_name', _lookup.city_id);
+                _lookup.cities = _bc.list;
+                _lookup.city_name = _bc.label;
 
                 await GetAllAreaData(active_filter, async (storeFamilies) => {
-                    let _bf = GetLookUpData(storeFamilies, 'area_id', 'area_name', _store_Lookup.area_id);
-                    _store_Lookup.areas = _bf.list;
-                    _store_Lookup.area_name = _bf.label;
+                    let _bf = GetLookUpData(storeFamilies, 'area_id', 'area_name', _lookup.area_id);
+                    _lookup.areas = _bf.list;
+                    _lookup.area_name = _bf.label;
 
-                    return await ReturnObject(callback, null, _store_Lookup, 'GetStoreHierarchyData');
+                    return await ReturnObject(callback, null, _lookup, 'GetStoreHierarchyData');
                 });
             });
         });
     });
-}
-
-let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
-    let result = {list: [], displayName: ''};
-    let _isSelected = false;
-    list.forEach(l => {
-        _isSelected = ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false);
-        if(_isSelected === true) result.displayName = l[displayColumn];
-
-        result.list.push(
-            {
-                label: l[displayColumn],
-                value: l[idCoulmn],
-                isSelected: _isSelected
-            }
-        )
-    });
-    return result;
 }
 
 export { StoreLookUp, IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };

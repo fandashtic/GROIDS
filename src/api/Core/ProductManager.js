@@ -3,11 +3,11 @@ import { GetAllManufactureData } from 'api/Data/Manufacture';
 import { GetAllBrandDatas } from 'api/Data/Brand';
 import { GetAllProductCategoriesData } from 'api/Data/ProductCategory';
 import { GetAllProductFamiliesData } from 'api/Data/ProductFamily';
-import { ReturnObject } from 'api/Shared/Util';
+import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
 import { IsHasValue } from 'api/Shared/Util'
 
-let IsProductValid = async (productName, password, callback) => {
-    return await GetById(productName, async (product) => {
+let IsProductValid = async (product_id, password, callback) => {
+    return await GetById(product_id, async (product) => {
         if (product.password === password) {
             return await callback({
                 'data': {
@@ -62,8 +62,8 @@ let SaveProduct = async (product, callback) => {
     });
 }
 
-let UpdateProduct = async (key, product, callback) => { 
-    return await Update(key, product, async (product) => {
+let UpdateProduct = async (product_id, product, callback) => { 
+    return await Update(product_id, product, async (product) => {
         if (product) {
             return await callback({
                 'data':product,
@@ -78,9 +78,9 @@ let UpdateProduct = async (key, product, callback) => {
     });
 }
 
-let DeleteProduct = async (key, callback) =>
+let DeleteProduct = async (product_id, callback) =>
 {
-    return await Delete(key, async (product) => {
+    return await Delete(product_id, async (product) => {
         if (product) {
             return await callback({
                 'data':product,
@@ -129,65 +129,49 @@ let GetAllProducts = async (filter, callback) => {
 
 const GetProductHierarchyData = async (product, callback) => {
     let active_filter = { 'status': true };
-    let _product_Lookup = {};
+    let _lookup = {};
 
     if (IsHasValue(product)) {
-        _product_Lookup.product_id = product.product_id;
-        _product_Lookup.product_name = product.product_name;
-        _product_Lookup.manufacture_id = product.manufacture_id;
-        _product_Lookup.brand_id = product.brand_id;
-        _product_Lookup.product_category_id = product.product_category_id;
-        _product_Lookup.product_family_id = product.product_family_id;
-        _product_Lookup.company_id = product.company_id;
-        _product_Lookup.store_id = product.store_id;
-        _product_Lookup.description = product.description;
-        _product_Lookup.profile_image_url = product.profile_image_url;
-        _product_Lookup.status = product.status;
+        _lookup.product_id = product.product_id;
+        _lookup.product_name = product.product_name;
+        _lookup.manufacture_id = product.manufacture_id;
+        _lookup.brand_id = product.brand_id;
+        _lookup.product_category_id = product.product_category_id;
+        _lookup.product_family_id = product.product_family_id;
+        _lookup.company_id = product.company_id;
+        _lookup.company_name = product.company_name;
+        _lookup.store_id = product.store_id;
+        _lookup.store_name = product.store_name;
+        _lookup.description = product.description;
+        _lookup.profile_image_url = product.profile_image_url;
+        _lookup.status = product.status;
     }
 
     GetAllManufactureData(active_filter, async (manufactures) => {
-        let _m = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _product_Lookup.manufacture_id);
-        _product_Lookup.manufactures = _m.list;
-        _product_Lookup.manufacture_name = _m.dispalyName;
+        let _m = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _lookup.manufacture_id);
+        _lookup.manufactures = _m.list;
+        _lookup.manufacture_name = _m.label;
 
         await GetAllBrandDatas(active_filter, async (brands) => {
-            let _b = GetLookUpData(brands, 'brand_id', 'brand_name', _product_Lookup.brand_id);
-            _product_Lookup.brands = _b.list;
-            _product_Lookup.brand_name = _b.dispalyName;
+            let _b = GetLookUpData(brands, 'brand_id', 'brand_name', _lookup.brand_id);
+            _lookup.brands = _b.list;
+            _lookup.brand_name = _b.label;
 
             await GetAllProductCategoriesData(active_filter, async (productCategories) => {
-                let _bc = GetLookUpData(productCategories, 'product_category_id', 'product_category_name', _product_Lookup.product_category_id);
-                _product_Lookup.productCategories = _bc.list;
-                _product_Lookup.product_category_name = _bc.dispalyName;
+                let _bc = GetLookUpData(productCategories, 'product_category_id', 'product_category_name', _lookup.product_category_id);
+                _lookup.productCategories = _bc.list;
+                _lookup.product_category_name = _bc.label;
 
                 await GetAllProductFamiliesData(active_filter, async (productFamilies) => {
-                    let _bf = GetLookUpData(productFamilies, 'product_family_id', 'product_family_name', _product_Lookup.product_family_id);
-                    _product_Lookup.product_families = _bf.list;
-                    _product_Lookup.product_family_name = _bf.dispalyName;
+                    let _bf = GetLookUpData(productFamilies, 'product_family_id', 'product_family_name', _lookup.product_family_id);
+                    _lookup.product_families = _bf.list;
+                    _lookup.product_family_name = _bf.label;
 
-                    return await ReturnObject(callback, null, _product_Lookup, 'GetProductHierarchyData');
+                    return await ReturnObject(callback, null, _lookup, 'GetProductHierarchyData');
                 });
             });
         });
     });
-}
-
-let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
-    let result = {list: [], label: ''};
-    let _isSelected = false;
-    list.forEach(l => {
-        _isSelected = ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false);
-        if(_isSelected === true) result.label = l[displayColumn];
-
-        result.list.push(
-            {
-                label: l[displayColumn],
-                value: l[idCoulmn],
-                isSelected: _isSelected
-            }
-        )
-    });
-    return result;
 }
 
 export { IsProductValid, SaveProduct, UpdateProduct, DeleteProduct, GetProduct, GetAllProducts, ProductLookUp };

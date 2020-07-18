@@ -1,19 +1,23 @@
-import { GetAllStates, AddState, UpdateState, DeleteState } from 'api/Core/StateManager';
+import { GetAllStates, AddState, UpdateState, DeleteState, StateLookUp } from 'api/Core/StateManager';
 
 let AddStateAPI = async (state, callback) => {
     return await AddState(state, callback);
 };
 
-let UpdateStateAPI = async (stateId, state, callback) => {
-    return await UpdateState(stateId, state, callback);
+let UpdateStateAPI = async (state_id, state, callback) => {
+    return await UpdateState(state_id, state, callback);
 };
 
-let DeleteStateAPI = async (stateId, callback) => {
-    return await DeleteState(stateId, callback);
+let DeleteStateAPI = async (state_id, callback) => {
+    return await DeleteState(state_id, callback);
 };
 
 let GetStatesAPI = async (filter, callback) => {
     return await GetAllStates( filter, callback);
 };
 
-export { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStatesAPI };
+let StateLookUpAPI = async (state_id, callback) => {
+    return await StateLookUp( state_id, callback);
+};
+
+export { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStatesAPI, StateLookUpAPI };

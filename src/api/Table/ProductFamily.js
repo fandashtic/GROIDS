@@ -1,4 +1,4 @@
-exports.ProductFamily = {
+let ProductFamily = {
     product_family_id: String,
     product_family_name: String,
     manufacture_id: String,
@@ -13,3 +13,5 @@ exports.ProductFamily = {
     modified_on: Date,
     modified_by: String
 }
+
+export { ProductFamily };
