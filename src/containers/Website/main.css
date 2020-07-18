@@ -1,0 +1,71 @@
+.slick-track {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .slick-track {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .ant-carousel .slick-slide img {
+        height: 100vh !important;
+    }
+
+    .headerCard {
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        z-index: 20;
+        width: 100%;
+    }
+
+    .site-card-border-less-wrapper {
+        margin-top: 40px !important;
+    }
+}
+
+.slick-slider {
+    margin-bottom: 0px;
+} 
+
+.ant-carousel .slick-slide img {
+    height: 250px;
+}
+
+.ant-carousel {
+    position: relative;
+    z-index: 10;
+}
+
+.headerCard {
+    position: absolute;
+    top: 110px;
+    left: 10px;
+    z-index: 20;
+    width: 100%;
+}
+
+.ant-card-head {
+    border: 0;
+}
+
+.ant-card-head-title {
+    text-align: center;
+    font-size: 32px;
+}
+
+.ant-card-body {
+    padding-top: 0px;
+}
+
+.site-card-border-less-wrapper {
+    margin-top: 180px;
+}
+
+.user-buttons {
+    position: absolute;
+    z-index: 30;
+    top: 20px;
+    right: 60px;
+}
