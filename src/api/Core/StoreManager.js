@@ -1,4 +1,9 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Store';
+import { GetAllCityData } from 'api/Data/City';
+import { GetAllBrandDatas } from 'api/Data/State';
+import { GetAllProductCategoriesData } from 'api/Data/Country';
+import { ReturnObject } from 'api/Shared/Util';
+import { IsHasValue } from 'api/Shared/Util'
 
 let IsStoreValid = async (storeName, password, callback) => {
     return await GetById(storeName, async (store) => {
@@ -102,5 +107,22 @@ let GetAllStores = async (filter, callback) => {
         }
     });
 };
+
+let StoreLookUp = async (product_id, callback) => {
+    if(IsHasValue(product_id)){
+        return await GetById(product_id, async (product) => {            
+            if (IsHasValue(product)) {
+                return await GetProductHierarchyData(product, callback);
+            } else {
+                return await callback({
+                    'data': null,
+                    'Status': 401
+                })
+            }
+        });
+    }else{
+        return await GetProductHierarchyData(null, callback);
+    }   
+}
 
 export { IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };

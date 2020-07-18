@@ -7,29 +7,29 @@ const _primaryKey = 'country_id';
 
 //#region
 
-let GetById = async (key, callback) => {
+let GetCountryDataById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);
 };
 
-let GetAll = async (filter, callback) => {
+let GetAllCountryData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (country, callback) => {    
+let SaveCountryData = async (country, callback) => {    
     country = AddDetaultValues(country, 'country_id', PreFix.Country, country.created_by);
     return await Add(_tableName, _primaryKey,country, callback);
 }
 
-let Update = async (key, country, callback) => { 
+let UpdateCountryData = async (key, country, callback) => { 
     country = UpdateDetaultValues(country, country.modified_by);
     return await Edit(_tableName, _primaryKey, key, country, callback);
 }
 
-let Delete = async (key, callback) =>
+let DeleteCountryData = async (key, callback) =>
 {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
-export { GetById, GetAll, Save, Update, Delete };
+export { GetCountryDataById, GetAllCountryData, SaveCountryData, UpdateCountryData, DeleteCountryData };
 
 //#endregion

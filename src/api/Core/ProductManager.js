@@ -96,8 +96,8 @@ let DeleteProduct = async (key, callback) =>
     });
 };
 
-let GetProduct = async (productName, callback) => {
-    return await GetById(productName, async (product) => {
+let GetProduct = async (product_id, callback) => {
+    return await GetById(product_id, async (product) => {
         if (product) {
             return await callback({
                 'data':product,
@@ -146,9 +146,6 @@ const GetProductHierarchyData = async (product, callback) => {
         _product_Lookup.status = product.status;
     }
 
-    //company: [{ dispalyName: '', value: '', isSelected: true }, { dispalyName: '', value: '', isSelected: false }],
-    //store: [{ dispalyName: '', value: '', isSelected: true }, { dispalyName: '', value: '', isSelected: false }],
-
     GetAllManufactureData(active_filter, async (manufactures) => {
         let _m = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _product_Lookup.manufacture_id);
         _product_Lookup.manufactures = _m.list;
@@ -185,7 +182,7 @@ let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
 
         result.list.push(
             {
-                dispalyName: l[displayColumn],
+                label: l[displayColumn],
                 value: l[idCoulmn],
                 isSelected: _isSelected
             }

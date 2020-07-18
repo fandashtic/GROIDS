@@ -3,32 +3,32 @@ import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'states';
-const _primaryKey = 'state_id';
+const _primaryKey = 'StateData';
 
 //#region
 
-let GetById = async (key, callback) => {
+let GetStateDataById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);
 };
 
-let GetAll = async (filter, callback) => {
+let GetAllStateData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (state, callback) => {
+let SaveStateData = async (state, callback) => {
     state = AddDetaultValues(state, 'area_id', PreFix.State, state.created_by);
     return await Add(_tableName, _primaryKey, state, callback);
 }
 
-let Update = async (key, state, callback) => {
+let UpdateStateData = async (key, state, callback) => {
     state = UpdateDetaultValues(state, state.modified_by);
     return await Edit(_tableName, _primaryKey, key, state, callback);
 }
 
-let Delete = async (key, callback) => {
+let DeleteStateData = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
-export { GetById, GetAll, Save, Update, Delete };
+export { GetStateDataById, GetAllStateData, SaveStateData, UpdateStateData, DeleteStateData };
 
 //#endregion

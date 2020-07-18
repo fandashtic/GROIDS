@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/State';
+import { GetStateDataById, GetAllStateData, SaveStateData, UpdateStateData, DeleteStateData } from 'api/Data/State';
 
 let IsStateValid = async (stateName, password, callback) => {
-    return await GetById(stateName, async (state) => {
+    return await GetStateDataById(stateName, async (state) => {
         if (state.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsStateValid = async (stateName, password, callback) => {
 };
 
 let AddState = async (state, callback) => {
-    return await Save(state, async (state) => {
+    return await SaveStateData(state, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -40,7 +40,7 @@ let AddState = async (state, callback) => {
 }
 
 let UpdateState = async (key, state, callback) => { 
-    return await Update(key, state, async (state) => {
+    return await UpdateStateData(key, state, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -57,7 +57,7 @@ let UpdateState = async (key, state, callback) => {
 
 let DeleteState = async (key, callback) =>
 {
-    return await Delete(key, async (state) => {
+    return await DeleteStateData(key, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -73,7 +73,7 @@ let DeleteState = async (key, callback) =>
 };
 
 let GetState = async (stateName, callback) => {
-    return await GetById(stateName, async (state) => {
+    return await GetStateDataById(stateName, async (state) => {
         if (state) {
             return await callback({
                 'data':state,
@@ -89,7 +89,7 @@ let GetState = async (stateName, callback) => {
 }
 
 let GetAllStates = async (filter, callback) => {
-    return await GetAll(filter, async (states) => {
+    return await GetAllStateData(filter, async (states) => {
         if (states) {
             return await callback({
                 'data':states,

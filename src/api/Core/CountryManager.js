@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Country';
+import { GetCountryDataById, GetAllCountryData, SaveCountryData, UpdateCountryData, DeleteCountryData } from 'api/Data/Country';
 
 let IsCountryValid = async (countryName, password, callback) => {
-    return await GetById(countryName, async (country) => {
+    return await GetCountryDataById(countryName, async (country) => {
         if (country.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsCountryValid = async (countryName, password, callback) => {
 };
 
 let AddCountry = async (country, callback) => {
-    return await Save(country, async (country) => {
+    return await SaveCountryData(country, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -40,7 +40,7 @@ let AddCountry = async (country, callback) => {
 }
 
 let UpdateCountry = async (key, country, callback) => { 
-    return await Update(key, country, async (country) => {
+    return await UpdateCountryData(key, country, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -57,7 +57,7 @@ let UpdateCountry = async (key, country, callback) => {
 
 let DeleteCountry = async (key, callback) =>
 {
-    return await Delete(key, async (country) => {
+    return await DeleteCountryData(key, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -73,7 +73,7 @@ let DeleteCountry = async (key, callback) =>
 };
 
 let GetCountry = async (countryName, callback) => {
-    return await GetById(countryName, async (country) => {
+    return await GetCountryDataById(countryName, async (country) => {
         if (country) {
             return await callback({
                 'data':country,
@@ -89,7 +89,7 @@ let GetCountry = async (countryName, callback) => {
 }
 
 let GetAllCountrys = async (filter, callback) => {
-    return await GetAll(filter, async (countrys) => {
+    return await GetAllCountryData(filter, async (countrys) => {
         if (countrys) {
             return await callback({
                 'data':countrys,
