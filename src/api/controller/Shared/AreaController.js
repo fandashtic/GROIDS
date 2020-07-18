@@ -1,4 +1,4 @@
-var { GetAllAreas, AddArea, UpdateArea, DeleteArea } = require('./../Core/AreaManager');
+var { GetAllAreas, AddArea, UpdateArea, DeleteArea } = require('../Core/AreaManager');
 
 exports.AddArea = async (area, callback) => {
     return await AddArea(area, callback);

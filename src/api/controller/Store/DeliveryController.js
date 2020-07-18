@@ -1,5 +1,5 @@
 
-import { GetAllDeliverys, AddDelivery, UpdateDelivery, DeleteDelivery } from 'api/Core/DeliveryManager';
+import { GetAllDeliverys, AddDelivery, UpdateDelivery, DeleteDelivery } from 'api/Controller/Store/node_modules/api/Core/DeliveryManager';
 
 let AddDeliveryAPI = async (delivery, callback) => {
     return await AddDelivery(delivery, callback);

@@ -1,4 +1,4 @@
-import { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
+import { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Controller/Shared/node_modules/api/Core/ProductFamilyManager';
 
 let AddProductFamilyAPI = async (productFamily, callback) => {
     return await AddProductFamily(productFamily, callback);

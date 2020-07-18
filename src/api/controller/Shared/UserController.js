@@ -1,4 +1,4 @@
-import { GetAllUsers, IsUserValid, AddUser, UpdateUser, DeleteUser } from 'api/Core/UserManager'
+import { GetAllUsers, IsUserValid, AddUser, UpdateUser, DeleteUser } from 'api/Controller/Shared/node_modules/api/Core/UserManager'
 
 const IsUserValidAPI = async (userName, password, callback) => {
     return await IsUserValid(userName, password, callback);

@@ -1,5 +1,5 @@
 
-import { GetAllProductCategories, AddProductCategory, UpdateProductCategory, DeleteProductCategory } from 'api/Core/ProductCategoryManager';
+import { GetAllProductCategories, AddProductCategory, UpdateProductCategory, DeleteProductCategory } from 'api/Controller/Shared/node_modules/api/Core/ProductCategoryManager';
 
 let AddProductCategoryAPI = async (productCategory, callback) => {
     return await AddProductCategory(productCategory, callback);

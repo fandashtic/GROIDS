@@ -1,5 +1,5 @@
 
-import { GetAllSchemes, AddScheme, UpdateScheme, DeleteScheme } from 'api/Core/SchemeManager';
+import { GetAllSchemes, AddScheme, UpdateScheme, DeleteScheme } from 'api/Controller/Store/node_modules/api/Core/SchemeManager';
 
 let AddSchemeAPI = async (scheme, callback) => {
     return await AddScheme(scheme, callback);

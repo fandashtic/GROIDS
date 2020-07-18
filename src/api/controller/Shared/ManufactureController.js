@@ -1,5 +1,5 @@
 
-import { GetAllManufactures, AddManufacture, UpdateManufacture, DeleteManufacture } from 'api/Core/ManufactureManager';
+import { GetAllManufactures, AddManufacture, UpdateManufacture, DeleteManufacture } from 'api/Controller/Shared/node_modules/api/Core/ManufactureManager';
 
 let AddManufactureAPI = async (manufacture, callback) => {
     return await AddManufacture(manufacture, callback);

@@ -1,4 +1,4 @@
-import { GetAllStores, AddStore, UpdateStore, DeleteStore } from 'api/Core/StoreManager';
+import { GetAllStores, AddStore, UpdateStore, DeleteStore } from 'api/Controller/Store/node_modules/api/Core/StoreManager';
 
 let AddStoreAPI = async (store, callback) => {
     return await AddStore(store, callback);

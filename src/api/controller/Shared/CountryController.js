@@ -1,5 +1,5 @@
 
-import { GetAllCountrys, AddCountry, UpdateCountry, DeleteCountry } from 'api/Core/CountryManager';
+import { GetAllCountrys, AddCountry, UpdateCountry, DeleteCountry } from 'api/Controller/Shared/node_modules/api/Core/CountryManager';
 
 let AddCountryAPI = async (country, callback) => {
     return await AddCountry(country, callback);
