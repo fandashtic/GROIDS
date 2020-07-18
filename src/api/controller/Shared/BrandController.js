@@ -1,5 +1,5 @@
 
-import { GetAllBrands, AddBrand, UpdateBrand, DeleteBrand } from 'api/Controller/Shared/node_modules/api/Core/BrandManager';
+import { GetAllBrands, AddBrand, UpdateBrand, DeleteBrand } from 'api/Core/BrandManager';
 
 let AddBrandAPI = async (brand, callback) => {
     return await AddBrand(brand, callback);

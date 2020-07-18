@@ -1,4 +1,4 @@
-import { GetAllStates, AddState, UpdateState, DeleteState } from 'api/Controller/Shared/node_modules/api/Core/StateManager';
+import { GetAllStates, AddState, UpdateState, DeleteState } from 'api/Core/StateManager';
 
 let AddStateAPI = async (state, callback) => {
     return await AddState(state, callback);

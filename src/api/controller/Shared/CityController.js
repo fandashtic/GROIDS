@@ -1,5 +1,5 @@
 
-import { GetAllCities, AddCity, UpdateCity, DeleteCity } from 'api/Controller/Shared/node_modules/api/Core/CityManager';
+import { GetAllCities, AddCity, UpdateCity, DeleteCity } from 'api/Core/CityManager';
 
 let AddCityAPI = async (city, callback) => {
     return await AddCity(city, callback);
