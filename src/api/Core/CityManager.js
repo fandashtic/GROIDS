@@ -1,7 +1,7 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/City';
+import { GetCityDataById, GetAllCityData, SaveCityData, UpdateCityData, DeleteCityData } from 'api/Data/City';
 
 let IsCityValid = async (cityName, password, callback) => {
-    return await GetById(cityName, async (city) => {
+    return await GetCityDataById(cityName, async (city) => {
         if (city.password === password) {
             return await callback({
                 'data': {
@@ -24,7 +24,7 @@ let IsCityValid = async (cityName, password, callback) => {
 };
 
 let AddCity = async (city, callback) => {
-    return await Save(city, async (city) => {
+    return await SaveCityData(city, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -40,7 +40,7 @@ let AddCity = async (city, callback) => {
 }
 
 let UpdateCity = async (key, city, callback) => { 
-    return await Update(key, city, async (city) => {
+    return await UpdateCityData(key, city, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -57,7 +57,7 @@ let UpdateCity = async (key, city, callback) => {
 
 let DeleteCity = async (key, callback) =>
 {
-    return await Delete(key, async (city) => {
+    return await DeleteCityData(key, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -73,7 +73,7 @@ let DeleteCity = async (key, callback) =>
 };
 
 let GetCity = async (cityName, callback) => {
-    return await GetById(cityName, async (city) => {
+    return await GetCityDataById(cityName, async (city) => {
         if (city) {
             return await callback({
                 'data':city,
@@ -89,7 +89,7 @@ let GetCity = async (cityName, callback) => {
 }
 
 let GetAllCitys = async (filter, callback) => {
-    return await GetAll(filter, async (citys) => {
+    return await GetAllCityData(filter, async (citys) => {
         if (citys) {
             return await callback({
                 'data':citys,
