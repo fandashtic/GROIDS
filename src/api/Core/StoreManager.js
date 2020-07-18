@@ -1,7 +1,7 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Store';
 import { GetAllCityData } from 'api/Data/City';
-import { GetAllBrandDatas } from 'api/Data/State';
-import { GetAllProductCategoriesData } from 'api/Data/Country';
+import { GetAllStateData } from 'api/Data/State';
+import { GetAllCountryData } from 'api/Data/Country';
 import { ReturnObject } from 'api/Shared/Util';
 import { IsHasValue } from 'api/Shared/Util'
 
@@ -108,11 +108,11 @@ let GetAllStores = async (filter, callback) => {
     });
 };
 
-let StoreLookUp = async (product_id, callback) => {
-    if(IsHasValue(product_id)){
-        return await GetById(product_id, async (product) => {            
-            if (IsHasValue(product)) {
-                return await GetProductHierarchyData(product, callback);
+let StoreLookUp = async (store_id, callback) => {
+    if(IsHasValue(store_id)){
+        return await GetById(store_id, async (store) => {            
+            if (IsHasValue(store)) {
+                return await GetStoreHierarchyData(store, callback);
             } else {
                 return await callback({
                     'data': null,
@@ -121,8 +121,71 @@ let StoreLookUp = async (product_id, callback) => {
             }
         });
     }else{
-        return await GetProductHierarchyData(null, callback);
+        return await GetStoreHierarchyData(null, callback);
     }   
+}
+
+// const GetStoreHierarchyData = async (store, callback) => {
+//     let active_filter = { 'status': true };
+//     let _store_Lookup = {};
+
+//     if (IsHasValue(store)) {
+//         _store_Lookup.store_id = store.store_id;
+//         _store_Lookup.store_name = store.store_name;
+//         _store_Lookup.country_id = store.manufacture_id;
+//         _store_Lookup.state_id = store.brand_id;
+//         _store_Lookup.city_id = store.store_category_id;
+//         _store_Lookup.area_id = store.store_family_id;
+//         _store_Lookup.company_id = store.company_id;
+//         _store_Lookup.store_id = store.store_id;
+//         _store_Lookup.description = store.description;
+//         _store_Lookup.profile_image_url = store.profile_image_url;
+//         _store_Lookup.status = store.status;
+//     }
+
+//     GetAllCountryData(active_filter, async (countries) => {
+//         let _m = GetLookUpData(countries, 'country_id', 'country_name', _store_Lookup.country_id);
+//         _store_Lookup.manufactures = _m.list;
+//         _store_Lookup.manufacture_name = _m.dispalyName;
+
+//         await GetAllBrandDatas(active_filter, async (brands) => {
+//             let _b = GetLookUpData(brands, 'state_id', 'brand_name', _store_Lookup.state_id);
+//             _store_Lookup.brands = _b.list;
+//             _store_Lookup.brand_name = _b.dispalyName;
+
+//             await GetAllStoreCategoriesData(active_filter, async (storeCategories) => {
+//                 let _bc = GetLookUpData(storeCategories, 'city_id', 'store_category_name', _store_Lookup.city_id);
+//                 _store_Lookup.storeCategories = _bc.list;
+//                 _store_Lookup.store_category_name = _bc.dispalyName;
+
+//                 await GetAllStoreFamiliesData(active_filter, async (storeFamilies) => {
+//                     let _bf = GetLookUpData(storeFamilies, 'store_family_id', 'store_family_name', _store_Lookup.store_family_id);
+//                     _store_Lookup.store_families = _bf.list;
+//                     _store_Lookup.store_family_name = _bf.dispalyName;
+
+//                     return await ReturnObject(callback, null, _store_Lookup, 'GetStoreHierarchyData');
+//                 });
+//             });
+//         });
+//     });
+// }
+
+let GetLookUpData = (list, idCoulmn, displayColumn, selectedValue) => {
+    let result = {list: [], displayName: ''};
+    let _isSelected = false;
+    list.forEach(l => {
+        _isSelected = ((IsHasValue(selectedValue) && l[idCoulmn]) === selectedValue ? true : false);
+        if(_isSelected === true) result.displayName = l[displayColumn];
+
+        result.list.push(
+            {
+                label: l[displayColumn],
+                value: l[idCoulmn],
+                isSelected: _isSelected
+            }
+        )
+    });
+    return result;
 }
 
 export { IsStoreValid, AddStore, UpdateStore, DeleteStore, GetStore, GetAllStores };
