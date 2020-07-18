@@ -1,17 +1,36 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Row, Col, Carousel, Card, Form, Input, Button } from 'antd';
-import CustomScrollbars from 'util/CustomScrollbars'; 
+import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 
 class Index extends Component {
     state = {
-        view: true,
+        view: "pincode",
     }
-    viewChanged = () => {
-        this.setState({ view: !this.state.view })
+    viewPincode = () => {
+        this.setState({ view: "pincode" })
     }
+    viewSignIn = () => {
+        this.setState({ view: "signin" })
+    }
+    viewSignUp = () => {
+        this.setState({ view: "signup" })
+    }
+
+    handleKeyPress = (event) =>{
+        let regex = new RegExp("^[0-9+]*$"); 
+        let key = String.fromCharCode(event.charCode ? event.which : event.charCode); 
+        if (!regex.test(key)) { 
+         event.preventDefault();
+         this.setState({
+           data: { ...this.state.data, [event.target.name]: event.target.value }
+         });
+          return false; 
+        } 
+     }
+
     render () {
-        const { view } = this.state
+        const { view } = this.state;
         return (
             <CustomScrollbars>
             
@@ -36,24 +55,89 @@ class Index extends Component {
                 </div>
             </Carousel>
             <Row className="headerCard" justify='center'>
-                <Col lg={9} md={14} xs={18}>
+                <Col lg={9} md={14} xs={22}>
                     <div>
                         <Card title="GROIDS" bordered={false}>
+                            {view === "pincode" ? (<>
                             <p style={{textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
-                            <Form>
-                                <Input style={{height: "48px", fontSize: "16px"}} placeholder="Enter pin code" />
-                                <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "20px"}}>Continue</Button>
+                            <Form id="pincode">
+                                <Form.Item>
+                                    <Input style={{height: "48px", fontSize: "16px"}} placeholder="Enter Pin Code" onKeyPress={this.handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
+                                </Form.Item>
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>Continue</Button>
+                                </Form.Item>
                             </Form>
-                            <p style={{textAlign: "center", marginBottom: "4px"}}>Already have an account? <span style={{textDecoration: "none", color: "#038fde", cursor: "pointer"}}>Sign in</span></p>
-                            <p style={{textAlign: "center", marginBottom: "0px"}}>or <span style={{textDecoration: "none", color: "#038fde", cursor: "pointer"}}>Create account </span></p>
+                            <p style={{textAlign: "center", marginBottom: "4px"}}>Already have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignIn}>Sign in</span></p>
+                            <p style={{textAlign: "center", marginBottom: "0px"}}>or <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignUp}>Create account </span></p>
+                            </>): null }
+
+                            {view === "signin" ? (<>
+                            <Form id="signin">
+                            <p style={{textAlign: "center", fontSize: "18px"}}>Sign in</p>
+                            <Form.Item
+                                rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
+                            >
+                                <Input placeholder="Email" style={{height: "48px", fontSize: "16px"}} />
+                            </Form.Item>
+                            <Form.Item
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                                name="password"
+                            >
+                                <Input type="password" placeholder="Password" style={{height: "48px", fontSize: "16px"}} />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
+                                Sign in
+                                </Button>
+                            </Form.Item>
+                            </Form>
+                            <p style={{textAlign: "center", marginBottom: "4px"}}>Don't have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignUp}>Create new</span></p>
+                            <p style={{textAlign: "center", marginBottom: "0px"}}><span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewPincode}>I'm a Guest User</span></p>
+                            </>): null }
+
+                            {view === "signup" ? (<>
+                            <Form id="signup">
+                            <p style={{textAlign: "center", fontSize: "18px"}}>Sign up</p>
+                            <Form.Item
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            name="username"
+                            >
+                                <Input placeholder="Username" style={{height: "48px", fontSize: "16px"}}/>
+                            </Form.Item>
+                            <Form.Item
+                                rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
+                            >
+                                <Input placeholder="Email" style={{height: "48px", fontSize: "16px"}} />
+                            </Form.Item>
+                            <Form.Item
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                                name="password"
+                            >
+                                <Input type="password" placeholder="Password" style={{height: "48px", fontSize: "16px"}} />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
+                                Sign up
+                                </Button>                            
+                            </Form.Item>
+                            <p style={{textAlign: "center", marginBottom: "4px"}}>Already have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignIn}>Sign in</span></p>
+                            <p style={{textAlign: "center", marginBottom: "0px"}}><span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewPincode}>I'm a Guest User</span></p>
+                            </Form>
+                            </>): null }
                         </Card>
+                        <img className="fd-card-logo" src="/gallery/Fandashtic-logo.svg" /> 
                     </div> 
                 </Col>
             </Row>
 
-            <Row className="user-buttons">
+            <Row className="signin-button">
                 <Col>
-                    <Button type="primary">Sign in</Button>
+                    <Button type="primary">
+                        <span onClick={this.viewSignIn}>{view == "pincode" ? ( <>Sign in</>) : null }</span>
+                        <span onClick={this.viewSignUp}>{view == "signin" ? ( <>Sign up</>) : null }</span>
+                        <span onClick={this.viewPincode}>{view == "signup" ? ( <>Guest User</>) : null }</span>
+                    </Button>
                 </Col>
             </Row>
             

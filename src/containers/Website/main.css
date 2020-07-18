@@ -25,6 +25,12 @@
     }
 }
 
+@media screen and (max-width: 767px) {
+    .signin-button {
+        display: none;
+    }
+}
+
 .slick-slider {
     margin-bottom: 0px;
 } 
@@ -53,6 +59,7 @@
 .ant-card-head-title {
     text-align: center;
     font-size: 32px;
+    padding-top: 40px;
 }
 
 .ant-card-body {
@@ -63,9 +70,44 @@
     margin-top: 180px;
 }
 
-.user-buttons {
+.signin-button {
     position: absolute;
     z-index: 30;
     top: 20px;
     right: 60px;
 }
+
+.ant-form-horizontal .ant-row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.icon-sent {
+    position: absolute;
+    right: 18px;
+    top: 8px;
+    font-size: 30px;
+    color: #34b880;
+}
+
+.fd-card-logo {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    width: 70px;
+    top: -30px;
+    left: 43%;
+}
+
+.ant-btn-primary {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+}
+
+/* .ant-btn-primary:hover {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+} */
