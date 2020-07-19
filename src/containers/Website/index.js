@@ -101,10 +101,16 @@ class Index extends Component {
                             <Form id="signup">
                             <p style={{textAlign: "center", fontSize: "18px"}}>Sign up</p>
                             <Form.Item
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                            name="username"
+                            rules={[{ required: true, message: 'Please input your first name!' }]}
+                            name="firstname"
                             >
-                                <Input placeholder="Username" style={{height: "48px", fontSize: "16px"}}/>
+                                <Input placeholder="First Name" style={{height: "48px", fontSize: "16px"}}/>
+                            </Form.Item>
+                            <Form.Item
+                            rules={[{ required: true, message: 'Please input your last name!' }]}
+                            name="lastname"
+                            >
+                                <Input placeholder="Last Name" style={{height: "48px", fontSize: "16px"}}/>
                             </Form.Item>
                             <Form.Item
                                 rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
@@ -119,7 +125,7 @@ class Index extends Component {
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
-                                Sign up
+                                Register
                                 </Button>                            
                             </Form.Item>
                             <p style={{textAlign: "center", marginBottom: "4px"}}>Already have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignIn}>Sign in</span></p>
@@ -136,7 +142,7 @@ class Index extends Component {
                 <Col>
                     <Button type="primary">
                         <span onClick={this.viewSignIn}>{view == "pincode" ? ( <>Sign in</>) : null }</span>
-                        <span onClick={this.viewSignUp}>{view == "signin" ? ( <>Sign up</>) : null }</span>
+                        <span onClick={this.viewSignUp}>{view == "signin" ? ( <>Register</>) : null }</span>
                         <span onClick={this.viewPincode}>{view == "signup" ? ( <>Guest User</>) : null }</span>
                     </Button>
                 </Col>
