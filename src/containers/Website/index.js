@@ -4,17 +4,22 @@ import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 
 class Index extends Component {
+    
     state = {
         view: "pincode",
     }
     viewPincode = () => {
         this.setState({ view: "pincode" })
+        this.props.history.push('/dashboard/company');
     }
     viewSignIn = () => {
         this.setState({ view: "signin" })
+        this.props.history.push('/dashboard/company');
+
     }
     viewSignUp = () => {
         this.setState({ view: "signup" })
+        this.props.history.push('/dashboard/company');
     }
 
     handleKeyPress = (event) =>{
