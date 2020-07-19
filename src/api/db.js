@@ -1,11 +1,12 @@
+import { DeCode } from 'api/Shared/Util';
 var AWS = require('aws-sdk');
 var config = require('appConfig.json');
 
 let awsConfig = {
     "region": config.s3.region,
     "endpoint": config.db.endpoint,
-    "accessKeyId": config.db.ACCESS_KEY_ID,
-    "secretAccessKey": config.db.SECRET_ACCESS_KEY
+    "accessKeyId": DeCode(config.db.key),
+    "secretAccessKey": DeCode(config.db.secretkey)
 };
 
 //amplify push

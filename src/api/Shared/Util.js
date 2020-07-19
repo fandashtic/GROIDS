@@ -33,10 +33,16 @@ let GetNewKey = (type) => {
     let buff = new Buffer(_key);
     let base64data = buff.toString('base64');
     if (IsHasValue(type)) {
-        base64data = type + '#' + base64data;
+        base64data = type + '-' + base64data;
     }
     return base64data;
 };
+
+let GetKeyNameFromObject = (obj, value) => {
+    var keys = Object.keys(obj);
+    console.log(keys[value]);
+    return keys[value];
+}
 
 let ReturnObject = (callback, err, data, methodName) => {
     if (err) {
@@ -119,6 +125,13 @@ let GetDate = () => {
     + AppendLeadingZeroes(current_datetime.getSeconds())
     return formatted_date;
 }
+let EnCode = (data) => {
+    return Base64.encode(data);
+}
+
+let DeCode = (data) => {
+    return Base64.decode(data);
+}
 
 let CreatePassword = (password, password_salt) =>{
     return Base64.encode(password + password_salt);
@@ -140,4 +153,4 @@ let CreatePasswordSalt = () =>{
 
 export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, 
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, 
-    ComparePassword };
+    ComparePassword, GetKeyNameFromObject, EnCode, DeCode };
