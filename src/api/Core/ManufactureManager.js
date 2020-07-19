@@ -83,8 +83,8 @@ let GetAllManufactures = async (filter, callback) => {
 };
 
 let ManufactureLookUp = async (manufacture_id, callback) => {
-    if(IsHasValue(manufacture_id)){
-        return await GetManufactureDataById(manufacture_id, async (manufacture) => {            
+    if (IsHasValue(manufacture_id)) {
+        return await GetManufactureDataById(manufacture_id, async (manufacture) => {
             if (IsHasValue(manufacture)) {
                 return await GetManufactureHierarchyData(manufacture, callback);
             } else {
@@ -94,9 +94,9 @@ let ManufactureLookUp = async (manufacture_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetManufactureHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetManufactureHierarchyData = async (manufacture, callback) => {

@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -56,7 +57,7 @@ const formItemLayout = {
 
 
 const product_id =null
-const ProductFrom = ({editableDataToForm}) => {
+const ProductFrom = ({editableDataToForm,addData}) => {
     const [selectValues,setSelectValues] = useState({})
     const [form] = Form.useForm();
 
@@ -66,13 +67,18 @@ const ProductFrom = ({editableDataToForm}) => {
             setSelectValues(res)})
     },[ProductLookUpAPI])
 
-    const onFinish = values => {
-        console.log('Received values of form: ', values);
-    };
-
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     }
+    const onFinish = values => {
+        values['company_id'] = "212435446"
+        values['store_id'] = "1"
+        values['profile_image_url'] = "test"
+        values['status'] = true
+        values['created_on'] = new Date()
+        values['created_by'] = 1
+        addData(values)
+    };
     return (
         <Card className="gx-card" title="Product Form">
             <Form

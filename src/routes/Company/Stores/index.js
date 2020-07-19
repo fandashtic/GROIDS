@@ -7,9 +7,8 @@ import {GetStoresAPI,DeleteStoreAPI} from 'api/Controller/Shared/StoreController
 
 let filter = {status:true}
 
-function Index() {
+const  Index = () => {
     const [view, setView] = useState(true);
-  //  const [editData, setEditData]= useState({})
     const [stores, setStores] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
@@ -24,12 +23,6 @@ function Index() {
     const viewChanged = () => {
         setView(!view)
     }
-
-    // const editableData = (data) => {
-    //     setView(false)
-    //     setEditData(data)
-    // }
-
     useEffect(() => {
         apiInit()
     }, [])
@@ -40,8 +33,8 @@ function Index() {
         let dataList =  stores.filter((el) => el.store_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
         setsearchItem(dataList)
     }
-    
-    const deletedData = (id) =>{
+
+    const deletedData = (id) => {
         DeleteStoreAPI(id,(res,err) => {
            if(res.status ===200){
                message.success("Suceessfully Record Deleted");
@@ -51,32 +44,32 @@ function Index() {
            }
        } )
    }
+   return (
+    <Card title="Stores">
+        <div className="components-table-demo-control-bar">
+            <Row justify="space-between">
+                <Col>
+                    <></>
+                    {view && <AppModuleHeader placeholder="Search Brand"  value={searchValue} onChange={handleChange} />}
+                </Col >
+                <Col>
+                    <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
+                        {view ? (
+                            <><i className="icon icon-add gx-mr-2" />
+                                <span>Add New Store</span></>) : (
+                                <>
+                                    <i className="icon icon-eye gx-mr-2" />
+                                    <span>View Store</span></>)
+                        }
+                    </Button>
+                </Col>
+            </Row>
+        </div>
+        <Divider></Divider><br></br>
+        {view ? <ListView stores={searchItem} deletedData={deletedData}/> : <FormView />}
+    </Card>
+)
 
-    return (
-        <Card title="Stores">
-            <div className="components-table-demo-control-bar">
-                <Row justify="space-between">
-                    <Col>
-                        <></>
-                        {view && <AppModuleHeader placeholder="Search Brand"  value={searchValue} onChange={handleChange} />}
-                    </Col >
-                    <Col>
-                        <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
-                            {view ? (
-                                <><i className="icon icon-add gx-mr-2" />
-                                    <span>Add New Store</span></>) : (
-                                    <>
-                                        <i className="icon icon-eye gx-mr-2" />
-                                        <span>View Store</span></>)
-                            }
-                        </Button>
-                    </Col>
-                </Row>
-            </div>
-            <Divider></Divider><br></br>
-            {view ? <ListView stores={searchItem} deletedData={deletedData}/> : <FormView />}
-        </Card>
-    )
+    
 }
-
 export default Index

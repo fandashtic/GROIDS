@@ -4,7 +4,8 @@ import { Table, Tooltip, Space, Row, Col } from "antd";
 import { Pagination } from 'appConfig.json'
 import SweetAlert from "react-bootstrap-sweetalert";
 import IntlMessages from "util/IntlMessages";
-const View = ({ editableData, product,deletedData }) => {
+
+const View = ({ editableData,product,deletedData }) => {
 
     const [tableView, setTableView] = useState(true);
     const [dataView, setDataView] = useState({});

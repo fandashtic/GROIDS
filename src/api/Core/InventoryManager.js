@@ -27,7 +27,7 @@ let AddInventory = async (inventory, callback) => {
     return await Save(inventory, async (inventory) => {
         if (inventory) {
             return await callback({
-                'data':inventory,
+                'data': inventory,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddInventory = async (inventory, callback) => {
     });
 }
 
-let UpdateInventory = async (key, inventory, callback) => { 
+let UpdateInventory = async (key, inventory, callback) => {
     return await Update(key, inventory, async (inventory) => {
         if (inventory) {
             return await callback({
-                'data':inventory,
+                'data': inventory,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateInventory = async (key, inventory, callback) => {
     });
 }
 
-let DeleteInventory = async (key, callback) =>
-{
+let DeleteInventory = async (key, callback) => {
     return await Delete(key, async (inventory) => {
         if (inventory) {
             return await callback({
-                'data':inventory,
+                'data': inventory,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetInventory = async (inventoryName, callback) => {
     return await GetById(inventoryName, async (inventory) => {
         if (inventory) {
             return await callback({
-                'data':inventory,
+                'data': inventory,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllInventorys = async (filter, callback) => {
     return await GetAll(filter, async (inventorys) => {
         if (inventorys) {
             return await callback({
-                'data':inventorys,
+                'data': inventorys,
                 'Status': 200
             })
         } else {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -43,13 +44,18 @@ const status = [
     },
 ];
 
-const ProductFrom = () => {
-
+const ProductFrom = ({addData}) => {
     const [form] = Form.useForm();
-    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
+        values['company_id'] = "212435446"
+        values['store_id'] = "1"
+        values['profile_image_url'] = "test"
+        values['status'] = true
+        values['created_on'] = new Date()
+        values['created_by'] = 1
+        addData(values)
     };
 
     const handleChange = (value) => {
@@ -68,8 +74,8 @@ const ProductFrom = () => {
                 scrollToFirstError
             >
                 <Form.Item
-                    name="Category Name"
-                    label="Category Name"
+                    name=" product_category_name:"
+                    label=" product_category_name:s"
                     rules={[
                         {
                             required: true,

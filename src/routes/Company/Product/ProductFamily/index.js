@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductFamiliesAPI ,DeleteProductFamilyAPI} from 'api/Controller/Shared/ProductFamilyController'
+import { GetProductFamiliesAPI ,DeleteProductFamilyAPI,AddProductFamilyAPI} from 'api/Controller/Shared/ProductFamilyController'
 
 let filter = { status: true }
 
@@ -28,6 +28,17 @@ function Index() {
         })
     }
 
+    const addData = data => {
+        AddProductFamilyAPI(data, (res, err) => {
+            if (res.status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
+    }
+
     useEffect(() => {
         apiInit()
     }, [])
@@ -49,12 +60,12 @@ function Index() {
        } )
    }
    
-    return (
-        <div className="gx-module-box-content">
-            <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
-                        <></>
+        return (
+            <div className="gx-module-box-content">
+                <div className="gx-module-box-topbar">
+                    <Row gutter={16} style={{width: "100%"}}>
+                        <Col md={18} sm={16}>
+                            <></>
                         {view && <AppModuleHeader placeholder="Search Family" value={searchValue} onChange={handleChange} />}
                     </Col >
                     <Col>
@@ -70,10 +81,10 @@ function Index() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView editableData={editableData} deletedData={deletedData} family={searchItem}/>) : <ListForm  editableDataToForm ={editData}/>}
+            {view ? (<ListView editableData={editableData} deletedData={deletedData} family={searchItem}/>) : <ListForm  addData ={addData} editableDataToForm ={editData}/>}
 
-        </div>
-    )
-}
+            </div>
+        )
+};
 
 export default Index

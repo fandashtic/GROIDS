@@ -11,29 +11,26 @@ import {
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import { UploadFile } from 'api/Shared/FileUpload';
 import { PreFix } from 'api/Shared/Constant/Enum';
-import { IsHasValue, GetNewKey, GetKeyNameFromObject, EnCode, DeCode } from 'api/Shared/Util';
+import { IsHasValue, GetNewKey, GetFileExtn, EnCode, DeCode } from 'api/Shared/Util';
 
 const UnitTest = () => {
 
   useEffect(() => {
-    console.log(EnCode('9LWy6ICixkHnNmNRNuiUbzwWnEr4i8eIhrLFMQ1+'));
-    console.log(DeCode('OUxXeTZJQ2l4a0huTm1OUk51aVViendXbkVyNGk4ZUlockxGTVExKw=='));
     RunUnitTest();
   }, []);
 
   const handleFileUploadChange = (files) => {
     if (IsHasValue(files) && files.fileList.length > 0 && IsHasValue(files.fileList[0])) {
-      console.log(files.fileList[0]);
       let file = files.fileList[0];
-      let fileName = GetNewKey(PreFix.Product) + '.jpg';
+      let fileName = GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name);
       file.name = fileName;
-
       UploadFile(file, PreFix.Product, (res) => {
-        debugger;
-
+        //console.log(res);
+        console.log(res.data.bucket);
+        console.log(res.data.key);
+        console.log(res.data.location);
       })
     }
-
   }
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -39,13 +40,18 @@ const status = [
     },
 ];
 
-const From = () => {
+const From = ({addData}) => {
 
     const [form] = Form.useForm();
-   // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     const onFinish = values => {
-        console.log('Received values of form: ', values);
+        values['company_id'] = "212435446"
+        values['store_id'] = "1"
+        values['profile_image_url'] = "test"
+        values['status'] = true
+        values['created_on'] = new Date()
+        values['created_by'] = 1
+        addData(values)
     };
 
     return (
@@ -60,7 +66,7 @@ const From = () => {
                 scrollToFirstError
             >
                 <Form.Item
-                    name="Brand Name"
+                    name="brand_name"
                     label="Brand Name"
                     rules={[
                         {
@@ -72,7 +78,7 @@ const From = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Manufacture"
+                    name="manufacture_name"
                     label="Manufacture"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
@@ -80,19 +86,10 @@ const From = () => {
                 >
                     <Cascader options={residences} />
                 </Form.Item>
-                <Form.Item
-                    name="Status"
-                    label="Status"
-                    rules={[
-                        { type: 'array', required: true, message: 'Please select your  Status!' },
-                    ]}
-                >
-                    <Cascader options={status} />
-                </Form.Item>
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary"  htmlType="submit">
                     Submit
                 </Button>
             </Form>

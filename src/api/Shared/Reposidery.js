@@ -61,16 +61,16 @@ let All = async (tableName, filter, callback) => {
     }
 };
 
-let Add = async (tableName, keyColumn, tableData, callback) => {    
+let Add = async (tableName, keyColumn, tableData, callback) => {
     var params = {
         TableName: tableName,
         Item: tableData
     };
 
     //CreateTable(tableName, keyColumn, async () => {
-        return await docClient.put(params, function (err, data) {
-            ReturnObject(callback, err, data, 'Add');
-        });
+    return await docClient.put(params, function (err, data) {
+        ReturnObject(callback, err, data, 'Add');
+    });
     //})
 }
 
@@ -86,9 +86,9 @@ let Edit = async (tableName, keyColumn, keyValue, tableData, callback) => {
     };
 
     //CreateTable(tableName, keyColumn, async () => {
-        return await docClient.update(params, function (err, data) {
-            ReturnObject(callback, err, data, 'Update');
-        });
+    return await docClient.update(params, function (err, data) {
+        ReturnObject(callback, err, data, 'Update');
+    });
     //})    
 }
 

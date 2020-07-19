@@ -27,7 +27,7 @@ let AddCart = async (cart, callback) => {
     return await Save(cart, async (cart) => {
         if (cart) {
             return await callback({
-                'data':cart,
+                'data': cart,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddCart = async (cart, callback) => {
     });
 }
 
-let UpdateCart = async (key, cart, callback) => { 
+let UpdateCart = async (key, cart, callback) => {
     return await Update(key, cart, async (cart) => {
         if (cart) {
             return await callback({
-                'data':cart,
+                'data': cart,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateCart = async (key, cart, callback) => {
     });
 }
 
-let DeleteCart = async (key, callback) =>
-{
+let DeleteCart = async (key, callback) => {
     return await Delete(key, async (cart) => {
         if (cart) {
             return await callback({
-                'data':cart,
+                'data': cart,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetCart = async (cartName, callback) => {
     return await GetById(cartName, async (cart) => {
         if (cart) {
             return await callback({
-                'data':cart,
+                'data': cart,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllCarts = async (filter, callback) => {
     return await GetAll(filter, async (carts) => {
         if (carts) {
             return await callback({
-                'data':carts,
+                'data': carts,
                 'Status': 200
             })
         } else {

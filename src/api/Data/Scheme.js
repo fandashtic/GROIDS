@@ -15,18 +15,17 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (scheme, callback) => {    
+let Save = async (scheme, callback) => {
     scheme = AddDetaultValues(scheme, 'scheme_id', PreFix.Scheme, scheme.created_by);
-    return await Add(_tableName, _primaryKey,scheme, callback);
+    return await Add(_tableName, _primaryKey, scheme, callback);
 }
 
-let Update = async (key, scheme, callback) => { 
+let Update = async (key, scheme, callback) => {
     scheme = UpdateDetaultValues(scheme, scheme.modified_by);
     return await Edit(_tableName, _primaryKey, key, scheme, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
