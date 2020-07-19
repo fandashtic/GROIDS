@@ -1,23 +1,56 @@
 import React, { useState, useEffect } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col ,message} from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetManufacturesAPI } from 'api/Controller/Shared/ManufactureController'
+import { GetManufacturesAPI,DeleteManufactureAPI } from 'api/Controller/Shared/ManufactureController'
 
 const filter = { status: true }
 function Manufacture() {
     const [view, setView] = useState(true);
     const [manufactures, setManufactures] = useState([]);
+    const [searchValue, setSearchValue] = useState();
+    const [searchItem, setsearchItem] = useState([]);
+    
     const viewChanged = () => {
         setView(!view)
     }
 
-    useEffect(() => {
-        GetManufacturesAPI(filter, (data, err) => {
-            setManufactures(data)
+    
+    const apiInit = () => {
+        GetManufacturesAPI(filter, (res, err) => {
+            setManufactures(res.data)
+            setsearchItem(res.data)
         })
-    }, [GetManufacturesAPI]);
+    }
+
+    useEffect(() => {
+        apiInit()
+    }, []);
+    
+    // const editableData = (data) => {
+    //     setView(false)
+    //     setEditData(data)
+    // }
+
+    const handleChange = (event) => { 
+        event.persist();
+        setSearchValue(event.target.value)
+        let dataList =  manufactures.filter((el) =>el.manufacture_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+        setsearchItem(dataList)
+    }
+
+    
+    const deletedData = (id) =>{
+        DeleteManufactureAPI(id,(res,err) => {
+           if(res){
+               message.success("Suceessfully Record Deleted");
+               apiInit()
+           }else {
+               message.warning("Something went to wrong");
+           }
+       } )
+   }
 
     return (
         <div className="gx-module-box-content">
@@ -25,7 +58,7 @@ function Manufacture() {
                 <Row justify="space-between">
                     <Col>
                         <></>
-                        {view && <AppModuleHeader placeholder="Search Manufacture" />}
+                        {view && <AppModuleHeader placeholder="Search Manufacture" value={searchValue} onChange={handleChange} />}
                     </Col >
                     <Col>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
@@ -40,7 +73,7 @@ function Manufacture() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView data={manufactures} />) : <ListForm />}
+            {view ? (<ListView manufactures={searchItem} deletedData={deletedData} />) : <ListForm />}
 
         </div>
     )
