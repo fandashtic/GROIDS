@@ -1,70 +1,75 @@
-import React, { Component } from "react";
+import React, { useEffect,useState } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Row, Col, Button, Card, Divider } from 'antd'
+import { Row, Col, Button, Card, Divider,message } from 'antd'
 import ListView from './view'
 import FormView from './form'
-import { GetStoresAPI } from 'api/Controller/Shared/StoreController'
+import {GetStoresAPI,DeleteStoreAPI} from 'api/Controller/Shared/StoreController';
 
-class Index extends Component {
-    state = {
-        view: true,
-        eventvalue: "",
-        storeList: [],
-        copyStoreList:[]
-    }
+let filter = {status:true}
 
-    updateContactUser = () => {
-    }
-    viewChanged = () => {
-        this.setState({ view: !this.state.view })
-    }
-    handleChange = (event) => {
-        event.persist();
-        this.setState({ eventvalue: event.target.value })
-        let dataList =  this.state.storeList.filter((el) =>
-        el.store_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
-        console.log("data - ",dataList.length, "state -",this.state.storeList.length )
-        this.setState({ copyStoreList: dataList })
-       // let dataList =  this.state.storeList.filter((el) =>
-         //  el.store_name.toLowerCase().indexOf(event.target.value.toLowerCase()) !==-1)
-           //  console.log("data - ",dataList.length, "state -",this.state.storeList.length )
-             //this.setState({ storeList: dataList })
-    }
-    componentDidMount() {
+const  Index = () => {
+    const [view, setView] = useState(true);
+    const [stores, setStores] = useState([]);
+    const [searchValue, setSearchValue] = useState();
+    const [searchItem, setsearchItem] = useState([]);
 
-        GetStoresAPI({ status: true }, (res, err) => {
-            this.setState({ storeList: res.data, copyStoreList:res.data })
+    const apiInit = () => {
+        GetStoresAPI(filter, (res, err) => {
+            setStores(res.data)
+            setsearchItem(res.data)
         })
     }
 
-    render() {
-        const { view } = this.state
-        return (
-            <Card title="Stores">
-                <div className="components-table-demo-control-bar">
-                    <Row justify="space-between">
-                        <Col>
-                            <></>
-                            {view && <AppModuleHeader placeholder="Search Stores" value={this.state.eventvalue} onChange={this.handleChange} />}
-                        </Col >
-                        <Col>
-                            <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={this.viewChanged}>
-                                {view ? (
-                                    <><i className="icon icon-add gx-mr-2" />
-                                        <span>Add New Store</span></>) : (
-                                        <>
-                                            <i className="icon icon-eye gx-mr-2" />
-                                            <span>View Store</span></>)
-                                }
-                            </Button>
-                        </Col>
-                    </Row>
-                </div>
-
-                {view ? <ListView storeList={this.state.copyStoreList} /> : <FormView />}
-            </Card>
-        )
+    const viewChanged = () => {
+        setView(!view)
     }
-}
+    useEffect(() => {
+        apiInit()
+    }, [])
 
+    const handleChange = (event) => { 
+        event.persist();
+        setSearchValue(event.target.value)
+        let dataList =  stores.filter((el) => el.store_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 )
+        setsearchItem(dataList)
+    }
+
+    const deletedData = (id) => {
+        DeleteStoreAPI(id,(res,err) => {
+           if(res.status ===200){
+               message.success("Suceessfully Record Deleted");
+               apiInit()
+           }else {
+               message.warning("Something went to wrong");
+           }
+       } )
+   }
+   return (
+    <Card title="Stores">
+        <div className="components-table-demo-control-bar">
+            <Row justify="space-between">
+                <Col>
+                    <></>
+                    {view && <AppModuleHeader placeholder="Search Store"  value={searchValue} onChange={handleChange} />}
+                </Col >
+                <Col>
+                    <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
+                        {view ? (
+                            <><i className="icon icon-add gx-mr-2" />
+                                <span>Add New Store</span></>) : (
+                                <>
+                                    <i className="icon icon-eye gx-mr-2" />
+                                    <span>View Store</span></>)
+                        }
+                    </Button>
+                </Col>
+            </Row>
+        </div>
+        <Divider></Divider><br></br>
+        {view ? <ListView stores={searchItem} deletedData={deletedData}/> : <FormView />}
+    </Card>
+)
+
+    
+}
 export default Index

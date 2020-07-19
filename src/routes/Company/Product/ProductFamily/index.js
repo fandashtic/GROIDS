@@ -67,14 +67,14 @@ function Index() {
                         <Col md={18} sm={16}>
                             <></>
                         {view && <AppModuleHeader placeholder="Search Family" value={searchValue} onChange={handleChange} />}
-                    </Col >
-                    <Col>
+                    </Col>
+                    <Col md={6} sm={8}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
                             {view ? (
                                 <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                    <span>Add New Family</span></>) : (
+                                    <span>&nbsp;Add New Family</span></>) : (
                                     <>
-                                        <i className="icon icon-eye gx-mr-2" />
+                                        <i className="icon icon-eye gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
                                         <span>View Family</span></>)
                             }
                         </Button>

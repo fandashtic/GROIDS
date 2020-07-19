@@ -65,18 +65,18 @@ function Brands() {
     return (
         <div className="gx-module-box-content">
             <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
+                <Row gutter={16} style={{ width: "100%" }}>
+                    <Col md={18} sm={16}>
                         <></>
                         {view && <AppModuleHeader placeholder="Search Brands" value={searchValue} onChange={handleChange} />}
-                    </Col >
-                    <Col>
+                    </Col>
+                    <Col md={6} sm={8}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
                             {view ? (
                                 <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                    <span>Add New Brands</span></>) : (
+                                    <span>&nbsp;Add New Brands</span></>) : (
                                     <>
-                                        <i className="icon icon-eye gx-mr-2" />
+                                        <i className="icon icon-eye gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
                                         <span>View Brands</span></>)
                             }
                         </Button>
