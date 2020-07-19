@@ -1,6 +1,6 @@
 import React from "react";
 import {Layout, Popover,Avatar} from "antd";
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import { toggleCollapsedSideNav} from "../../appRedux/actions/Setting";
 
 import {NAV_STYLE_DRAWER, NAV_STYLE_FIXED, NAV_STYLE_MINI_SIDEBAR, TAB_SIZE} from "../../constants/ThemeSetting";
@@ -8,12 +8,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {userSignOut} from "appRedux/actions/Auth";
 
 const {Header} = Layout;
-
 const Topbar = () => {
 
   const { width, navCollapsed, navStyle} = useSelector(({settings}) => settings);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const userMenuOptions = (
     <ul className="gx-user-popover">
       <li className="gx-media gx-pointer"> 
@@ -22,7 +21,7 @@ const Topbar = () => {
       <li className="gx-media gx-pointer"> 
       <i className={`gx-mr-2  icon icon-culture-calendar`}/>
       <span className="gx-language-text">Connections</span></li>
-      <li className="gx-media gx-pointer"  onClick={() => dispatch(userSignOut())}> 
+      <li className="gx-media gx-pointer"  onClick={() => history.push('/') }> 
       <i className={`gx-mr-2 icon icon-chevron-left`}/>
       <span className="gx-language-text">Logout</span></li>
     </ul>

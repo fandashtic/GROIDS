@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Carousel, Card, Form, Input, Button } from 'antd';
+import { Row, Col, Carousel, Card, Form, Input, Button,message} from 'antd';
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 
@@ -14,15 +14,23 @@ class Index extends Component {
     }
     viewSignIn = () => {
         this.setState({ view: "signin" })
-        this.props.history.push('/dashboard/company');
+       // this.props.history.push('/dashboard/company');
 
     }
+
+    login = () => {
+        this.props.history.push('/dashboard/company');
+    }
+
     viewSignUp = () => {
         this.setState({ view: "signup" })
-        this.props.history.push('/dashboard/company');
+       // this.props.history.push('/dashboard/company');
     }
     viewCompanySignUp = () => {
         this.setState({ view: "companyRegister" })
+    }
+    consumer = () =>{
+        message.info('Coming Soon')
     }
 
     handleKeyPress = (event) =>{
@@ -73,7 +81,7 @@ class Index extends Component {
                                     <Input style={{height: "48px", fontSize: "16px"}} placeholder="Enter Pin Code" onKeyPress={this.handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
                                 </Form.Item>
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>Continue</Button>
+                                    <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}} onClick={this.consumer}>Continue</Button>
                                 </Form.Item>
                             </Form>
                             <p style={{textAlign: "center", marginBottom: "4px"}}>Already have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignIn}>Sign in</span></p>
@@ -95,7 +103,7 @@ class Index extends Component {
                                 <Input type="password" placeholder="Password" style={{height: "48px", fontSize: "16px"}} />
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
+                                <Button type="primary" htmlType="submit" size="large" onClick= {this.login} block style={{marginTop: "0px", marginBottom: "0px"}}>
                                 Sign in
                                 </Button>
                             </Form.Item>
@@ -168,7 +176,7 @@ class Index extends Component {
                                 <Input placeholder="Contact Person Name" style={{height: "48px", fontSize: "16px"}}/>
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit" size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
+                                <Button type="primary" htmlType="submit" onClick = {this.login} size="large" block style={{marginTop: "0px", marginBottom: "0px"}}>
                                 Register
                                 </Button>                            
                             </Form.Item>
