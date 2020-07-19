@@ -190,7 +190,7 @@ class Index extends Component {
                         <span onClick={this.viewPincode}>{view == "signup" ? ( <>Guest User</>) : null }</span>
                         <span onClick={this.viewPincode}>{view == "companyRegister" ? (<>Guest User</>): null}</span>
                     </Button>
-                    <Button type="primary">
+                    <Button className="register-btn" type="primary">
                         <span onClick={this.viewCompanySignUp}>Register</span>
                     </Button>
                 </Col>

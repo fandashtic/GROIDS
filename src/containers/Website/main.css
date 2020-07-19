@@ -123,3 +123,27 @@
     background-color: #74d8ae !important;
     border-color: #74d8ae !important;
 }
+
+.register-btn {
+    background: #e67d06 !important;
+    background-color: #e67d06 !important;
+    border-color: #e67d06 !important;
+}
+
+.register-btn:not([disabled]):not(.disabled):active {
+    background: #e67d06 !important;
+    background-color: #e67d06 !important;
+    border-color: #e67d06 !important;
+}
+
+.register-btn:focus {
+    background: #e67d06 !important;
+    background-color: #e67d06 !important;
+    border-color: #e67d06 !important;
+}
+
+.register-btn:hover {
+    background: #f9941f !important;
+    background-color: #f9941f !important;
+    border-color: #f9941f !important;
+}
