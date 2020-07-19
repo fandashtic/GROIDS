@@ -49,25 +49,25 @@ function Manufacture() {
            }else {
                message.warning("Something went to wrong");
            }
-       } )
+        })
    }
 
     return (
         <div className="gx-module-box-content">
             <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
+                <Row gutter={16} style={{width: "100%"}}>
+                    <Col md={17} sm={16}>
                         <></>
                         {view && <AppModuleHeader placeholder="Search Manufacture" value={searchValue} onChange={handleChange} />}
-                    </Col >
-                    <Col>
+                    </Col>
+                    <Col md={7} sm={8}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
                             {view ? (
-                                <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />&nbsp;
                                     <span>Add New Manufacture</span></>) : (
                                     <>
-                                        <i className="icon icon-eye gx-mr-2" />
-                                        <span>View Manufacture</span></>)
+                                        <i className="icon icon-eye gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                        <span>View Manufactures</span></>)
                             }
                         </Button>
                     </Col>
