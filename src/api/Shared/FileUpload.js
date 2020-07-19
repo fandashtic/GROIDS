@@ -1,4 +1,4 @@
-import { uploadFile } from 'react-s3';
+import { uploadFile, deleteFile } from 'react-s3';
 import { IsHasValue, EnCode, DeCode } from 'api/Shared/Util';
 var config = require('appConfig.json');
 
@@ -39,4 +39,33 @@ let UploadFile = async (file, folder, callback) => {
         })
 };
 
-export { UploadFile };
+let DeleteFile = async (file_name, folder, callback) => {
+    let dirName = config.s3.dirName + '/' + folder;
+    s3_config["dirName"] = dirName;
+    deleteFile(file_name, s3_config)
+        .then(async (data) => {
+            if (IsHasValue(data)) {
+                console.log(data)
+                return await callback({
+                    'data': data,
+                    'Status': 200
+                });
+            }
+            else {
+                return await callback({
+                    'data': null,
+                    'Status': 401
+                })
+            }
+        })
+
+        .catch(async (err) => {
+            console.error(err);
+            return await callback({
+                'data': null,
+                'Status': 401
+            })
+        })
+};
+
+export { UploadFile, DeleteFile };

@@ -30,7 +30,7 @@ let AddState = async (state, callback) => {
     return await SaveStateData(state, async (state) => {
         if (state) {
             return await callback({
-                'data':state,
+                'data': state,
                 'Status': 200
             })
         } else {
@@ -42,11 +42,11 @@ let AddState = async (state, callback) => {
     });
 }
 
-let UpdateState = async (state_id, state, callback) => { 
+let UpdateState = async (state_id, state, callback) => {
     return await UpdateStateData(state_id, state, async (state) => {
         if (state) {
             return await callback({
-                'data':state,
+                'data': state,
                 'Status': 200
             })
         } else {
@@ -58,12 +58,11 @@ let UpdateState = async (state_id, state, callback) => {
     });
 }
 
-let DeleteState = async (state_id, callback) =>
-{
+let DeleteState = async (state_id, callback) => {
     return await DeleteStateData(state_id, async (state) => {
         if (state) {
             return await callback({
-                'data':state,
+                'data': state,
                 'Status': 200
             })
         } else {
@@ -79,7 +78,7 @@ let GetState = async (state_id, callback) => {
     return await GetStateDataById(state_id, async (state) => {
         if (state) {
             return await callback({
-                'data':state,
+                'data': state,
                 'Status': 200
             })
         } else {
@@ -95,7 +94,7 @@ let GetAllStates = async (filter, callback) => {
     return await GetAllStateData(filter, async (states) => {
         if (states) {
             return await callback({
-                'data':states,
+                'data': states,
                 'Status': 200
             })
         } else {
@@ -108,8 +107,8 @@ let GetAllStates = async (filter, callback) => {
 };
 
 let StateLookUp = async (state_id, callback) => {
-    if(IsHasValue(state_id)){
-        return await GetStateDataById(state_id, async (state) => {            
+    if (IsHasValue(state_id)) {
+        return await GetStateDataById(state_id, async (state) => {
             if (IsHasValue(state)) {
                 return await GetStateHierarchyData(state, callback);
             } else {
@@ -119,9 +118,9 @@ let StateLookUp = async (state_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetStateHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetStateHierarchyData = async (state, callback) => {
@@ -132,7 +131,7 @@ const GetStateHierarchyData = async (state, callback) => {
         _lookup.country_id = state.country_id;
         _lookup.country_name = state.country_name;
         _lookup.state_id = state.state_id;
-        _lookup.state_name = state.state_name;   
+        _lookup.state_name = state.state_name;
         _lookup.company_id = state.company_id;
         _lookup.company_name = state.company_name;
         _lookup.store_id = state.store_id;

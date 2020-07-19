@@ -66,21 +66,20 @@ let IsHasValue = (data) => {
 };
 
 let GetLookUpData = (dataList, idCoulmn, dataLabel, selectedValue) => {
-    let result = {list: [], label: ''};
+    let result = { list: [], label: '' };
     let _isSelected = false;
-    dataList.forEach(l => {        
+    dataList.forEach(l => {
         _isSelected = ((l[idCoulmn] === selectedValue) ? true : false);
-        if(_isSelected === true) 
-        {
+        if (_isSelected === true) {
             result.label = l[dataLabel];
         }
 
         result.list.push(
-        {
-            label: l[dataLabel],
-            value: l[idCoulmn],
-            isSelected: _isSelected
-        }
+            {
+                label: l[dataLabel],
+                value: l[idCoulmn],
+                isSelected: _isSelected
+            }
         )
     });
     return result;
@@ -101,10 +100,10 @@ let UpdateDetaultValues = (tableData, modified_by) => {
 }
 
 let SortByCreatedOn = (tableData) => {
-   return tableData;
-//    .sort(function (x, y) {
-//         return x.created_on - y.created_on;
-//     });
+    return tableData;
+    //    .sort(function (x, y) {
+    //         return x.created_on - y.created_on;
+    //     });
 }
 
 let AppendLeadingZeroes = (n) => {
@@ -115,16 +114,17 @@ let AppendLeadingZeroes = (n) => {
 }
 
 let GetDate = () => {
-    const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     let current_datetime = new Date();
     let formatted_date = current_datetime.getFullYear() + "-"
-    + months[current_datetime.getMonth()] + "-"
-    + AppendLeadingZeroes(current_datetime.getDate()) + " "
-    + AppendLeadingZeroes(current_datetime.getHours()) + ":"
-    + AppendLeadingZeroes(current_datetime.getMinutes()) + ":"
-    + AppendLeadingZeroes(current_datetime.getSeconds())
+        + months[current_datetime.getMonth()] + "-"
+        + AppendLeadingZeroes(current_datetime.getDate()) + " "
+        + AppendLeadingZeroes(current_datetime.getHours()) + ":"
+        + AppendLeadingZeroes(current_datetime.getMinutes()) + ":"
+        + AppendLeadingZeroes(current_datetime.getSeconds())
     return formatted_date;
 }
+
 let EnCode = (data) => {
     return Base64.encode(data);
 }
@@ -133,15 +133,15 @@ let DeCode = (data) => {
     return Base64.decode(data);
 }
 
-let CreatePassword = (password, password_salt) =>{
+let CreatePassword = (password, password_salt) => {
     return Base64.encode(password + password_salt);
 };
 
-let ComparePassword = (password, password_salt, sys_password) =>{
+let ComparePassword = (password, password_salt, sys_password) => {
     return Base64.encode(password + password_salt) === sys_password ? true : false;
 };
 
-let CreatePasswordSalt = () =>{
+let CreatePasswordSalt = () => {
     return generator.generate({
         length: 10,
         numbers: true,
@@ -151,6 +151,11 @@ let CreatePasswordSalt = () =>{
     });
 };
 
-export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, 
-    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, 
-    ComparePassword, GetKeyNameFromObject, EnCode, DeCode };
+let GetFileExtn = (fileName) => {
+    return fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
+}
+export {
+    GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
+    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt,
+    ComparePassword, GetKeyNameFromObject, EnCode, DeCode, GetFileExtn
+};

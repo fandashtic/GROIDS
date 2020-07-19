@@ -1,15 +1,15 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Button, Row, Col,message } from "antd";
+import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductsAPI, DeleteProductAPI ,AddProductAPI} from 'api/Controller/Shared/ProductController'
+import { GetProductsAPI, DeleteProductAPI, AddProductAPI } from 'api/Controller/Shared/ProductController'
 
 let filter = { status: true }
 
 function Products() {
     const [view, setView] = useState(true);
-    const [editData, setEditData]= useState({})
+    const [editData, setEditData] = useState({})
     const [product, setProducts] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
@@ -20,12 +20,6 @@ function Products() {
             setsearchItem(res.data)
         })
     }
-
-    const addproduct=()=>{
-
-        
-    }
-
     const viewChanged = () => {
         setView(!view)
     }
@@ -50,29 +44,29 @@ function Products() {
         })
     }
 
-    const handleChange = (event) => { 
+    const handleChange = (event) => {
         event.persist();
         setSearchValue(event.target.value)
-        let dataList =  product.filter((el) =>el.product_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+        let dataList = product.filter((el) => el.product_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
         setsearchItem(dataList)
     }
 
-    const deletedData = (id) =>{
-         DeleteProductAPI(id,(res,err) => {
-            if(res){
+    const deletedData = (id) => {
+        DeleteProductAPI(id, (res, err) => {
+            if (res) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
-            }else {
+            } else {
                 message.warning("Something went to wrong");
             }
-        } )
+        })
     }
-    
+
     return (
         <div className="gx-module-box-content">
             <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
+                <Row gutter={16} style={{ width: "100%" }}>
+                    <Col md={18} sm={16}>
                         <></>
                         {view && <AppModuleHeader placeholder="Search Products" value={searchValue} onChange={handleChange} />}
                     </Col >
@@ -89,10 +83,9 @@ function Products() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView editableData={editableData} deletedData={deletedData} product={searchItem}/>) : <ListForm  addData ={addData} editableDataToForm ={editData}/>}
-
+            {view ? (<ListView editableData={editableData} deletedData={deletedData} product={searchItem} />) : <ListForm addData={addData} editableDataToForm={editData} />}
         </div>
     )
-}
+};
 
 export default Products

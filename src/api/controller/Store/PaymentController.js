@@ -14,7 +14,7 @@ let DeletePaymentAPI = async (paymentId, callback) => {
 };
 
 let GetPaymentsAPI = async (filter, callback) => {
-    return await GetAllPayments( filter, callback);
+    return await GetAllPayments(filter, callback);
 };
 
 export { AddPaymentAPI, UpdatePaymentAPI, DeletePaymentAPI, GetPaymentsAPI };

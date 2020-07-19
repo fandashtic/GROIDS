@@ -13,26 +13,26 @@ function Brands() {
     const [brands, setBrands] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
-
+    
     const viewChanged = () => {
         setView(!view)
     }
+	const apiInit = () => {
+	        GetBrandsAPI(filter, (res, err) => {
+	            console.log(res)
+	            setBrands(res.data)
+	            setsearchItem(res.data)
+	        })
+	    }
 
-    const apiInit = () => {
-        GetBrandsAPI(filter, (res, err) => {
-            setBrands(res.data)
-            setsearchItem(res.data)
-        })
-    }
+	    const editableData = (data) => {
+	        setView(false)
+	        setEditData(data)
+	    }
 
-    const editableData = (data) => {
-        setView(false)
-        setEditData(data)
-    }
-
-    useEffect(() => {
-        apiInit()
-    }, [])
+	    useEffect(() => {
+	        apiInit()
+	    }, [])
 
     const handleChange = (event) => {
         event.persist();
@@ -52,7 +52,6 @@ function Brands() {
         })
     }
   const addData = data => {
-        console.log(data)
         AddBrandAPI(data, (res, err) => {
             if (res.status === 200) {
                 message.success("Suceessfully Record Added");
@@ -85,9 +84,10 @@ function Brands() {
                 </Row>
             </div>
             {view ? (<ListView editableData={editableData} deletedData={deletedData} brands={searchItem} />) : <ListForm editableDataToForm={editData} addData={addData} />}
+	    
 
-        </div>
-    )
-}
+            </div>
+        )
+};
 
 export default Brands

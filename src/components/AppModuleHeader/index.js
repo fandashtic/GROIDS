@@ -7,11 +7,11 @@ const AppModuleHeader = (props) => {
     return (
       <div className="gx-module-box-header-inner">
         <div
-          className="gx-search-bar gx-lt-icon-search-bar-lg gx-module-search-bar gx-d-none gx-d-sm-block">
+          className="gx-search-bar gx-lt-icon-search-bar-lg gx-module-search-bar gx-d-sm-block">
           <div className="gx-form-group">
-            <input className="ant-input gx-border-0" type="search" placeholder={placeholder}
+            <input className="ant-input gx-border-1" type="search" placeholder={placeholder}
                    onChange={onChange}
-                   value={value}/>
+                   value={value}/> <i className="icon icon-search-new gx-mr-2" />
           </div>
         </div>
       </div>

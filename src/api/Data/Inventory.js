@@ -15,18 +15,17 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (inventory, callback) => {    
+let Save = async (inventory, callback) => {
     inventory = AddDetaultValues(inventory, 'inventory_id', PreFix.Inventory, inventory.created_by);
-    return await Add(_tableName, _primaryKey,inventory, callback);
+    return await Add(_tableName, _primaryKey, inventory, callback);
 }
 
-let Update = async (key, inventory, callback) => { 
+let Update = async (key, inventory, callback) => {
     inventory = UpdateDetaultValues(inventory, inventory.modified_by);
     return await Edit(_tableName, _primaryKey, key, inventory, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

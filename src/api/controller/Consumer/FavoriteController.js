@@ -1,4 +1,4 @@
-import { GetAllMyFavorites, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite } from 'api/Core/MyFavoriteManager';
+import { GetAllMyFavorites, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite } from 'api/Core/FavoriteManager';
 
 let AddMyFavoriteAPI = async (myFavorite, callback) => {
     return await AddMyFavorite(myFavorite, callback);

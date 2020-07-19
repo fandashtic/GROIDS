@@ -13,11 +13,11 @@ let DeleteStateAPI = async (state_id, callback) => {
 };
 
 let GetStatesAPI = async (filter, callback) => {
-    return await GetAllStates( filter, callback);
+    return await GetAllStates(filter, callback);
 };
 
 let StateLookUpAPI = async (state_id, callback) => {
-    return await StateLookUp( state_id, callback);
+    return await StateLookUp(state_id, callback);
 };
 
 export { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStatesAPI, StateLookUpAPI };

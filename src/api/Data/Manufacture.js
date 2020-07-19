@@ -15,7 +15,7 @@ let GetAllManufactureData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let SaveManufactureData = async (manufacture, callback) => {    
+let SaveManufactureData = async (manufacture, callback) => {
     manufacture = AddDetaultValues(manufacture, 'manufacture_id', PreFix.Manufacture, manufacture.created_by);
     return await Add(_tableName, _primaryKey, manufacture, callback);
 }

@@ -17,16 +17,15 @@ let GetAllProductFamiliesData = async (filter, callback) => {
 
 let SaveProductFamilyData = async (productFamily, callback) => {
     productFamily = AddDetaultValues(productFamily, 'product_family_id', PreFix.ProductFamily, productFamily.created_by);
-    return await Add(_tableName, _primaryKey,productFamily, callback);
+    return await Add(_tableName, _primaryKey, productFamily, callback);
 }
 
-let UpdateProductFamilyData= async (key, productFamily, callback) => { 
+let UpdateProductFamilyData = async (key, productFamily, callback) => {
     productFamily = UpdateDetaultValues(productFamily, productFamily.modified_by);
     return await Edit(_tableName, _primaryKey, key, productFamily, callback);
 }
 
-let DeleteProductFamilyData = async (key, callback) =>
-{
+let DeleteProductFamilyData = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

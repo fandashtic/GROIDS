@@ -30,8 +30,8 @@ let IsProductValid = async (product_id, password, callback) => {
 };
 
 let ProductLookUp = async (product_id, callback) => {
-    if(IsHasValue(product_id)){
-        return await GetById(product_id, async (product) => {            
+    if (IsHasValue(product_id)) {
+        return await GetById(product_id, async (product) => {
             if (IsHasValue(product)) {
                 return await GetProductHierarchyData(product, callback);
             } else {
@@ -41,16 +41,16 @@ let ProductLookUp = async (product_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetProductHierarchyData(null, callback);
-    }   
+    }
 }
 
 let SaveProduct = async (product, callback) => {
     return await Save(product, async (product) => {
         if (product) {
             return await callback({
-                'data':product,
+                'data': product,
                 'Status': 200
             })
         } else {
@@ -62,11 +62,11 @@ let SaveProduct = async (product, callback) => {
     });
 }
 
-let UpdateProduct = async (product_id, product, callback) => { 
+let UpdateProduct = async (product_id, product, callback) => {
     return await Update(product_id, product, async (product) => {
         if (product) {
             return await callback({
-                'data':product,
+                'data': product,
                 'Status': 200
             })
         } else {
@@ -78,12 +78,11 @@ let UpdateProduct = async (product_id, product, callback) => {
     });
 }
 
-let DeleteProduct = async (product_id, callback) =>
-{
+let DeleteProduct = async (product_id, callback) => {
     return await Delete(product_id, async (product) => {
         if (product) {
             return await callback({
-                'data':product,
+                'data': product,
                 'Status': 200
             })
         } else {
@@ -99,7 +98,7 @@ let GetProduct = async (product_id, callback) => {
     return await GetById(product_id, async (product) => {
         if (product) {
             return await callback({
-                'data':product,
+                'data': product,
                 'Status': 200
             })
         } else {
@@ -115,7 +114,7 @@ let GetAllProducts = async (filter, callback) => {
     return await GetAll(filter, async (products) => {
         if (products) {
             return await callback({
-                'data':products,
+                'data': products,
                 'Status': 200
             })
         } else {

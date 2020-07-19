@@ -27,7 +27,7 @@ let AddOrder = async (order, callback) => {
     return await Save(order, async (order) => {
         if (order) {
             return await callback({
-                'data':order,
+                'data': order,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddOrder = async (order, callback) => {
     });
 }
 
-let UpdateOrder = async (key, order, callback) => { 
+let UpdateOrder = async (key, order, callback) => {
     return await Update(key, order, async (order) => {
         if (order) {
             return await callback({
-                'data':order,
+                'data': order,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateOrder = async (key, order, callback) => {
     });
 }
 
-let DeleteOrder = async (key, callback) =>
-{
+let DeleteOrder = async (key, callback) => {
     return await Delete(key, async (order) => {
         if (order) {
             return await callback({
-                'data':order,
+                'data': order,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetOrder = async (orderName, callback) => {
     return await GetById(orderName, async (order) => {
         if (order) {
             return await callback({
-                'data':order,
+                'data': order,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllOrders = async (filter, callback) => {
     return await GetAll(filter, async (orders) => {
         if (orders) {
             return await callback({
-                'data':orders,
+                'data': orders,
                 'Status': 200
             })
         } else {

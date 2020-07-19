@@ -63,31 +63,31 @@ function Brands() {
        } )
    }
 
-    return (
-        <div className="gx-module-box-content">
-            <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
-                        <></>
+        return (
+            <div className="gx-module-box-content">
+                <div className="gx-module-box-topbar">
+                    <Row gutter={16} style={{width: "100%"}}>
+                        <Col md={18} sm={16}>
+                            <></>
                         {view && <AppModuleHeader placeholder="Search Category" value={searchValue} onChange={handleChange} />}
-                    </Col >
-                    <Col>
-                        <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
-                            {view ? (
-                                <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                    <span>Add New Category</span></>) : (
-                                    <>
-                                        <i className="icon icon-eye gx-mr-2" />
-                                        <span>View Category</span></>)
-                            }
-                        </Button>
-                    </Col>
-                </Row>
-            </div>
+                        </Col>
+                        <Col md={6} sm={8}>
+                            <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
+                                {view ? (
+                                    <><i className="icon icon-add gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                        <span>Add New Category</span></>) : (
+                                        <>
+                                            <i className="icon icon-eye gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                            <span>View Categories</span></>)
+                                }
+                            </Button>
+                        </Col>
+                    </Row>
+                </div>
             {view ? (<ListView editableData={editableData} deletedData ={deletedData} category={searchItem}/>) : <ListForm  editableDataToForm ={editData}/>}
 
-        </div>
-    )
-}
+            </div>
+        )
+};
 
 export default Brands

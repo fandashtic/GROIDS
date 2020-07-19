@@ -60,12 +60,12 @@ function Index() {
        } )
    }
    
-    return (
-        <div className="gx-module-box-content">
-            <div className="gx-module-box-topbar">
-                <Row justify="space-between">
-                    <Col>
-                        <></>
+        return (
+            <div className="gx-module-box-content">
+                <div className="gx-module-box-topbar">
+                    <Row gutter={16} style={{width: "100%"}}>
+                        <Col md={18} sm={16}>
+                            <></>
                         {view && <AppModuleHeader placeholder="Search Family" value={searchValue} onChange={handleChange} />}
                     </Col >
                     <Col>
@@ -83,8 +83,8 @@ function Index() {
             </div>
             {view ? (<ListView editableData={editableData} deletedData={deletedData} family={searchItem}/>) : <ListForm  addData ={addData} editableDataToForm ={editData}/>}
 
-        </div>
-    )
-}
+            </div>
+        )
+};
 
 export default Index

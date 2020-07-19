@@ -1,12 +1,13 @@
-import { GetNewKey, AddDetaultValues, GetDate } from 'api/Shared/Util';
+import { IsHasValue, GetNewKey, GetFileExtn, EnCode, DeCode, AddDetaultValues, GetDate } from 'api/Shared/Util';
 import { PreFix, UserType, StoreType, ActiveStatus } from 'api/Shared/Constant/Enum';
 import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
-import { AddBrandAPI } from 'api/Controller/Shared/BrandController';
+import { AddBrandAPI, DeleteBrandAPI } from 'api/Controller/Shared/BrandController';
 import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
 import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
 import { ProductLookUpAPI, AddProductAPI, GetProductAPI } from 'api/Controller/Shared/ProductController';
 import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
 import { AddStoreAPI, UpdateStoreAPI, DeleteStoreAPI, GetStoresAPI, GetStoreAPI, StoreLookUpAPI } from 'api/Controller/Shared/StoreController';
+import { UploadFile, DeleteFile } from 'api/Shared/FileUpload';
 
 const company_id = GetNewKey(PreFix.Company);
 const manufacture_id = GetNewKey(PreFix.Manufacture);
@@ -46,6 +47,12 @@ let AddBrand = () => {
     }
 
     AddBrandAPI(Brand, (data, err) => {
+    });
+}
+
+let DeleteBrand = (brand_id) => {
+    DeleteBrandAPI(brand_id, (data, err) => {
+        debugger;
     });
 }
 
@@ -188,24 +195,35 @@ let SignIn = () => {
     })
 }
 
+let DeleteFileFromS3 = (filename) => {
+    DeleteFile(filename, PreFix.Product, (res) => {
+        console.log(res);        
+      });
+}
+
 let RunUnitTest = () => {
     // AddManufacture();
-    // AddBrand();
+    AddBrand();
+    let _brand_id= 'BR-N2JhNzU0MzMtODBkNC00ZTlmLTlkOWMtMTAyNWI2ZWNlZDVh';
+    DeleteBrand(_brand_id);
     // AddProductCategory();
     // AddProductFamily();
     // AddProduct();
-    let _product_id= 'PR#MGMwZDFkOWEtZGMxZC00NGUzLTg0M2UtNTZlODkyYmE5Mzdl';
+    //let _product_id= 'PR#MGMwZDFkOWEtZGMxZC00NGUzLTg0M2UtNTZlODkyYmE5Mzdl';
     //GetProduct(_product_id);
     //ProductLookUp(null);    
-    ProductLookUp(_product_id);
+    //ProductLookUp(_product_id);
     
-    let _store_id= 'ST#YzQwMWYzZGQtZTQ2OS00NjQ2LTg1ZDItZjhlZDA0YjQ4MDBm';
+    //let _store_id= 'ST#YzQwMWYzZGQtZTQ2OS00NjQ2LTg1ZDItZjhlZDA0YjQ4MDBm';
     //AddStore();
     //GetStore(_store_id);
     //StoreLookUp(null);    
     //StoreLookUp(_store_id);
     //SaveUser();
     //SignIn();
+    //let _fileName = 'PR-NGExNjgyZTItN2RjNS00ZGUzLWFjNWQtOGFjMGJkM2MwNDg1.png';
+    //DeleteFileFromS3(_fileName);
+
 };
 
 export { RunUnitTest };

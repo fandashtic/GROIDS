@@ -27,7 +27,7 @@ let AddDelivery = async (delivery, callback) => {
     return await Save(delivery, async (delivery) => {
         if (delivery) {
             return await callback({
-                'data':delivery,
+                'data': delivery,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddDelivery = async (delivery, callback) => {
     });
 }
 
-let UpdateDelivery = async (key, delivery, callback) => { 
+let UpdateDelivery = async (key, delivery, callback) => {
     return await Update(key, delivery, async (delivery) => {
         if (delivery) {
             return await callback({
-                'data':delivery,
+                'data': delivery,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateDelivery = async (key, delivery, callback) => {
     });
 }
 
-let DeleteDelivery = async (key, callback) =>
-{
+let DeleteDelivery = async (key, callback) => {
     return await Delete(key, async (delivery) => {
         if (delivery) {
             return await callback({
-                'data':delivery,
+                'data': delivery,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetDelivery = async (deliveryName, callback) => {
     return await GetById(deliveryName, async (delivery) => {
         if (delivery) {
             return await callback({
-                'data':delivery,
+                'data': delivery,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllDeliverys = async (filter, callback) => {
     return await GetAll(filter, async (deliverys) => {
         if (deliverys) {
             return await callback({
-                'data':deliverys,
+                'data': deliverys,
                 'Status': 200
             })
         } else {

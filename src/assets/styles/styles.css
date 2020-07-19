@@ -1,0 +1,17 @@
+.gx-search-bar {
+    min-width: 250px;
+    margin-bottom: 6px;
+}
+
+.gx-search-bar i {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 991px) {
+    .gx-search-bar i {
+        top: 10px;
+    }  
+}

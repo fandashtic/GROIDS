@@ -9,7 +9,7 @@ let AddArea = async (area, callback) => {
     return await SaveAreaData(area, async (area) => {
         if (area) {
             return await callback({
-                'data':area,
+                'data': area,
                 'Status': 200
             })
         } else {
@@ -21,11 +21,11 @@ let AddArea = async (area, callback) => {
     });
 }
 
-let UpdateArea = async (key, area, callback) => { 
+let UpdateArea = async (key, area, callback) => {
     return await UpdateAreaData(key, area, async (area) => {
         if (area) {
             return await callback({
-                'data':area,
+                'data': area,
                 'Status': 200
             })
         } else {
@@ -37,12 +37,11 @@ let UpdateArea = async (key, area, callback) => {
     });
 }
 
-let DeleteArea = async (key, callback) =>
-{
+let DeleteArea = async (key, callback) => {
     return await DeleteAreaData(key, async (area) => {
         if (area) {
             return await callback({
-                'data':area,
+                'data': area,
                 'Status': 200
             })
         } else {
@@ -58,7 +57,7 @@ let GetArea = async (areaName, callback) => {
     return await GetAreaDataById(areaName, async (area) => {
         if (area) {
             return await callback({
-                'data':area,
+                'data': area,
                 'Status': 200
             })
         } else {
@@ -74,7 +73,7 @@ let GetAllAreas = async (filter, callback) => {
     return await GetAllAreaData(filter, async (areas) => {
         if (areas) {
             return await callback({
-                'data':areas,
+                'data': areas,
                 'Status': 200
             })
         } else {
@@ -87,8 +86,8 @@ let GetAllAreas = async (filter, callback) => {
 };
 
 let AreaLookUp = async (area_id, callback) => {
-    if(IsHasValue(area_id)){
-        return await GetAreaDataById(area_id, async (area) => {            
+    if (IsHasValue(area_id)) {
+        return await GetAreaDataById(area_id, async (area) => {
             if (IsHasValue(area)) {
                 return await GetAreaHierarchyData(area, callback);
             } else {
@@ -98,9 +97,9 @@ let AreaLookUp = async (area_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetAreaHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetAreaHierarchyData = async (area, callback) => {
@@ -116,7 +115,7 @@ const GetAreaHierarchyData = async (area, callback) => {
         _lookup.state_id = area.state_id;
         _lookup.state_name = area.state_name;
         _lookup.city_id = area.city_id;
-        _lookup.city_name = area.city_name;        
+        _lookup.city_name = area.city_name;
         _lookup.company_id = area.company_id;
         _lookup.company_name = area.company_name;
         _lookup.store_id = area.store_id;

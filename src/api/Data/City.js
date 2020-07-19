@@ -11,22 +11,21 @@ let GetCityDataById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);
 };
 
-let GetAllCityData= async (filter, callback) => {
+let GetAllCityData = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let SaveCityData= async (city, callback) => {
+let SaveCityData = async (city, callback) => {
     city = AddDetaultValues(city, 'city_id', PreFix.City, city.created_by);
-    return await Add(_tableName, _primaryKey,city, callback);
+    return await Add(_tableName, _primaryKey, city, callback);
 }
 
-let UpdateCityData= async (key, city, callback) => { 
+let UpdateCityData = async (key, city, callback) => {
     city = UpdateDetaultValues(city, city.modified_by);
     return await Edit(_tableName, _primaryKey, key, city, callback);
 }
 
-let DeleteCityData = async (key, callback) =>
-{
+let DeleteCityData = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 
