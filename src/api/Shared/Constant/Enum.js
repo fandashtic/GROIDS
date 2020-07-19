@@ -26,12 +26,23 @@ let UserType = {
     SUPPORT: 6,
 }
 
-let StoreType = {
-    Wholesale: 1,
-    Retail: 2,
-    SuperMarket: 3,
-    Stockist: 4,
-}
+let StoreType = [
+    {
+        value: '1',
+        label: 'Wholesale',
+    },
+    {
+        value: '2',
+        label: 'Retail',
+    },
+    {
+        value: '3',
+        label: 'SuperMarket',
+    },
+    {
+        value: '4',
+        label: 'Stockist',
+    }]
 
 let ConsumerType = {
     PRIME: 1,

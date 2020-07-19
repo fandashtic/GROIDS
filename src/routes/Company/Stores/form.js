@@ -1,17 +1,16 @@
-import React from 'react';
-import useForm from 'components/Shared/Useform';
-import { AddStoreAPI } from 'api/Controller/Shared/StoreController'
+import React,{useEffect,useState} from 'react';
 import {
     Form,
     Input,
     Cascader,
     Button,
     PageHeader,
-    Upload
+    Upload,
+    message
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-
-
+import {StoreLookUpAPI} from 'api/Controller/Shared/StoreController';
+import {StoreType} from 'api/Shared/Constant/Enum'
 const residences = [
     {
         value: 'zhejiang',
@@ -43,36 +42,25 @@ const status = [
         label: 'InActive',
     },
 ];
-const FormView = () => {
-
+const FormView = ({addData}) => {
     const [form] = Form.useForm();
-    // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-    const { handleChange, handleSubmit, values } = useForm();
-
-    const OnSubmitData = value => {
-
-         if (window.find("Please Give your Input")!==true){
-           
-            console.log('Received values of form: ', values);
+    const [selectValues,setSelectValues] = useState({})
+    const onFinish = values => {
             values['company_id'] = "212435446"
             values['product_id'] = "1"
             values['profile_image_url'] = "test"
             values['status'] = true
             values['created_on'] = new Date()
             values['created_by'] = 1
-            console.log(values)
+        addData(values)
+    };
 
-            AddStoreAPI(values,(data,err)=>{
-               console.log('response', data)
-               console.log('err',err)
-           })
-    }else {
-        console.log("Error")
-    }
-
-    }
-
-
+    useEffect(()=>{
+        StoreLookUpAPI(null, (res,err)=>{
+                setSelectValues(res)
+            
+        })
+    })
     return (
         <>
             <PageHeader className="site-page-header" title="Stores Form" ></PageHeader>
@@ -80,7 +68,7 @@ const FormView = () => {
                 {...formItemLayout}
                 form={form}
                 name="Store"
-                onFinish={(e)=>handleSubmit}
+                onFinish={onFinish}
                 initialValues={{
                 }}
                 scrollToFirstError
@@ -95,19 +83,19 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="store_name" onChange={handleChange} />
+                    <Input name="store_name"/>
                 </Form.Item>
                 <Form.Item
-                    name="Store Type"
+                    name="store_type"
                     label="Store Type"
                     rules={[
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={StoreType} />
                 </Form.Item>
                 <Form.Item
-                    name="Billing Address"
+                    name="billing_address"
                     label="Billing Address"
                     rules={[
                         {
@@ -116,10 +104,10 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="billing_address" onChange={handleChange} />
+                    <Input name="billing_address"/>
                 </Form.Item>
                 <Form.Item
-                    name="Shipping Address"
+                    name="shipping_address"
                     label="Shipping Address"
                     rules={[
                         {
@@ -128,43 +116,43 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="shipping_address" onChange={handleChange} />
+                    <Input name="shipping_address"/>
                 </Form.Item>
                 <Form.Item
-                    name="Area"
+                    name="area_name"
                     label="Area"
                     rules={[
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.areas} />
                 </Form.Item>
                 <Form.Item
-                    name="City"
+                    name="city_name"
                     label="City"
                     rules={[
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.cities} />
                 </Form.Item>
                 <Form.Item
-                    name="State"
+                    name="state_name"
                     label="State"
                     rules={[
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.states} />
                 </Form.Item>
                 <Form.Item
-                    name="Country"
+                    name="country_name"
                     label="Country"
                     rules={[
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.countries} />
                 </Form.Item>
                 <Form.Item
                     name="Location"
@@ -176,10 +164,10 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="latitude" onChange={handleChange} />
+                    <Input name="latitude"/>
                 </Form.Item>
                 <Form.Item
-                    name="Email"
+                    name="email"
                     label="Email"
                     rules={[
                         {
@@ -188,10 +176,10 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="email" onChange={handleChange} />
+                    <Input name="email"/>
                 </Form.Item>
                 <Form.Item
-                    name="Mobile number"
+                    name="mobilenumber"
                     label="Mobile number"
                     rules={[
                         {
@@ -200,10 +188,10 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="mobilenumber" onChange={handleChange} />
+                    <Input name="mobilenumber"  />
                 </Form.Item>
                 <Form.Item
-                    name="Contact Person"
+                    name="contactperson"
                     label="Contact Person"
                     rules={[
                         {
@@ -212,16 +200,16 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input name="contactperson" onChange={handleChange} />
+                    <Input name="contactperson"  />
                 </Form.Item>
                 <Form.Item
-                    name="Tin / GST Number"
+                    name="tin"
                     label="Tin / GST Number"
                 >
-                    <Input name="contactperson" onChange={handleChange} />
+                    <Input name="contactperson"/>
                 </Form.Item>
                 <Form.Item
-                    name="Store Logo"
+                    name="logo"
                     label="Store Logo"
                     rules={[
                         {
@@ -233,7 +221,6 @@ const FormView = () => {
                     <Upload
                         action="//jsonplaceholder.typicode.com/posts/"
                         listType="picture-card"
-                        onChange={handleChange}
                     >
                         <div>
                             <PlusOutlined />
@@ -242,7 +229,7 @@ const FormView = () => {
                     </Upload>
                 </Form.Item>
                 <Form.Item
-                    name="Store banner image"
+                    name="banner"
                     label="Store banner image"
                     rules={[
                         {
@@ -254,7 +241,6 @@ const FormView = () => {
                     <Upload
                         action="//jsonplaceholder.typicode.com/posts/"
                         listType="picture-card"
-                        onChange={handleChange}
                     >
                         <div>
                             <PlusOutlined />
@@ -262,23 +248,18 @@ const FormView = () => {
                         </div>
                     </Upload>
                 </Form.Item>
+               
                 <Form.Item
-                    name="Store Slogan"
-                    label="Store Slogan"
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name="Business Days & Hours"
+                    name="business_days_hours"
                     label="Business Days & Hours"
                 >
-                    <Input name="business_days_hours" onChange={handleChange} />
+                    <Input name="business_days_hours"  />
                 </Form.Item>
                 <Form.Item
-                    name="Delivery Days & Hours"
+                    name="delivery_days_hours"
                     label="Delivery Days & Hours"
                 >
-                    <Input name="delivery_days_hours" onChange={handleChange} />
+                    <Input name="delivery_days_hours" />
                 </Form.Item>
                 <Form.Item
                     name="Status"
@@ -292,7 +273,7 @@ const FormView = () => {
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary" onClick={OnSubmitData} htmlType="submit">
+                <Button type="primary"  htmlType="submit">
                     Submit
                 </Button>
             </Form>

@@ -34,15 +34,14 @@ function Products() {
     }, [])
 
     const addData = data => {
-        console.log(data)
-        // AddProductAPI(data, (res, err) => {
-        //     if (res.Status === 200) {
-        //         message.success("Suceessfully Record Added");
-        //         apiInit()
-        //     } else {
-        //         message.warning("Something went to wrong");
-        //     }
-        // })
+        AddProductAPI(data, (res, err) => {
+            if (res.Status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
     }
 
     const handleChange = (event) => {

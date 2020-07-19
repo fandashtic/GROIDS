@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -10,16 +9,16 @@ import {
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {ProductLookUpAPI} from 'api/Controller/Shared/ProductController';
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-    },
-];
+// const residences = [
+//     {
+//         value: 'zhejiang',
+//         label: 'Zhejiang',
+//     },
+//     {
+//         value: 'jiangsu',
+//         label: 'Jiangsu',
+//     },
+// ];
 
 const status = [
     {
