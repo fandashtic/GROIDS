@@ -29,7 +29,7 @@ let AddCountry = async (country, callback) => {
     return await SaveCountryData(country, async (country) => {
         if (country) {
             return await callback({
-                'data':country,
+                'data': country,
                 'Status': 200
             })
         } else {
@@ -41,11 +41,11 @@ let AddCountry = async (country, callback) => {
     });
 }
 
-let UpdateCountry = async (country_id, country, callback) => { 
+let UpdateCountry = async (country_id, country, callback) => {
     return await UpdateCountryData(country_id, country, async (country) => {
         if (country) {
             return await callback({
-                'data':country,
+                'data': country,
                 'Status': 200
             })
         } else {
@@ -57,12 +57,11 @@ let UpdateCountry = async (country_id, country, callback) => {
     });
 }
 
-let DeleteCountry = async (country_id, callback) =>
-{
+let DeleteCountry = async (country_id, callback) => {
     return await DeleteCountryData(country_id, async (country) => {
         if (country) {
             return await callback({
-                'data':country,
+                'data': country,
                 'Status': 200
             })
         } else {
@@ -78,7 +77,7 @@ let GetCountry = async (country_id, callback) => {
     return await GetCountryDataById(country_id, async (country) => {
         if (country) {
             return await callback({
-                'data':country,
+                'data': country,
                 'Status': 200
             })
         } else {
@@ -94,7 +93,7 @@ let GetAllCountries = async (filter, callback) => {
     return await GetAllCountryData(filter, async (countries) => {
         if (countries) {
             return await callback({
-                'data':countries,
+                'data': countries,
                 'Status': 200
             })
         } else {
@@ -108,8 +107,8 @@ let GetAllCountries = async (filter, callback) => {
 
 
 let CountryLookUp = async (country_id, callback) => {
-    if(IsHasValue(country_id)){
-        return await GetCountryDataById(country_id, async (country) => {            
+    if (IsHasValue(country_id)) {
+        return await GetCountryDataById(country_id, async (country) => {
             if (IsHasValue(country)) {
                 return await GetCountryHierarchyData(country, callback);
             } else {
@@ -119,9 +118,9 @@ let CountryLookUp = async (country_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetCountryHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetCountryHierarchyData = async (country, callback) => {
@@ -130,7 +129,7 @@ const GetCountryHierarchyData = async (country, callback) => {
 
     if (IsHasValue(country)) {
         _lookup.country_id = country.country_id;
-        _lookup.country_name = country.country_name; 
+        _lookup.country_name = country.country_name;
         _lookup.company_id = country.company_id;
         _lookup.company_name = country.company_name;
         _lookup.store_id = country.store_id;

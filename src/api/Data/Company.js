@@ -15,18 +15,17 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (company, callback) => {    
+let Save = async (company, callback) => {
     company = AddDetaultValues(company, 'company_id', PreFix.Company, company.created_by);
-    return await Add(_tableName, _primaryKey,company, callback);
+    return await Add(_tableName, _primaryKey, company, callback);
 }
 
-let Update = async (key, company, callback) => { 
+let Update = async (key, company, callback) => {
     company = UpdateDetaultValues(company, company.modified_by);
     return await Edit(_tableName, _primaryKey, key, company, callback);
 }
 
-let Delete = async (key, callback) =>
-{
+let Delete = async (key, callback) => {
     return await Remove(_tableName, _primaryKey, key, callback);
 };
 

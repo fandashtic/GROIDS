@@ -27,7 +27,7 @@ let AddPayment = async (payment, callback) => {
     return await Save(payment, async (payment) => {
         if (payment) {
             return await callback({
-                'data':payment,
+                'data': payment,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddPayment = async (payment, callback) => {
     });
 }
 
-let UpdatePayment = async (key, payment, callback) => { 
+let UpdatePayment = async (key, payment, callback) => {
     return await Update(key, payment, async (payment) => {
         if (payment) {
             return await callback({
-                'data':payment,
+                'data': payment,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdatePayment = async (key, payment, callback) => {
     });
 }
 
-let DeletePayment = async (key, callback) =>
-{
+let DeletePayment = async (key, callback) => {
     return await Delete(key, async (payment) => {
         if (payment) {
             return await callback({
-                'data':payment,
+                'data': payment,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetPayment = async (paymentName, callback) => {
     return await GetById(paymentName, async (payment) => {
         if (payment) {
             return await callback({
-                'data':payment,
+                'data': payment,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllPayments = async (filter, callback) => {
     return await GetAll(filter, async (payments) => {
         if (payments) {
             return await callback({
-                'data':payments,
+                'data': payments,
                 'Status': 200
             })
         } else {

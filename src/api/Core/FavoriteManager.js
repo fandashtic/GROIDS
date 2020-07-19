@@ -27,7 +27,7 @@ let AddMyFavorite = async (myFavorite, callback) => {
     return await Save(myFavorite, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
-                'data':myFavorite,
+                'data': myFavorite,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddMyFavorite = async (myFavorite, callback) => {
     });
 }
 
-let UpdateMyFavorite = async (key, myFavorite, callback) => { 
+let UpdateMyFavorite = async (key, myFavorite, callback) => {
     return await Update(key, myFavorite, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
-                'data':myFavorite,
+                'data': myFavorite,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateMyFavorite = async (key, myFavorite, callback) => {
     });
 }
 
-let DeleteMyFavorite = async (key, callback) =>
-{
+let DeleteMyFavorite = async (key, callback) => {
     return await Delete(key, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
-                'data':myFavorite,
+                'data': myFavorite,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetMyFavorite = async (myFavoriteName, callback) => {
     return await GetById(myFavoriteName, async (myFavorite) => {
         if (myFavorite) {
             return await callback({
-                'data':myFavorite,
+                'data': myFavorite,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllMyFavorites = async (filter, callback) => {
     return await GetAll(filter, async (myFavorites) => {
         if (myFavorites) {
             return await callback({
-                'data':myFavorites,
+                'data': myFavorites,
                 'Status': 200
             })
         } else {

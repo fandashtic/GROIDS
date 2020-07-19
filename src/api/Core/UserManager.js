@@ -6,15 +6,15 @@ let IsUserValid = async (userName, password, callback) => {
     let filter = {
         'user_name': userName
     };
-    
+
     return await GetAllUserData(filter, async (users) => {
         let userExists = users.filter(function (o) { return o.user_name === userName; });
         if (IsHasValue(userExists) && userExists.length > 0 && ComparePassword(password, userExists[0].password_salt, userExists[0].password)) {
-            let _session = {                
+            let _session = {
                 session_token: GetNewKey(),
                 session_date: GetDate()
             }
-            AddSessionLog(userExists[0].user_id + GetNewKey() , _session);           
+            AddSessionLog(userExists[0].user_id + GetNewKey(), _session);
             return await callback({
                 'data': {
                     UserName: userExists[0].userName,
@@ -38,7 +38,7 @@ let IsUserValid = async (userName, password, callback) => {
 
 let AddSessionLog = (session_id, session) => {
     InsertLog(session_id, session, async (session) => {
-               
+
     });
 }
 
@@ -138,7 +138,7 @@ let ChangePassword = async (user_id, new_password, old_password, callback) => {
                 'Status': 401
             })
         }
-    });    
+    });
 }
 
 let GetAllUsers = async (filter, callback) => {

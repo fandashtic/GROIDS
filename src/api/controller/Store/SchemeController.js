@@ -14,7 +14,7 @@ let DeleteSchemeAPI = async (schemeId, callback) => {
 };
 
 let GetSchemesAPI = async (filter, callback) => {
-    return await GetAllSchemes( filter, callback);
+    return await GetAllSchemes(filter, callback);
 };
 
 export { AddSchemeAPI, UpdateSchemeAPI, DeleteSchemeAPI, GetSchemesAPI };

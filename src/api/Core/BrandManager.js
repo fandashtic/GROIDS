@@ -30,7 +30,7 @@ let AddBrand = async (brand, callback) => {
     return await SaveBrandData(brand, async (brand) => {
         if (brand) {
             return await callback({
-                'data':brand,
+                'data': brand,
                 'Status': 200
             })
         } else {
@@ -42,11 +42,11 @@ let AddBrand = async (brand, callback) => {
     });
 }
 
-let UpdateBrand = async (brand_id, brand, callback) => { 
+let UpdateBrand = async (brand_id, brand, callback) => {
     return await UpdateBrandData(brand_id, brand, async (brand) => {
         if (brand) {
             return await callback({
-                'data':brand,
+                'data': brand,
                 'Status': 200
             })
         } else {
@@ -58,12 +58,11 @@ let UpdateBrand = async (brand_id, brand, callback) => {
     });
 }
 
-let DeleteBrand = async (brand_id, callback) =>
-{
+let DeleteBrand = async (brand_id, callback) => {
     return await DeleteBrandData(brand_id, async (brand) => {
         if (brand) {
             return await callback({
-                'data':brand,
+                'data': brand,
                 'Status': 200
             })
         } else {
@@ -79,7 +78,7 @@ let GetBrand = async (brand_id, callback) => {
     return await GetBrandDataById(brand_id, async (brand) => {
         if (brand) {
             return await callback({
-                'data':brand,
+                'data': brand,
                 'Status': 200
             })
         } else {
@@ -95,7 +94,7 @@ let GetAllBrands = async (filter, callback) => {
     return await GetAllBrandDatas(filter, async (brands) => {
         if (brands) {
             return await callback({
-                'data':brands,
+                'data': brands,
                 'Status': 200
             })
         } else {
@@ -108,8 +107,8 @@ let GetAllBrands = async (filter, callback) => {
 };
 
 let BrandLookUp = async (brand_id, callback) => {
-    if(IsHasValue(brand_id)){
-        return await GetBrandDataById(brand_id, async (brand) => {            
+    if (IsHasValue(brand_id)) {
+        return await GetBrandDataById(brand_id, async (brand) => {
             if (IsHasValue(brand)) {
                 return await GetBrandHierarchyData(brand, callback);
             } else {
@@ -119,9 +118,9 @@ let BrandLookUp = async (brand_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetBrandHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetBrandHierarchyData = async (brand, callback) => {
@@ -146,7 +145,7 @@ const GetBrandHierarchyData = async (brand, callback) => {
         _lookup.manufactures = _m.list;
         _lookup.manufacture_name = _m.label;
 
-        return await ReturnObject(callback, null, _lookup, 'GetBrandHierarchyData'); 
+        return await ReturnObject(callback, null, _lookup, 'GetBrandHierarchyData');
     });
 }
 

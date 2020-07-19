@@ -30,7 +30,7 @@ let AddCompany = async (company, callback) => {
         if (company) {
             await CreateDynamicUser(company, ApplicationType.Company);
             return await callback({
-                'data':company,
+                'data': company,
                 'Status': 200
             })
         } else {
@@ -42,11 +42,11 @@ let AddCompany = async (company, callback) => {
     });
 }
 
-let UpdateCompany = async (key, company, callback) => { 
+let UpdateCompany = async (key, company, callback) => {
     return await Update(key, company, async (company) => {
         if (company) {
             return await callback({
-                'data':company,
+                'data': company,
                 'Status': 200
             })
         } else {
@@ -58,12 +58,11 @@ let UpdateCompany = async (key, company, callback) => {
     });
 }
 
-let DeleteCompany = async (key, callback) =>
-{
+let DeleteCompany = async (key, callback) => {
     return await Delete(key, async (company) => {
         if (company) {
             return await callback({
-                'data':company,
+                'data': company,
                 'Status': 200
             })
         } else {
@@ -79,7 +78,7 @@ let GetCompany = async (companyName, callback) => {
     return await GetById(companyName, async (company) => {
         if (company) {
             return await callback({
-                'data':company,
+                'data': company,
                 'Status': 200
             })
         } else {
@@ -95,7 +94,7 @@ let GetAllCompanies = async (filter, callback) => {
     return await GetAll(filter, async (companies) => {
         if (companies) {
             return await callback({
-                'data':companies,
+                'data': companies,
                 'Status': 200
             })
         } else {

@@ -113,8 +113,8 @@ let GetAllStores = async (filter, callback) => {
 };
 
 let StoreLookUp = async (store_id, callback) => {
-    if(IsHasValue(store_id)){
-        return await GetById(store_id, async (store) => {            
+    if (IsHasValue(store_id)) {
+        return await GetById(store_id, async (store) => {
             if (IsHasValue(store)) {
                 return await GetStoreHierarchyData(store, callback);
             } else {
@@ -124,9 +124,9 @@ let StoreLookUp = async (store_id, callback) => {
                 })
             }
         });
-    }else{
+    } else {
         return await GetStoreHierarchyData(null, callback);
-    }   
+    }
 }
 
 const GetStoreHierarchyData = async (store, callback) => {
@@ -145,7 +145,7 @@ const GetStoreHierarchyData = async (store, callback) => {
         _lookup.city_id = store.city_id;
         _lookup.city_name = store.city_name;
         _lookup.area_id = store.area_id;
-        _lookup.area_name = store.area_name;        
+        _lookup.area_name = store.area_name;
         _lookup.profile_image_url = store.profile_image_url;
         _lookup.status = store.status;
         _lookup.pincode = store.pincode;

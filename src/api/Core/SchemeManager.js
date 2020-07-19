@@ -27,7 +27,7 @@ let AddScheme = async (scheme, callback) => {
     return await Save(scheme, async (scheme) => {
         if (scheme) {
             return await callback({
-                'data':scheme,
+                'data': scheme,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddScheme = async (scheme, callback) => {
     });
 }
 
-let UpdateScheme = async (key, scheme, callback) => { 
+let UpdateScheme = async (key, scheme, callback) => {
     return await Update(key, scheme, async (scheme) => {
         if (scheme) {
             return await callback({
-                'data':scheme,
+                'data': scheme,
                 'Status': 200
             })
         } else {
@@ -55,12 +55,11 @@ let UpdateScheme = async (key, scheme, callback) => {
     });
 }
 
-let DeleteScheme = async (key, callback) =>
-{
+let DeleteScheme = async (key, callback) => {
     return await Delete(key, async (scheme) => {
         if (scheme) {
             return await callback({
-                'data':scheme,
+                'data': scheme,
                 'Status': 200
             })
         } else {
@@ -76,7 +75,7 @@ let GetScheme = async (schemeName, callback) => {
     return await GetById(schemeName, async (scheme) => {
         if (scheme) {
             return await callback({
-                'data':scheme,
+                'data': scheme,
                 'Status': 200
             })
         } else {
@@ -92,7 +91,7 @@ let GetAllSchemes = async (filter, callback) => {
     return await GetAll(filter, async (schemes) => {
         if (schemes) {
             return await callback({
-                'data':schemes,
+                'data': schemes,
                 'Status': 200
             })
         } else {
