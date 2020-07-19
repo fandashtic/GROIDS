@@ -95,7 +95,7 @@ const ProductFrom = ({addData}) => {
                     <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
-                    name="Category"
+                    name="product_category_name"
                     label="Category"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Category!' },
@@ -104,7 +104,7 @@ const ProductFrom = ({addData}) => {
                     <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
-                    name="Status"
+                    name="status"
                     label="Status"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Status!' },

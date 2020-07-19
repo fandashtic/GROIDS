@@ -74,8 +74,8 @@ const ProductFrom = ({addData}) => {
                 scrollToFirstError
             >
                 <Form.Item
-                    name=" product_category_name:"
-                    label=" product_category_name:s"
+                    name="product_category_name"
+                    label="categoryname"
                     rules={[
                         {
                             required: true,
@@ -86,7 +86,7 @@ const ProductFrom = ({addData}) => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Manufacture"
+                    name="manufacture_name"
                     label="Manufacture"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
@@ -95,7 +95,7 @@ const ProductFrom = ({addData}) => {
                     <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
-                    name="Brand"
+                    name="brand_name"
                     label="Brand"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Brand!' },
@@ -105,7 +105,7 @@ const ProductFrom = ({addData}) => {
                     <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
-                    name="Status"
+                    name="status"
                     label="Status"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Status!' },

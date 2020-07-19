@@ -30,7 +30,7 @@ function Index() {
 
     const addData = data => {
         AddProductFamilyAPI(data, (res, err) => {
-            if (res.status === 200) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {

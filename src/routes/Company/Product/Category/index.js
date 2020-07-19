@@ -24,7 +24,8 @@ function Brands() {
 
     const addData = data => {
         AddProductCategoryAPI(data, (res, err) => {
-            if (res.status === 200) {
+            console.log(res)
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {
@@ -84,7 +85,7 @@ function Brands() {
                         </Col>
                     </Row>
                 </div>
-            {view ? (<ListView editableData={editableData} deletedData ={deletedData} category={searchItem}/>) : <ListForm  editableDataToForm ={editData}/>}
+            {view ? (<ListView editableData={editableData} deletedData ={deletedData} category={searchItem}/>) : <ListForm  editableDataToForm ={editData} addData={addData}/>}
 
             </div>
         )

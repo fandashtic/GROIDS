@@ -58,7 +58,7 @@ const From = ({addData}) => {
             >
                 <Form.Item
                     name="manufacture_name" 
-                    label="manufacture_name"
+                    label="manufacturename"
                     rules={[
                         {
                             required: true,
@@ -69,7 +69,7 @@ const From = ({addData}) => {
                     <Input/>
                 </Form.Item>
                 <Form.Item
-                    name="Status"
+                    name="status"
                     label="Status"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Status!' },

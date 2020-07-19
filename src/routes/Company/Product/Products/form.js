@@ -63,7 +63,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
 
     useEffect(()=>{
         ProductLookUpAPI(product_id,(res,err)=>{
-                console.log(res)
+                console.log(">>>>",res)
             setSelectValues(res)})
     },[ProductLookUpAPI])
 
@@ -91,7 +91,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 scrollToFirstError
             >
                 <Form.Item
-                    name="Product Name"
+                    name="product_name"
                     label="Product Name"
                     rules={[
                         {
@@ -103,7 +103,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Manufacture"
+                    name="manufacture_name"
                     label="Manufacture"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
@@ -112,7 +112,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     <Cascader options={selectValues.manufactures} />
                 </Form.Item>
                 <Form.Item
-                    name="Brand"
+                    name="brand_name"
                     label="Brand"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Brand!' },
@@ -122,7 +122,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     <Cascader options={selectValues.brands} />
                 </Form.Item>
                 <Form.Item
-                    name="Category"
+                    name="product_category_name"
                     label="Category"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Category!' },
@@ -132,7 +132,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 </Form.Item>
 
                 <Form.Item
-                    name="Product Family"
+                    name="product_family_name"
                     label="Product Family"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Product Family!' },
@@ -142,7 +142,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 </Form.Item>
 
                 <Form.Item
-                    name="Description"
+                    name="description"
                     label="Description"
                     rules={[
                         {
@@ -154,11 +154,11 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Product Image"
+                    name="profile_image_url"
                     label="Product Image"
                     rules={[
                     {
-                        required: true,
+                        required: false,
                         message: 'Please input your Product Image!',
                     },
                     ]}
@@ -175,7 +175,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     </Upload>
                 </Form.Item>
                 <Form.Item
-                    name="Status"
+                    name="status"
                     label="Status"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your  Status!' },
