@@ -26,7 +26,7 @@ function Manufacture() {
 
     useEffect(() => {
         apiInit()
-    }, []);
+    }, [view]);
 
     // const editableData = (data) => {
     //     setView(false)
@@ -43,7 +43,7 @@ function Manufacture() {
 
     const deletedData = (id) => {
         DeleteManufactureAPI(id, (res, err) => {
-            if (res) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
             } else {
@@ -53,7 +53,7 @@ function Manufacture() {
     }
     const addData = data => {
         AddManufactureAPI(data, (res, err) => {
-            if (res.status === 200) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {

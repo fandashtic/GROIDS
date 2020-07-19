@@ -21,8 +21,8 @@ let GetBrandsAPI = async (filter, callback) => {
     return await GetAllBrands(filter, callback);
 };
 
-let BeandLookUpAPI = async (brand_id, callback) => {
+let BrandLookUpAPI = async (brand_id, callback) => {
     return await BrandLookUp(brand_id, callback);
 };
 
-export { AddBrandAPI, UpdateBrandAPI, DeleteBrandAPI, GetBrandsAPI, BeandLookUpAPI, GetBrandAPI };
+export { AddBrandAPI, UpdateBrandAPI, DeleteBrandAPI, GetBrandsAPI, BrandLookUpAPI, GetBrandAPI };

@@ -1,5 +1,7 @@
-import React from 'react';
+import React , { useState, useEffect } from 'react';
 import useForm from 'components/Shared/Useform';
+import { BrandLookUpAPI } from 'api/Controller/Shared/BrandController';
+
 import {
     Form,
     Input,
@@ -29,6 +31,7 @@ const formItemLayout = {
         sm: { span: 16 },
     },
 };
+
 const status = [
     {
         value: 'Active',
@@ -40,9 +43,11 @@ const status = [
     },
 ];
 
-const From = ({addData}) => {
+const From = ({ addData }) => {
 
     const [form] = Form.useForm();
+    let brand_id = null;
+    const [LookUpData, setLookUpData] = useState({})
 
     const onFinish = values => {
         values['company_id'] = "212435446"
@@ -53,6 +58,13 @@ const From = ({addData}) => {
         values['created_by'] = 1
         addData(values)
     };
+
+    useEffect(() => {
+        BrandLookUpAPI(brand_id, (data, err) => {
+            setLookUpData(data);
+        });
+
+    }, [brand_id]);
 
     return (
         <Card className="gx-card" title="Brand Form">
@@ -84,12 +96,12 @@ const From = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary"  htmlType="submit">
+                <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form>

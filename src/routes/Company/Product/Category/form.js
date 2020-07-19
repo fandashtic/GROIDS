@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import useForm from 'components/Shared/Useform';
+import { ProductCategoryLookUpAPI } from 'api/Controller/Shared/ProductCategoryController';
 import {
     Form,
     Input,
@@ -46,6 +47,8 @@ const status = [
 
 const ProductFrom = ({addData}) => {
     const [form] = Form.useForm();
+    let category_id = null;
+    const [LookUpData, setLookUpData] = useState({})
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -57,6 +60,13 @@ const ProductFrom = ({addData}) => {
         values['created_by'] = 1
         addData(values)
     };
+
+    useEffect(() => {
+        ProductCategoryLookUpAPI(category_id, (data, err) => {
+            setLookUpData(data);
+        });
+
+    }, [category_id]);
 
     const handleChange = (value) => {
         console.log(`selected ${value}`);
@@ -92,7 +102,7 @@ const ProductFrom = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
                 <Form.Item
                     name="brand_name"
@@ -102,7 +112,7 @@ const ProductFrom = ({addData}) => {
                     ]}
 
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.brands} />
                 </Form.Item>
                 <Form.Item
                     name="status"
