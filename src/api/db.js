@@ -1,9 +1,9 @@
 var AWS = require('aws-sdk');
-var config = require('./../../src/appConfig.json');
+var config = require('appConfig.json');
 
 let awsConfig = {
-    "region": "us-east-2",
-    "endpoint": "https://dynamodb.us-east-2.amazonaws.com",
+    "region": config.s3.region,
+    "endpoint": config.db.endpoint,
     "accessKeyId": config.db.ACCESS_KEY_ID,
     "secretAccessKey": config.db.SECRET_ACCESS_KEY
 };

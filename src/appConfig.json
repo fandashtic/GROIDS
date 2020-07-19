@@ -1,6 +1,12 @@
 {
     "db": {
+        "endpoint": "https://dynamodb.us-east-2.amazonaws.com",
         "ACCESS_KEY_ID": "AKIA5O6WF24TZIHTKUEB",
         "SECRET_ACCESS_KEY": "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"
+    },
+    "s3":{
+        "ARN": "arn:aws:s3:::amplify-groids-dev-111249-deployment",
+        "region": "us-east-2",
+        "dirName": "groids"
     }
 }
