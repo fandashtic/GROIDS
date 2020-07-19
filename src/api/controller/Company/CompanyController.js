@@ -1,4 +1,4 @@
-import { GetAllCompanys, AddCompany, UpdateCompany, DeleteCompany } from 'api/Core/CompanyManager';
+import { GetAllCompanies, AddCompany, UpdateCompany, DeleteCompany } from 'api/Core/CompanyManager';
 
 let AddCompanyAPI = async (company, callback) => {
     return await AddCompany(company, callback);
@@ -13,7 +13,7 @@ let DeleteCompanyAPI = async (companyId, callback) => {
 };
 
 let GetCompaniesAPI = async (filter, callback) => {
-    return await GetAllCompanys(filter, callback);
+    return await GetAllCompanies(filter, callback);
 };
 
 export { AddCompanyAPI, UpdateCompanyAPI, DeleteCompanyAPI, GetCompaniesAPI };

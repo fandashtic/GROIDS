@@ -90,11 +90,11 @@ let GetCountry = async (country_id, callback) => {
     });
 }
 
-let GetAllCountrys = async (filter, callback) => {
-    return await GetAllCountryData(filter, async (countrys) => {
-        if (countrys) {
+let GetAllCountries = async (filter, callback) => {
+    return await GetAllCountryData(filter, async (countries) => {
+        if (countries) {
             return await callback({
-                'data':countrys,
+                'data':countries,
                 'Status': 200
             })
         } else {
@@ -148,4 +148,4 @@ const GetCountryHierarchyData = async (country, callback) => {
     });
 }
 
-export { IsCountryValid, AddCountry, UpdateCountry, DeleteCountry, GetCountry, GetAllCountrys, CountryLookUp };
+export { IsCountryValid, AddCountry, UpdateCountry, DeleteCountry, GetCountry, GetAllCountries, CountryLookUp };

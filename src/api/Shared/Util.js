@@ -125,6 +125,7 @@ let GetDate = () => {
     + AppendLeadingZeroes(current_datetime.getSeconds())
     return formatted_date;
 }
+
 let EnCode = (data) => {
     return Base64.encode(data);
 }
@@ -151,6 +152,9 @@ let CreatePasswordSalt = () =>{
     });
 };
 
+let GetFileExtn = (fileName) => {
+    return fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
+}
 export { GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames, 
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, 
-    ComparePassword, GetKeyNameFromObject, EnCode, DeCode };
+    ComparePassword, GetKeyNameFromObject, EnCode, DeCode, GetFileExtn };

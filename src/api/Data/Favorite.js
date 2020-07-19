@@ -2,7 +2,7 @@ import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
-const _tableName = 'myfavorites';
+const _tableName = 'favorite';
 const _primaryKey = 'favorite_id';
 
 //#region
@@ -15,14 +15,14 @@ let GetAll = async (filter, callback) => {
     return await All(_tableName, filter, callback);
 };
 
-let Save = async (myfavorite, callback) => {    
-    myfavorite = AddDetaultValues(myfavorite, 'favorite_id', PreFix.Favorite, myfavorite.created_by);
-    return await Add(_tableName, _primaryKey,myfavorite, callback);
+let Save = async (favorite, callback) => {    
+    favorite = AddDetaultValues(favorite, 'favorite_id', PreFix.Favorite, favorite.created_by);
+    return await Add(_tableName, _primaryKey,favorite, callback);
 }
 
-let Update = async (key, myfavorite, callback) => { 
-    myfavorite = UpdateDetaultValues(myfavorite, myfavorite.modified_by);
-    return await Edit(_tableName, _primaryKey, key, myfavorite, callback);
+let Update = async (key, favorite, callback) => { 
+    favorite = UpdateDetaultValues(favorite, favorite.modified_by);
+    return await Edit(_tableName, _primaryKey, key, favorite, callback);
 }
 
 let Delete = async (key, callback) =>

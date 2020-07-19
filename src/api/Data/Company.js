@@ -2,7 +2,7 @@ import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
-const _tableName = 'companys';
+const _tableName = 'companies';
 const _primaryKey = 'company_id';
 
 //#region

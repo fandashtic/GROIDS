@@ -91,11 +91,11 @@ let GetCompany = async (companyName, callback) => {
     });
 }
 
-let GetAllCompanys = async (filter, callback) => {
-    return await GetAll(filter, async (companys) => {
-        if (companys) {
+let GetAllCompanies = async (filter, callback) => {
+    return await GetAll(filter, async (companies) => {
+        if (companies) {
             return await callback({
-                'data':companys,
+                'data':companies,
                 'Status': 200
             })
         } else {
@@ -107,4 +107,4 @@ let GetAllCompanys = async (filter, callback) => {
     });
 };
 
-export { IsCompanyValid, AddCompany, UpdateCompany, DeleteCompany, GetCompany, GetAllCompanys };
+export { IsCompanyValid, AddCompany, UpdateCompany, DeleteCompany, GetCompany, GetAllCompanies };
