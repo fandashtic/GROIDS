@@ -50,7 +50,7 @@ const  Index = () => {
             <Row justify="space-between">
                 <Col>
                     <></>
-                    {view && <AppModuleHeader placeholder="Search Brand"  value={searchValue} onChange={handleChange} />}
+                    {view && <AppModuleHeader placeholder="Search Store"  value={searchValue} onChange={handleChange} />}
                 </Col >
                 <Col>
                     <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
