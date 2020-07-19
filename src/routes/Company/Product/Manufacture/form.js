@@ -34,42 +34,31 @@ const status = [
     },
 ];
 
-const From = () => {
-
+const From = ({addData}) => {
     const [form] = Form.useForm();
-    const {handleChange,handleSubmit,values} = useForm()
-
-    const submitData = () => {
-        console.log('Received values of form: ', values);
+    const onFinish = values => {
         values['company_id'] = "212435446"
         values['store_id'] = "1"
         values['profile_image_url'] = "test"
         values['status'] = true
-        values['created_on'] = GetDate()
+        values['created_on'] = new Date()
         values['created_by'] = 1
-        console.log(values)
-//}
-       AddManufactureAPI(values,(data,err)=>{
-           console.log('response', data)
-           console.log('err',err)
-       })
+        addData(values)
     };
-
-  
     return (
         <Card className="gx-card" title="Manufacture Form">
             <Form
                 {...formItemLayout}
                 form={form}
                 name="Manufacture"
-                onFinish={handleSubmit}
+                onFinish={onFinish}
                 initialValues={{
                 }}
                 scrollToFirstError
             >
                 <Form.Item
-                    name="Manufacture Name"
-                    label="Manufacture Name"
+                    name="manufacture_name" 
+                    label="manufacture_name"
                     rules={[
                         {
                             required: true,
@@ -77,7 +66,7 @@ const From = () => {
                         },
                     ]}
                 >
-                    <Input name="manufacture_name" onChange={handleChange} />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
                     name="Status"
@@ -91,7 +80,7 @@ const From = () => {
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary" onClick={() =>submitData()} htmlType="submit">
+                <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form>

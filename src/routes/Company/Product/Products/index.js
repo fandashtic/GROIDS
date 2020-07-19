@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductsAPI, DeleteProductAPI } from 'api/Controller/Shared/ProductController'
+import { GetProductsAPI, DeleteProductAPI ,AddProductAPI} from 'api/Controller/Shared/ProductController'
 
 let filter = { status: true }
 
@@ -21,6 +21,11 @@ function Products() {
         })
     }
 
+    const addproduct=()=>{
+
+        
+    }
+
     const viewChanged = () => {
         setView(!view)
     }
@@ -33,7 +38,17 @@ function Products() {
     useEffect(() => {
         apiInit()
     }, [])
-    
+
+    const addData = data => {
+        AddProductAPI(data, (res, err) => {
+            if (res.status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
+    }
 
     const handleChange = (event) => { 
         event.persist();
@@ -74,7 +89,7 @@ function Products() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView editableData={editableData} deletedData={deletedData} product={searchItem}/>) : <ListForm  editableDataToForm ={editData}/>}
+            {view ? (<ListView editableData={editableData} deletedData={deletedData} product={searchItem}/>) : <ListForm  addData ={addData} editableDataToForm ={editData}/>}
 
         </div>
     )

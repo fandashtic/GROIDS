@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductCategorysAPI,DeleteProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController'
+import { GetProductCategorysAPI,DeleteProductCategoryAPI,AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController'
 
 let filter = { status: true }
 
@@ -22,6 +22,16 @@ function Brands() {
         })
     }
 
+    const addData = data => {
+        AddProductCategoryAPI(data, (res, err) => {
+            if (res.status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
+    }
 
     const viewChanged = () => {
         setView(!view)

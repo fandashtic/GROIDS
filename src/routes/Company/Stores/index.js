@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Row, Col, Button, Card, Divider } from 'antd'
 import ListView from './view'
 import FormView from './form'
-import { GetStoresAPI } from 'api/Controller/Store/StoreController'
+import { GetStoresAPI } from 'api/Controller/Shared/StoreController'
 
 class Index extends Component {
     state = {

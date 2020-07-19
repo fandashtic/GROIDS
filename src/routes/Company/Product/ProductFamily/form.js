@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -39,19 +40,18 @@ const status = [
     },
 ];
 
-const ProductFrom = () => {
-
+const ProductFrom = ({addData}) => {
     const [form] = Form.useForm();
-    //const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     const onFinish = values => {
-        console.log('Received values of form: ', values);
+        values['company_id'] = "212435446"
+        values['store_id'] = "1"
+        values['profile_image_url'] = "test"
+        values['status'] = true
+        values['created_on'] = new Date()
+        values['created_by'] = 1
+        addData(values)
     };
-
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
-
     return (
         <Card className="gx-card" title="Product Form">
             <Form
@@ -64,8 +64,8 @@ const ProductFrom = () => {
                 scrollToFirstError
             >
                 <Form.Item
-                    name="Product Family Name"
-                    label="Product Family Name"
+                    name="product_family_name"
+                    label="Family Name"
                     rules={[
                         {
                             required: true,
@@ -76,7 +76,7 @@ const ProductFrom = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="Manufacture"
+                    name="manufacture_name"
                     label="Manufacture"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
@@ -85,7 +85,7 @@ const ProductFrom = () => {
                     <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
-                    name="Brand"
+                    name="brand_name"
                     label="Brand"
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Brand!' },

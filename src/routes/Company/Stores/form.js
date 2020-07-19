@@ -1,6 +1,6 @@
 import React from 'react';
 import useForm from 'components/Shared/Useform';
-import { AddStoreAPI } from 'api/Controller/Store/StoreController'
+import { AddStoreAPI } from 'api/Controller/Shared/StoreController'
 import {
     Form,
     Input,
@@ -55,7 +55,7 @@ const FormView = () => {
            
             console.log('Received values of form: ', values);
             values['company_id'] = "212435446"
-            values['store_id'] = "1"
+            values['product_id'] = "1"
             values['profile_image_url'] = "test"
             values['status'] = true
             values['created_on'] = new Date()
@@ -80,8 +80,7 @@ const FormView = () => {
                 {...formItemLayout}
                 form={form}
                 name="Store"
-                onFinish={OnSubmitData}
-                onFinishFailed={(e)=>handleSubmit}
+                onFinish={(e)=>handleSubmit}
                 initialValues={{
                 }}
                 scrollToFirstError
@@ -96,7 +95,7 @@ const FormView = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input name="store_name" onChange={handleChange} />
                 </Form.Item>
                 <Form.Item
                     name="Store Type"
@@ -138,7 +137,7 @@ const FormView = () => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={status} />
+                    <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
                     name="City"
@@ -147,7 +146,7 @@ const FormView = () => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={status} />
+                    <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
                     name="State"
@@ -156,7 +155,7 @@ const FormView = () => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={status} />
+                    <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
                     name="Country"
@@ -165,7 +164,7 @@ const FormView = () => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={status} />
+                    <Cascader options={residences} />
                 </Form.Item>
                 <Form.Item
                     name="Location"

@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductFamiliesAPI ,DeleteProductFamilyAPI} from 'api/Controller/Shared/ProductFamilyController'
+import { GetProductFamiliesAPI ,DeleteProductFamilyAPI,AddProductFamilyAPI} from 'api/Controller/Shared/ProductFamilyController'
 
 let filter = { status: true }
 
@@ -25,6 +25,17 @@ function Index() {
         GetProductFamiliesAPI(filter, (res, err) => {
             setFamily(res.data)
             setsearchItem(res.data)
+        })
+    }
+
+    const addData = data => {
+        AddProductFamilyAPI(data, (res, err) => {
+            if (res.status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
         })
     }
 
@@ -70,7 +81,7 @@ function Index() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView editableData={editableData} deletedData={deletedData} family={searchItem}/>) : <ListForm  editableDataToForm ={editData}/>}
+            {view ? (<ListView editableData={editableData} deletedData={deletedData} family={searchItem}/>) : <ListForm  addData ={addData} editableDataToForm ={editData}/>}
 
         </div>
     )

@@ -1,6 +1,6 @@
 import React,{useEffect,useState}from 'react';
 import { Table, Button, Space,PageHeader } from 'antd';
-import {GetStoresAPI} from 'api/Controller/Store/StoreController'
+import {GetStoresAPI} from 'api/Controller/Shared/StoreController'
 
 const data = []
 

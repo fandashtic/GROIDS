@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import { Button, Row, Col ,message} from "antd";
+import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetManufacturesAPI,DeleteManufactureAPI } from 'api/Controller/Shared/ManufactureController'
+import { GetManufacturesAPI, DeleteManufactureAPI, AddManufactureAPI } from 'api/Controller/Shared/ManufactureController'
 
 const filter = { status: true }
 function Manufacture() {
@@ -11,12 +11,12 @@ function Manufacture() {
     const [manufactures, setManufactures] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
-    
+
     const viewChanged = () => {
         setView(!view)
     }
 
-    
+
     const apiInit = () => {
         GetManufacturesAPI(filter, (res, err) => {
             setManufactures(res.data)
@@ -27,30 +27,40 @@ function Manufacture() {
     useEffect(() => {
         apiInit()
     }, []);
-    
+
     // const editableData = (data) => {
     //     setView(false)
     //     setEditData(data)
     // }
 
-    const handleChange = (event) => { 
+    const handleChange = (event) => {
         event.persist();
         setSearchValue(event.target.value)
-        let dataList =  manufactures.filter((el) =>el.manufacture_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+        let dataList = manufactures.filter((el) => el.manufacture_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
         setsearchItem(dataList)
     }
 
-    
-    const deletedData = (id) =>{
-        DeleteManufactureAPI(id,(res,err) => {
-           if(res){
-               message.success("Suceessfully Record Deleted");
-               apiInit()
-           }else {
-               message.warning("Something went to wrong");
-           }
-       } )
-   }
+
+    const deletedData = (id) => {
+        DeleteManufactureAPI(id, (res, err) => {
+            if (res) {
+                message.success("Suceessfully Record Deleted");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
+    }
+    const addData = data => {
+        AddManufactureAPI(data, (res, err) => {
+            if (res.status === 200) {
+                message.success("Suceessfully Record Added");
+                apiInit()
+            } else {
+                message.warning("Something went to wrong");
+            }
+        })
+    }
 
     return (
         <div className="gx-module-box-content">
@@ -73,7 +83,7 @@ function Manufacture() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView manufactures={searchItem} deletedData={deletedData} />) : <ListForm />}
+            {view ? (<ListView manufactures={searchItem} deletedData={deletedData} />) : <ListForm addData ={addData} />}
 
         </div>
     )
