@@ -92,6 +92,7 @@ class Index extends Component {
                                 </Button>
                             </Form.Item>
                             </Form>
+                            <p style={{textAlign: "center", marginBottom: "4px"}}><span style={{textDecoration: "none", cursor: "pointer"}} onClick={this.viewSignIn}>Forgot password?</span></p>
                             <p style={{textAlign: "center", marginBottom: "4px"}}>Don't have an account? <span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewSignUp}>Create new</span></p>
                             <p style={{textAlign: "center", marginBottom: "0px"}}><span style={{textDecoration: "none", color: "#34b880", cursor: "pointer"}} onClick={this.viewPincode}>I'm a Guest User</span></p>
                             </>): null }

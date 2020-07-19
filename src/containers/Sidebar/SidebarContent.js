@@ -35,7 +35,7 @@ const SidebarContent = () => {
             mode="inline">
             <Menu.Item key="main/dashboard">
               <Link to="/dashboard/company"><i
-                className="icon icon-dasbhoard" /> <span><IntlMessages id="sidebar.dashboard" /></span></Link>
+                className="icon icon-dasbhoard" /><span><IntlMessages id="sidebar.dashboard" /></span></Link>
             </Menu.Item>
             <Menu.Item key="main/Product">
               <Link to="/product"><i

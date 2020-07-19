@@ -9,5 +9,6 @@
         "region": "us-east-2",
         "dirName": "groids",
         "bucketName":"amplify-groids-dev-111249-deployment"
-    }
+    },
+    "Pagination":10
 }
