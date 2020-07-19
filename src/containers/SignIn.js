@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { Button, Checkbox, Input, message, Form } from "antd";
-import Icon from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import {
   hideMessage,
-  showAuthLoader,
 } from "appRedux/actions/Auth";
 
 import IntlMessages from "util/IntlMessages";
@@ -16,7 +14,6 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   const { loader, alertMessage, showMessage } = useSelector(({ auth }) => auth);
-  const [form] = Form.useForm();
   const history = useHistory();
 
   useEffect(() => {
@@ -33,7 +30,7 @@ const SignIn = () => {
   };
 
   const onFinish = values => {
-    history.push('/main/dashboard/company');
+    history.push('/dashboard/company');
   };
 
   return (

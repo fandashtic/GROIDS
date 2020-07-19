@@ -1,5 +1,5 @@
 
-import { GetAllManufactures, AddManufacture, UpdateManufacture, DeleteManufacture } from 'api/Core/ManufactureManager';
+import { AddManufacture, UpdateManufacture, DeleteManufacture, GetManufacture, GetAllManufactures, ManufactureLookUp } from 'api/Core/ManufactureManager';
 
 let AddManufactureAPI = async (manufacture, callback) => {
     return await AddManufacture(manufacture, callback);
@@ -17,4 +17,12 @@ let GetManufacturesAPI = async (filter, callback) => {
     return await GetAllManufactures(filter, callback);
 };
 
-export { AddManufactureAPI, UpdateManufactureAPI, DeleteManufactureAPI, GetManufacturesAPI };
+let GetManufactureAPI = async (filter, callback) => {
+    return await GetManufacture(filter, callback);
+};
+
+let ManufactureLookUpAPI = async (filter, callback) => {
+    return await ManufactureLookUp(filter, callback);
+};
+
+export { AddManufactureAPI, UpdateManufactureAPI, DeleteManufactureAPI, GetManufacturesAPI, GetManufactureAPI, ManufactureLookUpAPI };

@@ -1,20 +1,28 @@
 
-import { GetAllCountrys, AddCountry, UpdateCountry, DeleteCountry } from 'api/Core/CountryManager';
+import { IsCountryValid, AddCountry, UpdateCountry, DeleteCountry, GetCountry, GetAllCountrys, CountryLookUp } from 'api/Core/CountryManager';
 
 let AddCountryAPI = async (country, callback) => {
     return await AddCountry(country, callback);
 };
 
-let UpdateCountryAPI = async (countryId, country, callback) => {
-    return await UpdateCountry(countryId, country, callback);
+let UpdateCountryAPI = async (country_id, country, callback) => {
+    return await UpdateCountry(country_id, country, callback);
 };
 
-let DeleteCountryAPI = async (countryId, callback) => {
-    return await DeleteCountry(countryId, callback);
+let DeleteCountryAPI = async (country_id, callback) => {
+    return await DeleteCountry(country_id, callback);
 };
 
 let GetCountriesAPI = async (filter, callback) => {
-    return await GetAllCountrys( filter, callback);
+    return await GetAllCountrys(filter, callback);
 };
 
-export { AddCountryAPI, UpdateCountryAPI, DeleteCountryAPI, GetCountriesAPI };
+let GetCountryAPI = async (country_id, callback) => {
+    return await GetCountry(country_id, callback);
+};
+
+let CountryLookUpAPI = async (country_id, callback) => {
+    return await CountryLookUp(country_id, callback);
+};
+
+export { AddCountryAPI, UpdateCountryAPI, DeleteCountryAPI, GetCountriesAPI, CountryLookUpAPI, GetCountryAPI };

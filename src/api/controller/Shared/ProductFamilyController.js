@@ -1,19 +1,28 @@
-import { IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
+import { ProductFamilyLookUp, IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
 
-let AddProductFamilyAPI = async (productFamily, callback) => {
-    return await AddProductFamily(productFamily, callback);
+let AddProductFamilyAPI = async (product_family, callback) => {
+    return await AddProductFamily(product_family, callback);
 };
 
-let UpdateProductFamilyAPI = async (productFamilyId, productFamily, callback) => {
-    return await UpdateProductFamily(productFamilyId, productFamily, callback);
+let UpdateProductFamilyAPI = async (product_family_id, product_family, callback) => {
+    return await UpdateProductFamily(product_family_id, product_family, callback);
 };
 
-let DeleteProductFamilyAPI = async (productFamilyId, callback) => {
-    return await DeleteProductFamily(productFamilyId, callback);
+let DeleteProductFamilyAPI = async (product_family_id, callback) => {
+    return await DeleteProductFamily(product_family_id, callback);
 };
 
 let GetProductFamiliesAPI = async (filter, callback) => {
     return await GetAllProductFamilies(filter, callback);
 };
 
-export { AddProductFamilyAPI, UpdateProductFamilyAPI, DeleteProductFamilyAPI, GetProductFamiliesAPI };
+let GetProductFamilyAPI = async (product_family_id, callback) => {
+    return await GetProductFamily(product_family_id, callback);
+};
+
+let ProductFamilyLookUpAPI = async (product_family_id, callback) => {
+    return await ProductFamilyLookUp(product_family_id, callback);
+};
+
+
+export { AddProductFamilyAPI, GetProductFamilyAPI, UpdateProductFamilyAPI, DeleteProductFamilyAPI, GetProductFamiliesAPI, ProductFamilyLookUpAPI };

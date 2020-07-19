@@ -5,7 +5,7 @@ import { PreFix } from 'api/Shared/Constant/Enum';
 const _tableName = 'products';
 const _primaryKey = 'product_id';
 
-//#region
+//#regions
 
 let GetById = async (key, callback) => {
     return await Get(_tableName, _primaryKey, key, callback);

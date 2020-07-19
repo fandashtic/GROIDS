@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Form,
     Input,
@@ -8,7 +8,7 @@ import {
     Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-
+import {ProductLookUpAPI} from 'api/Controller/Shared/ProductController';
 const residences = [
     {
         value: 'zhejiang',
@@ -54,10 +54,17 @@ const formItemLayout = {
 //     },
 // };
 
-const ProductFrom = () => {
 
+const product_id =null
+const ProductFrom = ({editableDataToForm}) => {
+    const [selectValues,setSelectValues] = useState({})
     const [form] = Form.useForm();
-   // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+    useEffect(()=>{
+        ProductLookUpAPI(product_id,(res,err)=>{
+                console.log(res)
+            setSelectValues(res)})
+    },[ProductLookUpAPI])
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -66,7 +73,6 @@ const ProductFrom = () => {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     }
-
     return (
         <Card className="gx-card" title="Product Form">
             <Form
@@ -97,7 +103,7 @@ const ProductFrom = () => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.manufactures} />
                 </Form.Item>
                 <Form.Item
                     name="Brand"
@@ -107,7 +113,7 @@ const ProductFrom = () => {
                     ]}
 
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.brands} />
                 </Form.Item>
                 <Form.Item
                     name="Category"
@@ -116,7 +122,7 @@ const ProductFrom = () => {
                         { type: 'array', required: true, message: 'Please select your  Category!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.productCategories} />
                 </Form.Item>
 
                 <Form.Item
@@ -126,7 +132,7 @@ const ProductFrom = () => {
                         { type: 'array', required: true, message: 'Please select your Product Family!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={selectValues.product_families} />
                 </Form.Item>
 
                 <Form.Item

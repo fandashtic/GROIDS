@@ -1,4 +1,6 @@
 import { GetById, GetAll, Save, Update, Delete } from 'api/Data/Company';
+import { CreateDynamicUser } from 'api/Shared/Common';
+import { ApplicationType } from 'api/Shared/Constant/Enum';
 
 let IsCompanyValid = async (companyName, password, callback) => {
     return await GetById(companyName, async (company) => {
@@ -9,7 +11,7 @@ let IsCompanyValid = async (companyName, password, callback) => {
                     CompanyDisplayName: company.firstName + ' ' + company.lastName,
                     CompanyType: company.companyType,
                     CompanyId: company.companyId,
-                    StoreId: company.storeId,
+                    store_id: company.store_id,
                     CompanyProfileImage: company.profileImageUrl
                 },
                 'Status': 200
@@ -26,6 +28,7 @@ let IsCompanyValid = async (companyName, password, callback) => {
 let AddCompany = async (company, callback) => {
     return await Save(company, async (company) => {
         if (company) {
+            await CreateDynamicUser(company, ApplicationType.Company);
             return await callback({
                 'data':company,
                 'Status': 200

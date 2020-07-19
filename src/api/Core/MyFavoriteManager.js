@@ -9,7 +9,7 @@ let IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
                     MyFavoriteDisplayName: myFavorite.firstName + ' ' + myFavorite.lastName,
                     MyFavoriteType: myFavorite.myFavoriteType,
                     CompanyId: myFavorite.companyId,
-                    StoreId: myFavorite.storeId,
+                    store_id: myFavorite.store_id,
                     MyFavoriteProfileImage: myFavorite.profileImageUrl
                 },
                 'Status': 200

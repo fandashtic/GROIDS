@@ -1,3 +1,14 @@
+
+.loader {
+    height: 80vh; 
+    display: flex; 
+    justify-content: center;
+}
+
+.loader img {
+    width: 100px;
+}
+
 /*@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");*/
 
 body {
@@ -37,4 +48,3 @@ body {
   width: 120px;
 }
 
-/*# sourceMappingURL=loader.css.map */

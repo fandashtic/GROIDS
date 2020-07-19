@@ -1,6 +1,8 @@
-exports.State = {
+let State = {
     state_id: String,
     state_name: String,
+    country_id: String,
+    country_name: String,    
     profile_image_url: String,
     status: Boolean,
     created_on: Date,
@@ -8,3 +10,5 @@ exports.State = {
     modified_on: Date,
     modified_by: String
 }
+
+export { State };

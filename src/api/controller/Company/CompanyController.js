@@ -1,4 +1,3 @@
-
 import { GetAllCompanys, AddCompany, UpdateCompany, DeleteCompany } from 'api/Core/CompanyManager';
 
 let AddCompanyAPI = async (company, callback) => {

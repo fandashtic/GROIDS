@@ -9,7 +9,7 @@ let IsPaymentValid = async (paymentName, password, callback) => {
                     PaymentDisplayName: payment.firstName + ' ' + payment.lastName,
                     PaymentType: payment.paymentType,
                     CompanyId: payment.companyId,
-                    StoreId: payment.storeId,
+                    store_id: payment.store_id,
                     PaymentProfileImage: payment.profileImageUrl
                 },
                 'Status': 200

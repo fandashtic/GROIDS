@@ -3,7 +3,7 @@ import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'myfavorites';
-const _primaryKey = 'myfavorite_id';
+const _primaryKey = 'favorite_id';
 
 //#region
 
@@ -16,7 +16,7 @@ let GetAll = async (filter, callback) => {
 };
 
 let Save = async (myfavorite, callback) => {    
-    myfavorite = AddDetaultValues(myfavorite, 'myfavorite_id', PreFix.Favorite, myfavorite.created_by);
+    myfavorite = AddDetaultValues(myfavorite, 'favorite_id', PreFix.Favorite, myfavorite.created_by);
     return await Add(_tableName, _primaryKey,myfavorite, callback);
 }
 

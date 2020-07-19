@@ -1,7 +1,10 @@
 import { GetBrandDataById, GetAllBrandDatas, SaveBrandData, UpdateBrandData, DeleteBrandData } from 'api/Data/Brand';
+import { GetAllManufactureData } from 'api/Data/Manufacture';
+import { ReturnObject, GetLookUpData } from 'api/Shared/Util';
+import { IsHasValue } from 'api/Shared/Util'
 
-let IsBrandValid = async (brandName, password, callback) => {
-    return await GetBrandDataById(brandName, async (brand) => {
+let IsBrandValid = async (brand_id, password, callback) => {
+    return await GetBrandDataById(brand_id, async (brand) => {
         if (brand.password === password) {
             return await callback({
                 'data': {
@@ -9,7 +12,7 @@ let IsBrandValid = async (brandName, password, callback) => {
                     BrandDisplayName: brand.firstName + ' ' + brand.lastName,
                     BrandType: brand.brandType,
                     CompanyId: brand.companyId,
-                    StoreId: brand.storeId,
+                    store_id: brand.store_id,
                     BrandProfileImage: brand.profileImageUrl
                 },
                 'Status': 200
@@ -39,8 +42,8 @@ let AddBrand = async (brand, callback) => {
     });
 }
 
-let UpdateBrand = async (key, brand, callback) => { 
-    return await UpdateBrandData(key, brand, async (brand) => {
+let UpdateBrand = async (brand_id, brand, callback) => { 
+    return await UpdateBrandData(brand_id, brand, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -55,9 +58,9 @@ let UpdateBrand = async (key, brand, callback) => {
     });
 }
 
-let DeleteBrand = async (key, callback) =>
+let DeleteBrand = async (brand_id, callback) =>
 {
-    return await DeleteBrandData(key, async (brand) => {
+    return await DeleteBrandData(brand_id, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -72,8 +75,8 @@ let DeleteBrand = async (key, callback) =>
     });
 };
 
-let GetBrand = async (brandName, callback) => {
-    return await GetBrandDataById(brandName, async (brand) => {
+let GetBrand = async (brand_id, callback) => {
+    return await GetBrandDataById(brand_id, async (brand) => {
         if (brand) {
             return await callback({
                 'data':brand,
@@ -104,4 +107,47 @@ let GetAllBrands = async (filter, callback) => {
     });
 };
 
-export { IsBrandValid, AddBrand, UpdateBrand, DeleteBrand, GetBrand, GetAllBrands };
+let BrandLookUp = async (brand_id, callback) => {
+    if(IsHasValue(brand_id)){
+        return await GetBrandDataById(brand_id, async (brand) => {            
+            if (IsHasValue(brand)) {
+                return await GetBrandHierarchyData(brand, callback);
+            } else {
+                return await callback({
+                    'data': null,
+                    'Status': 401
+                })
+            }
+        });
+    }else{
+        return await GetBrandHierarchyData(null, callback);
+    }   
+}
+
+const GetBrandHierarchyData = async (brand, callback) => {
+    let active_filter = { 'status': true };
+    let _lookup = {};
+
+    if (IsHasValue(brand)) {
+        _lookup.manufacture_id = brand.manufacture_id;
+        _lookup.brand_id = brand.brand_id;
+        _lookup.brand_name = brand.brand_name;
+        _lookup.company_id = brand.company_id;
+        _lookup.company_name = brand.company_name;
+        _lookup.store_id = brand.store_id;
+        _lookup.store_name = brand.store_name;
+        _lookup.description = brand.description;
+        _lookup.profile_image_url = brand.profile_image_url;
+        _lookup.status = brand.status;
+    }
+
+    GetAllManufactureData(active_filter, async (manufactures) => {
+        let _m = GetLookUpData(manufactures, 'manufacture_id', 'manufacture_name', _lookup.manufacture_id);
+        _lookup.manufactures = _m.list;
+        _lookup.manufacture_name = _m.label;
+
+        return await ReturnObject(callback, null, _lookup, 'GetBrandHierarchyData'); 
+    });
+}
+
+export { IsBrandValid, AddBrand, UpdateBrand, DeleteBrand, GetBrand, GetAllBrands, BrandLookUp };

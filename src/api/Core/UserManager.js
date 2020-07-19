@@ -1,34 +1,32 @@
-import { GetById, GetAll, Save, Update, Delete } from 'api/Data/User';
+import { GetUserDataById, GetAllUserData, SaveUserData, UpdateUserData, DeleteUserData } from 'api/Data/User';
 import { InsertLog } from 'api/Data/SessionLog';
-import { PreFix } from 'api/Shared/Constant/Enum';
-import { GetNewKey, IsHasValue } from 'api/Shared/Util';
+import { GetNewKey, IsHasValue, GetDate, ComparePassword, CreatePassword } from 'api/Shared/Util';
 
 let IsUserValid = async (userName, password, callback) => {
     let filter = {
         'user_name': userName
     };
     
-    return await GetAll(filter, async (users) => {
+    return await GetAllUserData(filter, async (users) => {
         let userExists = users.filter(function (o) { return o.user_name === userName; });
-        if (IsHasValue(userExists) && userExists.length > 0 && userExists[0].password === password) {
+        if (IsHasValue(userExists) && userExists.length > 0 && ComparePassword(password, userExists[0].password_salt, userExists[0].password)) {
             let _session = {                
                 session_token: GetNewKey(),
-                session_date: new Date()
+                session_date: GetDate()
             }
-
-            InsertLog(userExists[0].user_id + GetNewKey() , _session, async (session) => {
-                return await callback({
-                    'data': {
-                        UserName: userExists[0].userName,
-                        UserDisplayName: userExists[0].firstName + ' ' + userExists[0].lastName,
-                        UserType: userExists[0].userType,
-                        CompanyId: userExists[0].companyId,
-                        StoreId: userExists[0].storeId,
-                        UserProfileImage: userExists[0].profileImageUrl
-                    },
-                    'Status': 200
-                })
-            });            
+            AddSessionLog(userExists[0].user_id + GetNewKey() , _session);           
+            return await callback({
+                'data': {
+                    UserName: userExists[0].userName,
+                    UserDisplayName: userExists[0].firstName + ' ' + userExists[0].lastName,
+                    UserType: userExists[0].userType,
+                    CompanyId: userExists[0].companyId,
+                    store_id: userExists[0].store_id,
+                    UserProfileImage: userExists[0].profileImageUrl,
+                    Session_Token: _session.session_token
+                },
+                'Status': 200
+            })
         } else {
             return await callback({
                 'data': null,
@@ -38,9 +36,17 @@ let IsUserValid = async (userName, password, callback) => {
     });
 };
 
+let AddSessionLog = (session_id, session) => {
+    InsertLog(session_id, session, async (session) => {
+               
+    });
+}
+
 let AddUser = async (user, callback) => {
-    return await Save(user, async (user) => {
+    return await SaveUserData(user, async (user) => {
         if (user) {
+            //TODO: Send Confirmation email to user.
+
             return await callback({
                 'data': user,
                 'Status': 200
@@ -55,7 +61,7 @@ let AddUser = async (user, callback) => {
 }
 
 let UpdateUser = async (key, user, callback) => {
-    return await Update(key, user, async (user) => {
+    return await UpdateUserData(key, user, async (user) => {
         if (user) {
             return await callback({
                 'data': user,
@@ -71,7 +77,7 @@ let UpdateUser = async (key, user, callback) => {
 }
 
 let DeleteUser = async (key, callback) => {
-    return await Delete(key, async (user) => {
+    return await DeleteUserData(key, async (user) => {
         if (user) {
             return await callback({
                 'data': user,
@@ -87,7 +93,7 @@ let DeleteUser = async (key, callback) => {
 };
 
 let GetUser = async (userName, callback) => {
-    return await GetById(userName, async (user) => {
+    return await GetUserDataById(userName, async (user) => {
         if (user) {
             return await callback({
                 'data': user,
@@ -102,8 +108,41 @@ let GetUser = async (userName, callback) => {
     });
 }
 
+let ChangePassword = async (user_id, new_password, old_password, callback) => {
+    let filter = {
+        'user_id': user_id
+    };
+
+    return await GetAllUserData(filter, async (users) => {
+        let userExists = users.filter(function (o) { return o.user_id === user_id; });
+        if (IsHasValue(userExists) && userExists.length > 0 && ComparePassword(old_password, userExists[0].password_salt, userExists[0].password)) {
+            userExists[0].password = CreatePassword(new_password, userExists[0].password_salt);
+            return await UpdateUserData(user_id, userExists[0], async (user) => {
+                if (user) {
+                    //TODO: Send Confirmation email to user.
+
+                    return await callback({
+                        'data': user,
+                        'Status': 200
+                    })
+                } else {
+                    return await callback({
+                        'data': null,
+                        'Status': 401
+                    })
+                }
+            });
+        } else {
+            return await callback({
+                'data': null,
+                'Status': 401
+            })
+        }
+    });    
+}
+
 let GetAllUsers = async (filter, callback) => {
-    return await GetAll(filter, async (users) => {
+    return await GetAllUserData(filter, async (users) => {
         if (users) {
             return await callback({
                 'data': users,
@@ -118,4 +157,4 @@ let GetAllUsers = async (filter, callback) => {
     });
 };
 
-export { IsUserValid, AddUser, UpdateUser, DeleteUser, GetUser, GetAllUsers };
+export { IsUserValid, AddUser, UpdateUser, DeleteUser, GetUser, GetAllUsers, ChangePassword };

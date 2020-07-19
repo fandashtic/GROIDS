@@ -1,0 +1,125 @@
+.slick-track {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .slick-track {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .ant-carousel .slick-slide img {
+        height: 100vh !important;
+    }
+
+    .headerCard {
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        z-index: 20;
+        width: 100%;
+    }
+
+    .site-card-border-less-wrapper {
+        margin-top: 40px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .signin-button {
+        display: none;
+    }
+}
+
+.slick-slider {
+    margin-bottom: 0px;
+} 
+
+.ant-carousel .slick-slide img {
+    height: 250px;
+}
+
+.ant-carousel {
+    position: relative;
+    z-index: 10;
+}
+
+.headerCard {
+    position: absolute;
+    top: 110px;
+    left: 10px;
+    z-index: 20;
+    width: 100%;
+}
+
+.ant-card-head {
+    border: 0;
+}
+
+.ant-card-head-title {
+    text-align: center;
+    font-size: 32px;
+    padding-top: 40px;
+}
+
+.ant-card-body {
+    padding-top: 0px;
+}
+
+.site-card-border-less-wrapper {
+    margin-top: 180px;
+}
+
+.signin-button {
+    position: absolute;
+    z-index: 30;
+    top: 20px;
+    right: 60px;
+}
+
+.ant-form-horizontal .ant-row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.icon-sent {
+    position: absolute;
+    right: 18px;
+    top: 8px;
+    font-size: 30px;
+    color: #34b880;
+}
+
+.fd-card-logo {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    width: 70px;
+    top: -30px;
+    left: 43%;
+}
+
+.ant-btn-primary {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+}
+
+.ant-btn-primary:not([disabled]):not(.disabled):active {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+}
+
+.ant-btn-primary:focus {
+    background: #34b880 !important;
+    background-color: #34b880 !important;
+    border-color: #34b880 !important;
+}
+
+.ant-btn-primary:hover {
+    background: #74d8ae !important;
+    background-color: #74d8ae !important;
+    border-color: #74d8ae !important;
+}

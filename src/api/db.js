@@ -1,11 +1,12 @@
+import { DeCode } from 'api/Shared/Util';
 var AWS = require('aws-sdk');
-var config = require('./../../src/appConfig.json');
+var config = require('appConfig.json');
 
 let awsConfig = {
-    "region": "us-east-2",
-    "endpoint": "https://dynamodb.us-east-2.amazonaws.com",
-    "accessKeyId": config.db.ACCESS_KEY_ID,
-    "secretAccessKey": config.db.SECRET_ACCESS_KEY
+    "region": config.s3.region,
+    "endpoint": config.db.endpoint,
+    "accessKeyId": DeCode(config.db.key),
+    "secretAccessKey": DeCode(config.db.secretkey)
 };
 
 //amplify push

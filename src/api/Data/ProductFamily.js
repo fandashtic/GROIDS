@@ -2,7 +2,7 @@ import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
 import { AddDetaultValues, UpdateDetaultValues } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
-const _tableName = 'productfamilys';
+const _tableName = 'productfamilies';
 const _primaryKey = 'product_family_id';
 
 //#regionProductFamilyData
