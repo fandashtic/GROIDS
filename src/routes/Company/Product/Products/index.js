@@ -53,7 +53,7 @@ function Products() {
 
     const deletedData = (id) => {
         DeleteProductAPI(id, (res, err) => {
-            if (res) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
             } else {

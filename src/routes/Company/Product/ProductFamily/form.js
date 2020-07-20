@@ -1,4 +1,6 @@
-import React  from 'react';
+
+import React , { useState, useEffect } from 'react';
+import { ProductFamilyLookUpAPI } from 'api/Controller/Shared/ProductFamilyController';
 import {
     Form,
     Input,
@@ -6,17 +8,6 @@ import {
     Button,
     Card,
 } from 'antd';
-
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-    },
-];
 
 const formItemLayout = {
     labelCol: {
@@ -41,6 +32,15 @@ const status = [
 
 const ProductFrom = ({addData}) => {
     const [form] = Form.useForm();
+    let product_family_id = null;
+    const [LookUpData, setLookUpData] = useState({})
+
+    useEffect(() => {
+        ProductFamilyLookUpAPI(product_family_id, (data, err) => {
+            setLookUpData(data);
+        });
+
+    }, [product_family_id]);
 
     const onFinish = values => {
         values['company_id'] = "212435446"
@@ -81,7 +81,7 @@ const ProductFrom = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
                 <Form.Item
                     name="brand_name"
@@ -91,7 +91,7 @@ const ProductFrom = ({addData}) => {
                     ]}
 
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.brands} />
                 </Form.Item>
                 <Form.Item
                     name="product_category_name"
@@ -100,7 +100,7 @@ const ProductFrom = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your  Category!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.productCategories} />
                 </Form.Item>
                 <Form.Item
                     name="status"

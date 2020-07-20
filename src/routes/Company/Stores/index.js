@@ -25,7 +25,7 @@ const Index = () => {
     }
     useEffect(() => {
         apiInit()
-    }, [])
+    }, [view])
 
     const handleChange = (event) => {
         event.persist();
@@ -36,7 +36,7 @@ const Index = () => {
 
     const deletedData = (id) => {
         DeleteStoreAPI(id, (res, err) => {
-            if (res.status === 200) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
             } else {

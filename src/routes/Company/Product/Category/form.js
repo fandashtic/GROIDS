@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React , { useState, useEffect } from 'react';
+import { ProductCategoryLookUpAPI } from 'api/Controller/Shared/ProductCategoryController';
 import {
     Form,
     Input,
@@ -10,16 +12,6 @@ import {
 } from 'antd';
 //const { Option } = Select;
 
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-    },
-];
 
 const formItemLayout = {
     labelCol: {
@@ -44,6 +36,8 @@ const status = [
 
 const ProductFrom = ({addData}) => {
     const [form] = Form.useForm();
+    let category_id = null;
+    const [LookUpData, setLookUpData] = useState({})
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -56,9 +50,12 @@ const ProductFrom = ({addData}) => {
         addData(values)
     };
 
-    // const handleChange = (value) => {
-    //     console.log(`selected ${value}`);
-    // }
+    useEffect(() => {
+        ProductCategoryLookUpAPI(category_id, (data, err) => {
+            setLookUpData(data);
+        });
+
+    }, [category_id]);
 
     return (
         <Card className="gx-card" title="Product Form">
@@ -90,7 +87,7 @@ const ProductFrom = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
                 <Form.Item
                     name="brand_name"
@@ -100,7 +97,7 @@ const ProductFrom = ({addData}) => {
                     ]}
 
                 >
-                    <Cascader options={residences} />
+                    <Cascader options={LookUpData.brands} />
                 </Form.Item>
                 <Form.Item
                     name="status"

@@ -19,7 +19,7 @@ const  View = ({editableData,family,deletedData}) => {
         },
         {
             title: 'Manufacture',
-            dataIndex: 'manufacture_Name',
+            dataIndex: 'manufacture_name',
             key: 'manufacture_id',
         },
         {

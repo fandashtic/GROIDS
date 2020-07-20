@@ -43,7 +43,7 @@ function Brands() {
 
     const deletedData = (id) => {
         DeleteBrandAPI(id, (res, err) => {
-            if (res) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
             } else {
@@ -53,7 +53,7 @@ function Brands() {
     }
   const addData = data => {
         AddBrandAPI(data, (res, err) => {
-            if (res.status === 200) {
+            if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {
