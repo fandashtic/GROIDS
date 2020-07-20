@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {Col, Row} from "antd";
 
 import {Area, AreaChart, Line, LineChart, ResponsiveContainer, Tooltip} from "recharts";
@@ -9,10 +9,7 @@ import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 import OrderHistory from "../../../../components/dashboard/Stores/OrderHistory";
 //import {GetUsers} from 'api/controller/Shared/UserController'
 
-let filter =
-{
-  "status": true
-};
+
 
 const Company = () => {
   // useEffect(() => { 

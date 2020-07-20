@@ -14,8 +14,6 @@ class Index extends Component {
     }
     viewSignIn = () => {
         this.setState({ view: "signin" })
-       // this.props.history.push('/dashboard/company');
-
     }
 
     login = () => {
@@ -24,7 +22,6 @@ class Index extends Component {
 
     viewSignUp = () => {
         this.setState({ view: "signup" })
-       // this.props.history.push('/dashboard/company');
     }
     viewCompanySignUp = () => {
         this.setState({ view: "companyRegister" })
@@ -52,22 +49,22 @@ class Index extends Component {
             
             <Carousel effect="fade" dots={false} pauseOnHover={false} autoplay={true}>
                 <div>
-                    <img src="/gallery/daria-volkova-BMnX7L9G5xc-unsplash.jpg" />
+                    <img src="/gallery/daria-volkova-BMnX7L9G5xc-unsplash.jpg" alt="" />
                 </div>
                 <div>
-                    <img src="/gallery/maddi-bazzocco-Hz4FAtKSLKo-unsplash.jpg" />
+                    <img src="/gallery/maddi-bazzocco-Hz4FAtKSLKo-unsplash.jpg" alt=""/>
                 </div>
                 <div>
-                    <img src="/gallery/gemma-stpjHJGqZyw-unsplash.jpg" />
+                    <img src="/gallery/gemma-stpjHJGqZyw-unsplash.jpg" alt="" />
                 </div>
                 <div>
-                    <img src="/gallery/fikri-rasyid-ezeC8-clZSs-unsplash.jpg" />
+                    <img src="/gallery/fikri-rasyid-ezeC8-clZSs-unsplash.jpg" alt=""/>
                 </div>
                 <div>
-                    <img src="/gallery/erol-ahmed-leOh1CzRZVQ-unsplash.jpg" />
+                    <img src="/gallery/erol-ahmed-leOh1CzRZVQ-unsplash.jpg" alt="" />
                 </div>
                 <div>
-                    <img src="/gallery/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg" />
+                    <img src="/gallery/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg" alt="" />
                 </div>
             </Carousel>
             <Row className="headerCard" justify='center'>
@@ -185,7 +182,7 @@ class Index extends Component {
                             </Form>
                             </>): null }
                         </Card>
-                        <img className="fd-card-logo" src="/gallery/Fandashtic-logo.svg" /> 
+                        <img className="fd-card-logo" alt="" src="/gallery/Fandashtic-logo.svg" /> 
                     </div> 
                 </Col>
             </Row>
@@ -193,10 +190,10 @@ class Index extends Component {
             <Row className="signin-button">
                 <Col>
                     <Button type="primary">
-                        <span onClick={this.viewSignIn}>{view == "pincode" ? ( <>Sign in</>) : null }</span>
-                        <span onClick={this.viewSignUp}>{view == "signin" ? ( <>Sign up</>) : null }</span>
-                        <span onClick={this.viewPincode}>{view == "signup" ? ( <>Guest User</>) : null }</span>
-                        <span onClick={this.viewPincode}>{view == "companyRegister" ? (<>Guest User</>): null}</span>
+                        <span onClick={this.viewSignIn}>{view === "pincode" ? ( <>Sign in</>) : null }</span>
+                        <span onClick={this.viewSignUp}>{view === "signin" ? ( <>Sign up</>) : null }</span>
+                        <span onClick={this.viewPincode}>{view === "signup" ? ( <>Guest User</>) : null }</span>
+                        <span onClick={this.viewPincode}>{view === "companyRegister" ? (<>Guest User</>): null}</span>
                     </Button>
                     <Button className="register-btn" type="primary">
                         <span onClick={this.viewCompanySignUp}>Register</span>

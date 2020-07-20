@@ -1,9 +1,8 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect,useContext} from "react";
 import {Drawer, Layout} from "antd";
-
+import Context from "appRedux/context";
 import SidebarContent from "./SidebarContent";
-import {toggleCollapsedSideNav, updateWindowWidth} from "appRedux/actions/Setting";
+import {toggleCollapsedSideNav, updateWindowWidth} from "appRedux/actions/Template";
 import {
   NAV_STYLE_DRAWER,
   NAV_STYLE_FIXED,
@@ -12,30 +11,22 @@ import {
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   TAB_SIZE,
   THEME_TYPE_LITE
-} from "../../constants/ThemeSetting";
+} from "constants/ThemeSetting";
 
 const {Sider} = Layout;
 
 const Sidebar = () => {
-
-  const dispatch = useDispatch();
-
-  const {themeType, navCollapsed, width, navStyle} = useSelector(({settings}) => settings);
-
-
+ const { state,dispatch } = useContext(Context);
+ const {themeType,navCollapsed,navStyle,width} = state
   const onToggleCollapsedNav = () => {
-    dispatch(toggleCollapsedSideNav(!navCollapsed));
+    dispatch(toggleCollapsedSideNav(!navCollapsed, dispatch));
   };
-
   useEffect(() => {
     window.addEventListener('resize', () => {
-      dispatch(updateWindowWidth(window.innerWidth));
+      dispatch(updateWindowWidth(window.innerWidth, dispatch));
     })
   }, [dispatch]);
-
-
   let drawerStyle = "gx-collapsed-sidebar";
-
   if (navStyle === NAV_STYLE_FIXED) {
     drawerStyle = "";
   } else if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {

@@ -1,4 +1,6 @@
-import { IsProductValid, SaveProduct, UpdateProduct, DeleteProduct, GetProduct, GetAllProducts, ProductLookUp } from 'api/Core/ProductManager';
+import { 
+   // IsProductValid, 
+    SaveProduct, UpdateProduct, DeleteProduct, GetProduct, GetAllProducts, ProductLookUp } from 'api/Core/ProductManager';
 
 let AddProductAPI = async (product, callback) => {
     return await SaveProduct(product, callback);

@@ -1,5 +1,9 @@
-import { docClient, dynamodb } from 'api/db';
-import { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, SortByCreatedOn } from 'api/Shared/Util';
+import { docClient, 
+   // dynamodb
+ } from 'api/db';
+import { GetUpdateExpressionAndAttributeValuesAndNames, ReturnObject, GetKey, 
+    //SortByCreatedOn 
+} from 'api/Shared/Util';
 
 // let CreateTable = async (tableName, keyColumn, callback) => {
 //     var params = {

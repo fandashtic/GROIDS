@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { RunUnitTest } from 'api/UnitTest/TestData';
 import {
-  Form,
-  Input,
-  Cascader,
-  Button,
-  Card,
+  // Form,
+  // Input,
+  // Cascader,
+  // Button,
+  // Card,
   Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import { UploadFile } from 'api/Shared/FileUpload';
 import { PreFix } from 'api/Shared/Constant/Enum';
-import { IsHasValue, GetNewKey, GetFileExtn, EnCode, DeCode } from 'api/Shared/Util';
+import { IsHasValue, GetNewKey, GetFileExtn,
+  //  EnCode, 
+  //  DeCode 
+  } from 'api/Shared/Util';
 
 const UnitTest = () => {
 
@@ -25,7 +28,6 @@ const UnitTest = () => {
       let fileName = GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name);
       file.name = fileName;
       UploadFile(file, PreFix.Product, (res) => {
-        //console.log(res);
         console.log(res.data.bucket);
         console.log(res.data.key);
         console.log(res.data.location);

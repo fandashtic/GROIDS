@@ -1,26 +1,18 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
-
+import Context from "appRedux/context";
 import CustomScrollbars from "util/CustomScrollbars";
 import SidebarLogo from "./SidebarLogo";
-//import UserProfile from "./UserProfile";
 import {
-  NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
-  NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   THEME_TYPE_LITE
-} from "../../constants/ThemeSetting";
+} from "constants/ThemeSetting";
 import IntlMessages from "../../util/IntlMessages";
-import { useSelector } from "react-redux";
 
 const SidebarContent = () => {
-  let {themeType, pathname } = useSelector(({ settings }) => settings);
-  const getNoHeaderClass = (navStyle) => {
-    if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) {
-      return "gx-no-header-notifications";
-    }
-    return "";
-  };
+  const { state } = useContext(Context);
+  const {themeType, pathname} = state
+
   const selectedKeys = pathname.substr(1);
   const defaultOpenKeys = selectedKeys.split('/')[1];
   return (

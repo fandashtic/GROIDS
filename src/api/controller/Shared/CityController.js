@@ -1,5 +1,7 @@
 
-import { IsCityValid, AddCity, UpdateCity, DeleteCity, GetCity, GetAllCities, CityLookUp } from 'api/Core/CityManager';
+import { 
+    //IsCityValid, 
+    AddCity, UpdateCity, DeleteCity, GetCity, GetAllCities, CityLookUp } from 'api/Core/CityManager';
 
 let AddCityAPI = async (city, callback) => {
     return await AddCity(city, callback);

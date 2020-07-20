@@ -1,10 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import {Layout} from "antd";
 
 import Sidebar from "../Sidebar/index";
 import Topbar from "../Topbar/index";
 import App from "routes/index";
-import {useSelector} from "react-redux";
 import {
   NAV_STYLE_ABOVE_HEADER,
   NAV_STYLE_BELOW_HEADER,
@@ -17,14 +16,15 @@ import {
   NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   TAB_SIZE
-} from "../../constants/ThemeSetting";
+} from "constants/ThemeSetting";
+import Context from "appRedux/context";
 import {useRouteMatch} from "react-router-dom";
 
 const {Content} = Layout;
 
 const MainApp = () => {
-
-  const {width, navStyle} = useSelector(({settings}) => settings);
+  const { state } = useContext(Context);
+  const {navStyle,width} = state
   const match = useRouteMatch();
 
   const getContainerClass = (navStyle) => {
@@ -65,7 +65,7 @@ const MainApp = () => {
 
 
   return (
-    <Layout className="gx-app-layout">
+   <Layout className="gx-app-layout">
       {getSidebar(navStyle, width)}
       <Layout>
         <Topbar/>

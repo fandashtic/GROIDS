@@ -1,18 +1,11 @@
-import React, {memo, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import URLSearchParams from 'url-search-params';
-import {Redirect, Route, Switch, useLocation, useRouteMatch} from "react-router-dom";
-import {ConfigProvider} from 'antd';
-import {IntlProvider} from "react-intl";
+import React, { memo, useEffect } from "react";
+import { Redirect, Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
+import { ConfigProvider } from 'antd';
+import { IntlProvider } from "react-intl";
 
 import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
-import SignIn from "../SignIn";
-import SignUp from "../SignUp";
 import Website from "../Website";
-import {setInitUrl} from "appRedux/actions/Auth";
-import {onLayoutTypeChange, onNavStyleChange, setThemeType} from "appRedux/actions/Setting";
-
 
 import {
   LAYOUT_TYPE_BOXED,
@@ -23,11 +16,11 @@ import {
   NAV_STYLE_DARK_HORIZONTAL,
   NAV_STYLE_DEFAULT_HORIZONTAL,
   NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
-} from "../../constants/ThemeSetting";
+  NAV_STYLE_FIXED
+} from "constants/ThemeSetting";
 
 const authUser = true
-
-const RestrictedRoute = ({component: Component, location, authUser, ...rest}) =>
+const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) =>
   <Route
     {...rest}
     render={props =>
@@ -36,35 +29,24 @@ const RestrictedRoute = ({component: Component, location, authUser, ...rest}) =>
         : <Redirect
           to={{
             pathname: '/product',
-            state: {from: location}
+            state: { from: location }
           }}
         />}
-/>;
+  />;
 
 const App = (props) => {
-
-  const dispatch = useDispatch();
-  const {locale, navStyle, layoutType} = useSelector(({settings}) => settings);
-  const { initURL} = useSelector(({auth}) => auth);
-
+  const navStyle = NAV_STYLE_FIXED
+  const locale = {
+    languageId: 'english',
+    locale: 'en',
+    name: 'English',
+    icon: 'us'
+  }
+  const layoutType = LAYOUT_TYPE_FULL
   const location = useLocation();
   const match = useRouteMatch();
 
   useEffect(() => {
-        if (initURL === '') {
-      dispatch(setInitUrl(location.pathname));
-    }
-    const params = new URLSearchParams(location.search);
-
-    if (params.has("theme")) {
-      dispatch(setThemeType(params.get('theme')));
-    }
-    if (params.has("nav-style")) {
-      dispatch(onNavStyleChange(params.get('nav-style')));
-    }
-    if (params.has("layout-type")) {
-      dispatch(onLayoutTypeChange(params.get('layout-type')));
-    }
     setLayoutType(layoutType);
     setNavStyle(navStyle);
   });
@@ -134,11 +116,11 @@ const App = (props) => {
         locale={currentAppLocale.locale}
         messages={currentAppLocale.messages}>
         <Switch>
-          <Route exact path='/' component={Website}/>
-          <Route exact path='/signin' component={SignIn}/>
-          <Route exact path='/signup' component={SignUp}/>
+          <Route exact path='/' component={Website} />
+          {/* <Route exact path='/signin' component={SignIn} />
+          <Route exact path='/signup' component={SignUp} /> */}
           <RestrictedRoute path={`${match.url}`} authUser={authUser} location={location}
-                           component={MainApp}/>
+            component={MainApp} />
         </Switch>
       </IntlProvider>
     </ConfigProvider>

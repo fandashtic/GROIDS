@@ -1,4 +1,6 @@
-import { ProductFamilyLookUp, IsProductFamilyValid, AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
+import { ProductFamilyLookUp,
+     //IsProductFamilyValid, 
+     AddProductFamily, UpdateProductFamily, DeleteProductFamily, GetProductFamily, GetAllProductFamilies } from 'api/Core/ProductFamilyManager';
 
 let AddProductFamilyAPI = async (product_family, callback) => {
     return await AddProductFamily(product_family, callback);

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Drawer, message} from "antd";
+import {Drawer, message} from "antd";
 import CustomScrollbars from "util/CustomScrollbars";
 import IntlMessages from "util/IntlMessages";
 import Brand from "./Brand";

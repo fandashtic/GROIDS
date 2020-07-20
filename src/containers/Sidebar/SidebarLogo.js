@@ -1,8 +1,7 @@
-import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React,{useContext} from "react";
 import {Link} from "react-router-dom";
 
-import {onNavStyleChange, toggleCollapsedSideNav} from "appRedux/actions/Setting";
+import {onNavStyleChange, toggleCollapsedSideNav} from "appRedux/actions/Template";
 import {
   NAV_STYLE_DRAWER,
   NAV_STYLE_FIXED,
@@ -10,13 +9,13 @@ import {
   NAV_STYLE_NO_HEADER_MINI_SIDEBAR,
   TAB_SIZE,
   THEME_TYPE_LITE
-} from "../../constants/ThemeSetting";
-
+} from "constants/ThemeSetting";
+import Context from "appRedux/context";
 
 const SidebarLogo = () => {
-  const dispatch = useDispatch();
-  const {width, themeType, navCollapsed} = useSelector(({settings}) => settings);
-  let navStyle = useSelector(({settings}) => settings.navStyle);
+  const { state,dispatch } = useContext(Context);
+  const {width,themeType,navCollapsed} = state
+  let navStyle = state.navStyle
   if (width < TAB_SIZE && navStyle === NAV_STYLE_FIXED) {
     navStyle = NAV_STYLE_DRAWER;
   }
@@ -27,13 +26,13 @@ const SidebarLogo = () => {
           className={`gx-icon-btn icon icon-${navStyle === NAV_STYLE_MINI_SIDEBAR ? 'menu-unfold' : 'menu-fold'} ${themeType !== THEME_TYPE_LITE ? 'gx-text-white' : ''}`}
           onClick={() => {
             if (navStyle === NAV_STYLE_DRAWER) {
-              dispatch(toggleCollapsedSideNav(!navCollapsed));
+              dispatch(toggleCollapsedSideNav(!navCollapsed,dispatch));
             } else if (navStyle === NAV_STYLE_FIXED) {
-              dispatch(onNavStyleChange(NAV_STYLE_MINI_SIDEBAR))
+              dispatch(onNavStyleChange(NAV_STYLE_MINI_SIDEBAR,dispatch))
             } else if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
-              dispatch(toggleCollapsedSideNav(!navCollapsed));
+              dispatch(toggleCollapsedSideNav(!navCollapsed,dispatch));
             } else {
-              dispatch(onNavStyleChange(NAV_STYLE_FIXED))
+              dispatch(onNavStyleChange(NAV_STYLE_FIXED,dispatch))
             }
           }}
         />

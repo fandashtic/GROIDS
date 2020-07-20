@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import useForm from 'components/Shared/Useform';
+import React from 'react';
 import {
     Form,
     Input,
     Cascader,
-    Select,
+   // Select,
     Button,
     Card,
-    Upload
+  // Upload
 } from 'antd';
-import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-const { Option } = Select;
+//const { Option } = Select;
 
 const residences = [
     {
@@ -58,9 +56,9 @@ const ProductFrom = ({addData}) => {
         addData(values)
     };
 
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
+    // const handleChange = (value) => {
+    //     console.log(`selected ${value}`);
+    // }
 
     return (
         <Card className="gx-card" title="Product Form">

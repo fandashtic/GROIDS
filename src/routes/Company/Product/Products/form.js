@@ -9,16 +9,6 @@ import {
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {ProductLookUpAPI} from 'api/Controller/Shared/ProductController';
-// const residences = [
-//     {
-//         value: 'zhejiang',
-//         label: 'Zhejiang',
-//     },
-//     {
-//         value: 'jiangsu',
-//         label: 'Jiangsu',
-//     },
-// ];
 
 const status = [
     {
@@ -64,7 +54,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
         ProductLookUpAPI(product_id,(res,err)=>{
                 console.log(">>>>",res)
             setSelectValues(res)})
-    },[ProductLookUpAPI])
+    },[])
 
     const handleChange = (value) => {
         console.log(`selected ${value}`);

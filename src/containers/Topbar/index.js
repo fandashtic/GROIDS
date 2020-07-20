@@ -1,17 +1,15 @@
-import React from "react";
+import React,{useContext} from "react";
 import {Layout, Popover,Avatar} from "antd";
 import {Link,useHistory} from "react-router-dom";
-import { toggleCollapsedSideNav} from "../../appRedux/actions/Setting";
+import { toggleCollapsedSideNav} from "appRedux/actions/Template";
+import Context from "appRedux/context";
 
-import {NAV_STYLE_DRAWER, NAV_STYLE_FIXED, NAV_STYLE_MINI_SIDEBAR, TAB_SIZE} from "../../constants/ThemeSetting";
-import {useDispatch, useSelector} from "react-redux";
-import {userSignOut} from "appRedux/actions/Auth";
+import {NAV_STYLE_DRAWER, NAV_STYLE_FIXED, NAV_STYLE_MINI_SIDEBAR, TAB_SIZE} from "constants/ThemeSetting";
 
 const {Header} = Layout;
 const Topbar = () => {
-
-  const { width, navCollapsed, navStyle} = useSelector(({settings}) => settings);
-  const dispatch = useDispatch();
+  const { state ,dispatch} = useContext(Context);
+  const {width,navCollapsed,navStyle} = state 
   const history = useHistory();
   const userMenuOptions = (
     <ul className="gx-user-popover">
@@ -32,7 +30,7 @@ const Topbar = () => {
         <div className="gx-linebar gx-mr-3">
           <i className="gx-icon-btn icon icon-menu"
              onClick={() => {
-               dispatch(toggleCollapsedSideNav(!navCollapsed));
+               dispatch(toggleCollapsedSideNav(!navCollapsed,dispatch));
              }}
           />
         </div> : null}

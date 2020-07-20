@@ -1,5 +1,4 @@
 import React from 'react';
-import useForm from 'components/Shared/Useform';
 import {
     Form,
     Input,
@@ -29,16 +28,6 @@ const formItemLayout = {
         sm: { span: 16 },
     },
 };
-const status = [
-    {
-        value: 'Active',
-        label: 'Active',
-    },
-    {
-        value: 'InActive',
-        label: 'InActive',
-    },
-];
 
 const From = ({addData}) => {
 

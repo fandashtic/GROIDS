@@ -8,9 +8,7 @@ import {
     Cascader
 } from 'antd';
 
-import useForm from 'components/Shared/Useform';
-import {AddManufactureAPI} from 'api/Controller/Shared/ManufactureController';
-import {GetDate} from 'api/Shared/Util';
+
 
 const formItemLayout = {
     labelCol: {

@@ -1,5 +1,7 @@
 import { Get, All, Add, Edit, Remove } from 'api/Shared/Reposidery';
-import { AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, IsHasValue } from 'api/Shared/Util';
+import { AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt, 
+    //IsHasValue
+ } from 'api/Shared/Util';
 import { PreFix } from 'api/Shared/Constant/Enum';
 
 const _tableName = 'users';

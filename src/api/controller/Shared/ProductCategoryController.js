@@ -1,5 +1,7 @@
 
-import { ProductCategoryLookUp, IsProductCategoryValid, AddProductCategory, UpdateProductCategory, DeleteProductCategory, GetProductCategory, GetAllProductCategories } from 'api/Core/ProductCategoryManager';
+import { ProductCategoryLookUp, 
+    //IsProductCategoryValid, 
+    AddProductCategory, UpdateProductCategory, DeleteProductCategory, GetProductCategory, GetAllProductCategories } from 'api/Core/ProductCategoryManager';
 
 let AddProductCategoryAPI = async (productCategory, callback) => {
     return await AddProductCategory(productCategory, callback);

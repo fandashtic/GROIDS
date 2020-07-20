@@ -6,21 +6,11 @@ import {
     Button,
     PageHeader,
     Upload,
-    message
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {StoreLookUpAPI} from 'api/Controller/Shared/StoreController';
 import {StoreType} from 'api/Shared/Constant/Enum'
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-    },
-];
+let store_id = null
 
 const formItemLayout = {
     labelCol: {
@@ -56,11 +46,11 @@ const FormView = ({addData}) => {
     };
 
     useEffect(()=>{
-        StoreLookUpAPI(null, (res,err)=>{
+        StoreLookUpAPI(store_id, (res,err)=>{
                 setSelectValues(res)
             
         })
-    })
+    },[])
     return (
         <>
             <PageHeader className="site-page-header" title="Stores Form" ></PageHeader>

@@ -1,5 +1,7 @@
 import { uploadFile, deleteFile } from 'react-s3';
-import { IsHasValue, EnCode, DeCode } from 'api/Shared/Util';
+import { IsHasValue, 
+    //EnCode, 
+    DeCode } from 'api/Shared/Util';
 var config = require('appConfig.json');
 
 const s3_config = {
