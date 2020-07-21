@@ -7,6 +7,7 @@ import Product from "./Company/Product"
 import Stores from "./Company/Stores"
 import Settings from "./Company/Setttings"
 import UnitTest from "./UnitTest"
+
 const App = ({match}) => (
   <div className="gx-main-content-wrapper">
     <Switch>

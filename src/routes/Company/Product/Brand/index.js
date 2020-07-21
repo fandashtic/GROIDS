@@ -51,6 +51,7 @@ function Brands() {
             }
         })
     }
+    
   const addData = data => {
         AddBrandAPI(data, (res, err) => {
             if (res.Status === 200) {

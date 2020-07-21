@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import {SWITCH_LANGUAGE, TOGGLE_COLLAPSED_NAV, WINDOW_WIDTH} from "constants/ActionTypes";
 import {LAYOUT_TYPE, NAV_STYLE, THEME_COLOR, THEME_TYPE} from "../../constants/ThemeSetting";
 
@@ -6,7 +5,7 @@ export function toggleCollapsedSideNav(navCollapsed,dispatch) {
   return {type: TOGGLE_COLLAPSED_NAV, navCollapsed};
 }
 
- function updateWindowWidth(width,dispatch) {
+ export function updateWindowWidth(width,dispatch) {
   dispatch({type: WINDOW_WIDTH, payload:width});
 }
 
@@ -33,5 +32,3 @@ export function switchLanguage(locale,dispatch) {
     payload: locale
   });
 }
-
-export {updateWindowWidth}
