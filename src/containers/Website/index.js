@@ -3,7 +3,7 @@ import { Row, Col, Carousel, Card, Form, Input, Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
-import { GetManufactures } from 'api/Shared/Master/Manufactures';
+import { GetManufactures } from 'api/Shared/Master/ManufactureController';
 
 
 const WebSite = () => {

@@ -40,7 +40,7 @@ const { AddSchemeAPI, UpdateSchemeAPI, DeleteSchemeAPI, GetSchemeAPI, GetSchemes
 //#region Consumer Controller
 
 const { AddCartAPI, UpdateCartAPI, DeleteCartAPI, GetCartAPI, GetCartsAPI } = require('./src/Controller/Consumer/CartController');
-const { AddFavoriteAPI, UpdateFavoriteAPI, DeleteFavoriteAPI, GetFavoritesAPI } = require('./src/Controller/Consumer/FavoriteController');
+const { AddFavoriteAPI, UpdateFavoriteAPI, DeleteFavoriteAPI, GetFavoriteAPI, GetFavoritesAPI } = require('./src/Controller/Consumer/FavoriteController');
 
 //#endregion Consumer Controller
 
@@ -538,7 +538,7 @@ exports.GetProductFamily = functions.https.onRequest((request, response) => {
   }
 });
 
-exports.GetProductFamiless = functions.https.onRequest((request, response) => {
+exports.GetProductFamilies = functions.https.onRequest((request, response) => {
   if (request.body !== null && request.body !== undefined && request.body.filter != null && request.body.filter !== undefined) {
     GetProductFamiliesAPI(request.body.filter, (data, err) => {
       ResponseAPI(response, data, err);
@@ -666,7 +666,7 @@ exports.GetStore = functions.https.onRequest((request, response) => {
   }
 });
 
-exports.GetStore = functions.https.onRequest((request, response) => {
+exports.GetStores = functions.https.onRequest((request, response) => {
   if (request.body !== null && request.body !== undefined && request.body.filter != null && request.body.filter !== undefined) {
     GetStoresAPI(request.body.filter, (data, err) => {
       ResponseAPI(response, data, err);
@@ -1222,9 +1222,9 @@ exports.DeleteFavorite = functions.https.onRequest((request, response) => {
   }
 });
 
-exports.GetFavorites = functions.https.onRequest((request, response) => {
+exports.GetFavorite = functions.https.onRequest((request, response) => {
   if (request.body !== null && request.body !== undefined && request.body.filter != null && request.body.filter !== undefined) {
-    GetFavoritesAPI(request.body.filter, (data, err) => {
+    GetFavoriteAPI(request.body.filter, (data, err) => {
       ResponseAPI(response, data, err);
     });
   } else {
