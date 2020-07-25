@@ -10,6 +10,6 @@
         "dirName": "groids",
         "bucketName":"amplify-groids-dev-111249-deployment"
     },
-    "apibaseurl": "http://localhost:5001/fandashticgroidsapi/us-central1/",
+    "apibaseurl": "http://localhost:5001/fandashticgroidsapi/us-central1",
     "Pagination":10
 }

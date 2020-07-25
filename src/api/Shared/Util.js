@@ -65,7 +65,7 @@ let IsHasValue = (data) => {
     return false;
 };
 
-let GetLookUpData = (dataList, idCoulmn, dataLabel, selectedValue) => {
+let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) => {
     let result = { list: [], label: '' };
     let _isSelected = false;
     dataList.forEach(l => {
@@ -78,7 +78,8 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, selectedValue) => {
             {
                 label: l[dataLabel],
                 value: l[idCoulmn],
-                isSelected: _isSelected
+                isSelected: _isSelected,
+                depend: IsHasValue(dependCol) ? l[dependCol] : ''
             }
         )
     });
@@ -100,10 +101,7 @@ let UpdateDetaultValues = (tableData, modified_by) => {
 }
 
 let SortByCreatedOn = (tableData) => {
-    return tableData;
-    //    .sort(function (x, y) {
-    //         return x.created_on - y.created_on;
-    //     });
+    return DeCode(tableData);
 }
 
 let AppendLeadingZeroes = (n) => {
@@ -154,6 +152,7 @@ let CreatePasswordSalt = () => {
 let GetFileExtn = (fileName) => {
     return fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
 }
+
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt,
