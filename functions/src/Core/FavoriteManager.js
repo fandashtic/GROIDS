@@ -1,16 +1,16 @@
-const { GetById, GetAll, Save, Update, Delete } = require('./../Data/MyFavorite');
+const { GetById, GetAll, Save, Update, Delete } = require('./../Data/Favorite');
 
-let IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
-    return await GetById(myFavoriteName, async (myFavorite) => {
-        if (myFavorite.password === password) {
+let IsFavoriteValid = async (favorite_name, password, callback) => {
+    return await GetById(favorite_name, async (favorite) => {
+        if (favorite.password === password) {
             return await callback({
                 'data': {
-                    MyFavoriteName: myFavorite.myFavoriteName,
-                    MyFavoriteDisplayName: myFavorite.firstName + ' ' + myFavorite.lastName,
-                    MyFavoriteType: myFavorite.myFavoriteType,
-                    CompanyId: myFavorite.companyId,
-                    store_id: myFavorite.store_id,
-                    MyFavoriteProfileImage: myFavorite.profileImageUrl
+                    FavoriteName: favorite.favorite_name,
+                    FavoriteDisplayName: favorite.firstName + ' ' + favorite.lastName,
+                    FavoriteType: favorite.favoriteType,
+                    CompanyId: favorite.companyId,
+                    store_id: favorite.store_id,
+                    FavoriteProfileImage: favorite.profileImageUrl
                 },
                 'Status': 200
             })
@@ -23,11 +23,11 @@ let IsMyFavoriteValid = async (myFavoriteName, password, callback) => {
     });
 };
 
-let AddMyFavorite = async (myFavorite, callback) => {
-    return await Save(myFavorite, async (myFavorite) => {
-        if (myFavorite) {
+let AddFavorite = async (favorite, callback) => {
+    return await Save(favorite, async (favorite) => {
+        if (favorite) {
             return await callback({
-                'data': myFavorite,
+                'data': favorite,
                 'Status': 200
             })
         } else {
@@ -39,11 +39,11 @@ let AddMyFavorite = async (myFavorite, callback) => {
     });
 }
 
-let UpdateMyFavorite = async (key, myFavorite, callback) => {
-    return await Update(key, myFavorite, async (myFavorite) => {
-        if (myFavorite) {
+let UpdateFavorite = async (key, favorite, callback) => {
+    return await Update(key, favorite, async (favorite) => {
+        if (favorite) {
             return await callback({
-                'data': myFavorite,
+                'data': favorite,
                 'Status': 200
             })
         } else {
@@ -55,11 +55,11 @@ let UpdateMyFavorite = async (key, myFavorite, callback) => {
     });
 }
 
-let DeleteMyFavorite = async (key, callback) => {
-    return await Delete(key, async (myFavorite) => {
-        if (myFavorite) {
+let DeleteFavorite = async (key, callback) => {
+    return await Delete(key, async (favorite) => {
+        if (favorite) {
             return await callback({
-                'data': myFavorite,
+                'data': favorite,
                 'Status': 200
             })
         } else {
@@ -71,11 +71,11 @@ let DeleteMyFavorite = async (key, callback) => {
     });
 };
 
-let GetMyFavorite = async (myFavoriteName, callback) => {
-    return await GetById(myFavoriteName, async (myFavorite) => {
-        if (myFavorite) {
+let GetFavorite = async (favorite_name, callback) => {
+    return await GetById(favorite_name, async (favorite) => {
+        if (favorite) {
             return await callback({
-                'data': myFavorite,
+                'data': favorite,
                 'Status': 200
             })
         } else {
@@ -87,11 +87,11 @@ let GetMyFavorite = async (myFavoriteName, callback) => {
     });
 }
 
-let GetAllMyFavorites = async (filter, callback) => {
-    return await GetAll(filter, async (myFavorites) => {
-        if (myFavorites) {
+let GetAllFavorites = async (filter, callback) => {
+    return await GetAll(filter, async (favorites) => {
+        if (favorites) {
             return await callback({
-                'data': myFavorites,
+                'data': favorites,
                 'Status': 200
             })
         } else {
@@ -103,4 +103,4 @@ let GetAllMyFavorites = async (filter, callback) => {
     });
 };
 
-module.exports = { IsMyFavoriteValid, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite, GetMyFavorite, GetAllMyFavorites };
+module.exports = { IsFavoriteValid, AddFavorite, UpdateFavorite, DeleteFavorite, GetFavorite, GetAllFavorites };

@@ -1,19 +1,19 @@
-const{ GetAllMyFavorites, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite } = require('./../../Core/FavoriteManager');
+const{ GetAllFavorites, AddFavorite, UpdateFavorite, DeleteFavorite } = require('./../../Core/FavoriteManager');
 
-let AddMyFavoriteAPI = async (myFavorite, callback) => {
-    return await AddMyFavorite(myFavorite, callback);
+let AddFavoriteAPI = async (favorite, callback) => {
+    return await AddFavorite(favorite, callback);
 };
 
-let UpdateMyFavoriteAPI = async (myFavoriteId, myFavorite, callback) => {
-    return await UpdateMyFavorite(myFavoriteId, myFavorite, callback);
+let UpdateFavoriteAPI = async (favorite_id, favorite, callback) => {
+    return await UpdateFavorite(favorite_id, favorite, callback);
 };
 
-let DeleteMyFavoriteAPI = async (myFavoriteId, callback) => {
-    return await DeleteMyFavorite(myFavoriteId, callback);
+let DeleteFavoriteAPI = async (favorite_id, callback) => {
+    return await DeleteFavorite(favorite_id, callback);
 };
 
-let GetMyFavoritesAPI = async (filter, callback) => {
-    return await GetAllMyFavorites(filter, callback);
+let GetFavoritesAPI = async (filter, callback) => {
+    return await GetAllFavorites(filter, callback);
 };
 
-module.exports = { AddMyFavoriteAPI, UpdateMyFavoriteAPI, DeleteMyFavoriteAPI, GetMyFavoritesAPI };
+module.exports = { AddFavoriteAPI, UpdateFavoriteAPI, DeleteFavoriteAPI, GetFavoritesAPI };

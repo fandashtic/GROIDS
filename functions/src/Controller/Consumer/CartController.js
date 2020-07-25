@@ -1,19 +1,23 @@
-const{ GetAllCarts, AddCart, UpdateCart, DeleteCart } = require('./../../Core/CartManager');
+const{ GetCart, GetAllCarts, AddCart, UpdateCart, DeleteCart } = require('../../Core/CartManager');
 
 let AddCartAPI = async (cart, callback) => {
     return await AddCart(cart, callback);
 };
 
-let UpdateCartAPI = async (cartId, cart, callback) => {
-    return await UpdateCart(cartId, cart, callback);
+let UpdateCartAPI = async (cart_id, cart, callback) => {
+    return await UpdateCart(cart_id, cart, callback);
 };
 
-let DeleteCartAPI = async (cartId, callback) => {
-    return await DeleteCart(cartId, callback);
+let DeleteCartAPI = async (cart_id, callback) => {
+    return await DeleteCart(cart_id, callback);
+};
+
+let GetCartAPI = async (cart_id, callback) => {
+    return await GetCart(cart_id, callback);
 };
 
 let GetCartsAPI = async (filter, callback) => {
     return await GetAllCarts(filter, callback);
 };
 
-module.exports = { AddCartAPI, UpdateCartAPI, DeleteCartAPI, GetCartsAPI };
+module.exports = { AddCartAPI, UpdateCartAPI, DeleteCartAPI, GetCartAPI, GetCartsAPI };

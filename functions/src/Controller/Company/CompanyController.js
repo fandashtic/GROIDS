@@ -1,19 +1,23 @@
-const{ GetAllCompanies, AddCompany, UpdateCompany, DeleteCompany } = require('./../../Core/CompanyManager');
+const{ IsCompanyValid, AddCompany, UpdateCompany, DeleteCompany, GetCompany, GetAllCompanies } = require('./../../Core/CompanyManager');
 
 let AddCompanyAPI = async (company, callback) => {
     return await AddCompany(company, callback);
 };
 
-let UpdateCompanyAPI = async (companyId, company, callback) => {
-    return await UpdateCompany(companyId, company, callback);
+let UpdateCompanyAPI = async (company_id, company, callback) => {
+    return await UpdateCompany(company_id, company, callback);
 };
 
-let DeleteCompanyAPI = async (companyId, callback) => {
-    return await DeleteCompany(companyId, callback);
+let DeleteCompanyAPI = async (company_id, callback) => {
+    return await DeleteCompany(company_id, callback);
+};
+
+let GetCompanyAPI = async (company_id, callback) => {
+    return await GetCompany(company_id, callback);
 };
 
 let GetCompaniesAPI = async (filter, callback) => {
     return await GetAllCompanies(filter, callback);
 };
 
-module.exports = { AddCompanyAPI, UpdateCompanyAPI, DeleteCompanyAPI, GetCompaniesAPI };
+module.exports = { AddCompanyAPI, UpdateCompanyAPI, DeleteCompanyAPI, GetCompanyAPI, GetCompaniesAPI };

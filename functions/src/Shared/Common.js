@@ -1,6 +1,6 @@
-const { SaveUserData} = require('./Data/User');
-const { ApplicationType, PreFix = require('./Shared/Constant/Enum');
-const { GetNewKey, CreatePassword, CreatePasswordSalt, IsHasValue = require('./Shared/Util');
+const { SaveUserData } = require('./../Data/User');
+const { ApplicationType, PreFix } = require('./../Shared/Constant/Enum');
+const { GetNewKey, CreatePassword, CreatePasswordSalt, IsHasValue } = require('./../Shared/Util');
 
 let CreateDynamicUser = (sourceData, type) => {
     let user = {};

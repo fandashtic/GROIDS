@@ -1,4 +1,4 @@
-let MyFavorite = {
+let Favorite = {
     favorite_id: String,
     favorite_name: String,
     company_id: String,
@@ -12,4 +12,4 @@ let MyFavorite = {
     modified_by: String
 }
 
-module.exports = { MyFavorite };
+module.exports = { Favorite };

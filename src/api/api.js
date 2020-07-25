@@ -1,4 +1,4 @@
-import config from 'appConfig.json';
+//import config from 'appConfig.json';
 import axios from 'axios';
 
 export default axios.create({

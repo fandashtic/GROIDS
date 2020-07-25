@@ -15,7 +15,7 @@ let DeleteProductCategoryAPI = async (product_category_id, callback) => {
     return await DeleteProductCategory(product_category_id, callback);
 };
 
-let GetProductCategorysAPI = async (filter, callback) => {
+let GetProductCategoriesAPI = async (filter, callback) => {
     return await GetAllProductCategories(filter, callback);
 };
 
@@ -27,4 +27,4 @@ let ProductCategoryLookUpAPI = async (product_category_id, callback) => {
     return await ProductCategoryLookUp(product_category_id, callback);
 };
 
-module.exports = { GetProductCategoryAPI, ProductCategoryLookUpAPI, AddProductCategoryAPI, UpdateProductCategoryAPI, DeleteProductCategoryAPI, GetProductCategorysAPI };
+module.exports = { GetProductCategoryAPI, ProductCategoryLookUpAPI, AddProductCategoryAPI, UpdateProductCategoryAPI, DeleteProductCategoryAPI, GetProductCategoriesAPI };

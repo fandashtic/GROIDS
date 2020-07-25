@@ -1,4 +1,4 @@
-const{ GetAllStates, AddState, UpdateState, DeleteState, StateLookUp } = require('./../../Core/StateManager');
+const{ GetState, GetAllStates, AddState, UpdateState, DeleteState, StateLookUp } = require('./../../Core/StateManager');
 
 let AddStateAPI = async (state, callback) => {
     return await AddState(state, callback);
@@ -16,8 +16,12 @@ let GetStatesAPI = async (filter, callback) => {
     return await GetAllStates(filter, callback);
 };
 
+let GetStateAPI = async (state_id, callback) => {
+    return await GetState(state_id, callback);
+};
+
 let StateLookUpAPI = async (state_id, callback) => {
     return await StateLookUp(state_id, callback);
 };
 
-module.exports = { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStatesAPI, StateLookUpAPI };
+module.exports = { AddStateAPI, UpdateStateAPI, DeleteStateAPI, GetStateAPI, GetStatesAPI, StateLookUpAPI };
