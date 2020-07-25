@@ -90,7 +90,7 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
                                 <Form id="pincode">
                                     <Form.Item>
-                                        <Input style={{ height: "48px", fontSize: "16px" }} placeholder="Enter Pin Code" onKeyPress={handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
+                                        <Input type="number" style={{ height: "48px", fontSize: "16px" }} placeholder="Enter Pin Code" onKeyPress={handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }} onClick={consumer}>Continue</Button>
@@ -106,7 +106,7 @@ const WebSite = () => {
                                     <Form.Item
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
                                     <Form.Item
                                         rules={[{ required: true, message: 'Enter password!' }]}
@@ -125,76 +125,76 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
 
-                            {view === "signup" ? (<>
-                                <Form id="signup">
-                                    <p style={{ textAlign: "center", fontSize: "18px" }}>Sign up</p>
-                                    <Form.Item
+                            {view === "signup" ? (<>                            
+                                <p style={{ textAlign: "center", fontSize: "18px" }}>Sign up</p>
+                                <Form id="signup" layout="inline">
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter first name!' }]}
                                         name="firstname"
                                     >
                                         <Input placeholder="First Name" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter last name!' }]}
                                         name="lastname"
                                     >
                                         <Input placeholder="Last Name" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter password!' }]}
                                         name="password"
                                     >
                                         <Input type="password" placeholder="Password" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item>
+                                    <Form.Item className="website-form-btn">
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
                                             Register
-                            </Button>
+                                        </Button>
                                     </Form.Item>
-                                    <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
-                                    <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                                 </Form>
+                                <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
+                                <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
 
                             {view === "companyRegister" ? (<>
-                                <Form id="companyRegister">
-                                    <p style={{ textAlign: "center", fontSize: "18px" }}>Register my Company</p>
-                                    <Form.Item
+                                <p style={{ textAlign: "center", fontSize: "18px" }}>Register my Company</p>
+                                <Form id="companyRegister" layout="inline">
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter company name!' }]}
                                         name="companyname"
                                     >
                                         <Input placeholder="Company Name" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter mobile number!' }]}
                                         name="mobile"
                                     >
                                         <Input placeholder="Mobile Number" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item
+                                    <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter Contact Person Name!' }]}
                                         name="contactperson"
                                     >
                                         <Input placeholder="Contact Person Name" style={{ height: "48px", fontSize: "16px" }} />
                                     </Form.Item>
-                                    <Form.Item>
+                                    <Form.Item className="website-form-btn">
                                         <Button type="primary" htmlType="submit" onClick={login} size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
                                             Register
-                            </Button>
+                                        </Button>
                                     </Form.Item>
-                                    <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
-                                    <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                                 </Form>
+                                <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
+                                    <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
                         </Card>
                         <img className="fd-card-logo" alt="" src="/gallery/Fandashtic-logo.svg" />
