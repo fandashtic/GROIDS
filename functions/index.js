@@ -1,34 +1,20 @@
 const functions = require('firebase-functions');
-var nodemailer = require('nodemailer');
 
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
+const { GetManufacturesAPI } = require('./src/Controller/Shared/ManufactureController');
+const { ReturnObject } = require('./src/Shared/Util');
+const { SendEmail } = require('./src/Shared/SendEmail');
+var config = require('./appConfig.json');
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'info.fandashtic@gmail.com',
-      pass: '%%f%H*t2PW6R'
-    }
-  });
-  
-  var mailOptions = {
-    from: 'info.fandashtic@gmail.com',
-    to: 'info.fandashtic@gmail.com',
-    subject: 'Sending Email using Grodis',
-    text: 'Hello Grodis!'
-  };
-  
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
+exports.GetManufactures = functions.https.onRequest((request, response) => {
+  GetManufacturesAPI(request.body.filter, (data, err) => {
+    if (data) {
+      response.send(data);
     } else {
-      console.log('Email sent: ' + info.response);
+      response.send(err);
     }
   });
+});
 
-  response.send("Hello from Firebase!");
+exports.SendEmail = functions.https.onRequest((request, response) => {
+  SendEmail(request.body.mailOptions, response);
 });
