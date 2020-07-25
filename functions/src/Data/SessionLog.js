@@ -1,5 +1,5 @@
-const { Edit } = require('./Shared/Reposidery');
-const { UpdateDetaultValues } = require('./Shared/Util');
+const { Edit } = require('./../Shared/Reposidery');
+const { UpdateDetaultValues } = require('./../Shared/Util');
 
 const _tableName = 'sessionlog';
 const _primaryKey = 'session_id';
