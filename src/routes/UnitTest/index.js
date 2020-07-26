@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import React, { useState, useEffect } from 'react'
 import { RunUnitTest } from 'api/UnitTest/TestData';
 import {
   // Form,
@@ -9,47 +10,71 @@ import {
   Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import { UploadFile } from 'api/Shared/FileUpload';
+//import { UploadFile } from 'api/Shared/FileUpload';
+import { FileUpload } from 'api/Shared/Firestore';
 import { PreFix } from 'api/Shared/Constant/Enum';
-import { IsHasValue, GetNewKey, GetFileExtn,
+import {
+  IsHasValue, GetNewKey, GetFileExtn,
   //  EnCode, 
-  //  DeCode 
-  } from 'api/Shared/Util';
+    DeCode 
+} from 'api/Shared/Util';
 
 const UnitTest = () => {
 
-  useEffect(() => {
-    RunUnitTest();
-  }, []);
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
 
-  const handleFileUploadChange = (files) => {
-    if (IsHasValue(files) && files.fileList.length > 0 && IsHasValue(files.fileList[0])) {
-      let file = files.fileList[0];
-      let fileName = GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name);
-      file.name = fileName;
-      UploadFile(file, PreFix.Product, (res) => {
-        console.log(res.data.bucket);
-        console.log(res.data.key);
-        console.log(res.data.location);
-      })
+  useEffect(() => {
+    //RunUnitTest();
+  }, [image]);
+
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      var file =e.target.files[0];
+      let newFile =  new File([file], GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name));
+      setImage(newFile);
     }
-  }
+  };
+
+
+  const upload = () => {
+      FileUpload(image, image.name, PreFix.Product, setProgress, setUrl, (data, err) => {
+        console.log(data);
+        console.log(err);
+      });
+    }
+
 
   return (
     <>
       <div>Unit Test</div>
-      <Upload
+
+      <div>
+        <progress value={progress} max="100" />
+        <br />
+        <br />
+        <input type="file" onChange={handleChange} />
+        <button onClick={upload}>Upload</button>
+        <br />
+        {url}
+        <br />
+        <img src={url} alt="firebase-image" />
+      </div>
+
+
+      {/* <Upload
         listType="picture-card"
-        onChange={handleFileUploadChange}
+        onChange={handleUpload}
       >
         <div>
           <PlusOutlined />
           <div className="ant-upload-text">Product Image</div>
         </div>
-      </Upload>
+      </Upload> */}
 
     </>
   )
-}
+};
 
 export default UnitTest;

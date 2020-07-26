@@ -47,5 +47,5 @@ export { AddProductFamily,
     UpdateProductFamily,
     DeleteProductFamily,
     GetProductFamily,
-    GetProductFamiles,
+    GetProductFamilies,
     ProductFamilyLookUp };

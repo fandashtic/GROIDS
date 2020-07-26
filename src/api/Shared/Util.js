@@ -33,7 +33,7 @@ let GetNewKey = (type) => {
     let buff = new Buffer(_key);
     let base64data = buff.toString('base64');
     if (IsHasValue(type)) {
-        base64data = type + '-' + base64data;
+        base64data = type + '0' + base64data;
     }
     return base64data;
 };
