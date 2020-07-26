@@ -1,13 +1,13 @@
-import React , { useState, useEffect } from 'react';
-import { BrandLookUpAPI } from 'api/controller/Shared/BrandController';
+import React from 'react';
 
 import {
     Form,
     Input,
-    Cascader,
     Button,
     Card,
+    Cascader
 } from 'antd';
+
 
 
 const formItemLayout = {
@@ -21,12 +21,19 @@ const formItemLayout = {
     },
 };
 
-const From = ({ addData }) => {
+const status = [
+    {
+        value: 'Active',
+        label: 'Active',
+    },
+    {
+        value: 'InActive',
+        label: 'InActive',
+    },
+];
 
+const From = ({addData}) => {
     const [form] = Form.useForm();
-    let brand_id = null;
-    const [LookUpData, setLookUpData] = useState({})
-
     const onFinish = values => {
         values['company_id'] = "212435446"
         values['store_id'] = "1"
@@ -36,45 +43,37 @@ const From = ({ addData }) => {
         values['created_by'] = 1
         addData(values)
     };
-
-    useEffect(() => {
-        BrandLookUpAPI(brand_id, (data, err) => {
-            setLookUpData(data);
-        });
-
-    }, [brand_id]);
-
     return (
-        <Card className="gx-card" title="Brand Form">
+        <Card className="gx-card" title="Manufacture Form">
             <Form
                 {...formItemLayout}
                 form={form}
-                name="Brand"
+                name="Manufacture"
                 onFinish={onFinish}
                 initialValues={{
                 }}
                 scrollToFirstError
             >
                 <Form.Item
-                    name="brand_name"
-                    label="Brand Name"
+                    name="manufacture_name" 
+                    label="manufacturename"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Brand Name!',
+                            message: 'Please input your Manufacture Name!',
                         },
                     ]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
-                    name="manufacture_name"
-                    label="Manufacture"
+                    name="status"
+                    label="Status"
                     rules={[
-                        { type: 'array', required: true, message: 'Please select your Manufacture!' },
+                        { type: 'array', required: true, message: 'Please select your  Status!' },
                     ]}
                 >
-                    <Cascader options={LookUpData.manufactures} />
+                    <Cascader options={status} />
                 </Form.Item>
                 <Button type="danger">
                     Reset

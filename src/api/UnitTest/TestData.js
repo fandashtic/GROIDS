@@ -7,7 +7,7 @@ import { PreFix,
     //UserType, StoreType,   ActiveStatus
 } from 'api/Shared/Constant/Enum';
 //import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
-import { AddBrandAPI, DeleteBrandAPI } from 'api/Controller/Shared/BrandController';
+import { AddBrandAPI, DeleteBrandAPI } from 'api/controller/Shared/BrandController';
 //import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
 //import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
 //import { ProductLookUpAPI,     AddProductAPI,     GetProductAPI } from 'api/Controller/Shared/ProductController';

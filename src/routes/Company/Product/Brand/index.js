@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetBrandsAPI, DeleteBrandAPI, AddBrandAPI } from 'api/Controller/Shared/BrandController'
+import { GetBrandsAPI, DeleteBrandAPI, AddBrandAPI } from 'api/controller/Shared/BrandController'
 
 let filter = { status: true }
 

@@ -8,7 +8,7 @@ import {
     Upload,
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {StoreLookUpAPI} from 'api/Controller/Shared/StoreController';
+import {StoreLookUpAPI} from 'api/controller/Shared/StoreController';
 import {StoreType} from 'api/Shared/Constant/Enum'
 let store_id = null
 

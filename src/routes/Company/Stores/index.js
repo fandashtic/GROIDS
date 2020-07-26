@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Row, Col, Button, Card, Divider, message } from 'antd'
 import ListView from './view'
 import FormView from './form'
-import { GetStoresAPI, DeleteStoreAPI, AddStoreAPI } from 'api/Controller/Shared/StoreController';
+import { GetStoresAPI, DeleteStoreAPI, AddStoreAPI } from 'api/controller/Shared/StoreController';
 
 let filter = { status: true }
 
