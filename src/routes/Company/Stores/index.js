@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Row, Col, Button, Card, Divider, message } from 'antd'
 import ListView from './view'
 import FormView from './form'
-import { GetStoresAPI, DeleteStoreAPI, AddStoreAPI } from 'api/controller/Shared/StoreController';
+import { GetStores, DeleteStore, AddStore } from 'api/Shared/Master/StoreController';
 
 let filter = { status: true }
 
@@ -14,7 +14,7 @@ const Index = () => {
     const [searchItem, setsearchItem] = useState([]);
 
     const apiInit = () => {
-        GetStoresAPI(filter, (res, err) => {
+        GetStores(filter, (res, err) => {
             setStores(res.data)
             setsearchItem(res.data)
         })
@@ -35,7 +35,7 @@ const Index = () => {
     }
 
     const deletedData = (id) => {
-        DeleteStoreAPI(id, (res, err) => {
+        DeleteStore(id, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
@@ -45,7 +45,7 @@ const Index = () => {
         })
     }
     const addData = data => {
-        AddStoreAPI(data, (res, err) => {
+        AddStore(data, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()

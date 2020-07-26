@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     Input,
@@ -8,7 +8,7 @@ import {
     Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {ProductLookUpAPI} from 'api/controller/Shared/ProductController';
+import { ProductLookUp } from 'api/Shared/Master/ProductController';
 
 const status = [
     {
@@ -45,16 +45,17 @@ const formItemLayout = {
 // };
 
 
-const product_id =null
-const ProductFrom = ({editableDataToForm,addData}) => {
-    const [selectValues,setSelectValues] = useState({})
+const product_id = null
+const ProductFrom = ({ editableDataToForm, addData }) => {
+    const [selectValues, setSelectValues] = useState({})
     const [form] = Form.useForm();
 
-    useEffect(()=>{
-        ProductLookUpAPI(product_id,(res,err)=>{
-                console.log(">>>>",res)
-            setSelectValues(res)})
-    },[])
+    useEffect(() => {
+        ProductLookUp(product_id, (res, err) => {
+            console.log(">>>>", res)
+            setSelectValues(res)
+        })
+    }, [])
 
     const handleChange = (value) => {
         console.log(`selected ${value}`);
@@ -146,10 +147,10 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     name="profile_image_url"
                     label="Product Image"
                     rules={[
-                    {
-                        required: false,
-                        message: 'Please input your Product Image!',
-                    },
+                        {
+                            required: false,
+                            message: 'Please input your Product Image!',
+                        },
                     ]}
                 >
                     <Upload

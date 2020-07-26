@@ -1,26 +1,26 @@
-import { 
-    //IsHasValue, 
-    GetNewKey,
-    //GetFileExtn, EnCode, DeCode, AddDetaultValues, GetDate 
-} from 'api/Shared/Util';
-import { PreFix, 
-    //UserType, StoreType,   ActiveStatus
-} from 'api/Shared/Constant/Enum';
-//import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
-import { AddBrandAPI, DeleteBrandAPI } from 'api/controller/Shared/BrandController';
-//import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
-//import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
-//import { ProductLookUpAPI,     AddProductAPI,     GetProductAPI } from 'api/Controller/Shared/ProductController';
-//import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
-//import { AddStoreAPI,     UpdateStoreAPI, DeleteStoreAPI, GetStoresAPI,     GetStoreAPI, StoreLookUpAPI } from 'api/Controller/Shared/StoreController';
-//import {     UploadFile,     DeleteFile } from 'api/Shared/FileUpload';
+// import { 
+//     //IsHasValue, 
+//     GetNewKey,
+//     //GetFileExtn, EnCode, DeCode, AddDetaultValues, GetDate 
+// } from 'api/Shared/Util';
+// import { PreFix, 
+//     //UserType, StoreType,   ActiveStatus
+// } from 'api/Shared/Constant/Enum';
+// import { AddManufactureAPI } from 'api/Controller/Shared/ManufactureController';
+// import { AddBrandAPI, DeleteBrandAPI } from 'api/Controller/Shared/BrandController';
+// import { AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController';
+// import { AddProductFamilyAPI } from 'api/Controller/Shared/ProductFamilyController';
+// import { ProductLookUpAPI,     AddProductAPI,     GetProductAPI } from 'api/Controller/Shared/ProductController';
+// import { IsUserValidAPI, AddUserAPI } from 'api/Controller/Shared/UserController';
+// import { AddStoreAPI,     UpdateStoreAPI, DeleteStoreAPI, GetStoresAPI,     GetStoreAPI, StoreLookUpAPI } from 'api/Controller/Shared/StoreController';
+// import {     UploadFile,     DeleteFile } from 'api/Shared/FileUpload';
 
-const company_id = GetNewKey(PreFix.Company);
-const manufacture_id = GetNewKey(PreFix.Manufacture);
-const brand_id = GetNewKey(PreFix.Brand);
-//const product_category_id = GetNewKey(PreFix.ProductCategory);
-//const product_family_id = GetNewKey(PreFix.product_family);
-const store_id = GetNewKey(PreFix.Store);
+// const company_id = GetNewKey(PreFix.Company);
+// const manufacture_id = GetNewKey(PreFix.Manufacture);
+// const brand_id = GetNewKey(PreFix.Brand);
+// const product_category_id = GetNewKey(PreFix.ProductCategory);
+// const product_family_id = GetNewKey(PreFix.product_family);
+// const store_id = GetNewKey(PreFix.Store);
 // const product_id = GetNewKey(PreFix.Product);
 // const created_by = GetNewKey(PreFix.User);
 // const country_id = GetNewKey(PreFix.Country);
@@ -42,25 +42,25 @@ const store_id = GetNewKey(PreFix.Store);
 //     });
 // }
 
-let AddBrand = () => {
-    const Brand = {
-        brand_id: brand_id,
-        brand_name: 'SunFest',
-        manufacture_id: manufacture_id,
-        company_id: company_id,
-        store_id: store_id,
-        profile_image_url: 'image.png'
-    }
+// let AddBrand = () => {
+//     const Brand = {
+//         brand_id: brand_id,
+//         brand_name: 'SunFest',
+//         manufacture_id: manufacture_id,
+//         company_id: company_id,
+//         store_id: store_id,
+//         profile_image_url: 'image.png'
+//     }
 
-    AddBrandAPI(Brand, (data, err) => {
-    });
-}
+//     AddBrandAPI(Brand, (data, err) => {
+//     });
+// }
 
-let DeleteBrand = (brand_id) => {
-    DeleteBrandAPI(brand_id, (data, err) => {
-        debugger;
-    });
-}
+// let DeleteBrand = (brand_id) => {
+//     DeleteBrandAPI(brand_id, (data, err) => {
+//         debugger;
+//     });
+// }
 
 // let AddProductCategory = () => {
 //     const ProductCategory = {
@@ -207,29 +207,29 @@ let DeleteBrand = (brand_id) => {
 //       });
 // }
 
-let RunUnitTest = () => {
-    // AddManufacture();
-    AddBrand();
-    let _brand_id= 'BR-N2JhNzU0MzMtODBkNC00ZTlmLTlkOWMtMTAyNWI2ZWNlZDVh';
-    DeleteBrand(_brand_id);
-    // AddProductCategory();
-    // AddProductFamily();
-    // AddProduct();
-    //let _product_id= 'PR#MGMwZDFkOWEtZGMxZC00NGUzLTg0M2UtNTZlODkyYmE5Mzdl';
-    //GetProduct(_product_id);
-    //ProductLookUp(null);    
-    //ProductLookUp(_product_id);
+// let RunUnitTest = () => {
+//     AddManufacture();
+//     AddBrand();
+//     let _brand_id= 'BR-N2JhNzU0MzMtODBkNC00ZTlmLTlkOWMtMTAyNWI2ZWNlZDVh';
+//     DeleteBrand(_brand_id);
+//     AddProductCategory();
+//     AddProductFamily();
+//     AddProduct();
+//     let _product_id= 'PR#MGMwZDFkOWEtZGMxZC00NGUzLTg0M2UtNTZlODkyYmE5Mzdl';
+//     GetProduct(_product_id);
+//     ProductLookUp(null);    
+//     ProductLookUp(_product_id);
     
-    //let _store_id= 'ST#YzQwMWYzZGQtZTQ2OS00NjQ2LTg1ZDItZjhlZDA0YjQ4MDBm';
-    //AddStore();
-    //GetStore(_store_id);
-    //StoreLookUp(null);    
-    //StoreLookUp(_store_id);
-    //SaveUser();
-    //SignIn();
-    //let _fileName = 'PR-NGExNjgyZTItN2RjNS00ZGUzLWFjNWQtOGFjMGJkM2MwNDg1.png';
-    //DeleteFileFromS3(_fileName);
+//     let _store_id= 'ST#YzQwMWYzZGQtZTQ2OS00NjQ2LTg1ZDItZjhlZDA0YjQ4MDBm';
+//     AddStore();
+//     GetStore(_store_id);
+//     StoreLookUp(null);    
+//     StoreLookUp(_store_id);
+//     SaveUser();
+//     SignIn();
+//     let _fileName = 'PR-NGExNjgyZTItN2RjNS00ZGUzLWFjNWQtOGFjMGJkM2MwNDg1.png';
+//     DeleteFileFromS3(_fileName);
 
-};
+// };
 
-export { RunUnitTest };
+// export { RunUnitTest };

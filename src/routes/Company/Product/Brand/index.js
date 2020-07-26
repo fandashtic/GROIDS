@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetBrandsAPI, DeleteBrandAPI, AddBrandAPI } from 'api/controller/Shared/BrandController'
+import { GetBrands, DeleteBrand, AddBrand } from 'api/Shared/Master/BrandController';
 
 let filter = { status: true }
 
@@ -18,7 +18,7 @@ function Brands() {
         setView(!view)
     }
 	const apiInit = () => {
-	        GetBrandsAPI(filter, (res, err) => {
+	        GetBrands(filter, (res, err) => {
 	            console.log(res)
 	            setBrands(res.data)
 	            setsearchItem(res.data)
@@ -42,7 +42,7 @@ function Brands() {
     }
 
     const deletedData = (id) => {
-        DeleteBrandAPI(id, (res, err) => {
+        DeleteBrand(id, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
@@ -53,7 +53,7 @@ function Brands() {
     }
     
   const addData = data => {
-        AddBrandAPI(data, (res, err) => {
+        AddBrand(data, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()

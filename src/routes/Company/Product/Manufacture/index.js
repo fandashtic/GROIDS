@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetManufacturesAPI, DeleteManufactureAPI, AddManufactureAPI } from 'api/controller/Shared/ManufactureController'
+import { GetManufactures, DeleteManufacture, AddManufacture } from 'api/Shared/Master/ManufactureController'
 
 const filter = { status: true }
 function Manufacture() {
@@ -18,7 +18,7 @@ function Manufacture() {
 
 
     const apiInit = () => {
-        GetManufacturesAPI(filter, (res, err) => {
+        GetManufactures(filter, (res, err) => {
             setManufactures(res.data)
             setsearchItem(res.data)
         })
@@ -42,7 +42,7 @@ function Manufacture() {
 
 
     const deletedData = (id) => {
-        DeleteManufactureAPI(id, (res, err) => {
+        DeleteManufacture(id, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()
@@ -52,7 +52,7 @@ function Manufacture() {
         })
     }
     const addData = data => {
-        AddManufactureAPI(data, (res, err) => {
+        AddManufacture(data, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()

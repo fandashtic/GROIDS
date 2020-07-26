@@ -1,6 +1,6 @@
 
 import React , { useState, useEffect } from 'react';
-import { ProductCategoryLookUpAPI } from 'api/controller/Shared/ProductCategoryController';
+import { ProductCategoryLookUp } from 'api/Shared/Master/ProductCategoryController';
 import {
     Form,
     Input,
@@ -51,7 +51,7 @@ const ProductFrom = ({addData}) => {
     };
 
     useEffect(() => {
-        ProductCategoryLookUpAPI(category_id, (data, err) => {
+        ProductCategoryLookUp(category_id, (data, err) => {
             setLookUpData(data);
         });
 

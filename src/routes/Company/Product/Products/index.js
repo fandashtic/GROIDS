@@ -3,7 +3,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductsAPI, DeleteProductAPI, AddProductAPI } from 'api/controller/Shared/ProductController'
+import { GetProducts, DeleteProduct, AddProduct } from 'api/Shared/Master/ProductController'
 
 let filter = { status: true }
 
@@ -13,9 +13,9 @@ function Products() {
     const [product, setProducts] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
- 
+
     const apiInit = () => {
-        GetProductsAPI(filter, (res, err) => {
+        GetProducts(filter, (res, err) => {
             setProducts(res.data)
             setsearchItem(res.data)
         })
@@ -34,7 +34,7 @@ function Products() {
     }, [])
 
     const addData = data => {
-        AddProductAPI(data, (res, err) => {
+        AddProduct(data, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
@@ -52,7 +52,7 @@ function Products() {
     }
 
     const deletedData = (id) => {
-        DeleteProductAPI(id, (res, err) => {
+        DeleteProduct(id, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Deleted");
                 apiInit()

@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import { BrandLookUpAPI } from 'api/controller/Shared/BrandController';
+import { BrandLookUp } from 'api/Shared/Master/BrandController';
 
 import {
     Form,
@@ -38,7 +38,7 @@ const From = ({ addData }) => {
     };
 
     useEffect(() => {
-        BrandLookUpAPI(brand_id, (data, err) => {
+        BrandLookUp(brand_id, (data, err) => {
             setLookUpData(data);
         });
 

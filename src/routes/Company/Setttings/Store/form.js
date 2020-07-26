@@ -1,6 +1,6 @@
 
 import React , { useState, useEffect } from 'react';
-import { ProductFamilyLookUpAPI } from 'api/controller/Shared/ProductFamilyController';
+import { ProductFamilyLookUp } from 'api/Shared/Master/ProductFamilyController';
 import {
     Form,
     Input,
@@ -36,7 +36,7 @@ const ProductFrom = ({addData}) => {
     const [LookUpData, setLookUpData] = useState({})
 
     useEffect(() => {
-        ProductFamilyLookUpAPI(product_family_id, (data, err) => {
+        ProductFamilyLookUp(product_family_id, (data, err) => {
             setLookUpData(data);
         });
 

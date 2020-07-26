@@ -8,7 +8,7 @@ import {
     Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {ProductLookUpAPI} from 'api/controller/Shared/ProductController';
+import {ProductLookUp} from 'api/Shared/Master/ProductController';
 
 const status = [
     {
@@ -51,7 +51,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
     const [form] = Form.useForm();
 
     useEffect(()=>{
-        ProductLookUpAPI(product_id,(res,err)=>{
+        ProductLookUp(product_id,(res,err)=>{
                 console.log(">>>>",res)
             setSelectValues(res)})
     },[])

@@ -8,7 +8,7 @@ import {
     Upload,
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {StoreLookUpAPI} from 'api/controller/Shared/StoreController';
+import {StoreLookUp} from 'api/Shared/Master/StoreController';
 import {StoreType} from 'api/Shared/Constant/Enum'
 let store_id = null
 
@@ -46,7 +46,7 @@ const FormView = ({addData}) => {
     };
 
     useEffect(()=>{
-        StoreLookUpAPI(store_id, (res,err)=>{
+        StoreLookUp(store_id, (res,err)=>{
                 setSelectValues(res)
             
         })

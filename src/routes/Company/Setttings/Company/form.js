@@ -1,14 +1,14 @@
 
-import React , { useState, useEffect } from 'react';
-import { ProductCategoryLookUpAPI } from 'api/controller/Shared/ProductCategoryController';
+import React, { useState, useEffect } from 'react';
+import { ProductCategoryLookUp } from 'api/Shared/Master/ProductCategoryController';
 import {
     Form,
     Input,
     Cascader,
-   // Select,
+    // Select,
     Button,
     Card,
-  // Upload
+    // Upload
 } from 'antd';
 //const { Option } = Select;
 
@@ -34,7 +34,7 @@ const status = [
     },
 ];
 
-const ProductFrom = ({addData}) => {
+const ProductFrom = ({ addData }) => {
     const [form] = Form.useForm();
     let category_id = null;
     const [LookUpData, setLookUpData] = useState({})
@@ -51,7 +51,7 @@ const ProductFrom = ({addData}) => {
     };
 
     useEffect(() => {
-        ProductCategoryLookUpAPI(category_id, (data, err) => {
+        ProductCategoryLookUp(category_id, (data, err) => {
             setLookUpData(data);
         });
 
