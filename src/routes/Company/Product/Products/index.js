@@ -13,7 +13,7 @@ function Products() {
     const [product, setProducts] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
-
+ 
     const apiInit = () => {
         GetProductsAPI(filter, (res, err) => {
             setProducts(res.data)

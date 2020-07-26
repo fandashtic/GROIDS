@@ -1,19 +1,23 @@
-import { GetAllMyFavorites, AddMyFavorite, UpdateMyFavorite, DeleteMyFavorite } from 'api/Core/FavoriteManager';
+import { GetFavorite, GetAllFavorites, AddFavorite, UpdateFavorite, DeleteFavorite } from 'api/Core/FavoriteManager';
 
-let AddMyFavoriteAPI = async (myFavorite, callback) => {
-    return await AddMyFavorite(myFavorite, callback);
+let AddFavoriteAPI = async (favorite, callback) => {
+    return await AddFavorite(favorite, callback);
 };
 
-let UpdateMyFavoriteAPI = async (myFavoriteId, myFavorite, callback) => {
-    return await UpdateMyFavorite(myFavoriteId, myFavorite, callback);
+let UpdateFavoriteAPI = async (favorite_id, favorite, callback) => {
+    return await UpdateFavorite(favorite_id, favorite, callback);
 };
 
-let DeleteMyFavoriteAPI = async (myFavoriteId, callback) => {
-    return await DeleteMyFavorite(myFavoriteId, callback);
+let DeleteFavoriteAPI = async (favorite_id, callback) => {
+    return await DeleteFavorite(favorite_id, callback);
 };
 
-let GetMyFavoritesAPI = async (filter, callback) => {
-    return await GetAllMyFavorites(filter, callback);
+let GetFavoriteAPI = async (favorite_id, callback) => {
+    return await GetFavorite(favorite_id, callback);
 };
 
-export { AddMyFavoriteAPI, UpdateMyFavoriteAPI, DeleteMyFavoriteAPI, GetMyFavoritesAPI };
+let GetFavoritesAPI = async (filter, callback) => {
+    return await GetAllFavorites(filter, callback);
+};
+
+export { AddFavoriteAPI, UpdateFavoriteAPI, DeleteFavoriteAPI, GetFavoriteAPI, GetFavoritesAPI };

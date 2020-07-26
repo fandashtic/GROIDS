@@ -1,0 +1,19 @@
+{
+    "db": {
+        "endpoint": "https://dynamodb.us-east-2.amazonaws.com",
+        "key": "QUtJQTVPNldGMjRUWklIVEtVRUI=",
+        "secretkey": "OUxXeTZJQ2l4a0huTm1OUk51aVViendXbkVyNGk4ZUlockxGTVExKw=="
+    },
+    "s3":{
+        "arn": "arn:aws:s3:::amplify-groids-dev-111249-deployment",
+        "region": "us-east-2",
+        "dirName": "groids",
+        "bucketName":"amplify-groids-dev-111249-deployment"
+    },
+    "mailconfig" :{
+        "service": "gmail",
+        "user": "aW5mby5mYW5kYXNodGljQGdtYWlsLmNvbQ==",
+        "pass": "JSVmJUgqdDJQVzZS"
+    },
+    "Pagination":10
+}

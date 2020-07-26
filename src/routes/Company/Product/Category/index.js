@@ -3,11 +3,11 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductCategorysAPI,DeleteProductCategoryAPI,AddProductCategoryAPI } from 'api/controller/Shared/ProductCategoryController'
+import { GetProductCategoriesAPI,DeleteProductCategoryAPI,AddProductCategoryAPI } from 'api/Controller/Shared/ProductCategoryController'
 
 let filter = { status: true }
 
-function Brands() {
+const ProductCategory = () => {
     const [view, setView] = useState(true);
     const [editData, setEditData]= useState({})
     const [category, setCategory] = useState([]);
@@ -15,7 +15,7 @@ function Brands() {
     const [searchItem, setsearchItem] = useState([]);
 
     const apiInit = () => {
-        GetProductCategorysAPI(filter, (res, err) => {
+        GetProductCategoriesAPI(filter, (res, err) => {
             console.log(res.data)
             setCategory(res.data)
             setsearchItem(res.data)
@@ -91,4 +91,4 @@ function Brands() {
         )
 };
 
-export default Brands
+export default ProductCategory;

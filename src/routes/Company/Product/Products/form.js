@@ -67,6 +67,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
         values['created_on'] = new Date()
         values['created_by'] = 1
         addData(values)
+        form.resetFields()
     };
     return (
         <Card className="gx-card" title="Product Form">
