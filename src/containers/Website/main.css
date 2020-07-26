@@ -172,7 +172,7 @@ input[type=number] {
 }
 
 .ant-form-item {
-    margin-bottom: 20px !important;
+    margin-bottom: 10px !important;
 }
 
 .form-input-50 {
@@ -181,4 +181,9 @@ input[type=number] {
 
 .form-input-100 {
     width: 100%;
+}
+
+input {
+    height: 40px;
+    font-size: 16px;
 }

@@ -90,7 +90,7 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
                                 <Form id="pincode">
                                     <Form.Item>
-                                        <Input type="number" style={{ height: "48px", fontSize: "16px" }} placeholder="Enter Pin Code" onKeyPress={handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
+                                        <Input type="number" placeholder="Enter Pin Code" onKeyPress={handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }} onClick={consumer}>Continue</Button>
@@ -106,13 +106,13 @@ const WebSite = () => {
                                     <Form.Item
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" />
                                     </Form.Item>
                                     <Form.Item
                                         rules={[{ required: true, message: 'Enter password!' }]}
                                         name="password"
                                     >
-                                        <Input type="password" placeholder="Password" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="password" placeholder="Password" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" onClick={login} block style={{ marginTop: "0px", marginBottom: "0px" }}>
@@ -132,24 +132,18 @@ const WebSite = () => {
                                         rules={[{ required: true, message: 'Enter first name!' }]}
                                         name="firstname"
                                     >
-                                        <Input placeholder="First Name" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input placeholder="First Name" />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter last name!' }]}
                                         name="lastname"
                                     >
-                                        <Input placeholder="Last Name" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input placeholder="Last Name" />
                                     </Form.Item>
-                                    <Form.Item className="form-input-50"
+                                    <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
-                                    </Form.Item>
-                                    <Form.Item className="form-input-50"
-                                        rules={[{ required: true, message: 'Enter password!' }]}
-                                        name="password"
-                                    >
-                                        <Input type="password" placeholder="Password" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" />
                                     </Form.Item>
                                     <Form.Item className="website-form-btn">
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
@@ -168,24 +162,29 @@ const WebSite = () => {
                                         rules={[{ required: true, message: 'Enter company name!' }]}
                                         name="companyname"
                                     >
-                                        <Input placeholder="Company Name" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input placeholder="Company Name" />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
+                                        rules={[{ required: true, message: 'Enter username!' }]} name="username"
+                                    >
+                                        <Input type="text" placeholder="Username" />
+                                    </Form.Item>
+                                    <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input type="email" placeholder="Email" />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter mobile number!' }]}
                                         name="mobile"
                                     >
-                                        <Input placeholder="Mobile Number" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input placeholder="Mobile Number" />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter Contact Person Name!' }]}
                                         name="contactperson"
                                     >
-                                        <Input placeholder="Contact Person Name" style={{ height: "48px", fontSize: "16px" }} />
+                                        <Input placeholder="Contact Person Name" />
                                     </Form.Item>
                                     <Form.Item className="website-form-btn">
                                         <Button type="primary" htmlType="submit" onClick={login} size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
