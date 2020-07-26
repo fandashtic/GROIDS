@@ -64,18 +64,18 @@ function Index() {
             <div className="gx-module-box-content">
                 <div className="gx-module-box-topbar">
                     <Row gutter={16} style={{width: "100%"}}>
-                        <Col md={18} sm={16}>
+                        <Col md={20} sm={19}>
                             <></>
                         {view && <AppModuleHeader placeholder="Search Family" value={searchValue} onChange={handleChange} />}
                     </Col>
-                    <Col md={6} sm={8}>
+                    <Col md={4} sm={5}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
                             {view ? (
                                 <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                    <span>&nbsp;Add New Family</span></>) : (
+                                    <span>&nbsp;Add New</span></>) : (
                                     <>
-                                        <i className="icon icon-eye gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                        <span>View Family</span></>)
+                                        <i className="icon icon-all-contacts gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                        <span>View All</span></>)
                             }
                         </Button>
                     </Col>

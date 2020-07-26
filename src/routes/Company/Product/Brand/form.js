@@ -14,10 +14,11 @@ const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
         sm: { span: 8 },
+        md: { span: 6 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 12 },
     },
 };
 
@@ -54,6 +55,7 @@ const From = ({ addData }) => {
                 initialValues={{
                 }}
                 scrollToFirstError
+                labelAlign="left"
             >
                 <Form.Item
                     name="brand_name"
@@ -76,12 +78,14 @@ const From = ({ addData }) => {
                 >
                     <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
-                <Button type="danger">
-                    Reset
+                <Form.Item>
+                <Button type="ghost">
+                    Cancel
                 </Button>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
+                </Form.Item>
             </Form>
         </Card>
     );

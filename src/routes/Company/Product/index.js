@@ -34,7 +34,7 @@ const filterOptions = [
   {
 
     id: 5,
-    name: 'Product Family',
+    name: 'Family',
     icon: 'star'
   
   },

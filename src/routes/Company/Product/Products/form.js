@@ -25,25 +25,13 @@ const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
         sm: { span: 8 },
+        md: { span: 6 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 12 },
     },
 };
-// const tailFormItemLayout = {
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//             offset: 0,
-//         },
-//         sm: {
-//             span: 16,
-//             offset: 8,
-//         },
-//     },
-// };
-
 
 const product_id =null
 const ProductFrom = ({editableDataToForm,addData}) => {
@@ -79,6 +67,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 initialValues={{
                 }}
                 scrollToFirstError
+                labelAlign="left"
             >
                 <Form.Item
                     name="product_name"
@@ -173,13 +162,14 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
-
-                <Button type="danger">
-                    Reset
+                <Form.Item>
+                <Button type="ghost">
+                    Cancel
                 </Button>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
+                </Form.Item>
             </Form>
         </Card>
     );
