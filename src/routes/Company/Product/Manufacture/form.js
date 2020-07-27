@@ -77,7 +77,7 @@ const From = ({addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
                 </Button>

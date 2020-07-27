@@ -65,11 +65,11 @@ const Index = () => {
                     <Col>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
                             {view ? (
-                                <><i className="icon icon-add gx-mr-2" />
-                                    <span>Add New Store</span></>) : (
+                                <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                    <span>&nbsp;Add New</span></>) : (
                                     <>
-                                        <i className="icon icon-eye gx-mr-2" />
-                                        <span>View Store</span></>)
+                                        <i className="icon icon-all-contacts gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
+                                        <span>View All</span></>)
                             }
                         </Button>
                     </Col>

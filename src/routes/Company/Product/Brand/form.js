@@ -78,7 +78,7 @@ const From = ({ addData }) => {
                 >
                     <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
                 </Button>

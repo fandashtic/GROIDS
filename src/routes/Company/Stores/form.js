@@ -16,10 +16,11 @@ const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
         sm: { span: 8 },
+        md: { span: 6 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 12 },
     },
 };
 const status = [
@@ -62,6 +63,7 @@ const FormView = ({addData}) => {
                 initialValues={{
                 }}
                 scrollToFirstError
+                labelAlign="left"
             >
                 <Form.Item
                     name="store_name"
@@ -260,12 +262,14 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
-                <Button type="danger">
-                    Reset
+                <Form.Item className="form-btn-center">
+                <Button type="ghost">
+                    Cancel
                 </Button>
                 <Button type="primary"  htmlType="submit">
                     Submit
                 </Button>
+                </Form.Item>
             </Form>
         </>
     );
