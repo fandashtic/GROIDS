@@ -1,7 +1,14 @@
 import { storage } from "./firebase";
 import { ReturnObject, EnCode } from 'api/Shared/Util';
 
-const FileUpload = async (file, fileName, folder, setProgress, setUrl, callback) => {
+const FileUpload = async (file, fileName, rootfolder, formFolder, setProgress, setUrl, callback) => {
+
+    var folder = rootfolder;
+    if(formFolder)
+    {
+        folder = folder + '/' + formFolder;
+    }
+
     var blob = new Blob([file], { contentType: file.type });
     const uploadTask = storage.ref(folder + '/' + fileName).put(blob);   
 

@@ -13,11 +13,7 @@ import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 //import { UploadFile } from 'api/Shared/FileUpload';
 import { FileUpload } from 'api/Shared/Firestore';
 import { PreFix } from 'api/Shared/Constant/Enum';
-import {
-  IsHasValue, GetNewKey, GetFileExtn,
-  //  EnCode, 
-    DeCode 
-} from 'api/Shared/Util';
+import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 
 const UnitTest = () => {
 
@@ -31,19 +27,18 @@ const UnitTest = () => {
 
   const handleChange = e => {
     if (e.target.files[0]) {
-      var file =e.target.files[0];
-      let newFile =  new File([file], GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name));
+      var file = e.target.files[0];
+      let newFile = new File([file], GetNewKey(PreFix.Product) + '.' + GetFileExtn(file.name));
       setImage(newFile);
     }
   };
 
-
   const upload = () => {
-      FileUpload(image, image.name, PreFix.Product, setProgress, setUrl, (data, err) => {
-        console.log(data);
-        console.log(err);
-      });
-    }
+    FileUpload(image, image.name, PreFix.Product, setProgress, setUrl, (data, err) => {
+      console.log(data);
+      console.log(err);
+    });
+  }
 
 
   return (
