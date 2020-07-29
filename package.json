@@ -91,5 +91,5 @@
     "customize-cra": "^0.9.1",
     "react-app-rewired": "^2.1.5"
   },
-  "proxy": "http://localhost:5001/fandashticgroidsapi/us-central1"
+  "proxy": "http://localhost:5001/fandashticgrocery/us-central1"
 }
