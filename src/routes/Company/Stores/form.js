@@ -64,6 +64,7 @@ const FormView = ({addData}) => {
                 }}
                 scrollToFirstError
                 labelAlign="left"
+                layout="inline"
             >
                 <Form.Item
                     name="store_name"
