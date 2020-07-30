@@ -4,14 +4,16 @@ import {
     NAV_STYLE_FIXED,
     THEME_COLOR,
     THEME_TYPE_SEMI_DARK,
+    THEME_TYPE_LITE,
+    THEME_TYPE_DARK,
     NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR
   } from "constants/ThemeSetting";
   
 const Context = createContext({
     navCollapsed: true,
-    navStyle: NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR,
+    navStyle: NAV_STYLE_FIXED,
     layoutType: LAYOUT_TYPE_FULL,
-    themeType: THEME_TYPE_SEMI_DARK,
+    themeType: THEME_TYPE_LITE,
     themeColor: THEME_COLOR,
     pathname: '/',
     width: window.innerWidth,

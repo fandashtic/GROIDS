@@ -42,7 +42,7 @@ const SidebarLogo = () => {
         {navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR && width >= TAB_SIZE ?
           <img alt="lo" src={require("assets/images/w-logo.png")} /> :
           themeType === THEME_TYPE_LITE ?
-            <img alt="logo1" src={require("assets/images/logo-white.png")}/> :
+            <img alt="logo1" src={require("assets/images/Fandashtic-Full-logo.svg")} style={{width: "100%"}}/> :
             <img alt="logo2" src={require("assets/images/logo.png")}/>}
       </Link>
     </div>
