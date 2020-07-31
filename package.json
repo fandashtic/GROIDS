@@ -6,16 +6,12 @@
     "@amcharts/amcharts3-react": "^3.1.0",
     "@ant-design/compatible": "^1.0.2",
     "@ant-design/icons": "^4.1.0",
-    "@aws-amplify/api": "^3.1.19",
-    "@aws-amplify/auth": "^3.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "amcharts3": "^3.21.15",
     "antd": "^4.2.0",
     "antd-theme-webpack-plugin": "^1.3.4",
-    "aws-amplify": "^3.0.20",
-    "aws-sdk": "^2.713.0",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "draftjs-to-html": "^0.9.1",
@@ -91,5 +87,5 @@
     "customize-cra": "^0.9.1",
     "react-app-rewired": "^2.1.5"
   },
-  "proxy": "http://localhost:5001/fandashticgrocery/us-central1"
+  "proxy": "http://localhost:3001"
 }
