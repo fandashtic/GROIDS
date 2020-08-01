@@ -7,17 +7,19 @@ import {
     Cascader,
     Button,
     Card,
+    Row,
+    Col
 } from 'antd';
 
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
-        md: { span: 6 }
+        sm: { span: 24 },
+        md: { span: 24 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 12 },
+        sm: { span: 24 },
     },
 };
 const status = [
@@ -63,7 +65,10 @@ const ProductFrom = ({addData}) => {
                 }}
                 scrollToFirstError
                 labelAlign="left"
+                layout="inline"
             >
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="product_family_name"
                     label="Family Name"
@@ -76,6 +81,8 @@ const ProductFrom = ({addData}) => {
                 >
                     <Input />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="manufacture_name"
                     label="Manufacture"
@@ -85,6 +92,10 @@ const ProductFrom = ({addData}) => {
                 >
                     <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="brand_name"
                     label="Brand"
@@ -95,6 +106,8 @@ const ProductFrom = ({addData}) => {
                 >
                     <Cascader options={LookUpData.brands} />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="product_category_name"
                     label="Category"
@@ -104,6 +117,10 @@ const ProductFrom = ({addData}) => {
                 >
                     <Cascader options={LookUpData.productCategories} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="status"
                     label="Status"
@@ -113,6 +130,10 @@ const ProductFrom = ({addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={24}>
                 <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
@@ -121,6 +142,8 @@ const ProductFrom = ({addData}) => {
                     Submit
                 </Button>
                 </Form.Item>
+                </Col>
+                </Row>
             </Form>
         </Card>
     );

@@ -206,3 +206,15 @@ input {
     position: relative;
     top: -6px;
 }
+
+.ant-form-inline .ant-form-item {
+    flex-wrap: wrap;
+}
+
+form .ant-row {
+    width: 100%;
+}
+
+form .ant-col {
+    width: 100%;
+}

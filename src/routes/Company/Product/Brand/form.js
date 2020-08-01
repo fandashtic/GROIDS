@@ -7,18 +7,20 @@ import {
     Cascader,
     Button,
     Card,
+    Row,
+    Col
 } from 'antd';
 
 
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
-        md: { span: 6 }
+        sm: { span: 24 },
+        md: { span: 24 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 12 },
+        sm: { span: 24 },
     },
 };
 
@@ -56,7 +58,10 @@ const From = ({ addData }) => {
                 }}
                 scrollToFirstError
                 labelAlign="left"
+                layout="inline"
             >
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="brand_name"
                     label="Brand Name"
@@ -69,6 +74,8 @@ const From = ({ addData }) => {
                 >
                     <Input />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="manufacture_name"
                     label="Manufacture"
@@ -78,6 +85,10 @@ const From = ({ addData }) => {
                 >
                     <Cascader options={LookUpData.manufactures} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={24}>
                 <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
@@ -86,6 +97,8 @@ const From = ({ addData }) => {
                     Submit
                 </Button>
                 </Form.Item>
+                </Col>
+                </Row>
             </Form>
         </Card>
     );

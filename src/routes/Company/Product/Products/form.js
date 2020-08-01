@@ -5,7 +5,9 @@ import {
     Cascader,
     Button,
     Card,
-    Upload
+    Upload,
+    Row,
+    Col
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {ProductLookUp} from 'api/Shared/Master/ProductController';
@@ -24,12 +26,12 @@ const status = [
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
-        md: { span: 6 }
+        sm: { span: 24 },
+        md: { span: 24 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 12 },
+        sm: { span: 24 },
     },
 };
 
@@ -68,20 +70,25 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 }}
                 scrollToFirstError
                 labelAlign="left"
+                layout="inline"
             >
-                <Form.Item
-                    name="product_name"
-                    label="Product Name"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Product Name!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
+                        <Form.Item
+                        name="product_name"
+                        label="Product Name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Product Name!',
+                            },
+                        ]}
+                    >
+                        <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col md={12} sm={24}>
+                    <Form.Item
                     name="manufacture_name"
                     label="Manufacture"
                     rules={[
@@ -90,6 +97,11 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={selectValues.manufactures} />
                 </Form.Item>
+                    </Col>
+                </Row>
+                
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="brand_name"
                     label="Brand"
@@ -100,6 +112,8 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={selectValues.brands} />
                 </Form.Item>
+                </Col>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="product_category_name"
                     label="Category"
@@ -109,7 +123,10 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={selectValues.productCategories} />
                 </Form.Item>
-
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="product_family_name"
                     label="Product Family"
@@ -119,7 +136,8 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={selectValues.product_families} />
                 </Form.Item>
-
+                    </Col>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="description"
                     label="Description"
@@ -132,6 +150,10 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Input />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="profile_image_url"
                     label="Product Image"
@@ -153,6 +175,8 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                         </div>
                     </Upload>
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="status"
                     label="Status"
@@ -162,6 +186,10 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={24}>
                 <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
@@ -170,6 +198,8 @@ const ProductFrom = ({editableDataToForm,addData}) => {
                     Submit
                 </Button>
                 </Form.Item>
+                </Col>
+                </Row>
             </Form>
         </Card>
     );
