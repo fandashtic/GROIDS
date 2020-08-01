@@ -1,43 +1,43 @@
 import API from 'api/api';
-import { DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
 
-let AddManufacture = async (filter, callback) => {
-    return API.post('/AddManufacture', filter)
+let AddManufacture = async (data, callback) => {
+    return API.post('/AddManufacture', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddManufacture');
         });
 };
 
-let UpdateManufacture = async (filter, callback) => {
-    return API.post('/UpdateManufacture', filter)
+let UpdateManufacture = async (id, data, callback) => {
+    return API.post('/UpdateManufacture', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateManufacture');
         });
 };
 
-let DeleteManufacture = async (filter, callback) => {
-    return API.post('/DeleteManufacture', filter)
+let DeleteManufacture = async (id, callback) => {
+    return API.post('/DeleteManufacture', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteManufacture');
         });
 };
 
-let GetManufacture = async (filter, callback) => {
-    return API.post('/GetManufacture', filter)
+let GetManufacture = async (id, callback) => {
+    return API.post('/GetManufacture', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetManufacture');
         });
 };
 
 let GetManufactures = async (filter, callback) => {
-    return API.post('/GetManufactures', filter)
+    return API.post('/GetManufactures', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetManufactures');
         });
 };
 
 let ManufactureLookUp = async (filter, callback) => {
-    return API.post('/ManufactureLookUp', filter)
+    return API.post('/ManufactureLookUp', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'ManufactureLookUp');
         });

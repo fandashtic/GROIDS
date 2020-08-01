@@ -1,43 +1,43 @@
 import API from 'api/api';
-import { DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
 
-let AddProductCategory = async (filter, callback) => {
-    return API.post('/AddProductCategory', filter)
+let AddProductCategory = async (data, callback) => {
+    return API.post('/AddProductCategory', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddProductCategory');
         });
 };
 
-let UpdateProductCategory = async (filter, callback) => {
-    return API.post('/UpdateProductCategory', filter)
+let UpdateProductCategory = async (id, data, callback) => {
+    return API.post('/UpdateProductCategory', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateProductCategory');
         });
 };
 
-let DeleteProductCategory = async (filter, callback) => {
-    return API.post('/DeleteProductCategory', filter)
+let DeleteProductCategory = async (id, callback) => {
+    return API.post('/DeleteProductCategory', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteProductCategory');
         });
 };
 
-let GetProductCategory = async (filter, callback) => {
-    return API.post('/GetProductCategory', filter)
+let GetProductCategory = async (id, callback) => {
+    return API.post('/GetProductCategory', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetProductCategory');
         });
 };
 
 let GetProductCategories = async (filter, callback) => {
-    return API.post('/GetProductCategories', filter)
+    return API.post('/GetProductCategories', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetProductCategories');
         });
 };
 
 let ProductCategoryLookUp = async (filter, callback) => {
-    return API.post('/ProductCategoryLookUp', filter)
+    return API.post('/ProductCategoryLookUp', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'ProductCategoryLookUp');
         });

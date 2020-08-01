@@ -153,8 +153,48 @@ let GetFileExtn = (fileName) => {
     return fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
 }
 
+let GetObject = (id) => {
+    return {
+        "filter": {
+            "id": id
+        }
+    }
+}
+
+let GetAllObject = (filter) => {
+    return {
+        "filter": filter
+    }
+}
+
+let PostObject = (data) => {
+    return {
+        "filter": {
+            "inputmodel": data
+        }
+    }
+}
+
+let PutObject = (id, data) => {
+    return {
+        "filter": {
+            "id": id,
+            "inputmodel": data
+        }
+    }
+}
+
+let DeleteObject = (id) => {
+    return {
+        "filter": {
+            "id": id
+        }
+    }
+}
+
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt,
-    ComparePassword, GetKeyNameFromObject, EnCode, DeCode, GetFileExtn
+    ComparePassword, GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
+    GetObject, GetAllObject, PostObject, PutObject, DeleteObject
 };

@@ -1,43 +1,43 @@
 import API from 'api/api';
-import { DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
 
-let AddCountry = async (filter, callback) => {
-    return API.post('/AddCountry', filter)
+let AddCountry = async (data, callback) => {
+    return API.post('/AddCountry', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddCountry');
         });
 };
 
-let UpdateCountry = async (filter, callback) => {
-    return API.post('/UpdateCountry', filter)
+let UpdateCountry = async (id, data, callback) => {
+    return API.post('/UpdateCountry', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateCountry');
         });
 };
 
-let DeleteCountry = async (filter, callback) => {
-    return API.post('/DeleteCountry', filter)
+let DeleteCountry = async (id, callback) => {
+    return API.post('/DeleteCountry', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteCountry');
         });
 };
 
-let GetCountry = async (filter, callback) => {
-    return API.post('/GetCountry', filter)
+let GetCountry = async (id, callback) => {
+    return API.post('/GetCountry', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetCountry');
         });
 };
 
 let GetCountries = async (filter, callback) => {
-    return API.post('/GetCountries', filter)
+    return API.post('/GetCountries', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetCountries');
         });
 };
 
 let CountryLookUp = async (filter, callback) => {
-    return API.post('/CountryLookUp', filter)
+    return API.post('/CountryLookUp', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'CountryLookUp');
         });

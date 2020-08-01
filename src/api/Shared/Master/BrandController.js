@@ -1,43 +1,43 @@
 import API from 'api/api';
-import { ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
 
-let AddBrand = async (filter, callback) => {
-    return API.post('/AddBrand', filter)
+let AddBrand = async (data, callback) => {
+    return API.post('/AddBrand', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddBrand');
         });
 };
 
-let UpdateBrand = async (filter, callback) => {
-    return API.post('/UpdateBrand', filter)
+let UpdateBrand = async (id, data, callback) => {
+    return API.post('/UpdateBrand', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateBrand');
         });
 };
 
-let DeleteBrand = async (filter, callback) => {
-    return API.post('/DeleteBrand', filter)
+let DeleteBrand = async (id, callback) => {
+    return API.post('/DeleteBrand', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteBrand');
         });
 };
 
-let GetBrand = async (filter, callback) => {
-    return API.post('/GetBrand', filter)
+let GetBrand = async (id, callback) => {
+    return API.post('/GetBrand', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetBrand');
         });
 };
 
 let GetBrands = async (filter, callback) => {
-    return API.post('/GetBrands', filter)
+    return API.post('/GetBrands', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetBrands');
         });
 };
 
 let BrandLookUp = async (filter, callback) => {
-    return API.post('/BrandLookUp', filter)
+    return API.post('/BrandLookUp', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'BrandLookUp');
         });

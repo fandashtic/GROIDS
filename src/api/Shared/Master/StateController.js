@@ -1,43 +1,43 @@
 import API from 'api/api';
-import { DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
 
-let AddState = async (filter, callback) => {
-    return API.post('/AddState', filter)
+let AddState = async (data, callback) => {
+    return API.post('/AddState', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddState');
         });
 };
 
-let UpdateState = async (filter, callback) => {
-    return API.post('/UpdateState', filter)
+let UpdateState = async (id, data, callback) => {
+    return API.post('/UpdateState', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateState');
         });
 };
 
-let DeleteState = async (filter, callback) => {
-    return API.post('/DeleteState', filter)
+let DeleteState = async (id, callback) => {
+    return API.post('/DeleteState', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteState');
         });
 };
 
-let GetState = async (filter, callback) => {
-    return API.post('/GetState', filter)
+let GetState = async (id, callback) => {
+    return API.post('/GetState', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetState');
         });
 };
 
 let GetStates = async (filter, callback) => {
-    return API.post('/GetStates', filter)
+    return API.post('/GetStates', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetStates');
         });
 };
 
 let StateLookUp = async (filter, callback) => {
-    return API.post('/StateLookUp', filter)
+    return API.post('/StateLookUp', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'StateLookUp');
         });
