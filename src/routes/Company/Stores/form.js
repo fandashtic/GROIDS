@@ -6,6 +6,8 @@ import {
     Button,
     PageHeader,
     Upload,
+    Row,
+    Col
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import {StoreLookUp} from 'api/Shared/Master/StoreController';
@@ -15,12 +17,12 @@ let store_id = null
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
-        md: { span: 6 }
+        sm: { span: 24 },
+        md: { span: 24 }
     },
     wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 12 },
+        sm: { span: 24 },
     },
 };
 const status = [
@@ -66,6 +68,8 @@ const FormView = ({addData}) => {
                 labelAlign="left"
                 layout="inline"
             >
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="store_name"
                     label="Store Name"
@@ -78,6 +82,8 @@ const FormView = ({addData}) => {
                 >
                     <Input name="store_name"/>
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="store_type"
                     label="Store Type"
@@ -87,6 +93,10 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={StoreType} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="billing_address"
                     label="Billing Address"
@@ -99,6 +109,8 @@ const FormView = ({addData}) => {
                 >
                     <Input name="billing_address"/>
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="shipping_address"
                     label="Shipping Address"
@@ -111,6 +123,10 @@ const FormView = ({addData}) => {
                 >
                     <Input name="shipping_address"/>
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="area_name"
                     label="Area"
@@ -120,6 +136,8 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={selectValues.areas} />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="city_name"
                     label="City"
@@ -129,6 +147,10 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={selectValues.cities} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="state_name"
                     label="State"
@@ -138,6 +160,8 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={selectValues.states} />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="country_name"
                     label="Country"
@@ -147,6 +171,10 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={selectValues.countries} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="Location"
                     label="Location"
@@ -159,6 +187,8 @@ const FormView = ({addData}) => {
                 >
                     <Input name="latitude"/>
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="email"
                     label="Email"
@@ -171,6 +201,10 @@ const FormView = ({addData}) => {
                 >
                     <Input name="email"/>
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="mobilenumber"
                     label="Mobile number"
@@ -183,6 +217,8 @@ const FormView = ({addData}) => {
                 >
                     <Input name="mobilenumber"  />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="contactperson"
                     label="Contact Person"
@@ -195,12 +231,18 @@ const FormView = ({addData}) => {
                 >
                     <Input name="contactperson"  />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="tin"
-                    label="Tin / GST Number"
+                    label="TIN / GST Number"
                 >
                     <Input name="contactperson"/>
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="logo"
                     label="Store Logo"
@@ -221,6 +263,10 @@ const FormView = ({addData}) => {
                         </div>
                     </Upload>
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="banner"
                     label="Store banner image"
@@ -241,19 +287,26 @@ const FormView = ({addData}) => {
                         </div>
                     </Upload>
                 </Form.Item>
-               
+               </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="business_days_hours"
-                    label="Business Days & Hours"
+                    label="Business Days &amp; Hours"
                 >
                     <Input name="business_days_hours"  />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={12} sm={24}>
                 <Form.Item
                     name="delivery_days_hours"
-                    label="Delivery Days & Hours"
+                    label="Delivery Days &amp; Hours"
                 >
                     <Input name="delivery_days_hours" />
                 </Form.Item>
+                </Col>
+                <Col md={12} sm={24}>
                 <Form.Item
                     name="Status"
                     label="Status"
@@ -263,6 +316,10 @@ const FormView = ({addData}) => {
                 >
                     <Cascader options={status} />
                 </Form.Item>
+                </Col>
+                </Row>
+                <Row gutter={[8, 0]}>
+                    <Col md={24}>
                 <Form.Item className="form-btn-center">
                 <Button type="ghost">
                     Cancel
@@ -271,6 +328,8 @@ const FormView = ({addData}) => {
                     Submit
                 </Button>
                 </Form.Item>
+                </Col>
+                </Row>
             </Form>
         </>
     );
