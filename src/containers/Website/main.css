@@ -211,10 +211,10 @@ input {
     flex-wrap: wrap;
 }
 
-form .ant-row {
+form.functionalForm .ant-row {
     width: 100%;
 }
 
-form .ant-col {
+form.functionalForm .ant-col {
     width: 100%;
 }

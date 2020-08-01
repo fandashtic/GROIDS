@@ -48,7 +48,7 @@ const From = ({addData}) => {
     };
     return (
         <Card className="gx-card" title="Manufacture Form">
-            <Form
+            <Form className="functionalForm"
                 {...formItemLayout}
                 form={form}
                 name="Manufacture"

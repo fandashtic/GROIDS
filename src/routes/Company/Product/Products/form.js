@@ -61,7 +61,7 @@ const ProductFrom = ({editableDataToForm,addData}) => {
     };
     return (
         <Card className="gx-card" title="Product Form">
-            <Form
+            <Form className="functionalForm"
                 {...formItemLayout}
                 form={form}
                 name="Product"

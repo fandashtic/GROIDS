@@ -57,7 +57,7 @@ const FormView = ({addData}) => {
     return (
         <>
             <PageHeader className="site-page-header" title="Stores Form" ></PageHeader>
-            <Form
+            <Form className="functionalForm"
                 {...formItemLayout}
                 form={form}
                 name="Store"
