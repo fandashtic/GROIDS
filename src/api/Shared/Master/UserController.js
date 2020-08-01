@@ -43,9 +43,25 @@ let UserLookUp = async (filter, callback) => {
         });
 };
 
+let ChangePassword = async (user_id, new_password, old_password, callback) => {
+    // return API.post('/UserLookUp', GetAllObject(filter))
+    //     .then(res => {
+    //        return  ReturnObject(callback, null, res.data, 'UserLookUp');
+    //     });
+};
+
+let IsUserValid = async (user_id, npassword , callback) => {
+    // return API.post('/UserLookUp', GetAllObject(filter))
+    //     .then(res => {
+    //        return  ReturnObject(callback, null, res.data, 'UserLookUp');
+    //     });
+};
+
 export { AddUser,
     UpdateUser,
     DeleteUser,
     GetUser,
     GetUsers,
+    UserLookUp,
+    IsUserValid,
     ChangePassword };
