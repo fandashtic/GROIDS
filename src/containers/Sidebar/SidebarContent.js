@@ -52,36 +52,36 @@ const SidebarContent = () => {
                 className="icon icon-dasbhoard" /><span><IntlMessages id="sidebar.dashboard" /></span></Link>
             </Menu.Item>
             <SubMenu key="dashboard" popupClassName={getNavStyleSubMenuClass(navStyle)}
-              title={<span> <i className="icon icon-dasbhoard" />
+              title={<span> <i className="icon icon-company" />
                 <span><IntlMessages id="sidebar.master" /></span></span>}>
               <Menu.Item key="main/manufacturer">
                 <Link to="/manufacturer">
-                  <i className="icon icon-crypto" />
+                  <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.manufacturer" /></span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="main/brand">
                 <Link to="/brand">
-                  <i className="icon icon-crypto" />
+                  <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.brand" /></span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="main/category">
                 <Link to="/category">
-                  <i className="icon icon-crypto" />
+                  <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.category" /></span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="main/family">
                 <Link to="/family">
-                  <i className="icon icon-crypto" />
+                  <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.family" /></span>
                 </Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="main/Product">
               <Link to="/product"><i
-                className="icon icon-folder" /><span><IntlMessages
+                className="icon icon-folder-o" /><span><IntlMessages
                   id="sidebar.products" /></span></Link>
             </Menu.Item>
             <Menu.Item key="main/Stores">
@@ -90,26 +90,26 @@ const SidebarContent = () => {
                   id="sidebar.stores" /></span></Link>
             </Menu.Item>
             <SubMenu key="settings" popupClassName={getNavStyleSubMenuClass(navStyle)}
-              title={<span> <i className="icon icon-components" />
+              title={<span> <i className="icon icon-setting" />
                 <span><IntlMessages id="sidebar.settings" /></span></span>}>
               <Menu.Item key="main/accounts">
                 <Link to="/settings"><i
-                  className="icon icon-star" /><span><IntlMessages
+                  className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.accounts" /></span></Link>
               </Menu.Item>
               <Menu.Item key="main/company">
                 <Link to="/settings"><i
-                  className="icon icon-star" /><span><IntlMessages
+                  className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.company" /></span></Link>
               </Menu.Item>
               <Menu.Item key="main/location">
                 <Link to="/settings"><i
-                  className="icon icon-star" /><span><IntlMessages
+                  className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.location" /></span></Link>
               </Menu.Item>
               <Menu.Item key="main/payment">
                 <Link to="/settings"><i
-                  className="icon icon-star" /><span><IntlMessages
+                  className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.payment" /></span></Link>
               </Menu.Item>
             </SubMenu>
