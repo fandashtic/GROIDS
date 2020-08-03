@@ -39,7 +39,6 @@ let GetNewKey = (type) => {
 
 let GetKeyNameFromObject = (obj, value) => {
     var keys = Object.keys(obj);
-    console.log(keys[value]);
     return keys[value];
 }
 
@@ -169,21 +168,14 @@ let GetAllObject = (filter) => {
 let PostObject = (data) => {
     data['created_by'] = '0';
     return {
-        "filter": {
-            "inputmodel": data
-        }
+        "inputmodel": data
     }
 }
 
 let PutObject = (id, data) => {
     data['created_by'] = '0';
     data['modified_by'] = '0';
-    return {
-        "filter": {
-            "id": id,
-            "inputmodel": data
-        }
-    }
+    return { "id": id, "inputmodel": data };
 }
 
 let DeleteObject = (id) => {

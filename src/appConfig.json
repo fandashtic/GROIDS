@@ -1,3 +1,4 @@
 {
-    "Pagination":10
+    "APIURL": "http://localhost:3001",
+    "Pagination": 10
 }

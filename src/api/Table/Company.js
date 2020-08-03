@@ -1,7 +1,8 @@
 let Company = {
     company_id: String,
     company_name: String,
-    email: String,
+    user_name: String,
+    email_id: String,
     mobilenumber: String,
     contactperson: String,
     billing_address: String,

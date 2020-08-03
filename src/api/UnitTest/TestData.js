@@ -24,7 +24,6 @@ const area_id = GetNewKey(PreFix.Area);
 
 
 let _AddManufacture = () => {
-    debugger;
     const manufacture = {
         manufacture_id: manufacture_id,
         manufacture_name: 'ITC',
@@ -53,7 +52,6 @@ let _AddBrand = () => {
 
 let _DeleteBrand = (brand_id) => {
     DeleteBrand(brand_id, (data, err) => {
-        debugger;
     });
 }
 

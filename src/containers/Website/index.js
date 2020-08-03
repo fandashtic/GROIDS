@@ -3,12 +3,18 @@ import { Row, Col, Carousel, Card, Form, Input, Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
-import { GetManufactures } from 'api/Shared/Master/ManufactureController';
+import { AddCompany } from 'api/Company/CompanyController';
 
 
 const WebSite = () => {
     const history = useHistory()
     const [view, SetView] = useState('pincode');
+    const [companyName, setcompanyName] = useState('');
+    const [userName, setuserName] = useState('');
+    const [email, setemail] = useState('');
+    const [mobileNumber, setmobileNumber] = useState('');
+    const [contactPerson, setcontactPerson] = useState('');
+
     const filter = {
         "filter": {
             "status": true
@@ -16,10 +22,7 @@ const WebSite = () => {
     };
 
     useEffect(() => {
-        GetManufactures(filter, (data, err) => {
-            console.log(data);
-            console.log(err);
-        });
+
     }, [filter]);
 
     const viewPincode = () => {
@@ -45,6 +48,21 @@ const WebSite = () => {
 
     const consumer = () => {
         message.info('Coming Soon')
+    }
+
+    const registerMyCompany = () => {
+        let newCompany = {
+            company_name: companyName,
+            user_name: userName,
+            email_id: email,
+            mobilenumber: mobileNumber,
+            contactperson: contactPerson
+        };
+
+        AddCompany(newCompany, (data, err) => {
+            console.log(data);
+            console.log(err);
+        });
     }
 
     const handleKeyPress = (event) => {
@@ -125,7 +143,7 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
 
-                            {view === "signup" ? (<>                            
+                            {view === "signup" ? (<>
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Sign up</p>
                                 <Form id="signup" layout="inline">
                                     <Form.Item className="form-input-50"
@@ -162,38 +180,38 @@ const WebSite = () => {
                                         rules={[{ required: true, message: 'Enter company name!' }]}
                                         name="companyname"
                                     >
-                                        <Input placeholder="Company Name" />
+                                        <Input placeholder="Company Name" value="companyName" onChange={e => setcompanyName(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter username!' }]} name="username"
                                     >
-                                        <Input type="text" placeholder="Username" />
+                                        <Input type="text" placeholder="Username" value="userName" onChange={e => setuserName(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" />
+                                        <Input type="email" placeholder="Email" value="email" onChange={e => setemail(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter mobile number!' }]}
                                         name="mobile"
                                     >
-                                        <Input placeholder="Mobile Number" />
+                                        <Input placeholder="Mobile Number" value="mobileNumber" onChange={e => setmobileNumber(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter Contact Person Name!' }]}
                                         name="contactperson"
                                     >
-                                        <Input placeholder="Contact Person Name" />
+                                        <Input placeholder="Contact Person Name" value="contactPerson" onChange={e => setcontactPerson(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="website-form-btn">
-                                        <Button type="primary" htmlType="submit" onClick={login} size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
+                                        <Button type="primary" htmlType="submit" onClick={registerMyCompany} size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
                                             Register
                                         </Button>
                                     </Form.Item>
                                 </Form>
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
-                                    <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
+                                <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
                         </Card>
                         <img className="fd-card-logo" alt="" src="/gallery/Fandashtic-logo.svg" />
