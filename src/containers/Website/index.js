@@ -4,16 +4,27 @@ import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 import { AddCompany } from 'api/Company/CompanyController';
-
+import { IsUserValid } from 'api/Shared/Master/UserController';
 
 const WebSite = () => {
     const history = useHistory()
     const [view, SetView] = useState('pincode');
+
+    //#region Register Company
     const [companyName, setcompanyName] = useState('');
     const [userName, setuserName] = useState('');
     const [email, setemail] = useState('');
     const [mobileNumber, setmobileNumber] = useState('');
     const [contactPerson, setcontactPerson] = useState('');
+    //#endregion Register Company
+
+    //#region Login
+
+    const [user_name, setuser_name] = useState('');
+    const [password, setpassword] = useState('');
+
+    //#endregion Login
+
 
     const filter = {
         "filter": {
@@ -34,8 +45,12 @@ const WebSite = () => {
         SetView("signin")
     }
 
-    const login = () => {
-        history.push('/dashboard/company');
+    const SignIn = () => {
+        IsUserValid(user_name, password, (data, err) => {
+            if (data) {
+                history.push('/dashboard/company');
+            }
+        });
     }
 
     const viewSignUp = () => {
@@ -124,18 +139,18 @@ const WebSite = () => {
                                     <Form.Item
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" />
+                                        <Input type="email" placeholder="Email" value="user_name" onChange={e => setuser_name(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item
                                         rules={[{ required: true, message: 'Enter password!' }]}
                                         name="password"
                                     >
-                                        <Input type="password" placeholder="Password" />
+                                        <Input type="password" placeholder="Password" value="password" onChange={e => setpassword(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item>
-                                        <Button type="primary" htmlType="submit" size="large" onClick={login} block style={{ marginTop: "0px", marginBottom: "0px" }}>
+                                        <Button type="primary" htmlType="submit" size="large" onClick={SignIn} block style={{ marginTop: "0px", marginBottom: "0px" }}>
                                             Sign in
-                            </Button>
+                                        </Button>
                                     </Form.Item>
                                 </Form>
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}><span style={{ textDecoration: "none", cursor: "pointer" }} onClick={viewSignIn}>Forgot password?</span></p>
