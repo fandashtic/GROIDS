@@ -36,8 +36,8 @@ let GetSchemes = async (id, callback) => {
         });
 };
 
-let SchemeLookUp = async (filter, callback) => {
-    return API.post('/SchemeLookUp', GetAllObject(filter))
+let SchemeLookUp = async (id, callback) => {
+    return API.post('/SchemeLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'SchemeLookUp');
         });

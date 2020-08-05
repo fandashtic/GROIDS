@@ -36,8 +36,8 @@ let GetCountries = async (filter, callback) => {
         });
 };
 
-let CountryLookUp = async (filter, callback) => {
-    return API.post('/CountryLookUp', GetAllObject(filter))
+let CountryLookUp = async (id, callback) => {
+    return API.post('/CountryLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'CountryLookUp');
         });

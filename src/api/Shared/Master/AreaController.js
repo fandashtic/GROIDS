@@ -36,8 +36,8 @@ let GetAreas = async (filter, callback) => {
         });
 };
 
-let AreaLookUp = async (filter, callback) => {
-    return API.post('/AreaLookUp', GetAllObject(filter))
+let AreaLookUp = async (id, callback) => {
+    return API.post('/AreaLookUp',GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AreaLookUp');
         });

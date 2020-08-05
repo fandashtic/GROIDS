@@ -36,8 +36,8 @@ let GetUsers = async (filter, callback) => {
         });
 };
 
-let UserLookUp = async (filter, callback) => {
-    return API.post('/UserLookUp', GetAllObject(filter))
+let UserLookUp = async (id, callback) => {
+    return API.post('/UserLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UserLookUp');
         });

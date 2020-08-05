@@ -36,8 +36,8 @@ let GetManufactures = async (filter, callback) => {
         });
 };
 
-let ManufactureLookUp = async (filter, callback) => {
-    return API.post('/ManufactureLookUp', GetAllObject(filter))
+let ManufactureLookUp = async (id, callback) => {
+    return API.post('/ManufactureLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'ManufactureLookUp');
         });

@@ -36,8 +36,8 @@ let GetOrders = async (filter, callback) => {
         });
 };
 
-let OrderLookUp = async (filter, callback) => {
-    return API.post('/OrderLookUp', GetAllObject(filter))
+let OrderLookUp = async (id, callback) => {
+    return API.post('/OrderLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'OrderLookUp');
         });

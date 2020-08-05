@@ -36,8 +36,8 @@ let GetInventories = async (filter, callback) => {
         });
 };
 
-let InventoryLookUp = async (filter, callback) => {
-    return API.post('/InventoryLookUp', GetAllObject(filter))
+let InventoryLookUp = async (id, callback) => {
+    return API.post('/InventoryLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'InventoryLookUp');
         });

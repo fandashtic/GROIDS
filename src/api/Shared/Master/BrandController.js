@@ -36,8 +36,8 @@ let GetBrands = async (filter, callback) => {
         });
 };
 
-let BrandLookUp = async (filter, callback) => {
-    return API.post('/BrandLookUp', GetAllObject(filter))
+let BrandLookUp = async (id, callback) => {
+    return API.post('/BrandLookUp',GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'BrandLookUp');
         });

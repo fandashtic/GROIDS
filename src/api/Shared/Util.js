@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import generator from 'generate-password';
+const {Base64} = require('js-base64');
 
 let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     let result = {};
@@ -86,14 +87,18 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
 
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
-    tableData['created_by'] = created_by;
+    if(IsHasValue(created_by)){
+        tableData['created_by'] = created_by;
+    }
     tableData['created_on'] = GetDate();
     tableData['status'] = true;
     return tableData;
 }
 
 let UpdateDetaultValues = (tableData, modified_by) => {
-    tableData['modified_by'] = modified_by;
+    if(IsHasValue(modified_by)){
+        tableData['modified_by'] = modified_by;
+    }
     tableData['modified_on'] = GetDate();
     return tableData;
 }
@@ -122,30 +127,13 @@ let GetDate = () => {
 }
 
 let EnCode = (data) => {
-    return data;
+    return Base64.encode(data);
 }
 
 let DeCode = (data) => {
-    return data;
+    return Base64.decode(data);
 }
 
-let CreatePassword = (password, password_salt) => {
-    return password + password_salt;
-};
-
-let ComparePassword = (password, password_salt, sys_password) => {
-    return (password + password_salt) === sys_password ? true : false;
-};
-
-let CreatePasswordSalt = () => {
-    return generator.generate({
-        length: 10,
-        numbers: true,
-        symbols: true,
-        lowercase: true,
-        uppercase: true
-    });
-};
 
 let GetFileExtn = (fileName) => {
     return fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
@@ -188,7 +176,7 @@ let DeleteObject = (id) => {
 
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
-    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, CreatePassword, CreatePasswordSalt,
-    ComparePassword, GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
+    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues,
+    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
     GetObject, GetAllObject, PostObject, PutObject, DeleteObject
 };

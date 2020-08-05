@@ -36,8 +36,8 @@ let GetStates = async (filter, callback) => {
         });
 };
 
-let StateLookUp = async (filter, callback) => {
-    return API.post('/StateLookUp', GetAllObject(filter))
+let StateLookUp = async (id, callback) => {
+    return API.post('/StateLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'StateLookUp');
         });

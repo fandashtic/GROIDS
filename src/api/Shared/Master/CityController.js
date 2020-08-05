@@ -36,8 +36,8 @@ let GetCities = async (filter, callback) => {
         });
 };
 
-let CityLookUp = async (filter, callback) => {
-    return API.post('/CityLookUp', GetAllObject(filter))
+let CityLookUp = async (id, callback) => {
+    return API.post('/CityLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'CityLookUp');
         });

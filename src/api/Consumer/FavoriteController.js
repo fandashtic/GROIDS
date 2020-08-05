@@ -36,8 +36,8 @@ let GetFavorites = async (filter, callback) => {
         });
 };
 
-let FavoriteLookUp = async (filter, callback) => {
-    return API.post('/FavoriteLookUp', GetAllObject(filter))
+let FavoriteLookUp = async (id, callback) => {
+    return API.post('/FavoriteLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'FavoriteLookUp');
         });

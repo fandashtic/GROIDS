@@ -36,8 +36,8 @@ let GetStores = async (filter, callback) => {
         });
 };
 
-let StoreLookUp = async (filter, callback) => {
-    return API.post('/StoreLookUp', GetAllObject(filter))
+let StoreLookUp = async (id, callback) => {
+    return API.post('/StoreLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'StoreLookUp');
         });

@@ -36,8 +36,8 @@ let GetPayments = async (filter, callback) => {
         });
 };
 
-let PaymentLookUp = async (filter, callback) => {
-    return API.post('/PaymentLookUp', GetAllObject(filter))
+let PaymentLookUp = async (id, callback) => {
+    return API.post('/PaymentLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'PaymentLookUp');
         });

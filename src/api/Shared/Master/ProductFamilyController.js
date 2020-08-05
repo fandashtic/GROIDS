@@ -36,8 +36,8 @@ let GetProductFamilies = async (filter, callback) => {
         });
 };
 
-let ProductFamilyLookUp = async (filter, callback) => {
-    return API.post('/ProductFamilyLookUp', GetAllObject(filter))
+let ProductFamilyLookUp = async (id, callback) => {
+    return API.post('/ProductFamilyLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'ProductFamilyLookUp');
         });

@@ -36,8 +36,8 @@ let GetCompanies = async (filter, callback) => {
         });
 };
 
-let CompanyLookUp = async (filter, callback) => {
-    return API.post('/CompanyLookUp', GetAllObject(filter))
+let CompanyLookUp = async (id, callback) => {
+    return API.post('/CompanyLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'CompanyLookUp');
         });
