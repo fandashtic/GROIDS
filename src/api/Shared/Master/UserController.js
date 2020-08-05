@@ -50,11 +50,16 @@ let ChangePassword = async (user_id, new_password, old_password, callback) => {
     //     });
 };
 
-let IsUserValid = async (user_id, password , callback) => {
-    // return API.post('/UserLookUp', GetAllObject(filter))
-    //     .then(res => {
-    //        return  ReturnObject(callback, null, res.data, 'UserLookUp');
-    //     });
+let IsUserValid = async (user_name, password, callback) => {
+    let filter = {
+        "user_name": user_name,
+        "password": password
+    };
+
+    return API.post('/IsUserValid', GetAllObject(filter))
+        .then(res => {
+            return ReturnObject(callback, null, res.data, 'IsUserValid');
+        });
 };
 
 export { AddUser,
