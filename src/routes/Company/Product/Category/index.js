@@ -3,22 +3,25 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col,message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetProductCategories,DeleteProductCategory,AddProductCategory } from 'api/Shared/Master/ProductCategoryController'
+import { GetProductCategories,DeleteProductCategory,AddProductCategory ,ProductCategoryLookUp} from 'api/Shared/Master/ProductCategoryController'
 
 let filter = { status: true }
-
+let category_id = "PC020e0c876-b81e-4ba8-a0c6-3e27671771e8"
 const ProductCategory = () => {
     const [view, setView] = useState(true);
     const [editData, setEditData]= useState({})
     const [category, setCategory] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
+    const [LookUpData, setLookUpData] = useState({})
 
     const apiInit = () => {
         GetProductCategories(filter, (res, err) => {
-            console.log(res.data)
             setCategory(res.data)
             setsearchItem(res.data)
+        })
+        ProductCategoryLookUp(category_id, (res,err) => {
+            setLookUpData(res)
         })
     }
 
@@ -85,7 +88,7 @@ const ProductCategory = () => {
                         </Col>
                     </Row>
                 </div>
-            {view ? (<ListView editableData={editableData} deletedData ={deletedData} category={searchItem}/>) : <ListForm  editableDataToForm ={editData} addData={addData}/>}
+            {view ? (<ListView editableData={editableData} deletedData ={deletedData} category={searchItem}/>) : <ListForm  editableDataToForm ={editData} addData={addData} LookUpData ={LookUpData}/>}
 
             </div>
         )

@@ -1,18 +1,16 @@
 
-import React , { useState, useEffect } from 'react';
-import { ProductCategoryLookUp } from 'api/Shared/Master/ProductCategoryController';
+import React from 'react';
 import {
     Form,
     Input,
-    Cascader,
-   // Select,
+    Select,
     Button,
     Card,
-  // Upload,
+    Upload,
   Row,
   Col
 } from 'antd';
-//const { Option } = Select;
+const { Option } = Select;
 
 
 const formItemLayout = {
@@ -26,22 +24,11 @@ const formItemLayout = {
         sm: { span: 24 },
     },
 };
-const status = [
-    {
-        value: 'Active',
-        label: 'Active',
-    },
-    {
-        value: 'InActive',
-        label: 'InActive',
-    },
-];
 
-const ProductFrom = ({addData}) => {
+const ProductFrom = ({addData,LookUpData}) => {
     const [form] = Form.useForm();
-    let category_id = null;
-    const [LookUpData, setLookUpData] = useState({})
-
+    const {manufactures,brands} = LookUpData
+    console.log(LookUpData)
     const onFinish = values => {
         console.log('Received values of form: ', values);
         values['company_id'] = "212435446"
@@ -52,13 +39,6 @@ const ProductFrom = ({addData}) => {
         values['created_by'] = 1
         addData(values)
     };
-
-    useEffect(() => {
-        ProductCategoryLookUp(category_id, (data, err) => {
-            setLookUpData(data);
-        });
-
-    }, [category_id]);
 
     return (
         <Card className="gx-card" title="Product Form">
@@ -96,7 +76,16 @@ const ProductFrom = ({addData}) => {
                         { type: 'array', required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={LookUpData.manufactures} />
+                  <Select
+                        showSearch
+                        defaultActiveFirstOption={false}
+                        showArrow={true}
+                        filterOption={false}
+                        allowClear
+                        notFoundContent={null}
+                    >
+                        { manufactures !== null ? manufactures.map(d => <Option key={d.value}>{d.label}</Option>):''}
+                    </Select>
                 </Form.Item>
                 </Col>
                 </Row>
@@ -108,20 +97,17 @@ const ProductFrom = ({addData}) => {
                     rules={[
                         { type: 'array', required: true, message: 'Please select your Brand!' },
                     ]}
-
                 >
-                    <Cascader options={LookUpData.brands} />
-                </Form.Item>
-                </Col>
-                <Col md={12} sm={24}>
-                <Form.Item
-                    name="status"
-                    label="Status"
-                    rules={[
-                        { type: 'array', required: true, message: 'Please select your  Status!' },
-                    ]}
-                >
-                    <Cascader options={status} />
+                    <Select
+                        showSearch
+                        defaultActiveFirstOption={false}
+                        showArrow={true}
+                        filterOption={false}
+                        allowClear
+                        notFoundContent={null}
+                    >
+                        { brands !== null ? brands.map(d=> <Option key={d.value}>{d.label}</Option>):''}
+                    </Select>
                 </Form.Item>
                 </Col>
                 </Row>

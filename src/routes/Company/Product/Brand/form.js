@@ -1,16 +1,15 @@
-import React , { useState, useEffect } from 'react';
-import { BrandLookUp } from 'api/Shared/Master/BrandController';
-
+import React  from 'react';
 import {
     Form,
     Input,
-    Cascader,
+    Select,
     Button,
     Card,
     Row,
     Col
 } from 'antd';
 
+const Option = Select.Option;
 
 const formItemLayout = {
     labelCol: {
@@ -24,12 +23,10 @@ const formItemLayout = {
     },
 };
 
-const From = ({ addData }) => {
+const From = ({ addData,LookUpData }) => {
 
     const [form] = Form.useForm();
-    let brand_id = null;
-    const [LookUpData, setLookUpData] = useState({})
-
+    const {manufactures} = LookUpData
     const onFinish = values => {
         values['company_id'] = "212435446"
         values['store_id'] = "1"
@@ -37,15 +34,10 @@ const From = ({ addData }) => {
         values['status'] = true
         values['created_on'] = new Date()
         values['created_by'] = 1
-        addData(values)
+        values['manufacture_name'] = manufactures.find(x => x.value === values.manufacture_id).label
+        addData(values).then(res => form.resetFields())
+       
     };
-
-    useEffect(() => {
-        BrandLookUp(brand_id, (data, err) => {
-            setLookUpData(data);
-        });
-
-    }, [brand_id]);
 
     return (
         <Card className="gx-card" title="Brand Form">
@@ -77,13 +69,22 @@ const From = ({ addData }) => {
                 </Col>
                 <Col md={12} sm={24}>
                 <Form.Item
-                    name="manufacture_name"
+                    name="manufacture_id"
                     label="Manufacture"
                     rules={[
-                        { type: 'array', required: true, message: 'Please select your Manufacture!' },
+                        { required: true, message: 'Please select your Manufacture!' },
                     ]}
                 >
-                    <Cascader options={LookUpData.manufactures} />
+                    <Select
+                        showSearch
+                        defaultActiveFirstOption={false}
+                        showArrow={false}
+                        filterOption={false}
+                        allowClear
+                        notFoundContent={null}
+                    >
+                        { manufactures !== null ? manufactures.map(d => <Option key={d.value}>{d.label}</Option>):''}
+                    </Select>
                 </Form.Item>
                 </Col>
                 </Row>

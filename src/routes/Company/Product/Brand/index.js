@@ -3,9 +3,9 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
 import ListView from './view';
 import ListForm from './form';
-import { GetBrands, DeleteBrand, AddBrand } from 'api/Shared/Master/BrandController';
-
+import { GetBrands, DeleteBrand, AddBrand, BrandLookUp } from 'api/Shared/Master/BrandController';
 let filter = { status: true }
+let brand_id = null;
 
 function Brands() {
     const [view, setView] = useState(true);
@@ -13,26 +13,29 @@ function Brands() {
     const [brands, setBrands] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
-    
+    const [LookUpData, setLookUpData] = useState({})
+
     const viewChanged = () => {
         setView(!view)
     }
-	const apiInit = () => {
-	        GetBrands(filter, (res, err) => {
-	            console.log(res)
-	            setBrands(res.data)
-	            setsearchItem(res.data)
-	        })
-	    }
+    const apiInit = () => {
+        GetBrands(filter, (res, err) => {
+            setBrands(res.data)
+            setsearchItem(res.data)
+        })
+    }
 
-	    const editableData = (data) => {
-	        setView(false)
-	        setEditData(data)
-	    }
+    const editableData = (data) => {
+        setView(false)
+        setEditData(data)
+    }
 
-	    useEffect(() => {
-	        apiInit()
-	    }, [])
+    useEffect(() => {
+        apiInit()
+        BrandLookUp(brand_id, (data, err) => {
+            setLookUpData(data);
+        });
+    }, [])
 
     const handleChange = (event) => {
         event.persist();
@@ -51,8 +54,8 @@ function Brands() {
             }
         })
     }
-    
-  const addData = data => {
+
+    const addData = data => {
         AddBrand(data, (res, err) => {
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
@@ -84,11 +87,11 @@ function Brands() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<ListView editableData={editableData} deletedData={deletedData} brands={searchItem} />) : <ListForm editableDataToForm={editData} addData={addData} />}
-	    
+            {view ? (<ListView editableData={editableData} deletedData={deletedData} brands={searchItem} />) : <ListForm editableDataToForm={editData} addData={addData} LookUpData={LookUpData} />}
 
-            </div>
-        )
+
+        </div>
+    )
 };
 
 export default Brands

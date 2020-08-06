@@ -35,15 +35,14 @@ const formItemLayout = {
     },
 };
 
-const product_id =null
 const ProductFrom = ({editableDataToForm,addData}) => {
     const [selectValues,setSelectValues] = useState({})
     const [form] = Form.useForm();
-
+    const product_id = ''; 
     useEffect(()=>{
         ProductLookUp(product_id,(res,err)=>{
-                console.log(">>>>",res)
-            setSelectValues(res)})
+            console.log(res)
+        setSelectValues(res)})
     },[])
 
     const handleChange = (value) => {
