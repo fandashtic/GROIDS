@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import generator from 'generate-password';
-const {Base64} = require('js-base64');
+//const {Base64} = require('js-base64');
 
 let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
     let result = {};
@@ -127,11 +127,13 @@ let GetDate = () => {
 }
 
 let EnCode = (data) => {
-    return Base64.encode(data);
+    //return Base64.encode(data);
+    return (data);
 }
 
 let DeCode = (data) => {
-    return Base64.decode(data);
+    //return Base64.decode(data);
+    return (data);
 }
 
 

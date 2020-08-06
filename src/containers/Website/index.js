@@ -47,7 +47,7 @@ const WebSite = () => {
 
     const SignIn = () => {
         IsUserValid(user_name, password, (data, err) => {
-            if (data) {
+            if (data.Status === 200) {
                 history.push('/dashboard/company');
             }
         });
@@ -75,8 +75,9 @@ const WebSite = () => {
         };
 
         AddCompany(newCompany, (data, err) => {
-            console.log(data);
-            console.log(err);
+            if (data.Status === 200) {
+                SetView("signin");
+            }
         });
     }
 

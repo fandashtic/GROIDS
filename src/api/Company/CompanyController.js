@@ -3,8 +3,11 @@ import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, R
 
 let AddCompany = async (data, callback) => {
     return API.post('/AddCompany', PostObject(data))
-        .then(res => {
-           return  ReturnObject(callback, null, res.data, 'AddCompany');
+        .then(function (response) {
+            return  ReturnObject(callback, null, response.data, 'AddCompany');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'AddCompany');
         });
 };
 
@@ -12,6 +15,9 @@ let UpdateCompany = async (id, data, callback) => {
     return API.post('/UpdateCompany', PutObject(id, data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'UpdateCompany');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'UpdateCompany');
         });
 };
 
@@ -19,6 +25,9 @@ let DeleteCompany = async (id, callback) => {
     return API.post('/DeleteCompany', DeleteObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'DeleteCompany');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'DeleteCompany');
         });
 };
 
@@ -26,6 +35,9 @@ let GetCompany = async (id, callback) => {
     return API.post('/GetCompany', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetCompany');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'GetCompany');
         });
 };
 
@@ -33,6 +45,9 @@ let GetCompanies = async (filter, callback) => {
     return API.post('/GetCompanies', GetAllObject(filter))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'GetCompanies');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'GetCompanies');
         });
 };
 
@@ -40,6 +55,9 @@ let CompanyLookUp = async (id, callback) => {
     return API.post('/CompanyLookUp', GetObject(id))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'CompanyLookUp');
+        })
+        .catch(function (error) {
+            return  ReturnObject(callback, error, null, 'CompanyLookUp');
         });
 };
 
