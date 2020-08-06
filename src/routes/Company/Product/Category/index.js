@@ -21,7 +21,8 @@ const ProductCategory = () => {
             setsearchItem(res.data)
         })
         ProductCategoryLookUp(category_id, (res,err) => {
-            setLookUpData(res)
+            console.log(res)
+            //setLookUpData(res)
         })
     }
 

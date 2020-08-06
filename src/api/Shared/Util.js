@@ -143,9 +143,7 @@ let GetFileExtn = (fileName) => {
 
 let GetObject = (id) => {
     return {
-        "filter": {
             "id": id
-        }
     }
 }
 
