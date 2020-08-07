@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect ,useState} from "react";
 import { Redirect, Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
 import { ConfigProvider } from 'antd';
 import { IntlProvider } from "react-intl";
@@ -18,23 +18,45 @@ import {
   NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
   NAV_STYLE_FIXED
 } from "constants/ThemeSetting";
-
+import {UserType} from 'api/Shared/Constant/Enum'
 const authUser = true
+
+const GetRoutePath = (userType) =>
+{
+    switch (userType) {
+        case UserType.SUPER_ADMIN:
+            return '/dashboard/company';
+        case UserType.COMPANY_ADMIN:
+            return '/dashboard/company';
+        case UserType.STORE_ADMIN:
+            return '/store/product';
+        case UserType.STORE_STAFF:
+            return '/store/product';
+        case UserType.CONSUMER:
+            return '/consumer/dashboard';
+        case UserType.SUPPORT:
+            return '/consumer/dashboard';
+        default:
+            return '/dashboard/company';
+    }
+}
+
 const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) =>
   <Route
     {...rest}
     render={props =>
-      authUser
+      authUser.user_type
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: '/product',
+            pathname: GetRoutePath( authUser.user_type),
             state: { from: location }
           }}
         />}
   />;
 
 const App = (props) => {
+  const [userToken , setUserToken] = useState({})
   const navStyle = NAV_STYLE_FIXED
   const locale = {
     languageId: 'english',
@@ -50,7 +72,6 @@ const App = (props) => {
     setLayoutType(layoutType);
     setNavStyle(navStyle);
   });
-
 
   const setLayoutType = (layoutType) => {
     if (layoutType === LAYOUT_TYPE_FULL) {
