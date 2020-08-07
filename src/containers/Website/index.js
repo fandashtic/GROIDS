@@ -5,6 +5,7 @@ import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 import { AddCompany } from 'api/Company/CompanyController';
 import { IsUserValid } from 'api/Shared/Master/UserController';
+import { UserType } from 'api/Shared/Constant/Enum'
 
 const WebSite = () => {
     const history = useHistory()
@@ -22,7 +23,7 @@ const WebSite = () => {
 
     const [user_name, setuser_name] = useState('');
     const [password, setpassword] = useState('');
-
+    const [userSession, setuserSession] = useState({});
     //#endregion Login
 
 
@@ -33,8 +34,8 @@ const WebSite = () => {
     };
 
     useEffect(() => {
-
-    }, [filter]);
+        localStorage.setItem('user', JSON.stringify(userSession));
+    }, [filter, userSession]);
 
     const viewPincode = () => {
         SetView("pincode")
@@ -46,11 +47,34 @@ const WebSite = () => {
     }
 
     const SignIn = () => {
-        IsUserValid(user_name, password, (data, err) => {
-            if (data.Status === 200) {
-                history.push('/dashboard/company');
+        IsUserValid(user_name, password, (res, err) => {
+            if (res.Status === 200) {
+                let user = res.data;
+                setuserSession(user);
+                let path = GetRoutePath(user.user_type);
+                history.push(path);
             }
         });
+    }
+
+    const GetRoutePath = (userType) =>
+    {
+        switch (userType) {
+            case UserType.SUPER_ADMIN:
+                return '/dashboard/company';
+            case UserType.COMPANY_ADMIN:
+                return '/dashboard/company';
+            case UserType.STORE_ADMIN:
+                return '/dashboard/company';
+            case UserType.STORE_STAFF:
+                return '/dashboard/company';
+            case UserType.CONSUMER:
+                return '/dashboard/company';
+            case UserType.SUPPORT:
+                return '/dashboard/company';
+            default:
+                return '/dashboard/company';
+        }
     }
 
     const viewSignUp = () => {
