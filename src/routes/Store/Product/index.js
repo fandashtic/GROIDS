@@ -1,29 +1,73 @@
-import React, { useState, useEffect } from 'react'
-import { Divider, Input } from 'antd';
-const Search = Input.Search;
+import React from 'react';
+import { Layout } from "antd";
+import { Configure, connectHits, connectStateResults, InstantSearch, Pagination, Stats, } from 'react-instantsearch-dom';
+import { withUrlSync } from './urlSync';
+import 'instantsearch.css/themes/algolia.css';
+import PageHeaderWithBack from 'components/PageHeaderWithBack';
+//import './style.css'
+import Header from "./Header";
+import Sidebar from "./SideBar";
+import Footer from "./Footer";
+import ProductList from "./ProductList";
+import algoliasearch from 'algoliasearch/lite';
 
-const PageHeaderWithBack = ({ title, subtitle, backurl }) =>
-    <div>
-        <h2>
-            {title}
-        </h2>
-        <span className={'badge'}>{subtitle}</span>
-        <Divider orientation="left" plain>
-        </Divider>
-    </div>;
+const { Content } = Layout;
 
-const ProductList = () => {
-    return (
-        <>
-            <PageHeaderWithBack title="Product Name" subtitle="Product" backurl=""></PageHeaderWithBack>
-            <Search placeholder="What you like..."
-             style={{ width: '50%',
-             position: 'absolute',
-             top: '33px',
-             left: '250px' }}
-             enterButton="Search Product" size="large"/>
-        </>
-    )
-}
+const searchClient = algoliasearch(
+    'latency',
+    '6be0576ff61c053d5f9a3225e2a90f76'
+);
 
-export default ProductList;
+const App = props => (
+    <>
+        <PageHeaderWithBack title="Products" subtitle="Company" islist={false} isadd={true} />
+
+        <InstantSearch className="gx-main-content"
+            indexName="ikea"
+            searchState={props.searchState}
+            createURL={props.createURL}
+            searchClient={searchClient}
+            onSearchStateChange={props.onSearchStateChange}>
+
+            <Configure hitsPerPage={16} />
+
+            <Layout className="gx-algolia-layout-has-sider">
+                <Sidebar />
+                <div className="gx-algolia-main">
+                    <Header />
+                    <Content className="gx-algolia-content">
+                        <CustomResults />
+                    </Content>
+                    <Footer>
+                        <Pagination showLast={true} />
+                    </Footer>
+                </div>
+            </Layout>
+        </InstantSearch>
+    </>
+);
+
+
+const CustomResults = connectStateResults(({ searchState, searchResult }) => {
+    if (searchResult && searchResult.nbHits === 0) {
+        return (
+            <div className="gx-algolia-content-inner">
+                <div className="gx-algolia-no-results">
+                    No results found matching{' '}
+                    <span className="gx-algolia-query">{searchState.query}</span>
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div className="gx-algolia-content-inner">
+                <Stats />
+                <ConnectedProducts />
+            </div>
+        );
+    }
+});
+
+const ConnectedProducts = connectHits(ProductList);
+
+export default withUrlSync(App);
