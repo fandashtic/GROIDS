@@ -85,6 +85,10 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
     return result;
 }
 
+let GetUserSession = async () => {
+    return await JSON.parse(localStorage.getItem('user'));
+};
+
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
     if(IsHasValue(created_by)){
@@ -176,7 +180,7 @@ let DeleteObject = (id) => {
 
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
-    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues,
+    ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
     GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
     GetObject, GetAllObject, PostObject, PutObject, DeleteObject
 };

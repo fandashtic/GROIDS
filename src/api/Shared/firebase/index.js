@@ -2,14 +2,14 @@ import firebase from "firebase/app";
 import "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBFLZe7Ekdi22HSiGC-WS4Q8Bgte2L39h8",
-    authDomain: "fandashticgrocery.firebaseapp.com",
-    databaseURL: "https://fandashticgrocery.firebaseio.com",
-    projectId: "fandashticgrocery",
-    storageBucket: "fandashticgrocery.appspot.com",
-    messagingSenderId: "797109517906",
-    appId: "1:797109517906:web:027433feab1af3739ca98b",
-    measurementId: "G-NWCVDJVKJG"
+    apiKey: "AIzaSyAJ5TlTOleBYz-Etonr5RGYbU2NuFLog9g",
+    authDomain: "grodis-d88d3.firebaseapp.com",
+    databaseURL: "https://grodis-d88d3.firebaseio.com",
+    projectId: "grodis-d88d3",
+    storageBucket: "grodis-d88d3.appspot.com",
+    messagingSenderId: "1056365641125",
+    appId: "1:1056365641125:web:3680406e57a7e9d6f73c4c",
+    measurementId: "G-J481M4XLWR"
 };
 
 firebase.initializeApp(firebaseConfig);

@@ -1,7 +1,7 @@
 import { storage } from "./firebase";
 import { ReturnObject, EnCode } from 'api/Shared/Util';
 
-const FileUpload = async (file, fileName, rootfolder, formFolder, setProgress, setUrl, callback) => {
+const FileUpload = async (file, fileName, rootfolder, setProgress, setUrl, callback, formFolder) => {
 
     var folder = rootfolder;
     if(formFolder)
@@ -38,10 +38,6 @@ const FileUpload = async (file, fileName, rootfolder, formFolder, setProgress, s
                     setUrl(url);
                     ReturnObject(callback, null, EnCode(url), 'FileUpload');
                 });
-            // .error(err => {
-            //     setUrl("http://via.placeholder.com/300");
-            //     ReturnObject(callback, err, null, 'FileUpload');
-            // })
         }
     );
 };
