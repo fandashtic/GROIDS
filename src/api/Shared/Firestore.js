@@ -1,7 +1,7 @@
 import { storage } from "./firebase";
 import { ReturnObject, EnCode } from 'api/Shared/Util';
 
-const FileUpload = async (file, fileName, rootfolder, setProgress, setUrl, callback, formFolder) => {
+const FileUpload = async (file, fileName, rootfolder, setUrl, callback, formFolder) => {
 
     var folder = rootfolder;
     if(formFolder)
@@ -19,7 +19,7 @@ const FileUpload = async (file, fileName, rootfolder, setProgress, setUrl, callb
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
 
-            setProgress(progress);
+           // setProgress(progress);
 
             if (snapshot && snapshot.metadata && progress === 100) {
                 console.log(snapshot);

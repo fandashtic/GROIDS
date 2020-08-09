@@ -39,7 +39,7 @@ const WebSite = () => {
 
     const viewPincode = () => {
         SetView("pincode")
-        history.push('/dashboard/company');
+        history.push('/company/dashbord');
     }
 
     const viewSignIn = () => {

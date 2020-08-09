@@ -17,22 +17,23 @@ const SubMenu = Menu.SubMenu;
 
 const SidebarContent = () => {
   const { state } = useContext(Context);
-  const { themeType, pathname, navStyle } = state
+  const { themeType, navStyle } = state
 
-  const selectedKeys = pathname.substr(1);
-  const defaultOpenKeys = selectedKeys.split('/')[1];
+  const selectedKeys = window.location.pathname;
+  const defaultOpenKeys = selectedKeys;
   const getNoHeaderClass = (navStyle) => {
     if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR || navStyle === NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR) {
       return "gx-no-header-notifications";
     }
     return "";
   };
-  const getNavStyleSubMenuClass = (navStyle) => {
-    if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
-      return "gx-no-header-submenu-popup";
-    }
-    return "";
-  };
+  // const getNavStyleSubMenuClass = (navStyle) => {
+  //   if (navStyle === NAV_STYLE_NO_HEADER_MINI_SIDEBAR) {
+  //     return "gx-no-header-submenu-popup";
+  //   }
+  //   return "";
+  // };
+  
   return (
     <>
       <SidebarLogo />
@@ -47,49 +48,48 @@ const SidebarContent = () => {
             selectedKeys={[selectedKeys]}
             theme={themeType === THEME_TYPE_LITE ? 'lite' : 'dark'}
             mode="inline">
-            <Menu.Item key="main/dashboard">
-              <Link to="/dashboard/company"><i
+            <Menu.Item key="/company/dashboard">
+              <Link to="/company/dashboard"><i
                 className="icon icon-dasbhoard" /><span><IntlMessages id="sidebar.dashboard" /></span></Link>
             </Menu.Item>
-            <SubMenu key="dashboard" popupClassName={getNavStyleSubMenuClass(navStyle)}
-              title={<span> <i className="icon icon-company" />
-                <span><IntlMessages id="sidebar.master" /></span></span>}>
-              <Menu.Item key="main/manufacturer">
-                <Link to="/manufacturer">
+            <SubMenu key="master" title={<span><i className="icon icon-widgets" />
+              <span><IntlMessages id="sidebar.master" /> </span></span>}>
+              <Menu.Item key="/company/master/manufacture">
+                <Link to="/company/master/manufacture">
                   <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.manufacturer" /></span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="main/brand">
-                <Link to="/brand">
+              <Menu.Item key="/company/master/brand">
+                <Link to="/company/master/brand">
                   <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.brand" /></span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="main/category">
-                <Link to="/category">
+              <Menu.Item key="/company/master/category">
+                <Link to="/company/master/category">
                   <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.category" /></span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="main/family">
-                <Link to="/family">
+              <Menu.Item key="/company/master/productFamily">
+                <Link to="/company/master/productFamily">
                   <i className="icon icon-orders" />
                   <span><IntlMessages id="sidebar.master.family" /></span>
                 </Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="main/Product">
-              <Link to="/product"><i
+            <Menu.Item key="/company/product">
+              <Link to="/company/product"><i
                 className="icon icon-folder-o" /><span><IntlMessages
                   id="sidebar.products" /></span></Link>
             </Menu.Item>
-            <Menu.Item key="main/Stores">
-              <Link to="/stores"><i
-                className="icon icon-inbuilt-apps" /><span><IntlMessages
+            <Menu.Item key="/company/stores">
+              <Link to="/company/stores"><i
+                className="icon icon-refer" /><span><IntlMessages
                   id="sidebar.stores" /></span></Link>
             </Menu.Item>
-            <SubMenu key="settings" popupClassName={getNavStyleSubMenuClass(navStyle)}
+            <SubMenu key="settings" 
               title={<span> <i className="icon icon-setting" />
                 <span><IntlMessages id="sidebar.settings" /></span></span>}>
               <Menu.Item key="main/accounts">
@@ -113,13 +113,15 @@ const SidebarContent = () => {
                     id="sidebar.settings.payment" /></span></Link>
               </Menu.Item>
             </SubMenu>
-
           </Menu>
         </CustomScrollbars>
       </div>
     </>
   );
 };
+
+
+
 
 SidebarContent.propTypes = {};
 export default SidebarContent;

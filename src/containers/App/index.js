@@ -25,9 +25,9 @@ const GetRoutePath = (userType) =>
 {
     switch (userType) {
         case UserType.SUPER_ADMIN:
-            return '/dashboard/company';
+            return '/company/dashboard';
         case UserType.COMPANY_ADMIN:
-            return '/dashboard/company';
+            return '/company/dashboard';
         case UserType.STORE_ADMIN:
             return '/store/product';
         case UserType.STORE_STAFF:
@@ -45,7 +45,7 @@ const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) 
   <Route
     {...rest}
     render={props =>
-      authUser.user_type
+      authUser
         ? <Component {...props} />
         : <Redirect
           to={{
