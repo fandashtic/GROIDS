@@ -70,7 +70,7 @@ const TableView = () => {
         },
     ];
     const onViewPanel = data => {
-        history.push(`${history.location.pathname}/edit/${data.product_id}`)
+        history.push(`${history.location.pathname}/view/${data.product_id}`)
     }
     return (
         <>
