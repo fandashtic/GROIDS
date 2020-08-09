@@ -44,10 +44,15 @@ let UserLookUp = async (id, callback) => {
 };
 
 let ChangePassword = async (user_id, new_password, old_password, callback) => {
-    // return API.post('/UserLookUp', GetAllObject(filter))
-    //     .then(res => {
-    //        return  ReturnObject(callback, null, res.data, 'UserLookUp');
-    //     });
+    let filter = {
+        'user_id': user_id,
+        'new_password': new_password,
+        'old_password' : old_password
+    };
+    return API.post('/ChangePassword', GetAllObject(filter))
+        .then(res => {
+           return  ReturnObject(callback, null, res.data, 'UserLookUp');
+        });
 };
 
 let IsUserValid = async (user_name, password, callback) => {

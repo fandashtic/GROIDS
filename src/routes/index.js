@@ -1,11 +1,7 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-
-
 import Company from "routes/navigations/company";
 import Store from "routes/navigations/store";
-
-
 const App = ({match}) => (
   <div className="gx-main-content-wrapper">
     <Switch>

@@ -1,4 +1,4 @@
-import React, { memo, useEffect ,useState} from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Redirect, Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
 import { ConfigProvider } from 'antd';
 import { IntlProvider } from "react-intl";
@@ -18,27 +18,34 @@ import {
   NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
   NAV_STYLE_FIXED
 } from "constants/ThemeSetting";
-import {UserType} from 'api/Shared/Constant/Enum'
-const authUser = true
+import { UserType } from 'api/Shared/Constant/Enum';
+import { IsHasValue, GetUserSession } from 'api/Shared/Util';
 
-const GetRoutePath = (userType) =>
-{
-    switch (userType) {
-        case UserType.SUPER_ADMIN:
-            return '/company/dashboard';
-        case UserType.COMPANY_ADMIN:
-            return '/company/dashboard';
-        case UserType.STORE_ADMIN:
-            return '/store/product';
-        case UserType.STORE_STAFF:
-            return '/store/product';
-        case UserType.CONSUMER:
-            return '/consumer/dashboard';
-        case UserType.SUPPORT:
-            return '/consumer/dashboard';
-        default:
-            return '/dashboard/company';
+let authUser = true;
+
+const GetRoutePath = (authUser) => {
+  console.log(authUser);
+  if (IsHasValue(authUser) && IsHasValue(authUser.user_type)) {
+    switch (authUser.user_type) {
+      case UserType.SUPER_ADMIN:
+        return '/dashboard/company';
+      case UserType.COMPANY_ADMIN:
+        return '/dashboard/company';
+      case UserType.STORE_ADMIN:
+        return '/store/product';
+      case UserType.STORE_STAFF:
+        return '/store/product';
+      case UserType.CONSUMER:
+        return '/consumer/dashboard';
+      case UserType.SUPPORT:
+        return '/consumer/dashboard';
+      default:
+        return '/dashboard/company';
     }
+  }
+  else {
+    return '/';
+  }
 }
 
 const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) =>
@@ -49,21 +56,23 @@ const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) 
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: GetRoutePath( authUser.user_type),
+            pathname: GetRoutePath(authUser),
             state: { from: location }
           }}
         />}
   />;
 
 const App = (props) => {
-  const [userToken , setUserToken] = useState({})
-  const navStyle = NAV_STYLE_FIXED
+  const [userToken, setUserToken] = useState(null);
+  const navStyle = NAV_STYLE_FIXED;
+
   const locale = {
     languageId: 'english',
     locale: 'en',
     name: 'English',
     icon: 'us'
-  }
+  };
+
   const layoutType = LAYOUT_TYPE_FULL
   const location = useLocation();
   const match = useRouteMatch();
@@ -72,6 +81,14 @@ const App = (props) => {
     setLayoutType(layoutType);
     setNavStyle(navStyle);
   });
+
+  useEffect( async() => {
+    // let userSession = await GetUserSession();
+    // if (IsHasValue(userSession)) {
+    //   setUserToken(userSession);
+    //   //authUser = true;
+    // }
+  }, [userToken]);
 
   const setLayoutType = (layoutType) => {
     if (layoutType === LAYOUT_TYPE_FULL) {
@@ -102,32 +119,6 @@ const App = (props) => {
       document.body.classList.remove('horizontal-layout');
     }
   };
-
-  // useEffect(() => {
-  //   if (location.pathname === '/') {
-  //     if (authUser === null) {
-  //       history.push('/signin');
-  //     } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
-  //       history.push('/main/dashboard/company');
-  //     } else {
-  //       history.push(initURL);
-  //     }
-  //   }
-  // }, [authUser, initURL, location, history]);
-
-  // useEffect(() => {
-  //   if (themeType === THEME_TYPE_DARK) {
-  //     console.log("adding dark class")
-  //     document.body.classList.add('dark-theme');
-  //     document.body.classList.add('dark-theme');
-  //     let link = document.createElement('link');
-  //     link.type = 'text/css';
-  //     link.rel = 'stylesheet';
-  //     link.href = "/css/dark_theme.css";
-  //     link.className = 'style_dark_theme';
-  //     document.body.appendChild(link);
-  //   }}
-  // ,[]);
 
   const currentAppLocale = AppLocale[locale.locale];
 

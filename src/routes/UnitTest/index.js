@@ -22,7 +22,7 @@ const UnitTest = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    RunUnitTest();
+    //RunUnitTest();
   }, [image]);
 
   const handleChange = e => {
