@@ -41,6 +41,8 @@ const ProductFrom = () => {
     const [image, setImage] = useState(null);
     const [manufactures, setManufactures] = useState([]);
     const [brands, setBrands] = useState([]);
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
 
     let location = history.location.pathname
     let id = location.substring(location.lastIndexOf('/') + 1)
@@ -127,7 +129,7 @@ const ProductFrom = () => {
         }
     };
     const upload = () => {
-        return FileUpload(image, image.name, PreFix.Brand, '', '', (data, err) => {
+        return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
             if (err) { return err }
             return data
         });
