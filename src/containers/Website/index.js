@@ -164,7 +164,7 @@ const WebSite = () => {
                                     <Form.Item
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" value="user_name" onChange={e => setuser_name(e.target.value)} />
+                                        <Input type="text" placeholder="User Name" value="user_name" onChange={e => setuser_name(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item
                                         rules={[{ required: true, message: 'Enter password!' }]}

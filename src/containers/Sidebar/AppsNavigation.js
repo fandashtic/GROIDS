@@ -7,7 +7,12 @@ const AppsNavigation = () => {
   <ul className="gx-app-nav">
     <li><i className="icon icon-notification"/></li>
     <li><i className="icon icon-wall"/></li>
-    <li className="signout" onClick={()=> { history.push('/')}}><i className="icon icon-signin"/></li>
+    <li className="signout" onClick={()=> { history.push('/')}}
+      style={{        
+        color: 'red',
+        fontWeight: 'bold'    
+      }}
+    ><i className="icon icon-signin"/></li>
   </ul>)
   }
 
