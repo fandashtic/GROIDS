@@ -201,12 +201,6 @@ input {
     margin-top: 20px;
 }
 
-.signout {
-    transform: rotate(180deg);
-    position: relative;
-    top: -6px;
-}
-
 .ant-form-inline .ant-form-item {
     flex-wrap: wrap;
 }
@@ -217,4 +211,8 @@ form.functionalForm .ant-row {
 
 form.functionalForm .ant-col {
     width: 100%;
+}
+
+.gx-app-nav {
+    justify-content: center;
 }
