@@ -73,13 +73,14 @@ function CompanySetting() {
                     </Col>
                     <Col md={4} sm={5}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
-                            {view ? (
+                            
+                            {/* {view ? { (
                                 <><i className="icon icon-add-circle gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
-                                    <span>&nbsp;Add New</span></>) : (
+                                    <span>&nbsp;Add New</span></>) : (}
                                     <>
                                         <i className="icon icon-all-contacts gx-mr-2 gx-fs-lg gx-d-inline-flex gx-vertical-align-middle" />
                                         <span>View All</span></>)
-                            }
+                            } */}
                         </Button>
                     </Col>
                 </Row>

@@ -47,7 +47,7 @@ const ChangePasswordForm = ({ editableDataToForm, changePassword }) => {
                 }}
                 scrollToFirstError
             >
-                <Form.Item
+                {/* <Form.Item
                     name="UserName"
                     label="User Name"
                     rules={[
@@ -58,7 +58,7 @@ const ChangePasswordForm = ({ editableDataToForm, changePassword }) => {
                     ]}
                 >
                     <Input />
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item
                     name="old_password"
                     label="Old Password"
