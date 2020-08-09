@@ -39,7 +39,6 @@ const SidebarContent = () => {
       <SidebarLogo />
       <div className="gx-sidebar-content">
         <div className={`gx-sidebar-notifications ${getNoHeaderClass(navStyle)}`}>
-          <UserProfile />
           <AppsNavigation />
         </div>
         <CustomScrollbars className="gx-layout-sider-scrollbar">

@@ -295,26 +295,6 @@ const ProductFrom = () => {
                             </Upload>
                         </Form.Item>
                     </Col>
-                    <Col md={12} sm={24}>
-                        {editView && <Col md={12} sm={24}>
-                            <Form.Item
-                                name="status"
-                                label="Status"
-                                rules={[
-                                    { required: true, message: 'Please select your Status!' },
-                                ]}
-                            >
-                                <Select
-                                    defaultActiveFirstOption={true}
-                                    showArrow={true}
-                                    allowClear
-                                >
-                                    <Option key="true">active</Option>
-                                    <Option key="false">In-Active</Option>
-                                </Select>
-                            </Form.Item>
-                        </Col>}
-                    </Col>
                 </Row>
                 <Row gutter={[8, 0]}>
                     <Col md={24}>

@@ -4,8 +4,6 @@ import {Avatar, Popover} from "antd";
 const UserProfile = () => {
   const userMenuOptions = (
     <ul className="gx-user-popover">
-      <li>My Account</li>
-      <li>Connections</li>
       <li>Logout
       </li>
     </ul>
