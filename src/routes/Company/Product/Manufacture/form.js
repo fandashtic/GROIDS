@@ -42,8 +42,10 @@ const From = () => {
     const [form] = Form.useForm();
     const [image, setImage] = useState(null);
     const [fileList, setFileList] = useState([]);
-    //const [url, setUrl] = useState("");
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
     const [editView, setEditView] = useState(false);
+
 
     let location = history.location.pathname
     let id = location.substring(location.lastIndexOf('/') + 1)
@@ -97,7 +99,7 @@ const From = () => {
     };
 
     // const upload = async () => {
-    //        FileUpload(image, image.name, PreFix.Brand, setUrl , (data,err)=>{
+    //        FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data,err)=>{
     //            return true
     //        });
     // }

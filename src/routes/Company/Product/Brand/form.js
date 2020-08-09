@@ -40,6 +40,8 @@ const Index = () => {
     const [fileList, setFileList] = useState([]);
     const [manufactures, setManufactures] = useState([]);
     const [editView, setEditView] = useState(false);
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
 
     let location = history.location.pathname
     let id = location.substring(location.lastIndexOf('/') + 1)
@@ -100,7 +102,7 @@ const Index = () => {
     };
 
     // const upload = () => {
-    //     return FileUpload(image, image.name, PreFix.Brand, '', '', (data, err) => {
+    //     return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
     //         if (err) { return err }
     //         return data
     //     });
