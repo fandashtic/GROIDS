@@ -16,6 +16,7 @@ import { PreFix } from 'api/Shared/Constant/Enum';
 import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 import { CSVLink, CSVDownload } from "react-csv";
 import { ImportData, ExportData } from 'components/DataImportExport';
+import {ImportCompany} from 'api/Company/CompanyController';
 
 const UnitTest = () => {
 
@@ -63,7 +64,9 @@ const UnitTest = () => {
   };
 
   const importdata = async (data) => {
-    console.log(data);
+    await ImportCompany(data, async(res) => {
+      console.log(res)
+    });
   }
 
   return (

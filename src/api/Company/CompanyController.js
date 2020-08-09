@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject, IsHasValue } from 'api/Shared/Util';
 
 let AddCompany = async (data, callback) => {
     return API.post('/AddCompany', PostObject(data))
@@ -62,7 +62,11 @@ let CompanyLookUp = async (id, callback) => {
 };
 
 let ImportCompany = async (data, callback) => {
-    
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddCompany(obj, callback);
+        });        
+    }
 };
 
 export { AddCompany,
