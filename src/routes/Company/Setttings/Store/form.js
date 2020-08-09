@@ -1,13 +1,16 @@
-
-import React , { useState, useEffect } from 'react';
-import { ProductFamilyLookUp } from 'api/Shared/Master/ProductFamilyController';
+import React,{useEffect,useState} from 'react';
 import {
     Form,
     Input,
     Cascader,
     Button,
-    Card,
+    PageHeader,
+    Upload,
 } from 'antd';
+import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
+import {StoreLookUp} from 'api/Shared/Master/StoreController';
+import {StoreType} from 'api/Shared/Constant/Enum'
+let store_id = null
 
 const formItemLayout = {
     labelCol: {
@@ -29,98 +32,68 @@ const status = [
         label: 'InActive',
     },
 ];
-
-const ProductFrom = ({addData}) => {
+const StoreSettingForm = ({addData}) => {
     const [form] = Form.useForm();
-    let product_family_id = null;
-    const [LookUpData, setLookUpData] = useState({})
-
-    useEffect(() => {
-        ProductFamilyLookUp(product_family_id, (data, err) => {
-            setLookUpData(data);
-        });
-
-    }, [product_family_id]);
-
+    const [selectValues,setSelectValues] = useState({})
     const onFinish = values => {
-        values['company_id'] = "212435446"
-        values['store_id'] = "1"
-        values['profile_image_url'] = "test"
-        values['status'] = true
-        values['created_on'] = new Date()
-        values['created_by'] = 1
+            values['company_id'] = "212435446"
+            values['product_id'] = "1"
+            values['profile_image_url'] = "test"
+            values['status'] = true
+            values['created_on'] = new Date()
+            values['created_by'] = 1
         addData(values)
     };
+
+    useEffect(()=>{
+        StoreLookUp(store_id, (res,err)=>{
+                setSelectValues(res)
+            
+        })
+    },[])
     return (
-        <Card className="gx-card" title="Product Form">
+        <>
+            <PageHeader className="site-page-header" title="Stores Setting" ></PageHeader>
             <Form
                 {...formItemLayout}
                 form={form}
-                name="Product"
+                name="Store"
                 onFinish={onFinish}
                 initialValues={{
                 }}
                 scrollToFirstError
             >
                 <Form.Item
-                    name="product_family_name"
-                    label="Family Name"
+                    name="store_name"
+                    label="Store Name"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Product Family Name!',
+                            message: 'Please Give your Input',
                         },
                     ]}
                 >
-                    <Input />
+                    <Input name="store_name"/>
                 </Form.Item>
                 <Form.Item
-                    name="manufacture_name"
-                    label="Manufacture"
+                    name="store_type"
+                    label="Store Type"
                     rules={[
-                        { type: 'array', required: true, message: 'Please select your Manufacture!' },
+                        { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={LookUpData.manufactures} />
+                    <Cascader options={StoreType} />
                 </Form.Item>
-                <Form.Item
-                    name="brand_name"
-                    label="Brand"
-                    rules={[
-                        { type: 'array', required: true, message: 'Please select your Brand!' },
-                    ]}
-
-                >
-                    <Cascader options={LookUpData.brands} />
-                </Form.Item>
-                <Form.Item
-                    name="product_category_name"
-                    label="Category"
-                    rules={[
-                        { type: 'array', required: true, message: 'Please select your  Category!' },
-                    ]}
-                >
-                    <Cascader options={LookUpData.productCategories} />
-                </Form.Item>
-                <Form.Item
-                    name="status"
-                    label="Status"
-                    rules={[
-                        { type: 'array', required: true, message: 'Please select your  Status!' },
-                    ]}
-                >
-                    <Cascader options={status} />
-                </Form.Item>
+                
                 <Button type="danger">
                     Reset
                 </Button>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary"  htmlType="submit">
                     Submit
                 </Button>
             </Form>
-        </Card>
+        </>
     );
 };
 
-export default ProductFrom;
-
+export default StoreSettingForm 

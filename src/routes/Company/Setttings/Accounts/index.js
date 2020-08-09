@@ -1,27 +1,9 @@
-// import React, { useState, useEffect } from "react";
-// import AppModuleHeader from "components/AppModuleHeader/index";
-// import { Button, Row, Col, message } from "antd";
-// import ListView from './view';
-// import ListForm from './form';
-// import { GetProductsAPI, DeleteProductAPI, AddProductAPI } from 'api/controller/Shared/ProductController'
+// import React from "react";
+// import {Redirect, Route, Switch} from "react-router-dom";
+// import asyncComponent from "util/asyncComponent";
+// import UserprofileSetting from './UserProfile'
+// //import setting from "..";
 
-// let filter = { status: true }
-
-// function accountSetting() {
-//     const [view,setview]=useState(true);
-//     const [editData,seteditdata]=useState({});
-
-
-
-
-
-
-
-
-
-
-
-
-// }
-
-// export default accountSetting
+// const AccountSetting = ({match}) => (
+ 
+// export default AccountSetting;

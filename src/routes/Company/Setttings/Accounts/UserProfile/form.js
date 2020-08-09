@@ -8,9 +8,7 @@ import {
     Upload
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {CompanyLookUp} from 'api/Company/CompanyController';
-import {StoreLookUp} from 'api/Shared/Master/StoreController';
-
+import {ProductLookUp} from 'api/Shared/Master/ProductController';
 
 const status = [
     {
@@ -34,13 +32,17 @@ const formItemLayout = {
         sm: { span: 12 },
     },
 };
-let filter = { status: true }
-const PaymentForm = ({editableDataToForm,addData}) => {
 
+const product_id =null
+const UserProfileSettingForm = ({editableDataToForm,addData}) => {
+    const [selectValues,setSelectValues] = useState({})
     const [form] = Form.useForm();
-    const [companyLookUpData,setcompanyLookUpData] = useState({});
-    const [storeLookUpData,setstoreLookUpData] = useState({});
 
+    useEffect(()=>{
+        ProductLookUp(product_id,(res,err)=>{
+                console.log(">>>>",res)
+            setSelectValues(res)})
+    },[])
 
     const handleChange = (value) => {
         console.log(`selected ${value}`);
@@ -55,26 +57,8 @@ const PaymentForm = ({editableDataToForm,addData}) => {
         addData(values)
         form.resetFields()
     };
-
-    const companyInit=()=>{
-        CompanyLookUp (filter,(res,err)=>{
-            setcompanyLookUpData (res)
-        })
-        
-    }
-    const storeInit=()=>{
-        StoreLookUp (filter,(res,err)=>{
-            setstoreLookUpData (res)
-        })
-        
-    }
-
-    useEffect(()=>{
-        companyInit();
-        storeInit();
-});
     return (
-        <Card className="gx-card" title=" Payment">
+        <Card className="gx-card" title="Product Form">
             <Form
                 {...formItemLayout}
                 form={form}
@@ -86,24 +70,24 @@ const PaymentForm = ({editableDataToForm,addData}) => {
                 labelAlign="left"
             >
                 <Form.Item
-                    name="payment_name"
-                    label="paymentName"
+                    name="email_id"
+                    label="email_id"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your payment_name!',
+                            message: 'Please input your email_id!',
                         },
                     ]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="payment_type"
-                    label="paymentType"
+                    name="user_name"
+                    label="UserName"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your payment_type!',
+                            message: 'Please input your user_name!',
                         },
                     ]}
                 >
@@ -111,24 +95,82 @@ const PaymentForm = ({editableDataToForm,addData}) => {
                 </Form.Item>
 
                 <Form.Item
-                    name="company_name"
-                    label="companyName"
+                    name="password"
+                    label="password"
                     rules={[
-                        { type: 'array', required: true, message: 'Please input your company_name!', },
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
                     ]}
                 >
-                    <Cascader options={companyLookUpData.company_name} />
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="first_name"
+                    label="FirstName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your firstName!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item
+                    name="last_name"
+                    label="LastName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your LastName!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item
+                    name="user_type"
+                    label="UserType"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your user_type!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="company_name"
+                    label="CompanyName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your company_name!',
+                        },
+                    ]}
+                >
+                    <Input />
                 </Form.Item>
 
                 <Form.Item
                     name="store_name"
-                    label="storeName"
+                    label="StoreName"
                     rules={[
-                        { type: 'array', required: true, message: 'Please input your storeName!', },
+                        {
+                            required: true,
+                            message: 'Please input your StoreName!',
+                        },
                     ]}
                 >
-                    <Cascader options={storeLookUpData.store_name} />
+                    <Input />
                 </Form.Item>
+
                 <Form.Item
                     name="profile_image_url"
                     label="Product Image"
@@ -172,5 +214,5 @@ const PaymentForm = ({editableDataToForm,addData}) => {
     );
 };
 
-export default PaymentForm;
+export default UserProfileSettingForm;
 

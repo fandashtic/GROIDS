@@ -5,29 +5,19 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import IntlMessages from "util/IntlMessages";
 import {Pagination} from 'appConfig.json';
 
-const  PaymentView = ({editableData,brands,deletedData}) => {
+const CountrySettingView = ({editableData,country,deletedData}) => {
     
     const [tableView, setTableView] = useState(true);
     const [dataView, setDataView] = useState({});
     const [showDelete, setshowDelete] = useState(false);
     const [dataDelete, setDataDelete] = useState({});
     const columns = [
-        {
-            title: 'companyName',
-            dataIndex: 'company_name',
-            key: 'company_name',
-        },
-        {
-            title: 'storeName',
-            dataIndex: 'store_name',
-            key: 'store_name',
-        },
-        {
-            title: 'payment_type',
-            dataIndex: 'payment_type',
-            key: 'payment_type',
-        },
         
+        {
+            title: 'CountryName',
+            dataIndex: 'country_name',
+            key: 'country_name',
+        },
         {
             title: 'Action',
             key: 'action',
@@ -80,12 +70,12 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
 
     return (
         <>
-            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={brands} pagination={{ pageSize: Pagination }}
+            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={country} pagination={{ pageSize: Pagination }}
                 scroll={{ y: 240 }} /> : (
                     <>
                         <div className="gx-module-box-topbar">
                             <Row justify="space-between">
-                               
+
                                 <Col>
                                     <Tooltip title="Back List View">
                                         <span className=" gx-btn-block gx-text-primary gx-pointer">
@@ -95,6 +85,7 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
                                 </Col>
                             </Row>
                         </div>
+                        <div>CountryName:{dataView.country_name}</div>
                     </>
                 )
             }
@@ -112,4 +103,4 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
     )
 }
 
-export default PaymentView
+export default CountrySettingView

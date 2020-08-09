@@ -1,37 +1,29 @@
 import React, { useState } from 'react'
 import { Table, Tooltip, Space, Row, Col } from "antd";
-
-import {Pagination} from 'appConfig.json'
 import SweetAlert from "react-bootstrap-sweetalert";
 import IntlMessages from "util/IntlMessages";
-const  View = ({editableData,family,deletedData}) => {
+import {Pagination} from 'appConfig.json';
+
+const  StoreSettingView = ({editableData,brands,deletedData}) => {
     
     const [tableView, setTableView] = useState(true);
     const [dataView, setDataView] = useState({});
     const [showDelete, setshowDelete] = useState(false);
     const [dataDelete, setDataDelete] = useState({});
-
     const columns = [
         {
-            title: 'Family Name',
-            dataIndex: 'product_family_name',
-            key: 'product_family_id',
+            title: 'store_name',
+            dataIndex: 'store_name',
+            key: 'store_name',
         },
         {
-            title: 'Manufacture',
-            dataIndex: 'manufacture_name',
-            key: 'manufacture_id',
+           
+            title: 'store_type',
+            dataIndex: 'store_type',
+            key: 'store_type',
         },
-        {
-            title: 'Brand',
-            dataIndex: 'brand_name',
-            key: 'brand_id',
-        },
-        {
-            title: 'Category',
-            dataIndex: 'product_category_name',
-            key: 'product_category_id',
-        },
+        
+        
         {
             title: 'Action',
             key: 'action',
@@ -51,7 +43,9 @@ const  View = ({editableData,family,deletedData}) => {
                             </span>
                         </Tooltip>
                         <Tooltip title="Delete">
-                            <span className="gx-text-danger gx-pointer" onClick={() => {deleteData(text)}}>
+                            <span className="gx-text-danger gx-pointer" onClick={() => {
+                                deleteData(text)
+                            }}>
                                 <i className="icon icon-trash gx-fs-xl gx-mr-2" />
                             </span>
                         </Tooltip>
@@ -61,18 +55,19 @@ const  View = ({editableData,family,deletedData}) => {
             },
         },
     ];
-    const onViewPanel = data => {
-        setTableView(false)
-        setDataView(data)
-    }
+
     const deleteData = data => {
         setshowDelete(true)
         setDataDelete(data)
     }
+    const onViewPanel = data => {
+        setTableView(false)
+        setDataView(data)
+    }
 
     const deleteFile = () => {
         setshowDelete(false)
-        deletedData(dataDelete.product_family_id)
+        deletedData(dataDelete.brand_id)
        
     }
     const onCancelDelete = () =>{
@@ -81,14 +76,12 @@ const  View = ({editableData,family,deletedData}) => {
 
     return (
         <>
-            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={family} pagination={{ pageSize: Pagination }}
+            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={brands} pagination={{ pageSize: Pagination }}
                 scroll={{ y: 240 }} /> : (
                     <>
                         <div className="gx-module-box-topbar">
                             <Row justify="space-between">
-                                <Col>
-                                    <h2>Family Data</h2>
-                                </Col>
+                               
                                 <Col>
                                     <Tooltip title="Back List View">
                                         <span className=" gx-btn-block gx-text-primary gx-pointer">
@@ -98,14 +91,10 @@ const  View = ({editableData,family,deletedData}) => {
                                 </Col>
                             </Row>
                         </div>
-                        <div>Family: {dataView.family_name}</div>
-                        <div>Category: {dataView.category_name}</div>
-                        <div>Manufacture: {dataView.manufacture_name}</div>
-                        <div>Brand: {dataView.brand_name}</div>
                     </>
                 )
             }
-             <SweetAlert show={showDelete}
+            <SweetAlert show={showDelete}
                 showCancel
                 confirmBtnText={<IntlMessages id="sweetAlerts.yesDeleteIt" />}
                 confirmBtnBsStyle="danger"
@@ -119,4 +108,4 @@ const  View = ({editableData,family,deletedData}) => {
     )
 }
 
-export default View
+export default StoreSettingView

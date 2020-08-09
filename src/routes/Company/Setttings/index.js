@@ -1,47 +1,78 @@
 import React, {Component} from "react";
 import {Drawer, message} from "antd";
 import CustomScrollbars from "util/CustomScrollbars";
+import {Route, Switch} from "react-router-dom";
 import IntlMessages from "util/IntlMessages";
-import accountSetting from "./Accounts";
-import companySetting from "./Company";
-import locationSetting from "./Location";
-import paymentSetting from "./Payment";
-import storeSetting from "./Store";
+import CompanySetting from "./CompanyProfile";
+import AreaSetting from "./Area";
+import CitySetting from './City'; 
+import StateSetting from './State';
+import CountrySetting from './Country'
+import PaymentSetting from "./Payment";
+import UserprofileSetting from "./UserProfile";
+import ChangePasswordSetting from "./ChangePassword";
 
 const filterOptions = [
-  {
+   {
     id: 1,
-    name: 'Accounts',
+    name: 'CompanyProfile',
     icon: 'star'
+
   }, {
+
     id: 2,
-    name: 'Company',
-    icon: 'star'
-
-  }, {
-
-    id: 3,
-    name: 'Location',
+    name: 'Area',
     icon: 'star'
   
-  }, {
+  }, 
+  {
+
+    id: 3,
+    name: 'City',
+    icon: 'star'
+  
+  },
+  {
 
     id: 4,
-    name: 'Payment',
+    name: 'State',
     icon: 'star'
   
   },
   {
 
     id: 5,
-    name: 'Store',
+    name: 'Country',
     icon: 'star'
   
   },
+  
+  // {
 
+  //   id: 6,
+  //   name: 'Payment',
+  //   icon: 'star'
+  
+  // },
+  
+  {
+
+    id: 8,
+    name: 'UserProfile',
+    icon: 'star'
+  
+  },
+  {
+
+    id: 9,
+    name: 'ChangePassword',
+    icon: 'star'
+  
+  },
+  
 ];
 
-class setting extends Component {
+class Settings extends Component {
   ContactSideBar = () => {
     return <div className="gx-module-side">
       <div className="gx-module-side-header">
@@ -82,23 +113,37 @@ class setting extends Component {
 
   onFilterOptionSelect = (option) => {
     switch (option.name) {
-      case 'Accounts': {
+      case 'CompanyProfile': {
         this.optionIds(option)
         break;
       }
-      case 'Company': {
+      case 'Area': {
         this.optionIds(option)
         break;
       }
-      case 'Location': {
+      case 'City': {
         this.optionIds(option)
         break;
       }
-      case 'Payment': {
+      case 'State': {
         this.optionIds(option)
         break;
       }
-      case 'Store': {
+      case 'Country': {
+        this.optionIds(option)
+        break;
+      }
+
+      // case 'Payment': {
+      //   this.optionIds(option)
+      //   break;
+      // }
+     
+      case 'UserProfile': {
+        this.optionIds(option)
+        break;
+      }
+      case 'ChangePassword': {
         this.optionIds(option)
         break;
       }
@@ -115,7 +160,7 @@ class setting extends Component {
         selectedSectionId: 1,
         drawerState: false,
         searchUser: '',
-        menuName:'Accounts',
+        menuName:'CompanyProfile',
         optionid:'4'
     }
   }
@@ -149,11 +194,14 @@ class setting extends Component {
                      onClick={this.onToggleDrawer.bind(this)}/>
               </span>
             {
-                menuName === 'Accounts' ? (<accountSetting/>):
-                menuName === 'Company' ? (<companySetting/>) :
-                menuName === 'Location' ?(<locationSetting/>) : 
-                menuName === 'Payment' ? (<paymentSetting/>) :
-                menuName === 'setting' ? (<storeSetting/>) : ''
+                menuName === 'CompanyProfile' ? (<CompanySetting/>) :
+                menuName === 'Area' ?(<AreaSetting/>) : 
+                menuName === 'City' ?(<CitySetting/>) :
+                menuName === 'State' ?(<StateSetting/>) :
+                menuName === 'Country' ?(<CountrySetting/>) :
+               // menuName === 'Payment' ? (<PaymentSetting/>) :
+                menuName === 'UserProfile' ? (<UserprofileSetting/>) :
+                menuName === 'ChangePassword' ? (<ChangePasswordSetting/>) :''
             }
           </div>
         </div>
@@ -163,4 +211,4 @@ class setting extends Component {
   }
 }
 
-export default setting;
+export default Settings;

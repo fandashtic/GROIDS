@@ -1,67 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
-import PaymentView from './view'
-import PaymentForm from './form'
-import {AddPayment,GetPayment,DeletePayment } from 'api/Store/PaymentController'
+import UserProfileSettingView from './view';
+import UserProfileSettingForm from './form';
+import { AddUser, GetUsers } from 'api/Shared/Master/UserController'
 import {CompanyLookUp} from 'api/Company/CompanyController';
 import {StoreLookUp} from 'api/Shared/Master/StoreController';
 
-const filter = { status: true }
-const payment_id = null
-function PaymentSetting() {
+let user_id = "";
+const product_id ="";
+let filter = { status: true }
+function UserprofileSetting () {
     const [view, setView] = useState(true);
     const [editData, setEditData] = useState({})
-    const [payments, setPayments] = useState([]);
+    const [userprofile, setUserprofile] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
+    const [companyLookUpData,setcompanyLookUpData] = useState({});
+    const [storeLookUpData,setstoreLookUpData] = useState({});
     
     
     const viewChanged = () => {
         setView(!view)
     }
-
     const apiInit = () => {
-        GetPayment(payment_id, (res, err) => {
-            console.log(res)
-            setPayments(res.data)
+        GetUsers(user_id, (res, err) => {
+            setUserprofile(res.data)
             setsearchItem(res.data)
         })
     }
-
     const editableData = (data) => {
         setView(false)
         setEditData(data)
     }
 
+    const companyInit=()=>{
+        CompanyLookUp (filter,(res,err)=>{
+            console.log('companylookup',res)
+            setcompanyLookUpData (res)
+        })
+        
+    }
+    const storeInit=()=>{
+        StoreLookUp (filter,(res,err)=>{
+            console.log('storelookup',res)
+            setstoreLookUpData (res)
+        })
+        
+    }
     useEffect(() => {
-        apiInit()
+        apiInit();
+        companyInit();
+        storeInit();
     }, [])
 
     const handleChange = (event) => {
         event.persist();
         setSearchValue(event.target.value)
-        let dataList = payments.filter((el) => el.payment_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+        let dataList = userprofile.filter((el) => el.user_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
         setsearchItem(dataList)
     }
-
-    const deletedData = (payment_id) => {
-        DeletePayment(payment_id, (res, err) => {
-            if (res.Status === 200) {
-                message.success("Suceessfully Record Deleted");
-                apiInit()
-            } else {
-                message.warning("Something went to wrong");
-            }
-        })
-    }
-
     const addData = data => {
-        AddPayment(data, (res, err) => {
+        AddUser(data, (res, err) => {
+            console.log(data)
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {
+                console.log(err)
                 message.warning("Something went to wrong");
             }
         })
@@ -72,7 +78,7 @@ function PaymentSetting() {
                 <Row gutter={16} style={{ width: "100%" }}>
                 <Col md={20} sm={19}>
                         <></>
-                        {view && <AppModuleHeader placeholder="Search Brands" value={searchValue} onChange={handleChange} />}
+                        {view && <AppModuleHeader placeholder="Search Products" value={searchValue} onChange={handleChange} />}
                     </Col>
                     <Col md={4} sm={5}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
@@ -87,11 +93,9 @@ function PaymentSetting() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<PaymentView editableData={editableData} deletedData={deletedData} payments={searchItem} />) : <PaymentForm editableDataToForm={editData} addData={addData}  />}
+            {view ? <UserProfileSettingView  editableData={editableData}  Profile={searchItem}  /> : <UserProfileSettingForm  editableDataToForm={editData}  addData={addData} storeLookUpData ={storeLookUpData} companyLookUpData ={companyLookUpData} />}
         </div>
     )
 };
 
-
-
-export default PaymentSetting
+export default UserprofileSetting ;

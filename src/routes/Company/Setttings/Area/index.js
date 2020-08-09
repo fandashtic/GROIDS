@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState ,useEffect} from "react";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import { Button, Row, Col, message } from "antd";
-import PaymentView from './view'
-import PaymentForm from './form'
-import {AddPayment,GetPayment,DeletePayment } from 'api/Store/PaymentController'
-import {CompanyLookUp} from 'api/Company/CompanyController';
-import {StoreLookUp} from 'api/Shared/Master/StoreController';
+import AreaSettingView from './view';
+import AreaSettingForm from './form';
+import { AddArea, GetAreas, AreaLookUp} from 'api/Shared/Master/AreaController'
 
-const filter = { status: true }
-const payment_id = null
-function PaymentSetting() {
+
+let filter = { status: true }
+  let area_id = ""
+
+function AreaSetting() {
+
     const [view, setView] = useState(true);
     const [editData, setEditData] = useState({})
-    const [payments, setPayments] = useState([]);
+    const [Area,setArea] = useState([]);
     const [searchValue, setSearchValue] = useState();
     const [searchItem, setsearchItem] = useState([]);
-    
-    
+    const [areaLookUpData,setareaLookUpData] = useState({})
+
+
     const viewChanged = () => {
         setView(!view)
     }
 
     const apiInit = () => {
-        GetPayment(payment_id, (res, err) => {
-            console.log(res)
-            setPayments(res.data)
+        GetAreas(filter, (res, err) => {
+            console.log("Mani",res.data)
+            setArea(res.data)
             setsearchItem(res.data)
         })
     }
@@ -34,45 +36,49 @@ function PaymentSetting() {
         setEditData(data)
     }
 
+   const arealookUpInit = () => {
+    AreaLookUp(area_id, (data, err) => {
+        setareaLookUpData(data)
+
+    })
+}
+
+
     useEffect(() => {
-        apiInit()
+        apiInit();
+        arealookUpInit();
+       
     }, [])
+
 
     const handleChange = (event) => {
         event.persist();
         setSearchValue(event.target.value)
-        let dataList = payments.filter((el) => el.payment_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
+        let dataList = Area.filter((el) =>el && el.area_name &&  el.area_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)
         setsearchItem(dataList)
     }
 
-    const deletedData = (payment_id) => {
-        DeletePayment(payment_id, (res, err) => {
-            if (res.Status === 200) {
-                message.success("Suceessfully Record Deleted");
-                apiInit()
-            } else {
-                message.warning("Something went to wrong");
-            }
-        })
-    }
 
     const addData = data => {
-        AddPayment(data, (res, err) => {
+        AddArea(data, (res, err) => {
+            console.log(data)
             if (res.Status === 200) {
                 message.success("Suceessfully Record Added");
                 apiInit()
             } else {
+                console.log(err)
                 message.warning("Something went to wrong");
             }
         })
     }
+
     return (
         <div className="gx-module-box-content">
             <div className="gx-module-box-topbar">
                 <Row gutter={16} style={{ width: "100%" }}>
                 <Col md={20} sm={19}>
                         <></>
-                        {view && <AppModuleHeader placeholder="Search Brands" value={searchValue} onChange={handleChange} />}
+                        {view && <AppModuleHeader placeholder="Search Products" value={searchValue} onChange={handleChange} />}
                     </Col>
                     <Col md={4} sm={5}>
                         <Button className="gx-btn-block ant-btn" type="primary" aria-label="add" onClick={viewChanged}>
@@ -87,11 +93,11 @@ function PaymentSetting() {
                     </Col>
                 </Row>
             </div>
-            {view ? (<PaymentView editableData={editableData} deletedData={deletedData} payments={searchItem} />) : <PaymentForm editableDataToForm={editData} addData={addData}  />}
+            {view ? (<AreaSettingView editableData={editableData}  Area={searchItem}/>) : <AreaSettingForm  addData={addData} editableDataToForm={editData} areaLookUpData = {areaLookUpData} />}
         </div>
     )
 };
 
 
 
-export default PaymentSetting
+export default AreaSetting

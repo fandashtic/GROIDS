@@ -89,7 +89,12 @@ const SidebarContent = () => {
                 className="icon icon-refer" /><span><IntlMessages
                   id="sidebar.stores" /></span></Link>
             </Menu.Item>
-            <SubMenu key="settings" 
+            <Menu.Item key="/company/settings">
+              <Link to="/company/settings"><i
+                className="icon icon-refer" /><span><IntlMessages
+                  id="sidebar.settings" /></span></Link>
+            </Menu.Item>
+            {/* <SubMenu key="settings" 
               title={<span> <i className="icon icon-setting" />
                 <span><IntlMessages id="sidebar.settings" /></span></span>}>
               <Menu.Item key="main/accounts">
@@ -112,7 +117,7 @@ const SidebarContent = () => {
                   className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.payment" /></span></Link>
               </Menu.Item>
-            </SubMenu>
+            </SubMenu> */}
           </Menu>
         </CustomScrollbars>
       </div>

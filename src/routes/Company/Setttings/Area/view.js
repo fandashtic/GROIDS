@@ -5,7 +5,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import IntlMessages from "util/IntlMessages";
 import {Pagination} from 'appConfig.json';
 
-const  PaymentView = ({editableData,brands,deletedData}) => {
+const AreaSettingView = ({editableData,Area,deletedData}) => {
     
     const [tableView, setTableView] = useState(true);
     const [dataView, setDataView] = useState({});
@@ -13,21 +13,26 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
     const [dataDelete, setDataDelete] = useState({});
     const columns = [
         {
-            title: 'companyName',
-            dataIndex: 'company_name',
-            key: 'company_name',
+            title: 'Areaname',
+            dataIndex: 'area_name',
+            key: 'area_name',
         },
         {
-            title: 'storeName',
-            dataIndex: 'store_name',
-            key: 'store_name',
+            title: 'City',
+            dataIndex: 'city_name',
+            key: 'city_name',
         },
         {
-            title: 'payment_type',
-            dataIndex: 'payment_type',
-            key: 'payment_type',
+            title: 'State',
+            dataIndex: 'state_name',
+            key: 'state_name',
         },
         
+        {
+            title: 'CountryName',
+            dataIndex: 'country_name',
+            key: 'country_name',
+        },
         {
             title: 'Action',
             key: 'action',
@@ -80,21 +85,26 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
 
     return (
         <>
-            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={brands} pagination={{ pageSize: Pagination }}
+            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={Area} pagination={{ pageSize: Pagination }}
                 scroll={{ y: 240 }} /> : (
                     <>
                         <div className="gx-module-box-topbar">
                             <Row justify="space-between">
-                               
+
                                 <Col>
                                     <Tooltip title="Back List View">
                                         <span className=" gx-btn-block gx-text-primary gx-pointer">
                                             <i className="icon icon-reply gx-fs-xl gx-mr-2" />
                                         </span>
                                     </Tooltip>
-                                </Col>
+                                    </Col>
+
                             </Row>
                         </div>
+                        <div>AreaName: {dataView.area_name}</div>
+                        <div>CityName : {dataView.city_name}</div>
+                        <div>StateName: {dataView.state_name}</div>
+                        <div>CountryName :{dataView.country_name}</div>
                     </>
                 )
             }
@@ -112,4 +122,4 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
     )
 }
 
-export default PaymentView
+export default AreaSettingView

@@ -1,33 +1,34 @@
-
 import React, { useState } from 'react'
 import { Table, Tooltip, Space, Row, Col } from "antd";
+import {Pagination} from 'appConfig.json';
 import SweetAlert from "react-bootstrap-sweetalert";
 import IntlMessages from "util/IntlMessages";
-import {Pagination} from 'appConfig.json';
 
-const  PaymentView = ({editableData,brands,deletedData}) => {
+const  UserProfileSettingView = ({editableData,deletedData,Profile}) => {
     
     const [tableView, setTableView] = useState(true);
     const [dataView, setDataView] = useState({});
     const [showDelete, setshowDelete] = useState(false);
     const [dataDelete, setDataDelete] = useState({});
     const columns = [
+
         {
-            title: 'companyName',
+            title: 'userName',
+            dataIndex: 'user_name',
+            key: 'user_name',
+        },
+
+        {
+            title: 'CompanyName',
             dataIndex: 'company_name',
             key: 'company_name',
         },
         {
-            title: 'storeName',
-            dataIndex: 'store_name',
-            key: 'store_name',
+            title: 'Email',
+            dataIndex: 'email_id',
+            key: 'email_id',
         },
-        {
-            title: 'payment_type',
-            dataIndex: 'payment_type',
-            key: 'payment_type',
-        },
-        
+    
         {
             title: 'Action',
             key: 'action',
@@ -47,9 +48,7 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
                             </span>
                         </Tooltip>
                         <Tooltip title="Delete">
-                            <span className="gx-text-danger gx-pointer" onClick={() => {
-                                deleteData(text)
-                            }}>
+                            <span className="gx-text-danger gx-pointer" onClick={() => {deleteData(text)}}>
                                 <i className="icon icon-trash gx-fs-xl gx-mr-2" />
                             </span>
                         </Tooltip>
@@ -60,32 +59,35 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
         },
     ];
 
-    const deleteData = data => {
-        setshowDelete(true)
-        setDataDelete(data)
-    }
     const onViewPanel = data => {
         setTableView(false)
         setDataView(data)
     }
+    const deleteData = data => {
+        setshowDelete(true)
+        setDataDelete(data)
+    }
 
     const deleteFile = () => {
         setshowDelete(false)
-        deletedData(dataDelete.brand_id)
+        deletedData(dataDelete.product_category_id)
        
     }
     const onCancelDelete = () =>{
         setshowDelete(false)
     }
 
+
     return (
         <>
-            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={brands} pagination={{ pageSize: Pagination }}
+            {tableView ? <Table className="gx-table-responsive" columns={columns} dataSource={Profile} pagination={{ pageSize: Pagination }}
                 scroll={{ y: 240 }} /> : (
                     <>
                         <div className="gx-module-box-topbar">
                             <Row justify="space-between">
-                               
+                                <Col>
+                                    <h2>Category Data</h2>
+                                </Col>
                                 <Col>
                                     <Tooltip title="Back List View">
                                         <span className=" gx-btn-block gx-text-primary gx-pointer">
@@ -95,6 +97,10 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
                                 </Col>
                             </Row>
                         </div>
+                        <div>userName: {dataView.user_name}</div>
+                        <div>CompanyName: {dataView.company_name}</div>
+                        <div>Email: {dataView.email_id}</div>
+                        
                     </>
                 )
             }
@@ -112,4 +118,4 @@ const  PaymentView = ({editableData,brands,deletedData}) => {
     )
 }
 
-export default PaymentView
+export default UserProfileSettingView
