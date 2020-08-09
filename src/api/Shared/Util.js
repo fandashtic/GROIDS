@@ -91,7 +91,7 @@ let GetUserSession = async () => {
 
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
-    if(IsHasValue(created_by)){
+    if (IsHasValue(created_by)) {
         tableData['created_by'] = created_by;
     }
     tableData['created_on'] = GetDate();
@@ -100,7 +100,7 @@ let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
 }
 
 let UpdateDetaultValues = (tableData, modified_by) => {
-    if(IsHasValue(modified_by)){
+    if (IsHasValue(modified_by)) {
         tableData['modified_by'] = modified_by;
     }
     tableData['modified_on'] = GetDate();
@@ -147,8 +147,18 @@ let GetFileExtn = (fileName) => {
 
 let GetObject = (id) => {
     return {
-            "id": id
+        "id": id
     }
+}
+
+let GetObjectByGiven = (obj) => {
+    let filter = {};
+    Object.keys(obj).map(function (k) {
+        console.log("key with value: " + k + " = " + obj[k]);
+        filter[k] = k;
+    })
+
+    return filter;
 }
 
 let GetAllObject = (filter) => {
@@ -181,6 +191,6 @@ let DeleteObject = (id) => {
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
-    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
-    GetObject, GetAllObject, PostObject, PutObject, DeleteObject
+    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn,
+    GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven
 };
