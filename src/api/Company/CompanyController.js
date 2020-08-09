@@ -61,9 +61,14 @@ let CompanyLookUp = async (id, callback) => {
         });
 };
 
+let ImportCompany = async (data, callback) => {
+    
+};
+
 export { AddCompany,
     UpdateCompany,
     DeleteCompany,
     GetCompany,
     GetCompanies,
-    CompanyLookUp };
+    CompanyLookUp,
+    ImportCompany };

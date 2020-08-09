@@ -7,7 +7,20 @@ let ImportData = ({ action }) => {
 
     const handleFileRead = async (event) => {
         const content = fileReader.result;
-        await action(content);
+        const array = content.split("\n")||[];
+        const keys = array[0].split(",")||[];
+        const response = [];
+        array.forEach(element => {
+            let row = {};
+            let dataRow = element.split(",")||[];
+            let i =0;
+            keys.forEach(key => {
+                row[key] = dataRow[i];
+                i++;
+            });   
+            response.push(row);
+        });
+        await action(response);
     };
 
     const handleFileChosen = (file) => {
