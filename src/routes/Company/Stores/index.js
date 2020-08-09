@@ -37,7 +37,7 @@ const Index = () => {
     const deletedData = (id) => {
         DeleteStore(id, (res, err) => {
             if (res.Status === 200) {
-                message.success("Suceessfully Record Deleted");
+                message.success("Successfully Record Deleted");
                 apiInit()
             } else {
                 message.warning("Something went to wrong");
@@ -47,7 +47,7 @@ const Index = () => {
     const addData = data => {
         AddStore(data, (res, err) => {
             if (res.Status === 200) {
-                message.success("Suceessfully Record Added");
+                message.success("Successfully Record Added");
                 apiInit()
             } else {
                 message.warning("Something went to wrong");
