@@ -85,16 +85,21 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
     return result;
 }
 
-let GetSessionValue = async(key) => {
-    let session = await JSON.parse(GetUserSession());
-    if(IsHasValue(session) && IsHasValue(session[key])){
+let GetSessionValue = async (key) => {
+    let session = await GetUserSession();
+    if (IsHasValue(session) && IsHasValue(session[key])) {
         return session[key];
     }
     return "";
 };
 
 let GetUserSession = async () => {
-    return await JSON.parse(localStorage.getItem('user'));
+    let session = await localStorage.getItem('user');
+    if (IsHasValue(session)) {
+        return JSON.parse(session);
+    } else {
+        return {};
+    }
 };
 
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
