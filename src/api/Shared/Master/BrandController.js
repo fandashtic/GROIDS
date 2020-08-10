@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddBrand = async (data, callback) => {
     return API.post('/AddBrand', PostObject(data))
@@ -43,9 +43,18 @@ let BrandLookUp = async (id, callback) => {
         });
 };
 
+let ImportBrand = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddBrand(obj, callback);
+        });        
+    }
+};
+
 export { AddBrand,
     UpdateBrand,
     DeleteBrand,
     GetBrand,
     GetBrands,
-    BrandLookUp };
+    BrandLookUp,
+    ImportBrand };

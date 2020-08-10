@@ -10,13 +10,15 @@ import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 import { CSVLink, CSVDownload } from "react-csv";
 import { ImportData, ExportData } from 'components/DataImportExport';
 import { ImportCompany } from 'api/Company/CompanyController';
-import { AddTemplate } from 'api/Shared/Common';
+import { AddTemplate, GetTemplate } from 'api/Shared/Common';
 
 const UnitTest = () => {
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const [template, setTemplate] = useState('');
+  
   let fileReader;
 
   const csvData = [
@@ -77,21 +79,50 @@ const UnitTest = () => {
     const StoreTemplate = { 'data': 'store_id,store_name,store_type,company_id,company_name,billing_address,shipping_address,area_id,area_name,city_id,city_name,state_id,state_name,country_id,country_name,pincode,latitude,longitude,email,mobilenumber,contactperson,tin,gst,logo,banner,business_days_hours,delivery_days_hours' };
     const UserTemplate = { 'data': 'user_id,email_id,user_name,password,first_name,last_name,user_type,company_id,company_name,store_id,store_name,profile_image_url' };
 
-    const callback = (data, err) => {
-      console.log(data, err);
+    const callback = (data, err) => {      
+      let temp = [];
+      temp = data.data;//.split(",").map(function(a){return a.trim()}) || [];
+      setTemplate(temp);
+      console.log(temp);
     };
 
-    AddTemplate('company', CompanyTemplate, callback);
-    AddTemplate('area', AreaTemplate, callback);
-    AddTemplate('brand', BrandTemplate, callback);
-    AddTemplate('city', CityTemplate, callback);
-    AddTemplate('country', CountryTemplate, callback);
-    AddTemplate('product', ProductTemplate, callback);
-    AddTemplate('productCategory', ProductCategoryTemplate, callback);
-    AddTemplate('productFamily', ProductFamilyTemplate, callback);
-    AddTemplate('state', StateTemplate, callback);
-    AddTemplate('store', StoreTemplate, callback);
-    AddTemplate('user', UserTemplate, callback);
+    // AddTemplate('company', CompanyTemplate, callback);
+    // AddTemplate('area', AreaTemplate, callback);
+    // AddTemplate('brand', BrandTemplate, callback);
+    // AddTemplate('city', CityTemplate, callback);
+    // AddTemplate('country', CountryTemplate, callback);
+    // AddTemplate('product', ProductTemplate, callback);
+    // AddTemplate('productCategory', ProductCategoryTemplate, callback);
+    // AddTemplate('productFamily', ProductFamilyTemplate, callback);
+    // AddTemplate('state', StateTemplate, callback);
+    // AddTemplate('store', StoreTemplate, callback);
+    // AddTemplate('user', UserTemplate, callback);
+
+    //GetTemplate('company', callback);
+    // GetTemplate('area', callback);
+    // GetTemplate('brand', callback);
+    // GetTemplate('city', callback);
+    // GetTemplate('country', callback);
+    // GetTemplate('product', callback);
+    // GetTemplate('productCategory', callback);
+    // GetTemplate('productFamily', callback);
+    // GetTemplate('state', callback);
+    // GetTemplate('store', callback);
+    // GetTemplate('user', callback);
+
+    // let obj = {
+    //   "id": "1",
+    //   "name": "Name",
+    //   "data": "xxxx"
+    // }
+    // let filter = {};
+    // Object.keys(obj).map(function (k, v) {
+    //   console.log("key with value: " + k + " = " + obj[k]);
+    //   filter[k] = v;
+    // })
+
+    // console.log(filter);
+
   }
 
   return (
@@ -103,7 +134,7 @@ const UnitTest = () => {
 
       <br />
 
-      <ExportData data={csvData} text="Hello" />
+      <ExportData data={template} text="Template Download" />
 
       <br />
       <CSVLink data={csvData}>Download me</CSVLink>;

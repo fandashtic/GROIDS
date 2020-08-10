@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddProduct = async (data, callback) => {
     return API.post('/AddProduct', PostObject(data))
@@ -43,9 +43,18 @@ let ProductLookUp = async (id, callback) => {
         });
 };
 
+let ImportProduct = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddProduct(obj, callback);
+        });        
+    }
+};
+
 export { AddProduct,
     UpdateProduct,
     DeleteProduct,
     GetProduct,
     GetProducts,
-    ProductLookUp };
+    ProductLookUp,
+    ImportProduct };

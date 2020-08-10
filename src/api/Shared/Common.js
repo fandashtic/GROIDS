@@ -6,9 +6,19 @@ let AddTemplate = (template_id, template, callback) => {
     filter["id"] = template_id;
     filter["template"] = template;
     return API.post('/AddTemplate', filter)
-    .then(res => {
-       return  ReturnObject(callback, null, res.data, 'AddTemplate');
-    });
+        .then(res => {
+            return ReturnObject(callback, null, res.data, 'AddTemplate');
+        });
 };
 
-export { AddTemplate };
+
+let GetTemplate = (template_id, callback) => {
+    let filter = {};
+    filter["id"] = template_id;
+    return API.post('/GetTemplate', filter)
+        .then(res => {
+            return ReturnObject(callback, null, res.data, 'GetTemplate');
+        });
+};
+
+export { AddTemplate, GetTemplate };
