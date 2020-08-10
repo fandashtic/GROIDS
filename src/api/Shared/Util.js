@@ -85,6 +85,14 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
     return result;
 }
 
+let GetSessionValue = async(key) => {
+    let session = await JSON.parse(GetUserSession());
+    if(IsHasValue(session) && IsHasValue(session[key])){
+        return session[key];
+    }
+    return "";
+};
+
 let GetUserSession = async () => {
     return await JSON.parse(localStorage.getItem('user'));
 };
@@ -168,15 +176,24 @@ let GetAllObject = (filter) => {
 }
 
 let PostObject = (data) => {
-    data['created_by'] = '0';
+    if (IsHasValue(GetSessionValue('user_id'))) {
+        data['created_by'] = GetSessionValue('user_id');
+    }
+    if (IsHasValue(GetSessionValue('company_id'))) {
+        data['company_id'] = GetSessionValue('company_id');
+    }
+    if (IsHasValue(GetSessionValue('store_id'))) {
+        data['store_id'] = GetSessionValue('store_id');
+    }
     return {
         "inputmodel": data
     }
 }
 
 let PutObject = (id, data) => {
-    data['created_by'] = '0';
-    data['modified_by'] = '0';
+    if (IsHasValue(GetSessionValue('user_id'))) {
+        data['modified_by'] = GetSessionValue('user_id');
+    }
     return { "id": id, "inputmodel": data };
 }
 
@@ -191,6 +208,6 @@ let DeleteObject = (id) => {
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
-    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn,
+    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, GetSessionValue,
     GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven
 };

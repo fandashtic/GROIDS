@@ -1,7 +1,7 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject, GetSessionValue } from 'api/Shared/Util';
 
-let AddCart = async (filter, callback) => {
+let AddCart = async (data, callback) => {
     return API.post('/AddCart', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddCart');
