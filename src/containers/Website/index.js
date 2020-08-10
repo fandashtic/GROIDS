@@ -99,7 +99,7 @@ const WebSite = () => {
         };
 
         AddCompany(newCompany, (data, err) => {
-            if (data.Status === 200) {
+            if (data && data.Status === 200) {
                 SetView("signin");
             }
         });

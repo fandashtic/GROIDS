@@ -85,8 +85,8 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
     return result;
 }
 
-let GetSessionValue = async (key) => {
-    let session = await GetUserSession();
+let GetSessionValue = (key) => {
+    let session = GetUserSession();
     if (IsHasValue(session) && IsHasValue(session[key])) {
         return session[key];
     }
@@ -98,7 +98,7 @@ let GetUserSession = async () => {
     if (IsHasValue(session)) {
         return JSON.parse(session);
     } else {
-        return {};
+        return null;
     }
 };
 
