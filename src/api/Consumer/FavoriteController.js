@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddFavorite = async (data, callback) => {
     return API.post('/AddFavorite', PostObject(data))
@@ -43,9 +43,18 @@ let FavoriteLookUp = async (id, callback) => {
         });
 };
 
+let ImportFavorite = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddFavorite(obj, callback);
+        });        
+    }
+};
+
 export { AddFavorite,
     UpdateFavorite,
     DeleteFavorite,
     GetFavorite,
     GetFavorites,
-    FavoriteLookUp };
+    FavoriteLookUp,
+    ImportFavorite };

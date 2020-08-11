@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddUser = async (data, callback) => {
     return API.post('/AddUser', PostObject(data))
@@ -67,6 +67,14 @@ let IsUserValid = async (user_name, password, callback) => {
         });
 };
 
+let ImportUser = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddUser(obj, callback);
+        });        
+    }
+};
+
 export { AddUser,
     UpdateUser,
     DeleteUser,
@@ -74,4 +82,5 @@ export { AddUser,
     GetUsers,
     UserLookUp,
     IsUserValid,
-    ChangePassword };
+    ChangePassword,
+    ImportUser };
