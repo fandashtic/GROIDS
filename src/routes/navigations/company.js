@@ -10,7 +10,7 @@ import Category from "../Company/Product/Category";
 import Manufacture from "../Company/Product/Manufacture";
 import ProductFamily from "../Company/Product/ProductFamily";
 import Stores from "../Company/Stores"
-import Settings from "../Company/Setttings"
+import Settings from "../Company/Settings"
 import UnitTest from "../UnitTest"
 
 const App = ({ match }) => {
@@ -26,6 +26,8 @@ const App = ({ match }) => {
             <Route path={`${match.path}master/productFamily`} component={ProductFamily}/>
             <Route path={`${match.path}stores`} component={Stores} />
             <Route path={`${match.path}settings`} component={Settings} />
+            {/* <Route exact path={`${match.url}/accounts/CompanyProfile`} component={CompanyProfile} />
+            <Route exact path={`${match.url}/accounts/UserProfile`} component={UserProfile} /> */}
             <Route path={`${match.path}unittest`} component={UnitTest} />
         </Switch>
     </div>)

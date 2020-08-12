@@ -48,7 +48,9 @@ const From = () => {
 
 
     let location = history.location.pathname
+    console.log(location)
     let id = location.substring(location.lastIndexOf('/') + 1)
+    console.log("id",id)
 
     useEffect(() => {
         editForm()

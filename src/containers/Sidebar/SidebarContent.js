@@ -11,7 +11,7 @@ import {
 } from "constants/ThemeSetting";
 import IntlMessages from "../../util/IntlMessages";
 import AppsNavigation from "./AppsNavigation";
-import UserProfile from "./UserProfile";
+
 
 const SubMenu = Menu.SubMenu;
 
@@ -33,7 +33,7 @@ const SidebarContent = () => {
   //   }
   //   return "";
   // };
-  
+
   return (
     <>
       <SidebarLogo />
@@ -88,15 +88,55 @@ const SidebarContent = () => {
                 className="icon icon-refer" /><span><IntlMessages
                   id="sidebar.stores" /></span></Link>
             </Menu.Item>
-            <Menu.Item key="/company/settings">
-              <Link to="/company/settings"><i
-                className="icon icon-refer" /><span><IntlMessages
-                  id="sidebar.settings" /></span></Link>
-            </Menu.Item>
-            {/* <SubMenu key="settings" 
+            <SubMenu key="settings"
+          
               title={<span> <i className="icon icon-setting" />
                 <span><IntlMessages id="sidebar.settings" /></span></span>}>
-              <Menu.Item key="main/accounts">
+              <SubMenu key="accounts"
+                title={<span> <i className="icon icon-setting" />
+                  <span><IntlMessages id="sidebar.settings.accounts" /></span></span>}>
+                <Menu.Item key="/company/settings/accounts/CompanyProfile">
+                  <Link to="/company/settings/accounts/CompanyProfile"><i
+                    className="icon icon-extra-components" /><span><IntlMessages
+                      id="sidebar.settings.company" /></span>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="/company/settings/accounts/userprofile">
+                  <Link to="/company/settings/accounts/userprofile"><i
+                    className="icon icon-extra-components" /><span><IntlMessages
+                      id="sidebar.settings.user" /></span></Link>
+                </Menu.Item>
+                <Menu.Item key="main/changePassword">
+                  <Link to="/company/settings/accounts/ChangePassword"><i
+                    className="icon icon-extra-components" /><span><IntlMessages
+                      id="sidebar.settings.changePassword" /></span></Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu key="location"
+                title={<span> <i className="icon icon-setting" />
+                  <span><IntlMessages id="sidebar.settings.location" /></span></span>}>
+                  <Menu.Item key="main/location">
+                    <Link to="/company/settings/Location/Country"><i
+                      className="icon icon-extra-components" /><span><IntlMessages
+                        id="sidebar.settings.country" /></span></Link>
+                  </Menu.Item>
+                  <Menu.Item key="main/location">
+                    <Link to="/company/settings/Location/State"><i
+                      className="icon icon-extra-components" /><span><IntlMessages
+                        id="sidebar.settings.state" /></span></Link>
+                  </Menu.Item>
+                  <Menu.Item key="main/location">
+                    <Link to="/company/settings/Location/City"><i
+                      className="icon icon-extra-components" /><span><IntlMessages
+                        id="sidebar.settings.city" /></span></Link>
+                  </Menu.Item>
+                  <Menu.Item key="main/location">
+                    <Link to="/company/settings/Location/Area"><i
+                      className="icon icon-extra-components" /><span><IntlMessages
+                        id="sidebar.settings.area" /></span></Link>
+                  </Menu.Item>
+              </SubMenu>
+              {/* <Menu.Item key="main/accounts">
                 <Link to="/settings"><i
                   className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.accounts" /></span></Link>
@@ -115,8 +155,8 @@ const SidebarContent = () => {
                 <Link to="/settings"><i
                   className="icon icon-extra-components" /><span><IntlMessages
                     id="sidebar.settings.payment" /></span></Link>
-              </Menu.Item>
-            </SubMenu> */}
+              </Menu.Item> */}
+            </SubMenu>
           </Menu>
         </CustomScrollbars>
       </div>

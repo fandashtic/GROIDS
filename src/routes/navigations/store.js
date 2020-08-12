@@ -6,7 +6,7 @@ import Main from "../main/dashboard/Store";
 import Product from "../Store/Product"
 import Products from "../Store/Product/Product"
 import Stores from "../Company/Stores"
-import Settings from "../Company/Setttings"
+import Settings from "../Company/Settings"
 import UnitTest from "../UnitTest"
 
 const App = ({match}) => (
