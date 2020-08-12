@@ -66,7 +66,7 @@ const  View = () => {
 
     return (
         <>
-            <PageHeader className="site-page-header" title="Stores View"></PageHeader>
+            {/* <PageHeader className="site-page-header" title="Stores View"></PageHeader> */}
             <Table className="gx-table-responsive" columns={columns} dataSource={stores} pagination={{ pageSize: Pagination }}
                 scroll={{ y: 240 }} /> 
         </>

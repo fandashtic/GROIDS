@@ -11,7 +11,8 @@ const Search = Input.Search;
 const Index = ({ match }) => {
   return (
     <>
-      <Row justify="end">
+    <PageHeaderWithBack title="Products" subtitle="Product" islist={true} isadd={false} />
+      {/* <Row justify="end">
         <Col span={12}><h2>Products</h2></Col>
         <Col span={12}>
           <Search placeholder="What you like..."
@@ -40,8 +41,8 @@ const Index = ({ match }) => {
             }} />
           </Tooltip>
         </Col>
-      </Row>
-      <Row>
+      </Row> */}
+      <Row className="gx-main-content-wrapper">
         <Col span={24}>
           <Switch>
             <Route exact path={`${match.url}`} component={Table} />

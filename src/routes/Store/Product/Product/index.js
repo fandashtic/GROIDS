@@ -9,17 +9,13 @@ const ProductList = () => {
     return (
         <>
             <PageHeaderWithBack title="Farmlite" subtitle="Product" islist={true} isadd={false} />
-            <Search placeholder="What you like..."
+            {/* <Search placeholder="What you like..."
                 style={{
-                    width: '50%',
-                    position: 'absolute',
-                    top: '30px',
-                    right: '80px',
                     height: "36px"
                 }}
-                enterButton="Search Product" size="medium" />
+                enterButton="Search Product" size="medium" /> */}
 
-            <Row>
+            <Row className="gx-main-content-wrapper">
                 <Col flex={2}>
                     <Card
                         style={{ width: 300 }}
