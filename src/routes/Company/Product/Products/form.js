@@ -18,6 +18,7 @@ import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 
 import { useHistory } from "react-router-dom";
 import { getData, updateData, LookUpData, addData } from './action';
+import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
 const { Option } = Select
 
 
@@ -120,10 +121,10 @@ const ProductFrom = () => {
         if (editView) {
             updateData(id, values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    updatedNotification()
                     form.resetFields();
                 }
             })
@@ -131,10 +132,10 @@ const ProductFrom = () => {
         else {
             addData(values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    successNotification()
                     form.resetFields();
                 }
             })

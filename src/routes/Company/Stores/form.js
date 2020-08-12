@@ -1,17 +1,25 @@
-import React,{useEffect,useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     Input,
-    Cascader,
+    Select,
     Button,
-    PageHeader,
-    Upload,
+    Card,
     Row,
-    Col
+    Upload,
+    Col,
+    PageHeader
 } from 'antd';
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
-import {StoreLookUp} from 'api/Shared/Master/StoreController';
+
+import { FileUpload } from 'api/Shared/Firestore';
+import { PreFix } from 'api/Shared/Constant/Enum';
+import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
+
+import { useHistory } from "react-router-dom";
+import { getData, updateData, LookUpData, addData } from './action';
 import {StoreType} from 'api/Shared/Constant/Enum'
+
 let store_id = null
 
 const formItemLayout = {
@@ -25,35 +33,20 @@ const formItemLayout = {
         sm: { span: 24 },
     },
 };
-const status = [
-    {
-        value: 'Active',
-        label: 'Active',
-    },
-    {
-        value: 'InActive',
-        label: 'InActive',
-    },
-];
-const FormView = ({addData}) => {
+const FormView = () => {
     const [form] = Form.useForm();
     const [selectValues,setSelectValues] = useState({})
-    const onFinish = values => {
-            values['company_id'] = "212435446"
-            values['product_id'] = "1"
-            values['profile_image_url'] = "test"
-            values['status'] = true
-            values['created_on'] = new Date()
-            values['created_by'] = 1
-        addData(values)
-    };
-
     useEffect(()=>{
-        StoreLookUp(store_id, (res,err)=>{
+        LookUpData(store_id, (res,err)=>{
+            console.log(res)
                 setSelectValues(res)
-            
         })
     },[])
+
+    const onFinish = () =>{
+
+    }
+
     return (
         <>
             <PageHeader className="site-page-header" title="Stores Form" ></PageHeader>
@@ -91,7 +84,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={StoreType} />
                 </Form.Item>
                 </Col>
                 </Row>
@@ -134,7 +126,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={selectValues.areas} />
                 </Form.Item>
                 </Col>
                 <Col md={12} sm={24}>
@@ -145,7 +136,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={selectValues.cities} />
                 </Form.Item>
                 </Col>
                 </Row>
@@ -158,7 +148,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={selectValues.states} />
                 </Form.Item>
                 </Col>
                 <Col md={12} sm={24}>
@@ -169,7 +158,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={selectValues.countries} />
                 </Form.Item>
                 </Col>
                 </Row>
@@ -314,7 +302,6 @@ const FormView = ({addData}) => {
                         { type: 'array', required: true, message: 'Please Give your Input' },
                     ]}
                 >
-                    <Cascader options={status} />
                 </Form.Item>
                 </Col>
                 </Row>

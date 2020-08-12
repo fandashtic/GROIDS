@@ -19,6 +19,7 @@ import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 import { addData, LookUpData, getBrand, updateBrand } from './action'
 
 import { useHistory } from "react-router-dom";
+import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
 
 const Option = Select.Option;
 const formItemLayout = {
@@ -70,10 +71,10 @@ const Index = () => {
         if (editView) {
             updateBrand(id, values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    updatedNotification()
                     form.resetFields();
                 }
             })
@@ -81,10 +82,10 @@ const Index = () => {
         else {
             addData(values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    successNotification()
                     form.resetFields();
                 }
             })
@@ -101,14 +102,12 @@ const Index = () => {
         }
     };
 
-    // const upload = () => {
-    //     return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
-    //         if (err) { return err }
-    //         return data
-    //     });
-    // }
-
-
+    const upload = () => {
+        return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
+            if (err) { return err }
+            return data
+        });
+    }
     return (
         <Card className="gx-card" title="Brand Form">
             <Form className="functionalForm"
