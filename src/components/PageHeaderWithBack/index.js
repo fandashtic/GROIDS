@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button, Tooltip } from 'antd';
 import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import 'instantsearch.css/themes/algolia.css';
 import { useHistory } from "react-router-dom";
-const PageHeaderWithBack = ({ title, subtitle, isadd, islist }) => {
+const Search = Input.Search;
+
+const PageHeaderWithBack = ({ title, subtitle, isForm, islist }) => {
     const history = useHistory()
     let pathname = history.location.pathname
     var arrVars = pathname.split("/");
@@ -13,37 +16,53 @@ const PageHeaderWithBack = ({ title, subtitle, isadd, islist }) => {
     console.log(restVar);
 
     return (
-        <div>
-            <h2 style={{position: "relative"}}>
-            <Tooltip placement="topLeft" title="Back"><ArrowLeftOutlined className="gx-mr-2" style={{position: "absolute", left: "-25px", top: "2px", color: "#545454", cursor: "pointer"}} /></Tooltip>{title}
-            </h2>
-            <Badge className='ant-badge' style={{ backgroundColor: '#34b880' }} count={subtitle}>
 
-            </Badge>
-            <Divider orientation="left" plain>
-
-                {isadd ?
-                    <Tooltip placement="topLeft" title="Add item"><AppstoreAddOutlined style={{
-                        position: 'absolute',
-                        top: '30px',
-                        right: '35px',
-                        fontSize: '30px',
-                        color: '#545454'
-                    }} /></Tooltip> : null}
-
-                {islist ?
-                    <span onClick={() => history.push(`${restVar}`)}>
-                        <InsertRowBelowOutlined style={{
-                            position: 'absolute',
-                            top: '30px',
-                            right: '35px',
-                            fontSize: '30px',
-                            color: '#545454'
+        <div className='gx-layout-sider-header' style={{
+            paddingLeft: '15px',
+            fontSize: '30px'
+        }}>
+            <h2>
+                <Link to="/" className="gx-site-logo">
+                    <ArrowLeftOutlined
+                        style={{
+                            marginRight: '10px'
                         }} />
-                    </span> : null}
+                    <span>
+                        {title}
+                    </span>
+                </Link>
+            </h2>
+            <Badge className='ant-badge'
+                style={{
+                    backgroundColor: '#34b880',
+                    position: 'relative',
+                    top: '20px',
+                    left: '-80px'
+                }} count={subtitle}>
+            </Badge>
 
-            </Divider>
-        </div>)
+            {islist ?
+                <>
+                    <Search placeholder="What you like..."
+                        style={{
+                            width: '50%',
+                            position: 'absolute',
+                            top: '18px',
+                            left: '240px'
+                        }}
+                        enterButton="Search Product" size="medium" />
+
+
+                    <Button type="primary" shape="circle" style={{
+                        top: '7px'
+                    }}>
+                        New
+                    </Button>
+                </>
+                : null}
+
+        </div>
+    )
 }
 
 export default PageHeaderWithBack;
