@@ -117,6 +117,7 @@
     background: #34b880 !important;
     background-color: #34b880 !important;
     border-color: #34b880 !important;
+    box-shadow: none;
 }
 
 .ant-btn-primary:not([disabled]):not(.disabled):active {
@@ -201,12 +202,6 @@ input {
     margin-top: 20px;
 }
 
-.signout {
-    transform: rotate(180deg);
-    position: relative;
-    top: -6px;
-}
-
 .ant-form-inline .ant-form-item {
     flex-wrap: wrap;
 }
@@ -217,4 +212,12 @@ form.functionalForm .ant-row {
 
 form.functionalForm .ant-col {
     width: 100%;
+}
+
+.gx-app-nav {
+    justify-content: center;
+}
+
+.ant-input-search-medium input {
+    height: 36px;
 }

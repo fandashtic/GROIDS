@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddCity = async (data, callback) => {
     return API.post('/AddCity', PostObject(data))
@@ -43,9 +43,18 @@ let CityLookUp = async (id, callback) => {
         });
 };
 
+let ImportCity = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddCity(obj, callback);
+        });        
+    }
+};
+
 export { AddCity,
     UpdateCity,
     DeleteCity,
     GetCity,
     GetCities,
-    CityLookUp };
+    CityLookUp,
+    ImportCity };

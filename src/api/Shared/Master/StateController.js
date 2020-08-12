@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddState = async (data, callback) => {
     return API.post('/AddState', PostObject(data))
@@ -43,9 +43,18 @@ let StateLookUp = async (id, callback) => {
         });
 };
 
+let ImportState = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddState(obj, callback);
+        });        
+    }
+};
+
 export { AddState,
     UpdateState,
     DeleteState,
     GetState,
     GetStates,
-    StateLookUp };
+    StateLookUp,
+    ImportState };

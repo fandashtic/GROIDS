@@ -69,7 +69,7 @@ const OrderHistory = () => {
               <h2 className="h4 gx-text-capitalize gx-mb-0">
                 Order History</h2>
             } extra={
-      <p className="gx-text-primary gx-mb-0 gx-pointer">Detailed History</p>
+      <p className="gx-text-primary gx-mb-0 gx-pointer">Fast Moving's</p>
     }>
       <div className="gx-table-responsive">
         <Table className="gx-table-no-bordered" columns={columns} dataSource={data} pagination={false} bordered={false}

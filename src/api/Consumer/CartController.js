@@ -1,7 +1,7 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject, GetSessionValue } from 'api/Shared/Util';
 
-let AddCart = async (filter, callback) => {
+let AddCart = async (data, callback) => {
     return API.post('/AddCart', PostObject(data))
         .then(res => {
            return  ReturnObject(callback, null, res.data, 'AddCart');
@@ -43,10 +43,19 @@ let CartLookUp = async (id, callback) => {
         });
 };
 
+let ImportCart = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddCart(obj, callback);
+        });        
+    }
+};
+
 export { 
     AddCart,
     UpdateCart,
     DeleteCart,
     GetCart,
     GetCarts,
-    CartLookUp };
+    CartLookUp,
+    ImportCart };

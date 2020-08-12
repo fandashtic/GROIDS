@@ -39,7 +39,7 @@ const WebSite = () => {
 
     const viewPincode = () => {
         SetView("pincode")
-        history.push('/company/dashbord');
+        history.push('/company/dashboard');
     }
 
     const viewSignIn = () => {
@@ -99,7 +99,7 @@ const WebSite = () => {
         };
 
         AddCompany(newCompany, (data, err) => {
-            if (data.Status === 200) {
+            if (data && data.Status === 200) {
                 SetView("signin");
             }
         });
@@ -164,7 +164,7 @@ const WebSite = () => {
                                     <Form.Item
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" value="user_name" onChange={e => setuser_name(e.target.value)} />
+                                        <Input type="text" placeholder="User Name" value="user_name" onChange={e => setuser_name(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item
                                         rules={[{ required: true, message: 'Enter password!' }]}
