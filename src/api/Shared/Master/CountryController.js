@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddCountry = async (data, callback) => {
     return API.post('/AddCountry', PostObject(data))
@@ -43,9 +43,18 @@ let CountryLookUp = async (id, callback) => {
         });
 };
 
+let ImportCountry = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddCountry(obj, callback);
+        });        
+    }
+};
+
 export { AddCountry,
     UpdateCountry,
     DeleteCountry,
     GetCountry,
     GetCountries,
-    CountryLookUp };
+    CountryLookUp,
+    ImportCountry };

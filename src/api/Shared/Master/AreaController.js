@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddArea = async (data, callback) => {
     return API.post('/AddArea', PostObject(data))
@@ -43,9 +43,18 @@ let AreaLookUp = async (id, callback) => {
         });
 };
 
+let ImportArea = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddArea(obj, callback);
+        });        
+    }
+};
+
 export { AddArea,
     UpdateArea,
     DeleteArea,
     GetArea,
     GetAreas,
-    AreaLookUp };
+    AreaLookUp,
+    ImportArea };

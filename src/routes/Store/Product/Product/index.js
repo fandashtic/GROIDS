@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button } from 'antd';
+import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button, Tooltip } from 'antd';
 import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import PageHeaderWithBack from 'components/PageHeaderWithBack';
 const Search = Input.Search;
@@ -14,9 +14,10 @@ const ProductList = () => {
                     width: '50%',
                     position: 'absolute',
                     top: '30px',
-                    right: '80px'
+                    right: '80px',
+                    height: "36px"
                 }}
-                enterButton="Search Product" size="large" />
+                enterButton="Search Product" size="medium" />
 
             <Row>
                 <Col flex={2}>
@@ -32,9 +33,7 @@ const ProductList = () => {
                             <Avatar
                                 shape="square" size={32}
                                 src="https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/PR%2FITC.jpg?alt=media&token=f8a172cb-6408-4d09-8953-c7dcbe032aa8" />,
-                            <EditOutlined key="edit" style={{
-                                fontSize: '30px'
-                            }} />,
+                                <Tooltip placement="topLeft" title="Edit"><i className="icon icon-edit" style={{fontSize: "30px"}} /></Tooltip>
                         ]}
                     >
 

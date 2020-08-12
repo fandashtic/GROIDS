@@ -85,13 +85,26 @@ let GetLookUpData = (dataList, idCoulmn, dataLabel, dependCol, selectedValue) =>
     return result;
 }
 
+let GetSessionValue = (key) => {
+    let session = GetUserSession();
+    if (IsHasValue(session) && IsHasValue(session[key])) {
+        return session[key];
+    }
+    return "";
+};
+
 let GetUserSession = async () => {
-    return await JSON.parse(localStorage.getItem('user'));
+    let session = await localStorage.getItem('user');
+    if (IsHasValue(session)) {
+        return JSON.parse(session);
+    } else {
+        return null;
+    }
 };
 
 let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
     tableData[keyColumn] = GetNewKey(type);
-    if(IsHasValue(created_by)){
+    if (IsHasValue(created_by)) {
         tableData['created_by'] = created_by;
     }
     tableData['created_on'] = GetDate();
@@ -100,7 +113,7 @@ let AddDetaultValues = (tableData, keyColumn, type, created_by) => {
 }
 
 let UpdateDetaultValues = (tableData, modified_by) => {
-    if(IsHasValue(modified_by)){
+    if (IsHasValue(modified_by)) {
         tableData['modified_by'] = modified_by;
     }
     tableData['modified_on'] = GetDate();
@@ -147,8 +160,18 @@ let GetFileExtn = (fileName) => {
 
 let GetObject = (id) => {
     return {
-            "id": id
+        "id": id
     }
+}
+
+let GetObjectByGiven = (obj) => {
+    let filter = {};
+    Object.keys(obj).map(function (k) {
+        console.log("key with value: " + k + " = " + obj[k]);
+        filter[k] = k;
+    })
+
+    return filter;
 }
 
 let GetAllObject = (filter) => {
@@ -158,15 +181,24 @@ let GetAllObject = (filter) => {
 }
 
 let PostObject = (data) => {
-    data['created_by'] = '0';
+    if (IsHasValue(GetSessionValue('user_id'))) {
+        data['created_by'] = GetSessionValue('user_id');
+    }
+    if (IsHasValue(GetSessionValue('company_id'))) {
+        data['company_id'] = GetSessionValue('company_id');
+    }
+    if (IsHasValue(GetSessionValue('store_id'))) {
+        data['store_id'] = GetSessionValue('store_id');
+    }
     return {
         "inputmodel": data
     }
 }
 
 let PutObject = (id, data) => {
-    data['created_by'] = '0';
-    data['modified_by'] = '0';
+    if (IsHasValue(GetSessionValue('user_id'))) {
+        data['modified_by'] = GetSessionValue('user_id');
+    }
     return { "id": id, "inputmodel": data };
 }
 
@@ -181,6 +213,6 @@ let DeleteObject = (id) => {
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
-    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, 
-    GetObject, GetAllObject, PostObject, PutObject, DeleteObject
+    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, GetSessionValue,
+    GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven
 };

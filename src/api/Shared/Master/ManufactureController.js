@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddManufacture = async (data, callback) => {
     return API.post('/AddManufacture', PostObject(data))
@@ -43,9 +43,18 @@ let ManufactureLookUp = async (id, callback) => {
         });
 };
 
+let ImportManufacture = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddManufacture(obj, callback);
+        });        
+    }
+};
+
 export { AddManufacture,
     UpdateManufacture,
     DeleteManufacture,
     GetManufacture,
     GetManufactures,
-    ManufactureLookUp };
+    ManufactureLookUp,
+    ImportManufacture };

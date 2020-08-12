@@ -1,5 +1,5 @@
 import API from 'api/api';
-import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, ReturnObject } from 'api/Shared/Util';
+import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, IsHasValue, ReturnObject } from 'api/Shared/Util';
 
 let AddProductFamily = async (data, callback) => {
     return API.post('/AddProductFamily', PostObject(data))
@@ -43,9 +43,18 @@ let ProductFamilyLookUp = async (id, callback) => {
         });
 };
 
+let ImportProductFamily = async (data, callback) => {
+    if(IsHasValue(data) && data.length > 0){
+        data.forEach(obj => {
+            AddProductFamily(obj, callback);
+        });        
+    }
+};
+
 export { AddProductFamily,
     UpdateProductFamily,
     DeleteProductFamily,
     GetProductFamily,
     GetProductFamilies,
-    ProductFamilyLookUp };
+    ProductFamilyLookUp,
+    ImportProductFamily };
