@@ -20,7 +20,7 @@ import {
 } from "constants/ThemeSetting";
 import { UserType } from 'api/Shared/Constant/Enum';
 import { IsHasValue, GetUserSession } from 'api/Shared/Util';
-
+import {NotificationContainer} from "react-notifications";
 let authUser = true;
 
 const GetRoutePath = (authUser) => {
@@ -135,6 +135,7 @@ const App = (props) => {
             component={MainApp} />
         </Switch>
       </IntlProvider>
+          <NotificationContainer/>
     </ConfigProvider>
   )
 };

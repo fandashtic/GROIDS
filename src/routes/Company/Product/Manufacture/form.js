@@ -16,10 +16,9 @@ import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import { FileUpload } from 'api/Shared/Firestore';
 import { PreFix } from 'api/Shared/Constant/Enum';
 import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
-
 import { getData, updateData, addData } from './action';
-
 import { useHistory } from "react-router-dom";
+import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
 
 const { Option } = Select;
 
@@ -40,7 +39,7 @@ const formItemLayout = {
 const From = () => {
     const history = useHistory()
     const [form] = Form.useForm();
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState();
     const [fileList, setFileList] = useState([]);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
@@ -54,7 +53,7 @@ const From = () => {
 
     useEffect(() => {
         editForm()
-    }, [])
+    }, [id])
 
     const editForm = () => {
         if (id !== "add") {
@@ -70,10 +69,10 @@ const From = () => {
         if (editView) {
             updateData(id, values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    updatedNotification()
                     form.resetFields();
                 }
             })
@@ -81,10 +80,10 @@ const From = () => {
         else {
             addData(values).then(result => {
                 if (result.err) {
-                    console.log(result.err)
+                    errorNotification()
                 }
                 else {
-                    console.log(result.res)
+                    successNotification()
                     form.resetFields();
                 }
             })
@@ -99,19 +98,27 @@ const From = () => {
             setImage(newFile);
         }
     };
+    useEffect(() => {
+        upload();
+    }, [image]);
 
-    // const upload = async () => {
-    //        FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data,err)=>{
-    //            return true
-    //        });
-    // }
+    const upload = async () => {
+        console.log("test")
+        if (image) {
+               FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data,err)=>{
+                   console.log(err)
+                   console.log(data)
+                   //return true
+               });
+        }
+
+
+    }
 
     const onRemoveChange = () => {
         setFileList([])
-        setImage(null)
+        //setImage(null)
     }
-
-
 
     return (
         <Card className="gx-card" title="Manufacture Form">

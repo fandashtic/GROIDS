@@ -5,7 +5,7 @@ import {Pagination} from 'appConfig.json';
 import { getBrands} from './action'
 import { useHistory } from "react-router-dom";
 
-const  TableView = () => {
+ const  TableView = () => {
     const history = useHistory()
     const [brands, setBrands] = useState([]);
 
@@ -47,7 +47,7 @@ const  TableView = () => {
     ];
 
     const onViewPanel = data => {
-        history.push(`${history.location.pathname}/edit/${data.brand_id}`)
+        history.push(`${history.location.pathname}/view/${data.brand_id}`)
     }
 
     return (

@@ -4,7 +4,7 @@ import { GetObject, GetAllObject, PostObject, PutObject, DeleteObject, DeCode, R
 let AddCompany = async (data, callback) => {
     return API.post('/AddCompany', PostObject(data))
         .then(function (response) {
-            return  ReturnObject(callback, null, response.data, 'AddCompany');
+            return  ReturnObject(callback, null, response, 'AddCompany');
         })
         .catch(function (error) {
             return  ReturnObject(callback, error, null, 'AddCompany');

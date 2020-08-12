@@ -100,6 +100,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Brand from './table'
 import Form from './form'
+import ViewData from './details'
 
 const Index = ({ match }) => {
   return (
@@ -107,7 +108,7 @@ const Index = ({ match }) => {
       <Route exact path={`${match.url}`} component={Brand} />
       <Route exact path={`${match.url}/addBrand`} component={Form} />
      <Route exact path={`${match.path}/edit/:id`} component={Form} />
-      <Route exact path={`${match.path}/view/:id`} component={Form} />
+      <Route exact path={`${match.path}/view/:id`} component={ViewData} />
     </Switch>
   )
 };

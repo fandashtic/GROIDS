@@ -14,7 +14,6 @@ import Settings from "../Company/Settings"
 import UnitTest from "../UnitTest"
 
 const App = ({ match }) => {
-    console.log(match)
     return (<div className="gx-main-content-wrapper">
         <Switch>
             <Redirect exact from={`${match.path}`} to={`${match.url}/dashboard`} />
