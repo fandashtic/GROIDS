@@ -9,6 +9,12 @@ import reducer from "appRedux/reducer";
 const NextApp = () => {
   const initialState = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
+  let link = document.createElement('link');
+    link.type = 'text/css';
+    link.rel = 'stylesheet';
+    link.className = 'gx-style';
+    link.href = `/css/light_purple.css`;
+    document.body.appendChild(link);
   return (
     <BrowserRouter>
      <Context.Provider value={{ state, dispatch }}>
