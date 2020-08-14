@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Tooltip, Space, Row, Col } from "antd";
+import { Input, Badge, Card, Avatar, Statistic, Row, Col, Table, Button, Tooltip, Space } from 'antd';
 import { Pagination } from 'appConfig.json'
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
+const Search = Input.Search;
 const View = () => {
     const history = useHistory()
     const [family, setfamily] = useState([]);
@@ -68,6 +71,7 @@ const View = () => {
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>
+
         </>
     )
 }

@@ -61,9 +61,9 @@ const WebSite = () => {
     {
         switch (userType) {
             case UserType.SUPER_ADMIN:
-                return '/dashboard/company';
+                return '/company/dashboard';
               case UserType.COMPANY_ADMIN:
-                return '/dashboard/company';
+                return '/company/dashboard';
               case UserType.STORE_ADMIN:
                 return '/store/product';
               case UserType.STORE_STAFF:
@@ -73,7 +73,7 @@ const WebSite = () => {
               case UserType.SUPPORT:
                 return '/consumer/dashboard';
               default:
-                return '/dashboard/company';
+                return '/company/dashboard';
         }
     }
 

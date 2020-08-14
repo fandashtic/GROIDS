@@ -1,16 +1,19 @@
 import React, { useState,useEffect } from 'react'
-import { Table, Tooltip, Space, Row, Col } from "antd";
 import {Pagination} from 'appConfig.json';
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
+import { Input, Badge, Card, Avatar, Statistic, Row, Col,Table, Button, Tooltip,Space } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
+const Search = Input.Search;
+
 const  TableView = () => {
     const history = useHistory()
     const [manufactures, setmanufactures] = useState([]);
 
     useEffect(() => {
         getDatas().then(result => {
-            console.log(result)
             if(result.err === null){
                 setmanufactures(result.res.data)
             }
@@ -58,6 +61,7 @@ const  TableView = () => {
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>
+
         </>
     )
 }

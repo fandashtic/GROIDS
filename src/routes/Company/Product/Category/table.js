@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from 'react'
-import { Table, Tooltip, Space, Row, Col } from "antd";
-import { getDatas} from './action'
+import { Input, Badge, Card, Avatar, Statistic, Row, Col, Table, Button, Tooltip, Space } from 'antd';
+import { getDatas} from './action';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import {Pagination} from 'appConfig.json';
+import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 
+const Search = Input.Search;
 const  TableView = () => {
     const [category, setCategory] = useState([]);
     const history = useHistory()
