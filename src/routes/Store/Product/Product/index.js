@@ -8,18 +8,9 @@ const { Meta } = Card;
 const ProductList = () => {
     return (
         <>
-            <PageHeaderWithBack title="Farmlite" subtitle="Product" islist={true} isadd={false} />
-            <Search placeholder="What you like..."
-                style={{
-                    width: '50%',
-                    position: 'absolute',
-                    top: '30px',
-                    right: '80px',
-                    height: "36px"
-                }}
-                enterButton="Search Product" size="medium" />
+            <PageHeaderWithBack title="Farmlite" subtitle="Product" islist={false} isForm={true} />
 
-            <Row>
+            <Row className="gx-main-content-wrapper">
                 <Col flex={2}>
                     <Card
                         style={{ width: 300 }}
@@ -33,7 +24,7 @@ const ProductList = () => {
                             <Avatar
                                 shape="square" size={32}
                                 src="https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/PR%2FITC.jpg?alt=media&token=f8a172cb-6408-4d09-8953-c7dcbe032aa8" />,
-                                <Tooltip placement="topLeft" title="Edit"><i className="icon icon-edit" style={{fontSize: "30px"}} /></Tooltip>
+                            <Tooltip placement="topLeft" title="Edit"><i className="icon icon-edit" style={{ fontSize: "30px" }} /></Tooltip>
                         ]}
                     >
 

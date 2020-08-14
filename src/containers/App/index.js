@@ -28,9 +28,9 @@ const GetRoutePath = (authUser) => {
   if (IsHasValue(authUser) && IsHasValue(authUser.user_type)) {
     switch (authUser.user_type) {
       case UserType.SUPER_ADMIN:
-        return '/dashboard/company';
+        return '/company/dashboard';
       case UserType.COMPANY_ADMIN:
-        return '/dashboard/company';
+        return '/company/dashboard';
       case UserType.STORE_ADMIN:
         return '/store/product';
       case UserType.STORE_STAFF:
@@ -40,7 +40,7 @@ const GetRoutePath = (authUser) => {
       case UserType.SUPPORT:
         return '/consumer/dashboard';
       default:
-        return '/dashboard/company';
+        return '/company/dashboard';
     }
   }
   else {

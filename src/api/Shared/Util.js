@@ -204,11 +204,9 @@ let PutObject = (id, data) => {
 
 let DeleteObject = (id) => {
     return {
-        "filter": {
             "id": id
         }
     }
-}
 
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
