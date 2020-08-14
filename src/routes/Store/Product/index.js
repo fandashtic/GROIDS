@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from "antd";
 import { Configure, connectHits, connectStateResults, InstantSearch, Pagination, Stats, } from 'react-instantsearch-dom';
+import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { withUrlSync } from './urlSync';
 import 'instantsearch.css/themes/algolia.css';
 import PageHeaderWithBack from 'components/PageHeaderWithBack';
@@ -20,7 +21,7 @@ const searchClient = algoliasearch(
 
 const App = props => (
     <>
-        <PageHeaderWithBack title="Products" subtitle="Company" islist={false} isadd={true} />
+        <PageHeaderWithBack title="Products" subtitle="Company"  rooticon={<HeartTwoTone />} />
 
         <InstantSearch className="gx-main-content"
             indexName="ikea"

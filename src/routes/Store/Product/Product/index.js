@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button, Tooltip } from 'antd';
 import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import PageHeaderWithBack from 'components/PageHeaderWithBack';
+import { GetImage } from 'api/Shared/Util';
 const Search = Input.Search;
 const { Meta } = Card;
 
 const ProductList = () => {
+    let obj = {'id': 1};
     return (
         <>
-            <PageHeaderWithBack title="Farmlite" subtitle="Product" islist={true} isadd={false} />
-            {/* <Search placeholder="What you like..."
-                style={{
-                    height: "36px"
-                }}
-                enterButton="Search Product" size="medium" /> */}
-
+            <PageHeaderWithBack title="Farmlite" subtitle="Product" islist={false} isadd={false} />
             <Row className="gx-main-content-wrapper">
                 <Col flex={2}>
                     <Card
@@ -22,13 +18,13 @@ const ProductList = () => {
                         cover={
                             <img
                                 alt="Formolite"
-                                src="https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/PR%2Fformolite.jpg?alt=media&token=2650f548-0f86-4d60-9c60-ec2347644e6c"
+                                src={GetImage(obj.profile_image_url)}
                             />
                         }
                         actions={[
                             <Avatar
                                 shape="square" size={32}
-                                src="https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/PR%2FITC.jpg?alt=media&token=f8a172cb-6408-4d09-8953-c7dcbe032aa8" />,
+                                src={GetImage(obj.profile_image_url)} />,
                                 <Tooltip placement="topLeft" title="Edit"><i className="icon icon-edit" style={{fontSize: "30px"}} /></Tooltip>
                         ]}
                     >
