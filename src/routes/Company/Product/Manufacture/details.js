@@ -32,7 +32,7 @@ function Details() {
                         cover={
                             <img
                                 alt=""
-                                src={product.profile_image_url}
+                                src={product.profile_image_url === 'image.png' ? "https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/sample%2Fimages.png?alt=media&token=51b37b66-d19b-43be-b108-9ce1b7ad18e0 " : product.profile_image_url}
                             />
                         }
                         actions={[

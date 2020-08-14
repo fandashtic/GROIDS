@@ -106,7 +106,7 @@ const Index = ({ match }) => {
   return (      
     <Switch>
       <Route exact path={`${match.url}`} component={Brand} />
-      <Route exact path={`${match.url}/addBrand`} component={Form} />
+      <Route exact path={`${match.url}/add`} component={Form} />
       <Route exact path={`${match.path}/edit/:id`} component={Form} />
       <Route exact path={`${match.path}/view/:id`} component={ViewData} />
     </Switch>

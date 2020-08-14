@@ -6,6 +6,8 @@ import { Input, Badge, Card, Avatar, Statistic, Row, Col,Table, Button, Tooltip,
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
+import {AddButton} from 'components/RouteButton'; 
+
 const Search = Input.Search;
 
 const  TableView = () => {
@@ -57,6 +59,7 @@ const  TableView = () => {
             <PageHeaderWithSearchNoBack title="Manufacture" subtitle="Product" islist={true} isadd={false} />
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
+                    <AddButton/>
                     <Table className="gx-table-responsive" columns={columns} dataSource={manufactures} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>
