@@ -1,5 +1,7 @@
 {
     "apiUrl": "https://grodis-api.herokuapp.com",
+    "DevAPIUrl": "http://localhost:3001",
     "API_TimeOut":10000,
-    "Pagination": 10
+    "Pagination": 10,
+    "DefaultImage": "https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/Assets%2FNoImageFound.png?alt=media&token=c8000d59-15c0-47f1-bd71-077581a29938"
 }

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import generator from 'generate-password';
+import config from './../../appConfig.json'
 //const {Base64} = require('js-base64');
 
 let GetUpdateExpressionAndAttributeValuesAndNames = (obj, type) => {
@@ -208,9 +209,14 @@ let DeleteObject = (id) => {
         }
     }
 
+let GetImage = (img) => {
+    if(IsHasValue(img)) return img;
+    return config.DefaultImage;
+}
+
 export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
-    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, GetSessionValue,
+    GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, GetSessionValue, GetImage,
     GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven
 };
