@@ -65,9 +65,9 @@ const WebSite = () => {
               case UserType.COMPANY_ADMIN:
                 return '/company/dashboard';
               case UserType.STORE_ADMIN:
-                return '/store/product';
+                return '/store/dashboard';
               case UserType.STORE_STAFF:
-                return '/store/product';
+                return '/store/dashboard';
               case UserType.CONSUMER:
                 return '/consumer/dashboard';
               case UserType.SUPPORT:
