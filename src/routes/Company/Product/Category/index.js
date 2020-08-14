@@ -102,24 +102,15 @@ import { Route, Switch } from "react-router-dom";
 import Table from './table'
 import Form from './form'
 import View from './details'
-import PageHeaderWithBack from 'components/PageHeaderWithBack';
-import { Row, Col, Input, Tooltip } from 'antd';
 
 const Index = ({ match }) => {
   return (
-    <>
-      <PageHeaderWithBack title="Category" subtitle="Product" islist={true} isadd={false} />
-      <Row className="gx-main-content-wrapper">
-        <Col span={24}>
-          <Switch>
-            <Route exact path={`${match.url}`} component={Table} />
-            <Route exact path={`${match.url}/add`} component={Form} />
-            <Route exact path={`${match.url}/edit/:id`} component={Form} />
-            <Route exact path={`${match.url}/view/:id`} component={View} />
-          </Switch>
-        </Col>
-      </Row>
-    </>
+    <Switch>
+      <Route exact path={`${match.url}`} component={Table} />
+      <Route exact path={`${match.url}/add`} component={Form} />
+      <Route exact path={`${match.url}/edit/:id`} component={Form} />
+      <Route exact path={`${match.url}/view/:id`} component={View} />
+    </Switch>
   )
 };
 

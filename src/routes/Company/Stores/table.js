@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import { Table, Tooltip, Space,PageHeader } from 'antd'
+import { Table, Tooltip, Space, Row, Col } from 'antd'
 import { Pagination } from 'appConfig.json'
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
+import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 
 const  View = () => {
     const history = useHistory()
@@ -66,9 +67,13 @@ const  View = () => {
 
     return (
         <>
-            {/* <PageHeader className="site-page-header" title="Stores View"></PageHeader> */}
-            <Table className="gx-table-responsive" columns={columns} dataSource={stores} pagination={{ pageSize: Pagination }}
-                scroll={{ y: 240 }} /> 
+            <PageHeaderWithSearchNoBack title="Store" subtitle="Product" islist={true} isadd={false} />
+            <Row className="gx-main-content-wrapper">
+                <Col span={24}>
+                    <Table className="gx-table-responsive" columns={columns} dataSource={stores} pagination={{ pageSize: Pagination }}
+                        scroll={{ y: 240 }} />
+                </Col>
+            </Row>
         </>
     )
 }

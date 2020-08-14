@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button } from 'antd';
 import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, EditOutlined } from '@ant-design/icons';
-import PageHeaderWithBack from 'components/PageHeaderWithBack';
+import PageHeaderWithBackNoSearch from 'components/PageHeaderWithBackNoSearch';
 import { useHistory } from "react-router-dom";
 import { getBrand } from './action';
 const Search = Input.Search;
@@ -24,8 +24,8 @@ function Details() {
 
     return (
         <>
-            <PageHeaderWithBack title={product.brand_name} subtitle="Product" islist={true} isadd={false} />
-            <Row>
+            <PageHeaderWithBackNoSearch title={product.brand_name} subtitle="Product" islist={true} isadd={false} />
+            <Row className="gx-main-content-wrapper" style={{margin: "0px"}}>
                 <Col flex={2}>
                     <Card
                         style={{ width: 300 }}

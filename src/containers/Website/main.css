@@ -224,6 +224,6 @@ form.functionalForm .ant-col {
 
 .topNavbar {
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.08);
-    padding: 10px 20px 0px 40px;
-    height: 72px;
+    padding: 10px 20px 8px 20px;
+    min-height: 72px;
 }

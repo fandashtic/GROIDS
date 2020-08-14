@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from 'react'
-import { Table, Tooltip, Space } from "antd";
+import { Table, Tooltip, Space, Row, Col } from "antd";
 import {Pagination} from 'appConfig.json';
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
+import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 const  TableView = () => {
     const history = useHistory()
     const [manufactures, setmanufactures] = useState([]);
@@ -50,9 +51,13 @@ const  TableView = () => {
     }
     return (
         <>
-           <Table className="gx-table-responsive" columns={columns} dataSource={manufactures} pagination={{ pageSize: Pagination }}
-                scroll={{ y: 240 }} /> 
-        
+            <PageHeaderWithSearchNoBack title="Manufacture" subtitle="Product" islist={true} isadd={false} />
+            <Row className="gx-main-content-wrapper">
+                <Col span={24}>
+                    <Table className="gx-table-responsive" columns={columns} dataSource={manufactures} pagination={{ pageSize: Pagination }}
+                        scroll={{ y: 240 }} />
+                </Col>
+            </Row>
         </>
     )
 }
