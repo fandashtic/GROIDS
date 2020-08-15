@@ -140,7 +140,7 @@ const WebSite = () => {
                     <img src="/gallery/maria-lin-kim-8RaUEd8zD-U-unsplash.jpg" alt="" />
                 </div>
             </Carousel>
-            <Row className="headerCard" justify='center'>
+            <Row className="loginCard" justify='center'>
                 <Col lg={9} md={14} xs={22}>
                     <div>
                         <Card title="GROIDS" bordered={false}>
@@ -267,9 +267,7 @@ const WebSite = () => {
                         <span onClick={viewPincode}>{view === "signup" ? (<>Guest User</>) : null}</span>
                         <span onClick={viewPincode}>{view === "companyRegister" ? (<>Guest User</>) : null}</span>
                     </Button>
-                    <Button className="register-btn" type="primary">
-                        <span onClick={viewCompanySignUp}>Register</span>
-                    </Button>
+                    <Button className="register-btn" onClick={viewCompanySignUp}>Register</Button>
                 </Col>
             </Row>
 

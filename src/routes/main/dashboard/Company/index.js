@@ -10,7 +10,7 @@ import Portfolio from "../../../../components/dashboard/Stores/Portfolio";
 const Company = () => {
   return (
     <Auxiliary>
-      <Row>
+      <Row className="gx-main-content-wrapper">
         <Col xl={6} lg={12} md={12} sm={12} xs={24}>
           <ChartCard prize="15480" title="" icon="user"
             children={<ResponsiveContainer width="100%" height={75}>
