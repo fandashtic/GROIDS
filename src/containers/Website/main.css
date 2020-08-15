@@ -205,7 +205,7 @@ input {
 }
 
 .ant-form-inline .ant-form-item {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
 }
 
 form.functionalForm .ant-row {
@@ -233,4 +233,9 @@ form.functionalForm .ant-col {
 .loginCard .ant-row {
     margin-left: 0px !important;
     margin-right: 0px !important;
+}
+
+.tableActions .ant-btn-background-ghost {
+    color: #34b880;
+    border-color: #34b880;
 }

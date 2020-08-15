@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import {Button} from 'antd';
-import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Button, Row, Col, Tooltip } from 'antd';
+import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ImportOutlined } from '@ant-design/icons';
 const AddButton = () => {
     const history = useHistory()
     let pathname = history.location.pathname; 
@@ -11,7 +11,14 @@ const AddButton = () => {
     }
     return  (
         <>
-            <Button icon={<PlusSquareOutlined  />} onClick={handleClick}>Add</Button>
+            <Row className="tableActions" justify="end" gutter={12}>
+                <Col>
+                    <Button ghost size="small" icon={<ImportOutlined />}>Import</Button>
+                </Col>
+                <Col>
+                    <Button ghost size="small" icon={<AppstoreAddOutlined />} onClick={handleClick}>Add</Button>
+                </Col>
+            </Row>            
         </>
     )
 }
@@ -25,7 +32,7 @@ const ViewButton = ({id}) => {
     }
     return  (
         <>
-            <Button icon={<PlusSquareOutlined  />}  name="View" onClick={handleClick}>View</Button>
+            <Button type="primary" icon={<PlusSquareOutlined  />} onClick={handleClick}>View</Button>
         </>
     )
 }

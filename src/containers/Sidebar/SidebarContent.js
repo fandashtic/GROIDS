@@ -56,7 +56,7 @@ const SidebarContent = () => {
               <Menu.Item key="/company/master/manufacture">
                 <Link to="/company/master/manufacture">
                   <i className="icon icon-orders" />
-                  <span><IntlMessages id="sidebar.master.manufacturer" /></span>
+                  <span><IntlMessages id="sidebar.master.manufacture" /></span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="/company/master/brand">
