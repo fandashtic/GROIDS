@@ -243,3 +243,7 @@ form.functionalForm .ant-col {
     color: #34b880;
     border-color: #34b880;
 }
+
+.ant-input-search input {
+    height: auto;
+}

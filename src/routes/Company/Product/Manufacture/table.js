@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 import {AddButton} from 'components/RouteButton'; 
 
-const Search = Input.Search;
-
 const  TableView = () => {
     const history = useHistory()
     const [manufactures, setmanufactures] = useState([]);
