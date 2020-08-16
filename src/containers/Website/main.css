@@ -235,6 +235,10 @@ form.functionalForm .ant-col {
     margin-right: 0px !important;
 }
 
+.tableActions {
+    padding-bottom: 6px;
+}
+
 .tableActions .ant-btn-background-ghost {
     color: #34b880;
     border-color: #34b880;

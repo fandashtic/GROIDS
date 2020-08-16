@@ -30247,7 +30247,7 @@ h6,
   border-right: 0 none;
 }
 .gx-layout-sider-scrollbar {
-  height: calc(100vh - 72px - 145px) !important;
+  height: calc(100vh - 30px - 145px) !important;
 }
 .framed-layout .gx-layout-sider-scrollbar {
   height: calc(100vh - 72px - 2 * 20px - 145px) !important;

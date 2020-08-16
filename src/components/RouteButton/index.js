@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { Button, Row, Col, Tooltip } from 'antd';
-import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ImportOutlined } from '@ant-design/icons';
+import { Button, Row, Col, Tooltip, Menu, Dropdown } from 'antd';
+import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ImportOutlined, UploadOutlined, MoreOutlined, DownloadOutlined } from '@ant-design/icons';
 const AddButton = () => {
     const history = useHistory()
     let pathname = history.location.pathname; 
@@ -9,14 +9,35 @@ const AddButton = () => {
     const handleClick = () => {
         history.push(`${pathname}/add`)
     }
+
+    const menu = (
+        <Menu>
+          <Menu.Item key="0" icon={<AppstoreAddOutlined />} onClick={handleClick}>
+            Add Item
+          </Menu.Item>
+          <Menu.Item key="1" icon={<UploadOutlined />}>
+            Import Data
+          </Menu.Item>
+          <Menu.Item key="1" icon={<DownloadOutlined />}>
+            Download Template
+          </Menu.Item>
+        </Menu>
+      );
     return  (
         <>
             <Row className="tableActions" justify="end" gutter={12}>
-                <Col>
-                    <Button ghost size="small" icon={<ImportOutlined />}>Import</Button>
+                {/* <Col>
+                    <Button ghost size="small" icon={<UploadOutlined />}>Import</Button>
                 </Col>
                 <Col>
                     <Button ghost size="small" icon={<AppstoreAddOutlined />} onClick={handleClick}>Add</Button>
+                </Col> */}
+                <Col>
+                    <Dropdown overlay={menu} trigger={['click']}>
+                        <a href className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            <MoreOutlined style={{fontSize: "20px"}} />
+                        </a>
+                    </Dropdown>
                 </Col>
             </Row>            
         </>
