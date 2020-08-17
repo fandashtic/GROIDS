@@ -47,4 +47,5 @@ export { AddOrder,
     UpdateOrder,
     DeleteOrder,
     GetOrder,
-    GetOrders };
+    GetOrders,
+    OrderLookUp };

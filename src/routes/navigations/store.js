@@ -8,7 +8,9 @@ import Product from "../Store/Product";
 import Products from "../Store/Product/Product";
 import Stores from "../Company/Stores";
 //import Settings from "../Company/Setttings";
+
 import Orders from "../Store/Orders";
+import Order from "../Store/Orders/Form";
 import UnitTest from "../UnitTest";
 
 const App = ({ match }) => (
@@ -22,6 +24,7 @@ const App = ({ match }) => (
       <Route path={`${match.path}unittest`} component={UnitTest} />
 
       <Route path={`${match.path}orders`} component={Orders} />
+      <Route path={`${match.path}order`} component={Order} />
     </Switch>
   </div>
 );
