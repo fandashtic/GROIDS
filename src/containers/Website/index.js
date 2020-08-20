@@ -6,7 +6,7 @@ import './main.css';
 import { AddCompany } from 'api/Company/CompanyController';
 import { IsUserValid } from 'api/Shared/Master/UserController';
 import { UserType } from 'api/Shared/Constant/Enum'
-
+import { IsHasValue } from 'api/Shared/Util';
 const WebSite = () => {
     const history = useHistory()
     const [view, SetView] = useState('pincode');
@@ -51,31 +51,35 @@ const WebSite = () => {
             if (res.Status === 200) {
                 let user = res.data;
                 setuserSession(user);
-                let path = GetRoutePath(user.user_type);
+                let path = GetRoutePath(user.UserType);
                 history.push(path);
             }
         });
     }
 
-    const GetRoutePath = (userType) =>
-    {
-        switch (userType) {
+    const GetRoutePath = (authUser) => {
+        if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
+          switch (authUser.UserType) {
             case UserType.SUPER_ADMIN:
-                return '/company/dashboard';
-              case UserType.COMPANY_ADMIN:
-                return '/company/dashboard';
-              case UserType.STORE_ADMIN:
-                return '/store/dashboard';
-              case UserType.STORE_STAFF:
-                return '/store/dashboard';
-              case UserType.CONSUMER:
-                return '/consumer/dashboard';
-              case UserType.SUPPORT:
-                return '/consumer/dashboard';
-              default:
-                return '/company/dashboard';
+              return '/company/dashboard';
+            case UserType.COMPANY_ADMIN:
+              return '/company/dashboard';
+            case UserType.STORE_ADMIN:
+              return '/store/product';
+            case UserType.STORE_STAFF:
+              return '/store/product';
+            case UserType.CONSUMER:
+              return '/consumer/dashboard';
+            case UserType.SUPPORT:
+              return '/consumer/dashboard';
+            default:
+              return '/company/dashboard';
+          }
         }
-    }
+        else {
+          return '/';
+        }
+      }
 
     const viewSignUp = () => {
         SetView("signup")

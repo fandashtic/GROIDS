@@ -3,10 +3,9 @@ import { Divider, Input, Badge, Card, Avatar, Statistic, Row, Col, Button } from
 import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, EditOutlined } from '@ant-design/icons';
 import PageHeaderWithBackNoSearch from 'components/PageHeaderWithBackNoSearch';
 import { useHistory } from "react-router-dom";
-import { getBrand } from './action';
+import { getData } from './action';
 const Search = Input.Search;
 const { Meta } = Card;
-
 function Details() {
     const history = useHistory()
     let location = history.location.pathname
@@ -15,17 +14,18 @@ function Details() {
     arrVars.pop();
     var restVar = arrVars.join("/");
     let id = location.substring(location.lastIndexOf('/') + 1)
-    const [product, setProduct] = useState({})
 
+    const [product, setProduct] = useState({})
     useEffect(() => {
-        getBrand(id).then(result => {
+        getData(id).then(result => {
+            console.log(result.res.data)
             setProduct(result.res.data)
         })
     }, [])
 
     return (
         <>
-            <PageHeaderWithBackNoSearch title={product.brand_name} subtitle="Product" islist={true} isadd={false} />
+            <PageHeaderWithBackNoSearch title={product.product_category_name} subtitle="Product" islist={true} isadd={false} />
             <Row className="gx-main-content-wrapper" style={{margin: "0px"}}>
                 <Col flex={2}>
                     <Card
@@ -33,34 +33,45 @@ function Details() {
                         cover={
                             <img
                                 alt=""
-                                src={product.profile_image_url=== "image.png" ? '': product.profile_image_url}
+                                src={product.profile_image_url}
                             />
                         }
                         actions={[
+                            <Avatar
+                                shape="square" size={32}
+                                src="https://firebasestorage.googleapis.com/v0/b/grodis-d88d3.appspot.com/o/PR%2FITC.jpg?alt=media&token=f8a172cb-6408-4d09-8953-c7dcbe032aa8" />,
                             <span>
-                                <EditOutlined key="edit" onClick={() => history.push(`${restVar}/edit/${id}`)} style={{
+                                <EditOutlined key="edit"  onClick={() => history.push(`${restVar}/edit/${id}`)} style={{
                                     fontSize: '30px'
                                 }} />
-                            </span>,
-                            <span>
-                                <Button type="danger" icon={<DeleteOutlined twoToneColor="red" />} size='large'>
-                                    Remove
-                            </Button>
                             </span>,
                         ]}
                     >
 
-                        <Meta title={product.brand_name} description={product.description} />
+                        <Meta title={product. product_category_name} description={product.description} />
 
                     </Card>
                 </Col>
                 <Col flex={3}>
-                    <Row>
+                <Row>
                         <Col span={12}>
                             <Statistic title="Manufacture" value={product.manufacture_name} prefix={<LikeOutlined style={{ color: 'blue' }} />} />
                         </Col>
                     </Row>
                     <Divider plain></Divider>
+                    <Row>
+                        <Col span={12}>
+                            <Statistic title="Brand" value={product.brand_name} prefix={<ApartmentOutlined />} />
+                        </Col>
+                    </Row>
+                    <Divider plain></Divider>
+                    <Row>
+                        <Col span={12}>
+                            <Button type="danger" icon={<DeleteOutlined twoToneColor="red" />} size='large'>
+                                Remove
+                            </Button>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </>

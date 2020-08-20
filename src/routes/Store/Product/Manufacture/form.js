@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+
 import {
     Form,
     Input,
-    Select,
     Button,
     Card,
+    Upload,
     Row,
     Col,
-    Upload
+    Select
 } from 'antd';
 
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
@@ -15,13 +16,12 @@ import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import { FileUpload } from 'api/Shared/Firestore';
 import { PreFix } from 'api/Shared/Constant/Enum';
 import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
-
-import { addData, LookUpData, getBrand, updateBrand } from './action'
-
+import { getData, updateData, addData } from './action';
 import { useHistory } from "react-router-dom";
-import { successNotification, updatedNotification, errorNotification } from 'components/Notification';
+import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
 
-const Option = Select.Option;
+const { Option } = Select;
+
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -34,32 +34,31 @@ const formItemLayout = {
     },
 };
 
-const Index = () => {
+
+
+const From = () => {
     const history = useHistory()
     const [form] = Form.useForm();
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState();
     const [fileList, setFileList] = useState([]);
-    const [manufactures, setManufactures] = useState([]);
-    const [editView, setEditView] = useState(false);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
+    const [editView, setEditView] = useState(false);
+
 
     let location = history.location.pathname
+    console.log(location)
     let id = location.substring(location.lastIndexOf('/') + 1)
+    console.log("id",id)
 
     useEffect(() => {
         editForm()
-        LookUpData().then(result => {
-            if (result.err === null) {
-                setManufactures(result.res.manufactures)
-            }
-        })
-    }, [])
+    }, [id])
 
     const editForm = () => {
         if (id !== "add") {
             setEditView(true)
-            getBrand(id).then(result => {
+            getData(id).then(result => {
                 form.setFieldsValue(result.res.data)
             })
         }
@@ -67,9 +66,8 @@ const Index = () => {
 
     const onFinish = async values => {
         values['profile_image_url'] = "image.png"
-        values['manufacture_name'] = manufactures.find(x => x.value === values.manufacture_id).label
         if (editView) {
-            updateBrand(id, values).then(result => {
+            updateData(id, values).then(result => {
                 if (result.err) {
                     errorNotification()
                 }
@@ -90,7 +88,6 @@ const Index = () => {
                 }
             })
         }
-
     };
 
     const handleChange = e => {
@@ -98,39 +95,40 @@ const Index = () => {
             setFileList(e.fileList)
             var file = e.fileList[0];
             let newFile = new File([file], GetNewKey(PreFix.Brand) + '.' + GetFileExtn(file.name));
-            console.log(newFile)
-            if(newFile){
-              //  setImage(newFile);
-                upload()
-            }   
+            setImage(newFile);
         }
     };
+    useEffect(() => {
+        upload();
+    }, [image]);
 
-    const upload = (newFile) => {
-        console.log(newFile)
-        // if (newFile) {
-        //      return FileUpload(newFile, newFile.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
-        //         if (err) { return err }
-        //         console.log(data)
-        //     });
-        // }
+    const upload = async () => {
+        console.log("test")
+        if (image) {
+               FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data,err)=>{
+                   console.log(err)
+                   console.log(data)
+                   //return true
+               });
+        }
+
 
     }
-    const toggle = () => {
-        console.log(image)
-        // return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
-        //     if (err) { return err }
-        //     return data
-        // });
+
+    const onRemoveChange = () => {
+        setFileList([])
+        //setImage(null)
     }
 
     return (
-        <Card className="gx-card" title="Brand Form">
+        <Card className="gx-card" title="Manufacture Form">
             <Form className="functionalForm"
                 {...formItemLayout}
                 form={form}
-                name="Brand"
+                name="Manufacture"
                 onFinish={onFinish}
+                initialValues={{
+                }}
                 scrollToFirstError
                 labelAlign="left"
                 layout="inline"
@@ -138,12 +136,12 @@ const Index = () => {
                 <Row gutter={[8, 0]}>
                     <Col md={12} sm={24}>
                         <Form.Item
-                            name="brand_name"
-                            label="Brand Name"
+                            name="manufacture_name"
+                            label="Manufacturer Name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your Brand Name!',
+                                    message: 'Please input your Manufacture Name!',
                                 },
                             ]}
                         >
@@ -151,60 +149,60 @@ const Index = () => {
                         </Form.Item>
                     </Col>
                     <Col md={12} sm={24}>
+                        <Col md={12} sm={24}>
+                            <Form.Item
+                                name="profile_image_url"
+                                label="Manufacture Image"
+                                rules={[
+                                    {
+                                        required: false,
+                                        message: 'Please input your Manufacture Image!',
+                                    },
+                                ]}
+                            >
+                                <Upload
+                                    action=''
+                                    listType="picture-card"
+                                    fileList={fileList}
+                                    onRemove={onRemoveChange}
+                                    onChange={handleChange}
+                                >
+                                    {fileList.length < 1 &&
+                                        <div>
+                                            <PlusOutlined />
+                                            <div className="ant-upload-text">Brand Image</div>
+                                        </div>
+                                    }
+                                </Upload>
+                            </Form.Item>
+                        </Col>
+                    </Col>
+                    {editView && <Col md={12} sm={24}>
                         <Form.Item
-                            name="manufacture_id"
-                            label="Manufacturer"
+                            name="status"
+                            label="Status"
                             rules={[
-                                { required: true, message: 'Please select your Manufacture!' },
+                                { required: true, message: 'Please select your Status!' },
                             ]}
                         >
                             <Select
                                 showSearch
-                                defaultActiveFirstOption={false}
+                                defaultActiveFirstOption={true}
                                 showArrow={true}
-                                filterOption={false}
                                 allowClear
-                                notFoundContent={null}
                             >
-                                {manufactures !== null && manufactures.length > 0 ? manufactures.map(d => <Option key={d.value}>{d.label}</Option>) : ''}
+                                <Option key="true">active</Option>
+                                <Option key="false">In-Active</Option>
                             </Select>
                         </Form.Item>
-
-                    </Col>
-                    <Col md={12} sm={24}>
-                        <Form.Item
-                            name="profile_image_url"
-                            label="Brand Image"
-                            rules={[
-                                {
-                                    required: false,
-                                    message: 'Please input your Brand Image!',
-                                },
-                            ]}
-                        >
-                            <Upload
-                                action={"//jsonplaceholder.typicode.com/posts/"}
-                                listType="picture-card"
-                                fileList={fileList}
-                                onChange={handleChange}
-                                onRemove={toggle}>
-
-                                {fileList.length < 1 &&
-                                    <div>
-                                        <PlusOutlined />
-                                        <div className="ant-upload-text">Brand Image</div>
-                                    </div>
-                                }
-                            </Upload>
-                        </Form.Item>
-                    </Col>
+                    </Col>}
                 </Row>
                 <Row gutter={[8, 0]}>
                     <Col md={24}>
                         <Form.Item className="form-btn-center">
                             <Button type="ghost">
                                 Cancel
-                </Button>
+                            </Button>
                             {editView ?
                                 (<Button type="primary" htmlType="submit" >
                                     Update
@@ -222,5 +220,5 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default From;
 

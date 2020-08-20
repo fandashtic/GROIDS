@@ -6,11 +6,10 @@ import {
     Select,
     Button,
     Card,
-    Upload,
     Row,
+    Upload,
     Col
 } from 'antd';
-
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 
 import { FileUpload } from 'api/Shared/Firestore';
@@ -20,8 +19,7 @@ import { GetNewKey, GetFileExtn } from 'api/Shared/Util';
 import { useHistory } from "react-router-dom";
 import { getData, updateData, LookUpData, addData } from './action';
 import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
-const { Option } = Select;
-
+const { Option } = Select
 
 const formItemLayout = {
     labelCol: {
@@ -39,9 +37,10 @@ const ProductFrom = () => {
     const history = useHistory()
     const [form] = Form.useForm();
     const [editView, setEditView] = useState(false);
-    const [image, setImage] = useState(null);
     const [manufactures, setManufactures] = useState([]);
     const [brands, setBrands] = useState([]);
+    const [image, setImage] = useState(null);
+    const [productCategories, setProductCategories] = useState([]);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
 
@@ -53,8 +52,10 @@ const ProductFrom = () => {
         editForm()
         LookUpData().then(result => {
             if (result.err === null) {
+                console.log(result.res)
                 setManufactures(result.res.manufactures)
                 setBrands(result.res.brands)
+                setProductCategories(result.res.productCategories)
             }
         })
     }, [])
@@ -68,17 +69,49 @@ const ProductFrom = () => {
         }
     }
 
+    const onSelectChange = e => {
+        let brandsData = []
+        let data = brands.find(x => x.dependent === e)
+        if (data !== undefined) {
+            brandsData.push(data)
+        }
+        setBrands(brandsData)
+    }
+    const onSelectBrandChange = e => {
+        let dataList = []
+        let data = productCategories.find(x => x.dependent === e)
+        if (data !== undefined) {
+            dataList.push(data)
+        }
+        setProductCategories(dataList)
+    }
+
+    const handleChange = e => {
+        if (e.fileList[0]) {
+            var file = e.fileList[0];
+            let newFile = new File([file], GetNewKey(PreFix.Brand) + '.' + GetFileExtn(file.name));
+            setImage(newFile);
+        }
+    };
+    // const upload = () => {
+    //     return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
+    //         if (err) { return err }
+    //         return data
+    //     });
+    // }
+
     const onFinish = async values => {
         values['manufacture_name'] = manufactures.find(x => x.value === values.manufacture_id).label
         values['brand_name'] = brands.find(x => x.value === values.brand_id).label
+        values['product_category_name'] = productCategories.find(x => x.value === values.product_category_id).label
         values['profile_image_url'] = "image.png"
         if (editView) {
             updateData(id, values).then(result => {
                 if (result.err) {
-                   errorNotification()
+                    errorNotification()
                 }
                 else {
-                   updatedNotification()
+                    updatedNotification()
                     form.resetFields();
                 }
             })
@@ -96,51 +129,12 @@ const ProductFrom = () => {
         }
     };
 
-    const onSelectChange = e => {
-        let brandsData = []
-        let data = brands.find(x => x.dependent === e)
-        if (data !== undefined) {
-            brandsData.push(data)
-        }
-        setBrands(brandsData)
-    }
-
-    const onPreview = async file => {
-        console.log(file)
-        // let src = file.url;
-        // if (!src) {
-        //   src = await new Promise(resolve => {
-        //     const reader = new FileReader();
-        //     reader.readAsDataURL(file.originFileObj);
-        //     reader.onload = () => resolve(reader.result);
-        //   });
-        // }
-        // const image = new Image();
-        // image.src = src;
-        // const imgWindow = window.open(src);
-        // imgWindow.document.write(image.outerHTML);
-    };
-
-    const handleChange = e => {
-        if (e.fileList[0]) {
-            var file = e.fileList[0];
-            let newFile = new File([file], GetNewKey(PreFix.Brand) + '.' + GetFileExtn(file.name));
-            setImage(newFile);
-        }
-    };
-    const upload = () => {
-        return FileUpload(image, image.name, PreFix.Brand, setUrl, setProgress, (data, err) => {
-            if (err) { return err }
-            return data
-        });
-    }
-
     return (
         <Card className="gx-card" title="Product Form">
             <Form className="functionalForm"
                 {...formItemLayout}
                 form={form}
-                name="Category"
+                name="Product"
                 onFinish={onFinish}
                 initialValues={{
                 }}
@@ -151,12 +145,12 @@ const ProductFrom = () => {
                 <Row gutter={[8, 0]}>
                     <Col md={12} sm={24}>
                         <Form.Item
-                            name="product_category_name"
-                            label="Category Name"
+                            name="product_family_name"
+                            label="Family Name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your Category Name!',
+                                    message: 'Please input your Product Family Name!',
                                 },
                             ]}
                         >
@@ -201,8 +195,29 @@ const ProductFrom = () => {
                                 filterOption={false}
                                 allowClear
                                 notFoundContent={null}
+                                onChange={onSelectBrandChange}
                             >
                                 {brands !== null && brands.length > 0 ? brands.map(d => <Option key={d.value}>{d.label}</Option>) : ''}
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col md={12} sm={24}>
+                        <Form.Item
+                            name="product_category_id"
+                            label="Category"
+                            rules={[
+                                { required: true, message: 'Please select your Brand!' },
+                            ]}
+                        >
+                            <Select
+                                showSearch
+                                defaultActiveFirstOption={false}
+                                showArrow={true}
+                                filterOption={false}
+                                allowClear
+                                notFoundContent={null}
+                            >
+                                {productCategories !== null && productCategories.length > 0 ? productCategories.map(d => <Option key={d.value}>{d.label}</Option>) : ''}
                             </Select>
                         </Form.Item>
 
@@ -210,13 +225,12 @@ const ProductFrom = () => {
                     <Col md={12} sm={24}>
                         <Form.Item
                             name="profile_image_url"
-                            label="Product Category Image"
+                            label="Product Family Image"
                         >
                             <Upload
                                 action=''
                                 listType="picture-card"
                                 onChange={handleChange}
-                                onPreview={onPreview}
                             >
                                 <div>
                                     <PlusOutlined />
@@ -251,7 +265,7 @@ const ProductFrom = () => {
                         <Form.Item className="form-btn-center">
                             <Button type="ghost">
                                 Cancel
-                            </Button>
+                </Button>
                             {editView ?
                                 (<Button type="primary" htmlType="submit" >
                                     Update

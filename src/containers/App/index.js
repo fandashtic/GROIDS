@@ -21,32 +21,8 @@ import {
 import { UserType } from 'api/Shared/Constant/Enum';
 import { IsHasValue, GetUserSession } from 'api/Shared/Util';
 import {NotificationContainer} from "react-notifications";
-let authUser = true;
 
-const GetRoutePath = (authUser) => {
-  console.log(authUser);
-  if (IsHasValue(authUser) && IsHasValue(authUser.user_type)) {
-    switch (authUser.user_type) {
-      case UserType.SUPER_ADMIN:
-        return '/company/dashboard';
-      case UserType.COMPANY_ADMIN:
-        return '/company/dashboard';
-      case UserType.STORE_ADMIN:
-        return '/store/product';
-      case UserType.STORE_STAFF:
-        return '/store/product';
-      case UserType.CONSUMER:
-        return '/consumer/dashboard';
-      case UserType.SUPPORT:
-        return '/consumer/dashboard';
-      default:
-        return '/company/dashboard';
-    }
-  }
-  else {
-    return '/';
-  }
-}
+
 
 const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) =>
   <Route
@@ -56,14 +32,13 @@ const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) 
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: GetRoutePath(authUser),
-            state: { from: location }
+            pathname: '/login', state: { from: location }
           }}
         />}
   />;
 
 const App = (props) => {
-  const [userToken, setUserToken] = useState(null);
+  const [userToken, setUser] = useState();
   const navStyle = NAV_STYLE_FIXED;
 
   const locale = {
@@ -80,15 +55,11 @@ const App = (props) => {
   useEffect(() => {
     setLayoutType(layoutType);
     setNavStyle(navStyle);
-  });
+      GetUserSession().then((res) => {
+        setUser(res)
+    })
+  },[]);
 
-  useEffect( async() => {
-    // let userSession = await GetUserSession();
-    // if (IsHasValue(userSession)) {
-    //   setUserToken(userSession);
-    //   //authUser = true;
-    // }
-  }, [userToken]);
 
   const setLayoutType = (layoutType) => {
     if (layoutType === LAYOUT_TYPE_FULL) {
@@ -129,9 +100,7 @@ const App = (props) => {
         messages={currentAppLocale.messages}>
         <Switch>
           <Route exact path='/' component={Website} />
-          {/* <Route exact path='/signin' component={SignIn} />
-          <Route exact path='/signup' component={SignUp} /> */}
-          <RestrictedRoute path={`${match.url}`} authUser={authUser} location={location}
+          <RestrictedRoute path={`${match.url}`} authUser={userToken} location={location}
             component={MainApp} />
         </Switch>
       </IntlProvider>

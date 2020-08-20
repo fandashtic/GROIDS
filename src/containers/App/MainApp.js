@@ -1,8 +1,7 @@
-import React,{useContext} from "react";
+import React,{useContext,useEffect,useState} from "react";
 import {Layout} from "antd";
 
 import Sidebar from "../Sidebar/index";
-import Topbar from "../Topbar/index";
 import App from "routes/index";
 import {
   NAV_STYLE_ABOVE_HEADER,
@@ -19,13 +18,39 @@ import {
 } from "constants/ThemeSetting";
 import Context from "appRedux/context";
 import {useRouteMatch} from "react-router-dom";
+import { UserType } from 'api/Shared/Constant/Enum';
+import { IsHasValue, GetUserSession } from 'api/Shared/Util';
 
 const {Content} = Layout;
 
+const GetRoutePath = (authUser) => {
+  if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
+    switch (authUser.UserType) {
+      case UserType.SUPER_ADMIN:
+        return '/company/dashboard';
+      case UserType.COMPANY_ADMIN:
+        return '/company/dashboard';
+      case UserType.STORE_ADMIN:
+        return '/store/product';
+      case UserType.STORE_STAFF:
+        return '/store/product';
+      case UserType.CONSUMER:
+        return '/consumer/dashboard';
+      case UserType.SUPPORT:
+        return '/consumer/dashboard';
+      default:
+        return '/company/dashboard';
+    }
+  }
+  else {
+    return '/';
+  }
+}
+
 const MainApp = () => {
+   const [user, setUser] = useState()
   const { state } = useContext(Context);
   const {navStyle,width} = state
-  const match = useRouteMatch();
 
   const getContainerClass = (navStyle) => {
     switch (navStyle) {
@@ -62,6 +87,10 @@ const MainApp = () => {
         return null;
     }
   };
+  useEffect(async() => {
+    let  user = await GetUserSession()
+    setUser(user)
+  },[]);
 
 
   return (
@@ -69,7 +98,7 @@ const MainApp = () => {
       {getSidebar(navStyle, width)}
       <Layout>
         <Content className={`gx-layout-content ${getContainerClass(navStyle)} `}>
-          <App match={match}/>
+          <App match={GetRoutePath(user)}/>
         </Content>
       </Layout>
     </Layout>

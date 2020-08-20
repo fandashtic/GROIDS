@@ -4,12 +4,13 @@ import table from './table';
 import form from './form';
 import view from './details';
 const Index = ({ match })=> {
+    console.log(match)
     return (
         <Switch>
-            <Route path={`${match.path}`} component={table} />
-            <Route path={`${match.path}Add`} component={form} />
-            <Route path={`${match.path}edit/:id`} component={form} />
-            <Route path={`${match.path}view/:id`} component={view} />
+            <Route exact path={`${match.url}`} component={table} />
+            <Route exact path={`${match.url}/add`} component={form} />
+            <Route exact path={`${match.url}/edit/:id`} component={form} />
+            <Route exact path={`${match.url}/view/:id`} component={view} />
         </Switch>
     )
 }

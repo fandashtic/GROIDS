@@ -4,7 +4,7 @@ import { Pagination } from 'appConfig.json'
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
-
+import { AddButton } from 'components/RouteButton';
 const  View = () => {
     const history = useHistory()
     const [stores, setStores] = useState([]);
@@ -70,6 +70,7 @@ const  View = () => {
             <PageHeaderWithSearchNoBack title="Store" subtitle="Product" islist={true} isadd={false} />
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
+                    <AddButton/>
                     <Table className="gx-table-responsive" columns={columns} dataSource={stores} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>

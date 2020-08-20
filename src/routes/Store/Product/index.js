@@ -1,74 +1,183 @@
-import React from 'react';
-import { Layout } from "antd";
-import { Configure, connectHits, connectStateResults, InstantSearch, Pagination, Stats, } from 'react-instantsearch-dom';
-import { SmileTwoTone, HeartTwoTone, DeleteOutlined, LikeOutlined, ApartmentOutlined, InsertRowBelowOutlined, PlusSquareOutlined, EditOutlined, EllipsisOutlined, SettingOutlined, AppstoreAddOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { withUrlSync } from './urlSync';
-import 'instantsearch.css/themes/algolia.css';
-import PageHeaderWithBack from 'components/PageHeaderWithBack';
-//import './style.css'
-import Header from "./Header";
-import Sidebar from "./SideBar";
-import Footer from "./Footer";
-import ProductList from "./ProductList";
-import algoliasearch from 'algoliasearch/lite';
+// import React, {Component} from "react";
+// import {Drawer, message} from "antd";
+// import CustomScrollbars from "util/CustomScrollbars";
+// import IntlMessages from "util/IntlMessages";
+// import Brand from "./Brand";
+// import Products from "./Products";
+// import Category from "./Category";
+// import Manufacture from "./Manufacture";
+// import ProductFamily from "./ProductFamily";
 
-const { Content } = Layout;
+// const filterOptions = [
+//   {
+//     id: 1,
+//     name: 'Products',
+//     icon: 'all-contacts'
+//   }, {
+//     id: 2,
+//     name: 'Manufacture',
+//     icon: 'frequent'
 
-const searchClient = algoliasearch(
-    'latency',
-    '6be0576ff61c053d5f9a3225e2a90f76'
-);
+//   }, {
 
-const App = props => (
-    <>
-        <PageHeaderWithBack title="Products" subtitle="Company"  rooticon={<HeartTwoTone />} />
+//     id: 3,
+//     name: 'Brand',
+//     icon: 'star'
 
-        <InstantSearch className="gx-main-content"
-            indexName="ikea"
-            searchState={props.searchState}
-            createURL={props.createURL}
-            searchClient={searchClient}
-            onSearchStateChange={props.onSearchStateChange}>
+//   }, {
 
-            <Configure hitsPerPage={16} />
+//     id: 4,
+//     name: 'Category',
+//     icon: 'star'
 
-            <Layout className="gx-algolia-layout-has-sider">
-                <Sidebar />
-                <div className="gx-algolia-main">
-                    <Header />
-                    <Content className="gx-algolia-content">
-                        <CustomResults />
-                    </Content>
-                    <Footer>
-                        <Pagination showLast={true} />
-                    </Footer>
-                </div>
-            </Layout>
-        </InstantSearch>
-    </>
-);
+//   },
+//   {
 
+//     id: 5,
+//     name: 'Product Family',
+//     icon: 'star'
 
-const CustomResults = connectStateResults(({ searchState, searchResult }) => {
-    if (searchResult && searchResult.nbHits === 0) {
-        return (
-            <div className="gx-algolia-content-inner">
-                <div className="gx-algolia-no-results">
-                    No results found matching{' '}
-                    <span className="gx-algolia-query">{searchState.query}</span>
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="gx-algolia-content-inner">
-                <Stats />
-                <ConnectedProducts />
-            </div>
-        );
-    }
-});
+//   },
 
-const ConnectedProducts = connectHits(ProductList);
+// ];
 
-export default withUrlSync(App);
+// class Product extends Component {
+//   ContactSideBar = () => {
+//     return <div className="gx-module-side">
+//       <div className="gx-module-side-header">
+//         <div className="gx-module-logo">
+//           <i className="icon icon-folder gx-mr-4"/>
+//           <span><IntlMessages id="sidebar.products"/></span>
+//         </div>
+//       </div>
+
+//       <div className="gx-module-side-content">
+//         <CustomScrollbars className="gx-module-side-scroll">
+//           <div className="gx-module-side-nav">
+//             <ul className="gx-module-nav">
+//               {filterOptions.map(option => <li key={option.id} className="gx-nav-item">
+//                   <span
+//                     className={`gx-link ${option.id === this.state.selectedSectionId ? 'active' : ''}`} onClick={
+//                     this.onFilterOptionSelect.bind(this, option)
+//                   }>
+//                     <i className={`icon icon-${option.icon}`}/>
+//                     <span>{option.name}</span>
+//                   </span>
+//                 </li>
+//               )}
+//             </ul>
+//           </div>
+//         </CustomScrollbars>
+//       </div>
+//     </div>
+
+//   };
+
+//   optionIds = (option) =>{
+//     this.setState({
+//         selectedSectionId: option.id,
+//         menuName:option.name
+//       });
+//   }
+
+//   onFilterOptionSelect = (option) => {
+//     switch (option.name) {
+//       case 'Brand': {
+//         this.optionIds(option)
+//         break;
+//       }
+//       case 'Category': {
+//         this.optionIds(option)
+//         break;
+//       }
+//       case 'Manufacture': {
+//         this.optionIds(option)
+//         break;
+//       }
+//       case 'Products': {
+//         this.optionIds(option)
+//         break;
+//       }
+//       case 'Product Family': {
+//         this.optionIds(option)
+//         break;
+//       }
+//       default:
+//         break;
+//     }
+
+//   };
+//   constructor() {
+//     super();
+//     this.state = {
+//         alertMessage: '',
+//         showMessage: false,
+//         selectedSectionId: 1,
+//         drawerState: false,
+//         searchUser: '',
+//         menuName:'Products',
+//         optionid:'4'
+//     }
+//   }
+
+//   onToggleDrawer() {
+//     this.setState({
+//       drawerState: !this.state.drawerState
+//     });
+//   }
+
+//   render() {
+//     const { menuName, drawerState,  alertMessage, showMessage} = this.state;
+//     return (
+//       <div className="gx-main-content">
+//         <div className="gx-app-module">
+//           <div className="gx-d-block gx-d-lg-none">
+//             {<Drawer
+//               placement="left"
+//               closable={false}
+//               visible={drawerState}
+//               onClose={this.onToggleDrawer.bind(this)}>
+//               {this.ContactSideBar()}
+//             </Drawer>}
+//           </div>
+//           <div className="gx-module-sidenav gx-d-none gx-d-lg-flex">
+//             {this.ContactSideBar()}
+//           </div>
+//           <div className="gx-module-box">
+//           <span className="gx-drawer-btn gx-d-flex gx-d-lg-none">
+//                   <i className="icon icon-menu gx-icon-btn" aria-label="Menu"
+//                      onClick={this.onToggleDrawer.bind(this)}/>
+//               </span>
+//             {
+//                 menuName === 'Brand' ? (<Brand/>):
+//                 menuName === 'Products' ? (<Products/>) :
+//                 menuName === 'Category' ?(<Category/>) : 
+//                 menuName === 'Manufacture' ? (<Manufacture/>) :
+//                 menuName === 'Product Family' ? (<ProductFamily/>) : ''
+//             }
+//           </div>
+//         </div>
+//         {showMessage && message.info(<span id="message-id">{alertMessage}</span>, 3, this.handleRequestClose)}
+//       </div>
+//     )
+//   }
+// }
+
+// export default Product;
+
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Product from './Products'
+import AddProduct from './Products/form'
+const Index = ({ match }) => {
+  return (
+    <Switch>
+      <Route path={`${match.path}`} component={Product} />
+      <Route path={`${match.path}Add`} component={AddProduct} />
+      <Route path={`${match.path}edit/:id`} component={AddProduct} />
+      <Route path={`${match.path}view/:id`} component={AddProduct} />
+    </Switch>
+  )
+};
+
+export default Index;
