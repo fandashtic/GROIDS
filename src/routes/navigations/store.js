@@ -6,7 +6,9 @@ import Main from "../main/dashboard/Store";
 
 import Product from "../Store/Product";
 //import Settings from "../Company/Setttings";
+
 import Orders from "../Store/Orders";
+import Order from "../Store/Orders/Form";
 import UnitTest from "../UnitTest";
 
 const App = ({ match }) => (
@@ -16,6 +18,7 @@ const App = ({ match }) => (
       <Route path={`${match.path}dashboard`} component={Main} />
       <Route path={`${match.path}products`} component={Product} />
       <Route path={`${match.path}orders`} component={Orders} />
+      <Route path={`${match.path}order`} component={Order} />
     </Switch>
   </div>
 );
