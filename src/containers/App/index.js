@@ -32,7 +32,7 @@ const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) 
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: '/login', state: { from: location }
+            pathname: '/', state: { from: location }
           }}
         />}
   />;

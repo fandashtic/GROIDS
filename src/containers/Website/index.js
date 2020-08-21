@@ -13,7 +13,6 @@ const WebSite = () => {
 
     //#region Register Company
     const [companyName, setcompanyName] = useState('');
-    const [userName, setuserName] = useState('');
     const [email, setemail] = useState('');
     const [mobileNumber, setmobileNumber] = useState('');
     const [contactPerson, setcontactPerson] = useState('');
@@ -24,22 +23,11 @@ const WebSite = () => {
     const [user_name, setuser_name] = useState('');
     const [password, setpassword] = useState('');
     const [userSession, setuserSession] = useState({});
+    const [pincode, setPincode] = useState(0);
     //#endregion Login
 
-
-    const filter = {
-        "filter": {
-            "status": true
-        }
-    };
-
-    useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(userSession));
-    }, [filter, userSession]);
-
     const viewPincode = () => {
-        SetView("pincode")
-        history.push('/company/dashboard');
+        SetView("pincode");
     }
 
     const viewSignIn = () => {
@@ -51,7 +39,7 @@ const WebSite = () => {
             if (res.Status === 200) {
                 let user = res.data;
                 setuserSession(user);
-                let path = GetRoutePath(user.UserType);
+                let path = GetRoutePath(user);
                 history.push(path);
             }
         });
@@ -59,27 +47,27 @@ const WebSite = () => {
 
     const GetRoutePath = (authUser) => {
         if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
-          switch (authUser.UserType) {
-            case UserType.SUPER_ADMIN:
-              return '/company/dashboard';
-            case UserType.COMPANY_ADMIN:
-              return '/company/dashboard';
-            case UserType.STORE_ADMIN:
-              return '/store/product';
-            case UserType.STORE_STAFF:
-              return '/store/product';
-            case UserType.CONSUMER:
-              return '/consumer/dashboard';
-            case UserType.SUPPORT:
-              return '/consumer/dashboard';
-            default:
-              return '/company/dashboard';
-          }
+            switch (authUser.UserType) {
+                case UserType.SUPER_ADMIN:
+                    return '/company/dashboard';
+                case UserType.COMPANY_ADMIN:
+                    return '/company/dashboard';
+                case UserType.STORE_ADMIN:
+                    return '/store/dashboard';
+                case UserType.STORE_STAFF:
+                    return '/store/dashboard';
+                case UserType.CONSUMER:
+                    return '/consumer/dashboard';
+                case UserType.SUPPORT:
+                    return '/consumer/dashboard';
+                default:
+                    return '/company/dashboard';
+            }
         }
         else {
-          return '/';
+            return '/';
         }
-      }
+    }
 
     const viewSignUp = () => {
         SetView("signup")
@@ -89,22 +77,29 @@ const WebSite = () => {
         SetView("companyRegister")
     }
 
-    const consumer = () => {
-        message.info('Coming Soon')
+    const consumer = () => {        
+        if (pincode.length === 6) {
+            history.push('/consumer/dashboard');
+        } else {
+            alert('Enter Valid Pincode');
+        }
     }
 
     const registerMyCompany = () => {
         let newCompany = {
             company_name: companyName,
-            user_name: userName,
+            user_name: email,
             email_id: email,
             mobilenumber: mobileNumber,
             contactperson: contactPerson
         };
 
-        AddCompany(newCompany, (data, err) => {
-            if (data && data.Status === 200) {
+        AddCompany(newCompany, (res, err) => {
+            if (res && res.data && res.data.Status === 200) {
                 SetView("signin");
+            }
+            else if (res && res.data && res.data.Status !== 200) {
+                alert(res.data.data);
             }
         });
     }
@@ -152,7 +147,7 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
                                 <Form id="pincode">
                                     <Form.Item>
-                                        <Input type="number" placeholder="Enter Pin Code" onKeyPress={handleKeyPress} maxLength={6} /><i className="icon icon-sent gx-mr-2" />
+                                        <Input type="number" placeholder="Enter Pin Code" onChange={e => setPincode(e.target.value)} /><i className="icon icon-sent gx-mr-2" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }} onClick={consumer}>Continue</Button>
@@ -220,16 +215,11 @@ const WebSite = () => {
                             {view === "companyRegister" ? (<>
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Register my Company</p>
                                 <Form id="companyRegister" layout="inline">
-                                    <Form.Item className="form-input-50"
+                                    <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'Enter company name!' }]}
                                         name="companyname"
                                     >
                                         <Input placeholder="Company Name" value="companyName" onChange={e => setcompanyName(e.target.value)} />
-                                    </Form.Item>
-                                    <Form.Item className="form-input-50"
-                                        rules={[{ required: true, message: 'Enter username!' }]} name="username"
-                                    >
-                                        <Input type="text" placeholder="Username" value="userName" onChange={e => setuserName(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
@@ -265,12 +255,9 @@ const WebSite = () => {
 
             <Row className="signin-button">
                 <Col>
-                    <Button type="primary">
-                        <span onClick={viewSignIn}>{view === "pincode" ? (<>Sign in</>) : null}</span>
-                        <span onClick={viewSignUp}>{view === "signin" ? (<>Sign up</>) : null}</span>
-                        <span onClick={viewPincode}>{view === "signup" ? (<>Guest User</>) : null}</span>
-                        <span onClick={viewPincode}>{view === "companyRegister" ? (<>Guest User</>) : null}</span>
-                    </Button>
+                    {view === "pincode" ? (<Button type="primary" onClick={viewSignIn}>Sign in</Button>) : null}
+                    {view === "signin" ? (<Button type="primary" onClick={viewSignUp}>Sign up</Button>) : null}
+                    {view === "signup" || view === "companyRegister" ? (<Button type="primary" onClick={viewPincode}>Guest User</Button>) : null}
                     <Button className="register-btn" onClick={viewCompanySignUp}>Register</Button>
                 </Col>
             </Row>
@@ -279,4 +266,4 @@ const WebSite = () => {
     )
 }
 
-export default WebSite
+export default WebSite;
