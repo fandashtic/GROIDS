@@ -55,10 +55,10 @@ const App = (props) => {
   useEffect(() => {
     setLayoutType(layoutType);
     setNavStyle(navStyle);
-      GetUserSession().then((res) => {
-        setUser(res)
-    })
-  },[]);
+    GetUserSession().then((res) => {
+      setUser(res)
+    });
+  }, []);
 
 
   const setLayoutType = (layoutType) => {

@@ -4,18 +4,23 @@ import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
 import { AddCompany } from 'api/Company/CompanyController';
-import { IsUserValid } from 'api/Shared/Master/UserController';
+import { IsUserValid, AddUser } from 'api/Shared/Master/UserController';
 import { UserType } from 'api/Shared/Constant/Enum'
 import { IsHasValue } from 'api/Shared/Util';
+import CircularProgress from "components/CircularProgress/index";
+
 const WebSite = () => {
     const history = useHistory()
     const [view, SetView] = useState('pincode');
+    const [isLoading, SetIsLoading] = useState(false);
 
     //#region Register Company
     const [companyName, setcompanyName] = useState('');
     const [email, setemail] = useState('');
     const [mobileNumber, setmobileNumber] = useState('');
     const [contactPerson, setcontactPerson] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     //#endregion Register Company
 
     //#region Login
@@ -35,6 +40,7 @@ const WebSite = () => {
     }
 
     const SignIn = () => {
+        SetIsLoading(true);
         IsUserValid(user_name, password, (res, err) => {
             if (res.Status === 200) {
                 let user = res.data;
@@ -42,6 +48,7 @@ const WebSite = () => {
                 let path = GetRoutePath(user);
                 history.push(path);
             }
+            SetIsLoading(false);
         });
     }
 
@@ -79,6 +86,7 @@ const WebSite = () => {
 
     const consumer = () => {        
         if (pincode.length === 6) {
+            SetIsLoading(true);
             history.push('/consumer/dashboard');
         } else {
             alert('Enter Valid Pincode');
@@ -86,6 +94,7 @@ const WebSite = () => {
     }
 
     const registerMyCompany = () => {
+        SetIsLoading(true);
         let newCompany = {
             company_name: companyName,
             user_name: email,
@@ -101,6 +110,29 @@ const WebSite = () => {
             else if (res && res.data && res.data.Status !== 200) {
                 alert(res.data.data);
             }
+            SetIsLoading(false);
+        });
+    }
+
+    const registerConsumer = () => {
+        SetIsLoading(true);
+        let newUser = {
+            email_id: email,
+            user_name: email,
+            first_name: firstName,
+            last_name: lastName,
+            user_type: UserType.CONSUMER
+        };
+
+        AddUser(newUser, (res, err) => {
+            if (res && res.data && res.Status === 200) {
+                alert(res.data);
+                SetView("signin");
+            }
+            else if (res && res.Status !== 200) {
+                alert(res.data);
+            }
+            SetIsLoading(false);
         });
     }
 
@@ -116,8 +148,17 @@ const WebSite = () => {
         // } 
     }
 
+    // useEffect(() => {
+    //     if (isLoading) {
+    //         setInterval(() => {
+    //             console.log('Loading...');
+    //         }, 1000);
+    //     }
+    // }, [isLoading]);
+
     return (
         <CustomScrollbars>
+           
 
             <Carousel effect="fade" dots={false} pauseOnHover={false} autoplay={true}>
                 <div>
@@ -147,12 +188,16 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
                                 <Form id="pincode">
                                     <Form.Item>
-                                        <Input type="number" placeholder="Enter Pin Code" onChange={e => setPincode(e.target.value)} /><i className="icon icon-sent gx-mr-2" />
+                                        <Input type="number" placeholder="Enter Pin Code" onInput={e => setPincode(e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6))} /><i className="icon icon-sent gx-mr-2" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }} onClick={consumer}>Continue</Button>
                                     </Form.Item>
                                 </Form>
+                                {isLoading ?
+                                    <div className="gx-loader-view gx-loader-position">
+                                        <CircularProgress />
+                                    </div> : null}
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}>or <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignUp}>Create account </span></p>
                             </>) : null}
@@ -177,6 +222,10 @@ const WebSite = () => {
                                         </Button>
                                     </Form.Item>
                                 </Form>
+                                {isLoading ?
+                                    <div className="gx-loader-view gx-loader-position">
+                                        <CircularProgress />
+                                    </div> : null}
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}><span style={{ textDecoration: "none", cursor: "pointer" }} onClick={viewSignIn}>Forgot password?</span></p>
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}>Don't have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignUp}>Create new</span></p>
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
@@ -189,25 +238,34 @@ const WebSite = () => {
                                         rules={[{ required: true, message: 'Enter first name!' }]}
                                         name="firstname"
                                     >
-                                        <Input placeholder="First Name" />
+                                        <Input placeholder="First Name" onChange={e => setFirstName(e.target.value)}  />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter last name!' }]}
                                         name="lastname"
                                     >
-                                        <Input placeholder="Last Name" />
+                                        <Input placeholder="Last Name" onChange={e => setLastName(e.target.value)}  />
                                     </Form.Item>
                                     <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" />
+                                        <Input type="email" placeholder="Email" onChange={e => setemail(e.target.value)}  />
+                                    </Form.Item>
+                                    <Form.Item className="form-input-100"
+                                        rules={[{ required: true, message: 'The input is not valid Mobile number!' }]} name="mobilenumber"
+                                    >
+                                        <Input type="number" placeholder="Mobile Number" onInput ={e => setmobileNumber(e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10))}  />
                                     </Form.Item>
                                     <Form.Item className="website-form-btn">
-                                        <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }}>
-                                            Register
+                                        <Button type="primary" htmlType="submit" size="large" onClick={registerConsumer} block style={{ marginTop: "0px", marginBottom: "0px" }}>
+                                            Register Me
                                         </Button>
                                     </Form.Item>
                                 </Form>
+                                {isLoading ?
+                                    <div className="gx-loader-view gx-loader-position">
+                                        <CircularProgress />
+                                    </div> : null}
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
@@ -244,6 +302,11 @@ const WebSite = () => {
                                         </Button>
                                     </Form.Item>
                                 </Form>
+                                
+                                {isLoading ?
+                                    <div className="gx-loader-view gx-loader-position">
+                                        <CircularProgress />
+                                    </div> : null}
                                 <p style={{ textAlign: "center", marginBottom: "4px" }}>Already have an account? <span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewSignIn}>Sign in</span></p>
                                 <p style={{ textAlign: "center", marginBottom: "0px" }}><span style={{ textDecoration: "none", color: "#34b880", cursor: "pointer" }} onClick={viewPincode}>I'm a Guest User</span></p>
                             </>) : null}
