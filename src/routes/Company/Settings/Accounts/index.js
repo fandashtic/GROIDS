@@ -1,10 +1,9 @@
 import React from "react";
 import { Route, Switch ,Redirect} from "react-router-dom";
 import CompanySetting from './CompanyProfile'
-import UserprofileSetting from './UserProfile'
+import {UserprofileSetting,demo} from './UserProfile'
 
 const account = ({ match }) => {
-  console.log("Accounts", match)
   return (
     <Switch>
       <Redirect exact from={`${match.path}`} to={`${match.path}/CompanyProfile`} />

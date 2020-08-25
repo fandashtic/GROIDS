@@ -12,20 +12,11 @@ import {
 import PlusOutlined from "@ant-design/icons/lib/icons/PlusOutlined";
 import { useHistory } from "react-router-dom";
 import { AddUser, GetUsers, UpdateUser } from 'api/Shared/Master/UserController'
+import { Add_user, Get_User, update_user, Delete_user } from './action'
 import {  Row, Col, message } from "antd";
 import { add } from 'lodash';
+import {successNotification,updatedNotification,errorNotification} from 'components/Notification';
 const { Option } = Select;
-
-const status = [
-    {
-        value: 'Active',
-        label: 'Active',
-    },
-    {
-        value: 'InActive',
-        label: 'InActive',
-    },
-];
 
 const formItemLayout = {
     labelCol: {
@@ -45,33 +36,31 @@ const formItemLayout = {
 const UserProfileSettingForm = () => {
     const history = useHistory()
     const [form] = Form.useForm();
+
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [editView, setEditView] = useState(false);
-
-    // const {store_name} = storeData;
-    //const {company_name} = companyData;
     let location = history.location.pathname
-    console.log(location)
+    console.log("location",location)
     let user_id = location.substring(location.lastIndexOf('/') + 1)
     console.log("id", user_id)
 
-    const apiInit = () => {
-        GetUsers(user_id, (res, err) => {
-            console.log(res)     
-        })
-    }
+    // const apiInit = () => {
+    //     GetUsers(user_id, (res, err) => {
+    //         console.log(res)     
+    //     })
+    // }
 
     useEffect(() => {
         editForm()
+        console.log('test')
     }, [])
 
     const editForm = () => {
-        if (user_id !== "add") {
+        if (user_id) {
             setEditView(true)
-            GetUsers(user_id, (res, err) => {
-                form.setFieldsValue(res)
-            })
+            Get_User().then(result=> 
+                form.setFieldsValue(result.res.data))
         }
     }
 
@@ -79,49 +68,55 @@ const UserProfileSettingForm = () => {
 
     }
 
-    const addData = data => {
-        AddUser(data, (res, err) => {
-            console.log(data)
-            if (res.Status === 200) {
-                message.success("Suceessfully Record Added");
-                apiInit()
-            } else {
-                console.log(err)
-                message.warning("Something went to wrong");
-            }
-        })
-    }
+    // const addData = data => {
+    //     AddUser(data, (res, err) => {
+    //         console.log(data)
+    //         if (res.Status === 200) {
+    //             message.success("Suceessfully Record Added");
+    //             apiInit()
+    //         } else {
+    //             console.log(err)
+    //             message.warning("Something went to wrong");
+    //         }
+    //     })
+    // }
 
     const onFinish = values => {
         values['company_id'] = "212435446"
         values['store_id'] = "1"
         values['profile_image_url'] = "test"
         values['status'] = true;
+        
         if (editView) {
-            UpdateUser(user_id, values, (res, err) => {
-                if (res) {
-                    form.resetFields();
+            update_user(user_id, values).then(results=>{
+                if (results.err) {
+                    errorNotification()
                 }
                 else {
-                    console.log(err)
+                    updatedNotification()
+                    form.resetFields();
                 }
             })
-
-        } else {
-            addData(values);
-            console.log("mani", values);
-            form.resetFields();
+            }
+            else {
+                Add_user(values).then(result => {
+                    if (result.err) {
+                        errorNotification()
+                    }
+                    else {
+                        successNotification()
+                        form.resetFields();
+                    }
+                })
+            }
         }
-
-
-    };
 
     return (
         <Card className="gx-card" title="User Profile">
             <Form
                 {...formItemLayout}
                 form={form}
-                name="Product"
+                name="UserProfile"
                 onFinish={onFinish}
                 initialValues={{
                 }}

@@ -54,6 +54,7 @@ const  UserProfileSettingView = ({Delete_User,deletedData,Profile}) => {
     ];
 
     const onViewPanel = data => {
+        console.log("data.user_id",data.user_id)
         history.push(`${history.location.pathname}/edit/${data.user_id}`)
     }
     const deleteData = data => {
