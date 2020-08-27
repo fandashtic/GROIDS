@@ -15,7 +15,7 @@ const Context = createContext({
     layoutType: LAYOUT_TYPE_FULL,
     themeType: THEME_TYPE_SEMI_DARK,
     themeColor: THEME_COLOR,
-    pathname: '/',
+    pathName: '/',
     width: window.innerWidth,
     isDirectionRTL: false,
     locale: {
@@ -23,7 +23,10 @@ const Context = createContext({
       locale: 'en',
       name: 'English',
       icon: 'us'
-    }
+    },
+    initURL:'/',
+    user:{},
+    isAuthUser:false
 });
 
 export default Context;

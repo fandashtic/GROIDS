@@ -93,6 +93,11 @@ let GetSessionValue = (key) => {
     }
     return "";
 };
+let SetSessionValue = async (type, data) => {
+    console.log(type ,data)
+    let session = await localStorage.setItem(type, JSON.stringify(data));
+    console.log(session)
+}
 
 let GetUserSession = async () => {
     let session = await localStorage.getItem('user');
@@ -218,5 +223,6 @@ export {
     GetLookUpData, GetDate, SortByCreatedOn, IsHasValue, GetUpdateExpressionAndAttributeValuesAndNames,
     ReturnObject, GetKey, GetNewKey, AddDetaultValues, UpdateDetaultValues, GetUserSession,
     GetKeyNameFromObject, EnCode, DeCode, GetFileExtn, GetSessionValue, GetImage,
-    GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven
+    GetObject, GetAllObject, PostObject, PutObject, DeleteObject, GetObjectByGiven,
+    SetSessionValue
 };

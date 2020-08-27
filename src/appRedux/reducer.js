@@ -5,6 +5,34 @@ import {
   THEME_COLOR,
   THEME_TYPE,
 } from "constants/ThemeSetting";
+import { UserType } from 'api/Shared/Constant/Enum'
+import { IsHasValue } from 'api/Shared/Util';
+
+import {LOGIN_USER} from './actions/auth'
+
+const GetRoutePath = (authUser) => {
+  if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
+    switch (authUser.UserType) {
+      case UserType.SUPER_ADMIN:
+        return '/company/dashboard';
+      case UserType.COMPANY_ADMIN:
+        return '/company/dashboard';
+      case UserType.STORE_ADMIN:
+        return '/store/dashboard';
+      case UserType.STORE_STAFF:
+        return '/store/dashboard';
+      case UserType.CONSUMER:
+        return '/consumer/dashboard';
+      case UserType.SUPPORT:
+        return '/consumer/dashboard';
+      default:
+        return '/company/dashboard';
+    }
+  }
+  else {
+    return '/';
+  }
+}
 
 export default function reducer(state, { type, payload } = {}) {
     switch (type) {
@@ -52,6 +80,9 @@ export default function reducer(state, { type, payload } = {}) {
             locale: payload,
     
           };
+        case LOGIN_USER:
+          localStorage.setItem("user", JSON.stringify(payload));
+          return { ...state, isAuthUser: true, user: payload, pathName: GetRoutePath(payload)};
         default:
           return state;
       }

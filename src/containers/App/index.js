@@ -1,12 +1,12 @@
-import React, { memo, useEffect, useState } from "react";
-import { Redirect, Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
+import React, { memo, useEffect, useState, useContext } from "react";
+import { Redirect, Route, Switch, useLocation, useRouteMatch, useHistory } from "react-router-dom";
 import { ConfigProvider } from 'antd';
 import { IntlProvider } from "react-intl";
 
 import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
 import Website from "../Website";
-
+import Context from "appRedux/context";
 import {
   LAYOUT_TYPE_BOXED,
   LAYOUT_TYPE_FRAMED,
@@ -18,12 +18,9 @@ import {
   NAV_STYLE_INSIDE_HEADER_HORIZONTAL,
   NAV_STYLE_FIXED
 } from "constants/ThemeSetting";
-import { UserType } from 'api/Shared/Constant/Enum';
-import { IsHasValue, GetUserSession } from 'api/Shared/Util';
-import {NotificationContainer} from "react-notifications";
-
-
-
+import { NotificationContainer } from "react-notifications";
+import { login} from "appRedux/actions/auth";
+import { IsHasValue } from 'api/Shared/Util';
 const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) =>
   <Route
     {...rest}
@@ -32,15 +29,17 @@ const RestrictedRoute = ({ component: Component, location, authUser, ...rest }) 
         ? <Component {...props} />
         : <Redirect
           to={{
-            pathname: '/', state: { from: location }
+            pathname: '/',
+            state: { from: location }
           }}
         />}
   />;
 
-const App = (props) => {
-  const [userToken, setUser] = useState();
-  const navStyle = NAV_STYLE_FIXED;
+const App = () => {
+  const { state,dispatch } = useContext(Context);
+  const { isAuthUser ,user,pathName} = state;
 
+  const navStyle = NAV_STYLE_FIXED;
   const locale = {
     languageId: 'english',
     locale: 'en',
@@ -50,15 +49,20 @@ const App = (props) => {
 
   const layoutType = LAYOUT_TYPE_FULL
   const location = useLocation();
-  const match = useRouteMatch();
+  const history = useHistory()
+  const match = useRouteMatch()
 
   useEffect(() => {
+    let userData = JSON.parse(localStorage.getItem("user"))
+    if(IsHasValue(userData)){
+      dispatch(login(userData,dispatch))
+    } else{
+      history.push('/')
+    } 
     setLayoutType(layoutType);
     setNavStyle(navStyle);
-    GetUserSession().then((res) => {
-      setUser(res)
-    });
-  }, []);
+  },[]);
+
 
 
   const setLayoutType = (layoutType) => {
@@ -91,8 +95,13 @@ const App = (props) => {
     }
   };
 
-  const currentAppLocale = AppLocale[locale.locale];
+  useEffect(() => {
+    if(isAuthUser ){
+      history.push(pathName)
+    }
+  },[user,isAuthUser]);
 
+  const currentAppLocale = AppLocale[locale.locale];
   return (
     <ConfigProvider locale={currentAppLocale.antd}>
       <IntlProvider
@@ -100,11 +109,11 @@ const App = (props) => {
         messages={currentAppLocale.messages}>
         <Switch>
           <Route exact path='/' component={Website} />
-          <RestrictedRoute path={`${match.url}`} authUser={userToken} location={location}
+          <RestrictedRoute path={`${match.url}`} authUser={isAuthUser} location={location}
             component={MainApp} />
         </Switch>
       </IntlProvider>
-          <NotificationContainer/>
+      <NotificationContainer />
     </ConfigProvider>
   )
 };

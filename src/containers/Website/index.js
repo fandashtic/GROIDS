@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Row, Col, Carousel, Card, Form, Input, Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
@@ -6,9 +6,10 @@ import './main.css';
 import { AddCompany } from 'api/Company/CompanyController';
 import { IsUserValid, AddUser } from 'api/Shared/Master/UserController';
 import { UserType } from 'api/Shared/Constant/Enum'
-import { IsHasValue } from 'api/Shared/Util';
+import { IsHasValue, SetSessionValue } from 'api/Shared/Util';
 import CircularProgress from "components/CircularProgress/index";
-
+import Context from "appRedux/context";
+import { login} from "appRedux/actions/auth";
 const WebSite = () => {
     const history = useHistory()
     const [view, SetView] = useState('pincode');
@@ -21,13 +22,14 @@ const WebSite = () => {
     const [contactPerson, setcontactPerson] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const { dispatch } = useContext(Context);
     //#endregion Register Company
 
     //#region Login
 
     const [user_name, setuser_name] = useState('');
     const [password, setpassword] = useState('');
-    const [userSession, setuserSession] = useState({});
+    const [userSession, setuserSession] = useState(null);
     const [pincode, setPincode] = useState(0);
     //#endregion Login
 
@@ -39,42 +41,25 @@ const WebSite = () => {
         SetView("signin")
     }
 
+    useEffect(() => {
+        if (IsHasValue(userSession)) {
+            SetSessionValue('user', userSession)
+        }
+    }, [userSession])
+
     const SignIn = () => {
         SetIsLoading(true);
         IsUserValid(user_name, password, (res, err) => {
             if (res.Status === 200) {
                 let user = res.data;
-                setuserSession(user);
-                let path = GetRoutePath(user);
-                history.push(path);
+               // setuserSession(user);
+               dispatch(login(user,dispatch));
             }
             SetIsLoading(false);
         });
     }
 
-    const GetRoutePath = (authUser) => {
-        if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
-            switch (authUser.UserType) {
-                case UserType.SUPER_ADMIN:
-                    return '/company/dashboard';
-                case UserType.COMPANY_ADMIN:
-                    return '/company/dashboard';
-                case UserType.STORE_ADMIN:
-                    return '/store/dashboard';
-                case UserType.STORE_STAFF:
-                    return '/store/dashboard';
-                case UserType.CONSUMER:
-                    return '/consumer/dashboard';
-                case UserType.SUPPORT:
-                    return '/consumer/dashboard';
-                default:
-                    return '/company/dashboard';
-            }
-        }
-        else {
-            return '/';
-        }
-    }
+ 
 
     const viewSignUp = () => {
         SetView("signup")
@@ -84,7 +69,7 @@ const WebSite = () => {
         SetView("companyRegister")
     }
 
-    const consumer = () => {        
+    const consumer = () => {
         if (pincode.length === 6) {
             SetIsLoading(true);
             history.push('/consumer/dashboard');
@@ -158,7 +143,7 @@ const WebSite = () => {
 
     return (
         <CustomScrollbars>
-           
+
 
             <Carousel effect="fade" dots={false} pauseOnHover={false} autoplay={true}>
                 <div>
@@ -188,7 +173,7 @@ const WebSite = () => {
                                 <p style={{ textAlign: "center", fontSize: "18px" }}>Groceries delivered in as little as 1 hour</p>
                                 <Form id="pincode">
                                     <Form.Item>
-                                        <Input type="number" placeholder="Enter Pin Code" onInput={e => setPincode(e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6))} /><i className="icon icon-sent gx-mr-2" />
+                                        <Input type="number" placeholder="Enter Pin Code" onInput={e => setPincode(e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 6))} /><i className="icon icon-sent gx-mr-2" />
                                     </Form.Item>
                                     <Form.Item>
                                         <Button type="primary" htmlType="submit" size="large" block style={{ marginTop: "0px", marginBottom: "0px" }} onClick={consumer}>Continue</Button>
@@ -238,23 +223,23 @@ const WebSite = () => {
                                         rules={[{ required: true, message: 'Enter first name!' }]}
                                         name="firstname"
                                     >
-                                        <Input placeholder="First Name" onChange={e => setFirstName(e.target.value)}  />
+                                        <Input placeholder="First Name" onChange={e => setFirstName(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-50"
                                         rules={[{ required: true, message: 'Enter last name!' }]}
                                         name="lastname"
                                     >
-                                        <Input placeholder="Last Name" onChange={e => setLastName(e.target.value)}  />
+                                        <Input placeholder="Last Name" onChange={e => setLastName(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid E-mail!' }]} name="email"
                                     >
-                                        <Input type="email" placeholder="Email" onChange={e => setemail(e.target.value)}  />
+                                        <Input type="email" placeholder="Email" onChange={e => setemail(e.target.value)} />
                                     </Form.Item>
                                     <Form.Item className="form-input-100"
                                         rules={[{ required: true, message: 'The input is not valid Mobile number!' }]} name="mobilenumber"
                                     >
-                                        <Input type="number" placeholder="Mobile Number" onInput ={e => setmobileNumber(e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10))}  />
+                                        <Input type="number" placeholder="Mobile Number" onInput={e => setmobileNumber(e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 10))} />
                                     </Form.Item>
                                     <Form.Item className="website-form-btn">
                                         <Button type="primary" htmlType="submit" size="large" onClick={registerConsumer} block style={{ marginTop: "0px", marginBottom: "0px" }}>
@@ -302,7 +287,7 @@ const WebSite = () => {
                                         </Button>
                                     </Form.Item>
                                 </Form>
-                                
+
                                 {isLoading ?
                                     <div className="gx-loader-view gx-loader-position">
                                         <CircularProgress />

@@ -1,8 +1,8 @@
 //import config from 'appConfig.json';
 import axios from 'axios';
-import {apiUrl} from 'appConfig.json'
+import {apiUrl,DevAPIUrl} from 'appConfig.json'
 export default axios.create({
-  baseURL: apiUrl,
+  baseURL: DevAPIUrl,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

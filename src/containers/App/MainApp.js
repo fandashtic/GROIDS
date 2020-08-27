@@ -1,5 +1,5 @@
-import React,{useContext,useEffect,useState} from "react";
-import {Layout} from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Layout } from "antd";
 
 import Sidebar from "../Sidebar/index";
 import App from "routes/index";
@@ -18,40 +18,15 @@ import {
 } from "constants/ThemeSetting";
 import Context from "appRedux/context";
 import {useRouteMatch} from "react-router-dom";
-import { UserType } from 'api/Shared/Constant/Enum';
-import { IsHasValue, GetUserSession } from 'api/Shared/Util';
 
-const {Content} = Layout;
-
-const GetRoutePath = (authUser) => {
-  if (IsHasValue(authUser) && IsHasValue(authUser.UserType)) {
-    switch (authUser.UserType) {
-      case UserType.SUPER_ADMIN:
-        return '/company/dashboard';
-      case UserType.COMPANY_ADMIN:
-        return '/company/dashboard';
-      case UserType.STORE_ADMIN:
-        return '/store/product';
-      case UserType.STORE_STAFF:
-        return '/store/product';
-      case UserType.CONSUMER:
-        return '/consumer/dashboard';
-      case UserType.SUPPORT:
-        return '/consumer/dashboard';
-      default:
-        return '/company/dashboard';
-    }
-  }
-  else {
-    return '/';
-  }
-}
+const { Content } = Layout;
 
 const MainApp = () => {
-   const [user, setUser] = useState()
+  console.log("mainapp")
   const { state } = useContext(Context);
-  const {navStyle,width} = state
-
+  const match = useRouteMatch();
+  const { navStyle, width } = state
+  
   const getContainerClass = (navStyle) => {
     switch (navStyle) {
       case NAV_STYLE_DARK_HORIZONTAL:
@@ -70,35 +45,29 @@ const MainApp = () => {
   };
   const getSidebar = (navStyle, width) => {
     if (width < TAB_SIZE) {
-      return <Sidebar/>;
+      return <Sidebar />;
     }
     switch (navStyle) {
-      case NAV_STYLE_FIXED :
-        return <Sidebar/>;
-      case NAV_STYLE_DRAWER :
-        return <Sidebar/>;
-      case NAV_STYLE_MINI_SIDEBAR :
-        return <Sidebar/>;
-      case NAV_STYLE_NO_HEADER_MINI_SIDEBAR :
-        return <Sidebar/>;
+      case NAV_STYLE_FIXED:
+        return <Sidebar />;
+      case NAV_STYLE_DRAWER:
+        return <Sidebar />;
+      case NAV_STYLE_MINI_SIDEBAR:
+        return <Sidebar />;
+      case NAV_STYLE_NO_HEADER_MINI_SIDEBAR:
+        return <Sidebar />;
       case NAV_STYLE_NO_HEADER_EXPANDED_SIDEBAR:
-        return <Sidebar/>;
-      default :
+        return <Sidebar />;
+      default:
         return null;
     }
   };
-  useEffect(async() => {
-    let  user = await GetUserSession()
-    setUser(user)
-  },[]);
-
-
   return (
-   <Layout className="gx-app-layout">
+    <Layout className="gx-app-layout">
       {getSidebar(navStyle, width)}
       <Layout>
         <Content className={`gx-layout-content ${getContainerClass(navStyle)} `}>
-          <App match={GetRoutePath(user)}/>
+          <App match={match}/>
         </Content>
       </Layout>
     </Layout>
