@@ -1,23 +1,22 @@
 import React, { useState,useEffect } from 'react'
-import { Input, Badge, Card, Avatar, Statistic, Row, Col, Table, Button, Tooltip, Space } from 'antd';
+import {  Row, Col, Table, Tooltip, Space } from 'antd';
 import { getDatas} from './action';
-import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import {Pagination} from 'appConfig.json';
-import { Link } from "react-router-dom";
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 import { AddButton } from 'components/RouteButton';
 
-const Search = Input.Search;
 const  TableView = () => {
     const [category, setCategory] = useState([]);
     const history = useHistory()
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
         getDatas().then(result => {
             console.log(result)
             if(result.err === null){
                 setCategory(result.res.data)
+                setloading(false)
             }
         })
 }, [])
@@ -65,7 +64,7 @@ const  TableView = () => {
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
                     <AddButton/>
-                    <Table className="gx-table-responsive" columns={columns} dataSource={category} pagination={{ pageSize: Pagination }}
+                    <Table className="gx-table-responsive" columns={columns} dataSource={category} loading={loading} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>

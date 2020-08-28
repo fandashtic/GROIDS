@@ -2,20 +2,20 @@ import React, { useState,useEffect } from 'react'
 import {Pagination} from 'appConfig.json';
 import { getDatas} from './action'
 import { useHistory } from "react-router-dom";
-import { Input, Badge, Card, Avatar, Statistic, Row, Col,Table, Button, Tooltip,Space } from 'antd';
-import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import {  Row, Col,Table,  Tooltip,Space } from 'antd';
 import PageHeaderWithSearchNoBack from 'components/PageHeaderWithSearchNoBack';
 import {AddButton} from 'components/RouteButton'; 
 
 const  TableView = () => {
     const history = useHistory()
     const [manufactures, setmanufactures] = useState([]);
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
         getDatas().then(result => {
             if(result.err === null){
                 setmanufactures(result.res.data)
+                setloading(false)
             }
         })
 }, [])
@@ -58,7 +58,7 @@ const  TableView = () => {
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
                     <AddButton/>
-                    <Table className="gx-table-responsive" columns={columns} dataSource={manufactures} pagination={{ pageSize: Pagination }}
+                    <Table className="gx-table-responsive" columns={columns} loading={loading} dataSource={manufactures} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>

@@ -8,12 +8,13 @@ import { AddButton } from 'components/RouteButton';
 const TableView = () => {
     const history = useHistory()
     const [product, setproduct] = useState([]);
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
         getDatas().then(result => {
-            console.log(result)
             if (result.err === null) {
                 setproduct(result.res.data)
+                setloading(false)
             }
         })
     }, [])
@@ -78,7 +79,7 @@ const TableView = () => {
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
                     <AddButton/>
-                    <Table className="gx-table-responsive" columns={columns} dataSource={product} pagination={{ pageSize: Pagination }}
+                    <Table className="gx-table-responsive" columns={columns} dataSource={product} loading={loading} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>

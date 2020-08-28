@@ -12,12 +12,13 @@ const Search = Input.Search;
 const View = () => {
     const history = useHistory()
     const [family, setfamily] = useState([]);
-
+    const [loading, setloading] = useState(true);
     useEffect(() => {
         getDatas().then(result => {
             console.log(result)
             if (result.err === null) {
                 setfamily(result.res.data)
+                setloading(false)
             }
         })
     }, [])
@@ -70,7 +71,7 @@ const View = () => {
             <Row className="gx-main-content-wrapper">
                 <Col span={24}>
                     <AddButton />
-                    <Table className="gx-table-responsive" columns={columns} dataSource={family} pagination={{ pageSize: Pagination }}
+                    <Table className="gx-table-responsive" columns={columns} dataSource={family} loading={loading} pagination={{ pageSize: Pagination }}
                         scroll={{ y: 240 }} />
                 </Col>
             </Row>

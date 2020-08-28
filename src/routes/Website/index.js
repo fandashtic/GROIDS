@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useContext } from 'react';
-import { Row, Col, Carousel, Card, Form, Input, Button, message } from 'antd';
+import { Row, Col, Carousel, Card, Form, Input, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import CustomScrollbars from 'util/CustomScrollbars';
 import './main.css';
@@ -7,7 +7,7 @@ import { AddCompany } from 'api/Company/CompanyController';
 import { IsUserValid, AddUser } from 'api/Shared/Master/UserController';
 import { UserType } from 'api/Shared/Constant/Enum'
 import { IsHasValue, SetSessionValue } from 'api/Shared/Util';
-import CircularProgress from "components/CircularProgress/index";
+import CircularProgress from "components/CircularProgress";
 import Context from "appRedux/context";
 import { login} from "appRedux/actions/auth";
 const WebSite = () => {

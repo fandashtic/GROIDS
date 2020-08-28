@@ -5,7 +5,7 @@ import { IntlProvider } from "react-intl";
 
 import AppLocale from "lngProvider";
 import MainApp from "./MainApp";
-import Website from "../Website";
+import Website from "../../routes/Website";
 import Context from "appRedux/context";
 import {
   LAYOUT_TYPE_BOXED,

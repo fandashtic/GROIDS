@@ -2,22 +2,21 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 
-import Main from "../main/dashboard/Company";
+import Dashboard from "./Dashboard";
 
-import Product from "../Company/Product"
-import Brand from "../Company/Product/Brand"
-import Category from "../Company/Product/Category";
-import Manufacture from "../Company/Product/Manufacture";
-import ProductFamily from "../Company/Product/ProductFamily";
-import Stores from "../Company/Stores"
-import Settings from "../Company/Settings"
-import UnitTest from "../UnitTest"
+import Product from "./Product/Products"
+import Brand from "./Product/Brand"
+import Category from "./Product/Category";
+import Manufacture from "./Product/Manufacture";
+import ProductFamily from "./Product/ProductFamily";
+import Stores from "./Stores"
+import Settings from "./Settings"
 
 const App = ({ match }) => {
     return (<div>
         <Switch>
             <Redirect exact from={`${match.path}`} to={`${match.url}/dashboard`} />
-            <Route path={`${match.path}dashboard`} component={Main}/>
+            <Route path={`${match.path}dashboard`} component={Dashboard}/>
             <Route path={`${match.path}product/`} component={Product}/>
             <Route path={`${match.path}master/brand`} component={Brand}/>
             <Route path={`${match.path}master/category`} component={Category}/>
@@ -27,7 +26,7 @@ const App = ({ match }) => {
             <Route path={`${match.path}settings`} component={Settings} />
             {/* <Route exact path={`${match.url}/accounts/CompanyProfile`} component={CompanyProfile} />
             <Route exact path={`${match.url}/accounts/UserProfile`} component={UserProfile} /> */}
-            <Route path={`${match.path}unittest`} component={UnitTest} />
+            {/* <Route path={`${match.path}unittest`} component={UnitTest} /> */}
         </Switch>
     </div>)
 }
